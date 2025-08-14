@@ -1,0 +1,7 @@
+# Purpose of This e-Book {.unnumbered}
+
+The Decision Modelling for Health Economic Evaluation, is an important book and likely an introductory book for those who want to learn about health economic modelling
+
+Say this e book is intended to supplement readers who want to learn how to apply the concepts illustrated in the book in R instead of Excel. 
+
+This ebook contains mostly supporting materials in R, instead of Excel that is available here (https://www.herc.ox.ac.uk/downloads/decision-modelling-for-health-economic-evaluation).

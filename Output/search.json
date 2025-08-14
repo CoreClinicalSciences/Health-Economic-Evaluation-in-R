@@ -1,0 +1,45 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Decision Modelling for Health Economic Evaluation in R",
+    "section": "",
+    "text": "Purpose of This e-Book\nThe Decision Modelling for Health Economic Evaluation, is an important book and likely an introductory book for those who want to learn about health economic modelling\nSay this e book is intended to supplement readers who want to learn how to apply the concepts illustrated in the book in R instead of Excel.\nThis ebook contains mostly supporting materials in R, instead of Excel that is available here (https://www.herc.ox.ac.uk/downloads/decision-modelling-for-health-economic-evaluation).",
+    "crumbs": [
+      "Purpose of This e-Book"
+    ]
+  },
+  {
+    "objectID": "Chapters/1-Introduction.html",
+    "href": "Chapters/1-Introduction.html",
+    "title": "1  Chapter 1",
+    "section": "",
+    "text": "blah",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Chapter 1</span>"
+    ]
+  },
+  {
+    "objectID": "Chapters/Appendix-1-Codes.html",
+    "href": "Chapters/Appendix-1-Codes.html",
+    "title": "2  Appendix",
+    "section": "",
+    "text": "blah",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Appendix</span>"
+    ]
+  },
+  {
+    "objectID": "Chapters/Ch1-Introduction.html",
+    "href": "Chapters/Ch1-Introduction.html",
+    "title": "1  Chapter 1 - Introduction",
+    "section": "",
+    "text": "blah",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Chapter 1 - Introduction</span>"
+    ]
+  }
+]

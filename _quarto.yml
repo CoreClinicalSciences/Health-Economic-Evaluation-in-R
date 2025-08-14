@@ -1,0 +1,37 @@
+project:
+  type: book
+  output-dir: Output
+
+book:
+  title: "Decision Modelling for Health Economic Evaluation in R"
+  author: "Core Clinical Sciences"
+  # logo: X
+  # repo-url: X
+  # repo-branch: main
+  # repo-actions: [issue]
+  
+  chapters:
+      - index.qmd
+      - part: Introduction
+        chapters: 
+            - Chapters/Ch1-Introduction.qmd
+            - Chapters/Ch2-Key-aspects.qmd
+            - Chapters/Ch3-Further-developments.qmd
+            - Chapters/Ch4-Probabilistic-models.qmd
+            - Chapters/Ch5-Probabilistic-analyses-outputs.qmd
+            - Chapters/Ch6-Uncertainty-VOI.qmd
+            - Chapters/Ch7-Efficient-research-design.qmd
+            - Chapters/Ch8-Future-challenges.qmd
+
+      - part: Appendices
+        chapters: 
+            - Chapters/Appendix-1-Codes.qmd
+
+# bibliography: references.bib
+
+number-depth: 3 
+
+format:
+  html:
+    theme: cosmo
+    code-link: true

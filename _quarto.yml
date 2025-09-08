@@ -15,8 +15,8 @@ book:
       - part: Introduction
         chapters: 
             - Chapters/Ch1-Introduction.qmd
-            - Chapters/Ch2-Key-aspects.qmd
-            - Chapters/Ch3-Further-developments.qmd
+            - Exercises/Ch2-Exercise-25.qmd
+            - Exercises/Ch3-Exercise-35.qmd
             - Chapters/Ch4-Probabilistic-models.qmd
             - Chapters/Ch5-Probabilistic-analyses-outputs.qmd
             - Chapters/Ch6-Uncertainty-VOI.qmd

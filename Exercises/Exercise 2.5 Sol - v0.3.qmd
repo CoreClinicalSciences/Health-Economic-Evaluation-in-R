@@ -1,0 +1,271 @@
+# Solutions for Exercise 2.5
+
+This R markdown file reproduces exercise 2.5 in R from the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+
+## Preamble on matrix operations
+
+When building markov molds and building transition matrices, using matrix-vector multiplications simplifies manual computation significantly.
+
+To multiply a matrix by a vector we must have the same number of columns in the matrix as rows in a vector. Consider below an example of a two-state markov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.ov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.
+
+```{r Preamble}
+#initial proportion
+#the number of entries should be the same as the number of states
+#in this example we assume all start in the first state
+iVec_example <- c(1,0)
+
+#the c() operation initializes a vector (it is considered by default a column vector)
+
+#consider a two state markov model
+tProbs_example <- matrix(c(0.7,0.3,
+                           0.1,0.9),
+                 nrow = 2, ncol = 2,
+                 byrow = T)
+
+#calculate the proportion of individuals first time-cycle
+
+#number of columns of the matrix (first variable) must match the number of rows in the vector (second variable) 
+time1Prop <- tProbs_example %*% iVec_example
+
+
+#to get the proportion after the second-time we can multiply the first-time proportion again by the transition probability matrix
+time2Prop <- tProbs_example %*% time1Prop
+
+
+
+#the [i,j] operator allows us to extract row i and column j of a matrix
+tProbs_example[1,] #extracts the first row
+tProbs_example[,2] #extracts the second column
+
+tProbs_example[1,2] #extracts first row and second column entry
+
+#we can also use the -i operator to extract all except i
+
+tProbs_example[-1,]  #extracts all but the first row
+tProbs_example[,-1]  #extracts all but the column
+```
+
+## Start of Exercise 2.5
+
+Calculate the monotherapy transition probabilities for the control based on the data provided in Table 2.5. They should match the transition probabilities provided in Table 2.2. part 1(a)
+
+We need to calculate the following transition probabilities:
+
+-   Transition probability from A to A
+-   Transition probability from A to B
+-   Transition probability from A to C
+-   Transition probability from A to D
+-   Transition probability from B to B
+-   Transition probability from B to C
+-   Transition probability from B to D
+-   Transition probability from C to C
+-   Transition probability from C to D
+
+### Part 1
+
+Fill in the transition probability matrix with the calculated transition probabilities and initialize the parameters necessary for modelling. Remember, you cannot go backwards in this model, so any transition probability below the diagonal values will be 0.
+
+```{r setup parameters}
+#fill in the quantities for the matrix here
+
+# The matrix will follow this structure, shown in table 2.6:
+# 
+#         To State
+#           A B C D
+# From    A
+# State   B
+#         C
+#         D
+
+
+#fill in the quantities for the matrix here
+tProbs <- matrix(
+  c(0.721453287, 0.201845444,0.066897347, 0.009803922,
+    0    , 0.581081081, 0.406995231, 0.011923688,
+    0    , 0    , 0.750142939, 0.249857061,
+    0    , 0    , 0    , 1
+  ),ncol = 4, nrow = 4, byrow = T
+)
+
+##check##, ensure the row sums are equal to 1
+rowSums(tProbs) 
+
+#fill in other parameters
+
+#costs
+dmca <- 1701 #direct medical cost of A
+dmcb <- 1774 #direct medical cost of B
+dmcc <- 6948 #direct medical cost of C
+ccca <- 1055 #community care cost of A
+cccb <- 1278 #community care cost of B
+cccc <- 2059 #community care cost of C
+cAZT <- 2278 #cost of Zidovudine
+cLam <- 2086.5 #cost of Lamivudine 
+
+#other parameters
+RR <- 0.509 #relative risk of treatment
+cDR <- 0.06 #annual discount rate cost (proportion)
+oDR <- 0 #annual discount rate benefits (proportion)
+```
+
+### Part 2
+
+Calculate the proportion of individuals in each state for years 1-20 (Monotherapy), their life-years, and costs.
+
+```{r}
+#input the initial vector for the state space, where each element refers to the initial proportion of individuals in state A-D respectively. We assume all individuals start in State A. We are giving the vector the name "iVec".
+
+iVec <-  c(1,0,0,0)
+
+calculateYearlyProbs <- function(tProbs, t, iVec){
+  
+  #create empty matrix that we will fill in
+  
+  matReturn <- matrix(nrow = t, ncol = 4)
+  
+  #initialize first vector of proportions
+  
+  #create column names
+  colnames(matReturn) <- c("A","B","C","D")
+
+  #Loop through all time-points and multiply the vector by 
+  for(i in 1:(t)){
+
+    matReturn[i,] <-   iVec %*% tProbs
+    
+    #update ivec
+    iVec <- iVec %*% tProbs
+    
+  }
+  return(matReturn)
+  
+  #returns a 20 (years) x 4 (states) matrix where the rows represent the proportion in a given state at year t
+  
+}
+
+#call the function
+yearlyProbs <- calculateYearlyProbs(tProbs,20,iVec)
+
+#check all rows should sum to 1
+rowSums(yearlyProbs)
+
+#calculate the number of life years for each year (Note the proportion that are not class D)
+#hint: try using rowSums()
+lifeYears <- rowSums(yearlyProbs[,-4])
+```
+
+### Part 3
+
+calculate cost and discounted cost Hint: The discounted rate formula is given on Page 41 in the footnote
+
+```{r Monotherapy Cost}
+#calculate the non-discounted cost of monotherapy
+#hint try using matrix multiplications 
+
+costA <- dmca+ccca+cAZT
+costB <- dmcb+cccb+cAZT
+costC <- dmcc+cccc+cAZT
+
+costVector <- c(costA,costB,costC)
+
+#calculate the non-discounted cost
+nonDiscCost <- yearlyProbs[,-4] %*% costVector
+
+#create the discounted costs function by filling in the formula for the discounted costs below. Creating a function means you can reuse this and easily discount future costs.
+#so we can apply this function to multiple values of t at once we can use R's vectorization. All basic operations in R "-+^/*" support basic R vectorization. 
+#this means we can use the discount formula for all values of t at once (t = 1,..,20). We can do this by using 1:t in place of "t" in the formula
+discountFormula <- function(nonDiscount,discRate,t){
+  
+  return(nonDiscount/(1+discRate)^(1:t))
+  
+}
+#calculate the discount costs using your discount function by filling in the blanks below. 
+#remember your function needs you to specify the non-discounted costs you calculated, then specify the discount rate, and the number of years you are calculating for.
+discCost <- discountFormula(nonDiscCost, discRate = cDR,20)
+
+#use the sum function to calculate the total costs and life years over the 20 years
+totalDiscCostMonoTherapy <- sum(discCost)
+totalLifeYearsMonoTherapy <- sum(lifeYears)
+```
+
+### Part 4
+
+Repeat the analysis for the combination therapy. Use table 2.2 part 1(b) as a guide to calculate the combination transition matrix. Recall that the combination therapy is only used for the first two years of treatment.
+
+```{r Combination Therapy}
+
+#first lets create a function that converts the original transition matrix to the combination transition matrix by using the risk ratio
+calculatetProbCombination <- function(tProbs,RR = 0.506){
+  
+  newMat <- tProbs
+  
+  #change the upper diagonals and multiply by risk rate
+  newMat[upper.tri(newMat)] <-   newMat[upper.tri(newMat)]*RR 
+  
+  diag(newMat) <- 0
+  
+  #change the diagonals to be 1- the rowsums
+  diag(newMat) <- 1-rowSums(newMat)
+  
+  return(newMat)
+  
+}
+
+
+tProbsComb <- calculatetProbCombination(tProbs,RR = RR)
+
+#check to ensure all rows sum to 1
+rowSums(tProbsComb)
+
+#calculate the yearly proportions (for the first two years)
+probsCombYearly1_2 <- calculateYearlyProbs(tProbsComb,t = 2,iVec = iVec)
+
+#calculate rest of years
+probsCombYearly3_20 <- calculateYearlyProbs(tProbs,t = 18,iVec =probsCombYearly1_2[2,])
+
+#combine them
+probsCombYearly <- rbind(probsCombYearly1_2,probsCombYearly3_20)
+
+#check
+rowSums(probsCombYearly) # all sum to 1
+
+  
+#calculate the life-years
+lifeYearsComb <- rowSums(probsCombYearly[,-4])
+
+#calculate the costs
+costAComb <- costA+cLam
+costBComb <- costB+cLam
+costCComb <- costC+cLam
+#combine the costs into a vector
+costVectorComb <- c(costAComb,costBComb,costCComb)
+
+#hint: use matrix multiplication
+costCombNonDisc1_2 <-   round(probsCombYearly[1:2,-4],6) %*% costVectorComb
+costCombNonDisc3_20 <- round(probsCombYearly[3:20,-4],6) %*% costVector
+
+#hint use rbind to combine the non-discounted cost
+costCombNonDisc <- rbind(costCombNonDisc1_2,costCombNonDisc3_20)
+
+#calculate the discounted rate
+costCombDisc <- discountFormula(costCombNonDisc, discRate = cDR,20)
+
+#calculate the total costs and life years for the combination therapy
+totalLifeYearsComb <- sum(lifeYearsComb)
+totalDiscCostComb <- sum(costCombDisc)
+```
+
+### Part 5
+
+Lastly, compare the total life years and costs between the monotherapy and combination therapy to calculate the ICER
+
+```{r Calculating the ICER}
+#combination over monotherapy
+lifeYearsGained <- totalLifeYearsComb - totalLifeYearsMonoTherapy
+increasedCost <- totalDiscCostComb - totalDiscCostMonoTherapy
+
+#calculate ICER
+ICER <- increasedCost/lifeYearsGained
+
+ICER 
+```

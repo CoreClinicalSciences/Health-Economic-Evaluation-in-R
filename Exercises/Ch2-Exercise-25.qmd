@@ -1,21 +1,13 @@
----
-title: "Exercise 2.5 Sol"
-author: "Nathaniel Dyrkton"
-date: "2025-08-26"
-output: html_document
----
+# Exercise 2.5
 
-#Solutions
+This R markdown file reproduces exercise 2.5 in R from the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
 
-This R markdown file reproduces exercise 2.5 in R from the book
-"Decision Modelling for Health Economic Evaluation" by Andrew Briggs,
-Mark Sculpher, and Karl Claxton
-
-#Preamble on matrix operations
+## Preamble on matrix operations
 
 When building markov molds and building transition matrices, using matrix-vector multiplications simplifies manual computation significantly.
 
-To multiply a matrix by a vector we must have the same number of columns in the matrix as rows in a vector. Consider below an example of a two-state markov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.
+To multiply a matrix by a vector we must have the same number of columns in the matrix as rows in a vector. Consider below an example of a two-state markov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.ov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.
+
 ```{r Preamble}
 #initial proportion
 #the number of entries should be the same as the number of states
@@ -53,8 +45,7 @@ tProbs_example[-1,]  #extracts all but the first row
 tProbs_example[,-1]  #extracts all but the column
 ```
 
-
-#Start of Exercise 2.5
+## Start of Exercise 2.5
 
 Calculate the monotherapy transition probabilities for the control based on the data provided in Table 2.5. They should match the transition probabilities provided in Table 2.2. part 1(a)
 
@@ -70,8 +61,10 @@ We need to calculate the following transition probabilities:
 -   Transition probability from C to C
 -   Transition probability from C to D
 
-Step 1: fill in the transition probability matrix with the calculated transition probabilities and initialize the parameters necessary for modelling.
-Remember, you cannot go backwards in this model, so any transition probability below the diagonal values will be 0. 
+### Part 1
+
+Fill in the transition probability matrix with the calculated transition probabilities and initialize the parameters necessary for modelling. Remember, you cannot go backwards in this model, so any transition probability below the diagonal values will be 0.
+
 ```{r setup parameters}
 #fill in the quantities for the matrix here
 
@@ -115,7 +108,9 @@ cDR <- 0.06 #annual discount rate cost (proportion)
 oDR <- 0 #annual discount rate benefits (proportion)
 ```
 
-Step 2: Calculate the proportion of individuals in each state for years 1-20 (Monotherapy), their life-years, and costs
+### Part 2
+
+Calculate the proportion of individuals in each state for years 1-20 (Monotherapy), their life-years, and costs.
 
 ```{r}
 #input the initial vector for the state space, where each element refers to the initial proportion of individuals in state A-D respectively. We assume all individuals start in State A. We are giving the vector the name "iVec".
@@ -159,8 +154,10 @@ rowSums(yearlyProbs)
 lifeYears <- rowSums(yearlyProbs[,-4])
 ```
 
-Part 3: calculate cost and discounted cost
-Hint: The discounted rate formula is given on Page 41 in the footnote
+### Part 3
+
+calculate cost and discounted cost Hint: The discounted rate formula is given on Page 41 in the footnote
+
 ```{r Monotherapy Cost}
 #calculate the non-discounted cost of monotherapy
 #hint try using matrix multiplications 
@@ -191,8 +188,10 @@ totalDiscCostMonoTherapy <- sum(discCost)
 totalLifeYearsMonoTherapy <- sum(lifeYears)
 ```
 
+### Part 4
 
-Step 4: Repeat the analysis for the combination therapy. Use table 2.2 part 1(b) as a guide to calculate the combination transition matrix. Recall that the combination therapy is only use for the first two years of treatment.
+Repeat the analysis for the combination therapy. Use table 2.2 part 1(b) as a guide to calculate the combination transition matrix. Recall that the combination therapy is only used for the first two years of treatment.
+
 ```{r Combination Therapy}
 
 #first lets create a function that converts the original transition matrix to the combination transition matrix by using the risk ratio
@@ -256,8 +255,10 @@ totalLifeYearsComb <- sum(lifeYearsComb)
 totalDiscCostComb <- sum(costCombDisc)
 ```
 
-Step 5: Lastly, compare the total life years and costs between the mono
-and combination therapy to calculate the ICER
+### Part 5
+
+Lastly, compare the total life years and costs between the monotherapy and combination therapy to calculate the ICER
+
 ```{r Calculating the ICER}
 #combination over monotherapy
 lifeYearsGained <- totalLifeYearsComb - totalLifeYearsMonoTherapy

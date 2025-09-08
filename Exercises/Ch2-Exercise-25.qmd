@@ -98,13 +98,17 @@ As you complete the matrix, remember, that it's not possible to go backwards in 
 
 ```{r ex 2.5.1 setup parameters}
 
+
 tProbs <- matrix(
-  c(0.721453287, 0.201845444,0.066897347, 0.009803922,
-    0    , 0.581081081, 0.406995231, 0.011923688,
-    0    , 0    , 0.750142939, 0.249857061,
-    0    , 0    , 0    , 1
+  c(0.721453287, 0.201845444, 0.066897347, 0.009803922,
+    0          , 0.581081081, 0.406995231, 0.011923688,
+    0          , 0          , 0.750142939, 0.249857061,
+    0          , 0          , 0          , 1
   ),ncol = 4, nrow = 4, byrow = T
 )
+
+#please note that there are more decimals here than in Table 2.2a and other figures. This is because we aim to maintain the exact decimals used in the Excel sheet for consistency. To get decimals closer to what we achieve here, we recommend using Table 2.5 as a guide.
+
 ```
 
 **Check.** We will use `rowSums` to make sure we've entered our transition matrix correctly. All the rows should equal 1

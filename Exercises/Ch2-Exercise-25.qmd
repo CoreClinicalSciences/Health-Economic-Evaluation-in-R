@@ -1,12 +1,12 @@
 # Exercise 2.5
 
-This R markdown file reproduces exercise 2.5 in R from the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+This R markdown file reproduces exercise 2.5 in R from Chapter 2 of the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
 
 ## Preamble on matrix operations
 
 When building markov molds and building transition matrices, using matrix-vector multiplications simplifies manual computation significantly.
 
-To multiply a matrix by a vector we must have the same number of columns in the matrix as rows in a vector. Consider below an example of a two-state markov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.ov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.
+To multiply a matrix by a vector we must have the same number of columns in the matrix as rows in a vector. Consider below an example of a two-state markov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.
 
 ### Matrix multiplication example
 
@@ -311,8 +311,8 @@ costCComb <- costC+cLam
 costVectorComb <- c(costAComb,costBComb,costCComb)
 
 #use matrix multiplication
-costCombNonDisc1_2 <-   round(probsCombYearly[1:2,-4],6) %*% costVectorComb
-costCombNonDisc3_20 <- round(probsCombYearly[3:20,-4],6) %*% costVector
+costCombNonDisc1_2 <-   probsCombYearly[1:2,-4] %*% costVectorComb
+costCombNonDisc3_20 <- probsCombYearly[3:20,-4] %*% costVector
 ```
 
 We will use `rbind` to combine the non-discounted costs and then use the discount function to calculate the discounted costs. With the costs and life years calculated for each year, we will use `sum` to calculate the total costs and life years associated with the combination therapy. 

@@ -45,8 +45,11 @@ Remember that the normal distribution's parameters are on the log scale. So, the
 SE_RR <- (log(CI_RR[2])-log(CI_RR[1]))/(2*1.96)
 ```
 
-**Check.** We can check we've done it properly by using the formulas below, They should provide the same results as the formula above.
-```{r 4.7.1 check SE calculation}
+:::{.callout-tip}
+## Check 
+We can check we've done it properly by using the formulas below, They should provide the same results as the confidence intervals we entered above as `CI_RR`.
+:::
+```{r 4.7.1 check calculations}
 exp(log(RR)-1.96*SE_RR)
 exp(log(RR)+1.96*SE_RR)
 ```
@@ -68,8 +71,9 @@ RRSim <- exp(lnRRDraw)
 We may use the `rgamma(m,shape,scale)` function to draw random numbers from the gamma distribution. Recall the formulae from 4.4.3 for parameterizing the gamma distribution using the method of moments. Take care to ensure the parameterization of the gamma distribution matches that of 4.4.3. Use `rgamma()` to check the parameterization. By default the parameterization should be $\beta$ = scale. 
 
 For this exercise we will take the mean costs directly from exercise 2.5 and assume the mean costs for the care are equal to their standard errors.
-
+:::{.callout-note}
 Note:  In R we can nest the assignment operator  `<-`  to save space
+:::
 
 ```{r 4.7.2 Draws using the gamma distribution}
 
@@ -112,7 +116,7 @@ ccccSim <- rgamma(1, shape = gammaDistAlpha(cccc,SEcccc),scale = gammaDistBeta(c
 
 Recall the transition matrix given in exercise 2.5. The exercise in the excel file has the reader separate the matrix into dichotomous and non-dichotomous transition probabilities and generate random numbers using a beta distribution for the dichotomous events and dirichlet distribution for the non-dichotomous events. There is also no dirichlet distribution in Excel. 
 
-In R we can tackle this issue more easily. We are able to quickly vectorize the random number generation to speed up calculations, and use the MCMCpack (Martin et al., 2011) to draw from the dirichlet distribution.
+In R we can tackle this issue more easily. We are able to quickly vectorize the random number generation to speed up calculations, and use the `MCMCpack` library (Martin et al., 2011) to draw from the dirichlet distribution.
 
 Below we load in the transition matrix provided in exercise 2.5
 ```{r 4.7.3 generating new transition matrices 1}
@@ -146,7 +150,9 @@ Lets use the `apply` function to quickly draw random numbers from the dirichlet 
 library(MCMCpack)
 ```
 
+:::{.callout-note}
 Note we only give n = 1 to the rdirichlet distribution as it generates a random vector of `length(alpha)`.
+:::
 
 The rdirichlet function by default returns the vector of draws by columns, but when we want these results by rows. To get the matrix back into our original form, we can just use the `t()` function to transpose matrix.
 
@@ -154,12 +160,16 @@ The rdirichlet function by default returns the vector of draws by columns, but w
 #use "1" to specify to apply the function by rows
 tProbRand <- t(apply(tAlpha,1,function(x){
   
-  return(rdirichlet(1,x))
+  return(MCMCpack::rdirichlet(1,x))
 }))
 
 #our new transition probability matrix
 tProbRand 
 ```
+:::{.callout-tip collapse="true"}
+## Tip
+We could also write: `return(rdirichlet(1,x))` without the `MCMCpack::` prefix. We've added the prefix so we can clearly see where a function comes from. Anything without a prefix is a function from base R, or a function we've written ourselves. This is really helpful when you revisit your code, particularly if you are calling functions from many different packages. 
+:::
 
 ## Part 4: Re-running the Markov model from exercise 2.5
 

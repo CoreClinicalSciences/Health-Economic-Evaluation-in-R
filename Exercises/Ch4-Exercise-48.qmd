@@ -6,32 +6,32 @@ This R markdown file reproduces exercise 4.8 in R from Chapter 4 in the book "De
 This exercise re-evaluates the hip-replacement analysis from exercise 3.5. However, we assign probability distributions to parameters that are, in general, estimated with uncertainty.
 
 
-## Part 1
-Assigning beta distributions to probability parameters
+## Part 1: Assigning beta distributions to probability parameters
 
-Consider this verbatim quote from 4.8.2 Section 2:
+Consider this quote from *4.8.2 Section 2*:
 
-"The hospital records of a sample of 100 patients receiving a primary THR were examined retrospectively. Of these patients, two patients died either during or immediately
- following the procedure. The operative mortality for the procedure is therefore estimated to be 2 per cent."
+>"The hospital records of a sample of 100 patients receiving a primary THR were examined retrospectively. Of these patients, two patients died either during or immediately following the procedure. The operative mortality for the procedure is therefore estimated to be 2 per cent."
 
 and 
 
-"The hospital records of a sample of 100 patients having experienced a revision procedure
- to replace a failed primary THR were reviewed at one year. During this time, four
- patients had undergone a further revision procedure."
+>"The hospital records of a sample of 100 patients having experienced a revision procedure to replace a failed primary THR were reviewed at one year. During this time, four patients had undergone a further revision procedure."
 
-```{r Beta distribution}
+As in exercise 4.7, we will start by setting a seed and by loading parameters from the previous exercise. 
+
+```{r 4.8.1 set-up}
 #set a seed for reproducibility
 set.seed(12345)
 
 #some deterministic parameters from the previous exercise, no changes are needed
-
 age <- 60
 male <- 0
 
 cDR <- 0.06
 oDR <- 0.015
 
+#fixed costs
+cStandard <- 394 #cost of standard implant
+cNP1 <- 579 #cost of new implant
 
 omrPTHR <- rbeta(1,2,98)   #operative mortality rate following primary THR
 
@@ -40,9 +40,12 @@ omrRTHR <- rbeta(1,2,98)  #operative mortality rate following revision THR
   
 
 rrr <- rbeta(1,4,96) #re-revision risk
+```
 
+Now, let us compare the standard errors of each estimate by using the sampling distribution based on the central limit theorem, and the method of moments of the beta distribution.
 
-#let us compare the standard errors of each estimate by using the 1. the sampling distribution based on the central limit theorem, and the method of moments of the beta distribution.
+We will create a function to calculate the standard errors.
+```{r 4.8.1 create standard error functions}
 
 SE_p <- function(p,n){
   return(sqrt(p*(1-p)/n))
@@ -53,72 +56,63 @@ SE_beta <- function(alpha,beta){
 
   return(sqrt(alpha*beta/((alpha+beta)^2 *(alpha+beta+1))))
 }
+```
 
+Now we will use those functions to calculate the standard errors: 
+```{r 4.8.1 calculating standard errors}
+#SE omPTHR
 SE_omrPTHR_p <- SE_p(0.02,100) 
 SE_omrPTHR_beta <- SE_beta(2,98)
 
-
+#SE rrr
 SE_rrr_p <- SE_p(0.04,100) 
 SE_rrr_beta <- SE_beta(4,96)
 ```
 
-Lets compare the two standard error
-```{r compare standard errors}
+Lets compare the two standard errors
+```{r 4.8.1 compare standard errors}
 SE_rrr_p
 SE_rrr_beta
 ```
+
 Notice that the two standard errors are almost identical with the absolute difference being about 0.0001, this shows that using method of moments with the beta distribution can approximate the standard error of the the sample proportion
 
+## Part 2: Using the gamma distribution for costs
 
+Consider the following verbatim quote from *Section 4.8.2 Part 3*:
 
-## Part 2
-Using the gamma distribution for costs
-
-Consider the following verbatim quote from Section 4.8.2 Part 3
-
-"A number of units involved in THR were reviewed and the mean cost of a revision
+>"A number of units involved in THR were reviewed and the mean cost of a revision
  procedure was found to be £5294 with a standard error of £1487."
  
- 
-The gamma distribution is parameterized in the textbook as $f(x \mid \alpha, \beta) = \frac{1}{\Gamma(\alpha), \beta^\alpha} \, x^{\alpha-1} \, e^{-x/\beta}$, where $\beta$ is the "scale" parameter. To match this parameterization we must use the "scale" parameter rather than the "rate" parameter when inputting $\beta$.
+The gamma distribution is parameterized in the textbook as: $$f(x \mid \alpha, \beta) = \frac{1}{\Gamma(\alpha), \beta^\alpha} \, x^{\alpha-1} \, e^{-x/\beta}$$ where $\beta$ is the "scale" parameter. To match this parameterization we must use the *scale* parameter rather than the *rate* parameter when inputting $\beta$.
 
-```{r gamma distribution for costs}
-
-#fill in the mean and SE for the gamma distribution using the method of moments
-
+We will fill in the mean and SE for the gamma distribution using the method of moments, and ensure we select scale for the beta value as there is a rate parameter (1/scale)
+```{r 4.8.2 gamma distribution for costs}
 alpha <- (5294/1487)^2
 beta <- 1487^2 / 5294
 
-#ensure that we select scale for the beta value as there is a rate parameter (1/scale)
+#select scale for the beta value as there is a rate parameter
 cRevision <- rgamma(1,shape = alpha,scale = beta)
-
-#other fixed costs
-cStandard <- 394 #cost of standard implant
-cNP1 <- 579 #cost of new implant
-
-
 ```
 
+## Part 3: Using the beta distribution to generate utility parameters
 
-## Part 3
+Consider using the method of moments to draw from the beta distribution based on the this quote from *Section 4.8.2 Section 3*:
 
-Using the beta distribution to generate utility parameters.
+>"A study was instigated to explore the utility weights subjects placed on different outcomes of THR related to the states of the Markov model – the following results were calculated in terms of mean (standard error) by state:
+>
+> * Successful primary – 0.85 (0.03)
+> * Successful revision – 0.75 (0.04)
+> * Revision – 0.3 (0.03)"
 
-Consider using the method of moments to draw from the beta distribution based on the this verbatim quote from Section 4.8.2 Section 3)
-"A study was instigated to explore the utility weights subjects placed on different outcomes of THR related to the states of the Markov model – the following results were calculated in terms of mean (standard error) by state:
- Successful primary – 0.85 (0.03)
- Successful revision – 0.75 (0.04)
- Revision – 0.3 (0.03)"
+Because we need to calculate alpha and beta for the beta distribution simultaneously as the beta depends on alpha, we can merge all operations into one function.
 
-```{r Costs using the beta distribution}
-
-#because we need to calculate alpha and beta for the beta distribution simultaneously as the beta depends on alpha, we can merge all operations into one function.
-#create a function that calculates alpha and beta from the mean and standard errors and subsequently drawing from the beta distribution.
-
-
+We will create a function that calculates alpha and beta from the mean and standard errors and subsequently draws from the beta distribution.
+```{r 4.8.3 Costs using the beta distribution}
 drawBetaMethodMoments <- function(n,mu,s){
   
-  #functions estimates alpha and beta using the method of moments then draws from the beta distribution
+  #functions estimates alpha and beta using the method of moments 
+  #then draws from the beta distribution
   alpha <- ((mu*(1-mu)/s^2) -1)*mu
   beta <- alpha*(1-mu )/mu
   
@@ -127,9 +121,10 @@ drawBetaMethodMoments <- function(n,mu,s){
   
   return(draw)
 }
+```
 
-#draw our beta distribution based on the mean and standard errors
-
+Now we will draw our beta distribution based on the mean and standard errors using our newly created function.
+```{r 4.8.3 draw from beta distribution}
 uSuccessP <- drawBetaMethodMoments(1,0.85,0.03)
 uSuccessR <- drawBetaMethodMoments(1,0.75,0.04)
 uRevision <- drawBetaMethodMoments(1,0.3,0.03)
@@ -137,18 +132,18 @@ uRevision <- drawBetaMethodMoments(1,0.3,0.03)
 ```
 
 
+## Part 4: Drawing from a multivariate normal distribution
 
-## Part 4
-Drawing from a multivariate normal distribution
+One of the advantages R has over Excel is that it has access to morespecialized functions. The excel exercise has the reader generate multivariate normal random numbers via the uni-variate normal distribution. Although there is some nice theory regarding the univariate and multivariate normal distributions, in R we can simply draw directly from a multivariate normal distribution via well established packages such as `MASS` to simulate the hazard model from exercise 3.5
 
-One of the many advantages R has over Excel is that it has access to more  specialized function. The excel exercise has the reader generate multivariate normal random numbers via the uni-variate normal distribution. Although there is some nice theory regarding the univariate and multivariate normal distributions, in R we can simply draw directly from a multivariate normal distribution via well established packages such as MASS to simulate the hazard model from exercise 3.5
+For example the `mvrnorm()` distribution only requires the covariance matrix, and a cholesky decomposition is not required (although it would likely be more computationally efficient). On modern hardware, there is little difference unless we are generating multivariate normals with very high dimensionality.
 
-For example the mvrnorm() distribution only requires the covariance matrix, and a cholesky decomposition is not required (although it would likely more computationally efficient). On modern hardware, there is little difference unless we are generating multivariate normals with very high dimentionality.
+:::{.callout-note}
+If you don't have MASS installed, you will need to install the package using this code: `install.packages("MASS")`
+:::
 
-```{r drawing from a multivariate normal}
-#If you don't have MASS installed, you will need to install the package using install.packages() function
-#install.packages("MASS")
-
+To start, we will load the `MASS` package and input the survival model and covariance matrix provided in the exercise. 
+```{r 4.8.4 loading package & previously provided information}
 #load the package
 library(MASS)
 
@@ -173,33 +168,41 @@ covMat <- matrix(
 
 #name the matrix columns and rows
 colnames(covMat) <- rownames(covMat) <- c("lngamma","cons","age","male","NP1")
+```
 
+Although we don't need to, it's worth noting that we can easily calculate the cholesky decomposition in R
 
-
-
-#note we can easily calculate the cholesky decomposition in R if needed
+```{r 4.8.4 cholesky decomposition}
 choleskyMat <- chol(covMat)
+```
 
+:::{.callout-tip}
+## Check 
+Compare the coefficient values from normDraw with those from survModelFit. The coefficients should be of similar magnitude and direction but the exact values may differ.
+:::
+```{r 4.8.4 normDraw check}
+normDraw <- MASS::mvrnorm(1, mu = survModelSummary$coefficient,Sigma = covMat)
 
-
-normDraw <- mvrnorm(1, mu = survModelSummary$coefficient,Sigma = covMat)
-#as a sanity check, compare the coefficient values from normDraw with those from survModelFit. The coefficients should be of similar magnitude and direction but the exact values may differ
 normDraw
-#remember these are on the log scale, we can extract the necessary parameters
+```
 
-#we can extract the necessary parameters using the [i] operator, or, since the vector has named elements, we can be more explicit by using ['name'] instead
+Remember these values are on the log scale. 
+
+We can extract the necessary parameters using the `[i]` operator, or, since the vector has named elements, we can be more explicit by using `['name']` instead
+```{r 4.8.4 extract parameters}
 gamma <- exp(normDraw['lngamma'])
 lambda <- exp(normDraw['cons'] + normDraw['age']*age + normDraw['male']*male)
 rrNP1 <- exp(normDraw['NP1'])
 
 ```
 
+## Part 5: Combining all our functions
+We combine all the functions built in the exercise 3.5 to create an analysis function that completes the NP1 ICER calculations in a single call. 
 
-## Part 5
-We combine all the functions built in the previous exercises to create an analysis function that completes the NP1 ICER calculations in one call. 
+As in Exercise 4.7, we create an analysis function that takes in all necessary parameters and outputs the appropriate cost and QALYs to calculate the ICER.
 
-We bring all previous functions from exercise 3.5. As in Exercise 4.7, we create an analysis function that takes in all necessary parameters and outputs the appropriate cost and QALYs to calculate the ICER.
-```{r re-writing the analysis}
+The first step is to load in all of our previous functions
+```{r 4.8.5 load in previous functions}
 
 tProbsHazard <- function(t,lambda,gamma){
   return(1-exp(lambda*(((1:t)-1)^gamma - ((1:t)^gamma))))
@@ -260,7 +263,8 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
   }
   return(matReturn)
   
-  #returns a 60 (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t
+  #returns a t (years) x 5 (states) matrix where the rows represent 
+  #the proportion in a given state at year t
   
 }
 
@@ -270,8 +274,10 @@ discountFormula <- function(nonDiscount,discRate,t){
   return(nonDiscount/(1+discRate)^(1:t))
   
 }
+```
 
-
+Then we compile all the functions into a single analysis function:
+```{r 4.8.5 create analysis function}
 analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,cPrimary,cRevision,cPSuccess,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){
 
   #calculate the revision risk
@@ -282,7 +288,10 @@ analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,cPrimary,cRevision,cPSuccess,cSta
     inds <- sum(x+age >= yearlyTProbs$Index)
     
     #select the gender columns
-    #if else takes 3 arguments, the first is a logical check, if true, it returns the second value, if false it returns the 3rd argument. Equivalent code can be written use if(x){}else{}.
+    #if else takes 3 arguments, the first is a logical check, 
+    #if true, it returns the second value, 
+    #if false it returns the 3rd argument. 
+    #Equivalent code can be written use if(x){}else{}.
     genderCol <- ifelse(male ==1,3,4)
     
     return(yearlyTProbs[inds,genderCol])
@@ -304,7 +313,8 @@ analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,cPrimary,cRevision,cPSuccess,cSta
   #calculate the discounted cost
   discCostStandard <- discountFormula(totalCosts,cDR,t=t)
   
-  #calculate the quality adjusted life years by creating a vector for each state utility except death
+  #calculate the quality adjusted life years by creating 
+  #a vector for each state utility except death
   utility<- c(0,uSuccessP,uRevision,uSuccessR)
   
   #multiply by the cohort
@@ -344,23 +354,23 @@ analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,cPrimary,cRevision,cPSuccess,cSta
   return(list(STDcost = STDcost, STDQALYS = STDQALYS, NP1cost = NP1cost,NP1QALYS = NP1QALYS, ICER = (NP1cost-STDcost)/(NP1QALYS-STDQALYS)))
   
 }
-
-
-
-
 ```
 
 
-## Part 6
-Calculating the ICER
-```{r calculating probabilistic ICER}
+## Part 6: Calculating the ICER
+Now we will use our analysis function to calculate the ICER. 
+
+We will need to provide the starting vector, and the number of cycles we want to calculate, and then we can load our arguments into the primary analysis function.
+```{r 4.8.6 calculating probabilistic ICER}
 #call the created function
 iVec <- c(1000,0,0,0,0)
 t <- 60
 
 results <- analysisNP1(omrPTHR,omrRTHR,mr,rrr,cPrimary,cRevision,cPSuccess,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t)
+```
 
-
+We will use these results to calculate the differences in costs and QALYs, and then compute the ICER.
+```{r 4.8.6 calculate the ICER}
 #calculate the difference in costs
 diffCost <- results$NP1cost-results$STDcost
 
@@ -371,7 +381,6 @@ diffQALY <- results$NP1QALYS-results$STDQALYS
 ICER <- diffCost/diffQALY
 
 ICER 
-
 ```
 
 

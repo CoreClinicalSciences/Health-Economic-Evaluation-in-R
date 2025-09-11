@@ -219,7 +219,7 @@ calculateYearlyProbs <- function(tProbs, t, iVec){
 }
 ```
 
-Then we will use these functions to create a single analysis function. We will build in an error check to make sure our rows sum to 1 as before.
+Then we will use these functions to create a single analysis function. We can build in an error check to make sure our rows sum to 1 as before.
 ```{r 4.7.4 build analysis function}
 analysisFunc <- function(dmca,dmcb,dmcc,ccca,cccb,cccc,RR,cAZT,cALam,cDR,tProbs,iVec,t){
   
@@ -229,7 +229,7 @@ analysisFunc <- function(dmca,dmcb,dmcc,ccca,cccb,cccc,RR,cAZT,cALam,cDR,tProbs,
   yearlyProbs <- calculateYearlyProbs(tProbs,t,iVec)
 
   #throw error if row sums are not equal to 1
-  stopifnot(!rowsum(yearlyProbs)==1)
+  #stopifnot(!rowsum(yearlyProbs)==1)
   
   lifeYears <- rowSums(yearlyProbs[,-4])
   

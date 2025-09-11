@@ -1,4 +1,4 @@
-# Exercise 4.7
+# Exercise 4.7 {.unnumbered}
 
 This R markdown file reproduces exercise 4.7 in R from chapter 4 in the book
 "Decision Modelling for Health Economic Evaluation" by Andrew Briggs,
@@ -68,7 +68,9 @@ RRSim <- exp(lnRRDraw)
 
 ## Part 2: Using the distribution to draw random costs 
 
-We may use the `rgamma(m,shape,scale)` function to draw random numbers from the gamma distribution. Recall the formulae from 4.4.3 for parameterizing the gamma distribution using the method of moments. Take care to ensure the parameterization of the gamma distribution matches that of 4.4.3. Use `rgamma()` to check the parameterization. By default the parameterization should be $\beta$ = scale. 
+We may use the `rgamma(m,shape,scale)` function to draw random numbers from the gamma distribution. Recall the formulae from 4.4.3 for parameterizing the gamma distribution using the method of moments. Take care to ensure the parameterization of the gamma distribution matches that of 4.4.3. Use `rgamma()` to check the parameterization. The gamma distribution is parameterized in the textbook as $f(x \mid \alpha, \beta) = \frac{1}{\Gamma(\alpha), \beta^\alpha} \, x^{\alpha-1} \, e^{-x/\beta}$, where $\beta$ is the "scale" parameter. 
+
+By default the parameterization should be $\beta$ = scale. 
 
 For this exercise we will take the mean costs directly from exercise 2.5 and assume the mean costs for the care are equal to their standard errors.
 :::{.callout-note}

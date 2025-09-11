@@ -1,12 +1,12 @@
-# Exercise 3.5
+# Exercise 3.5 {.unnumbered}
 
-This R markdown file reproduces exercise 3.5 in R from the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+This R markdown file reproduces exercise 3.5 in R from Chapter 3 of the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
 
 This exercise builds upon the skills from exercise 2.5. You will need to know how to build and call functions in R, as well as how to multiply matrices.
 
 The following Markov Model will be used in this exercise. Use it to fill in the transition probabilities in the later section. This figure comes directly from the original Excel worksheet provided by Andrew Briggs, Mark Sculpher, and Karl Claxton.
 
-![Exercise 3.5 Markov Model](Diagrams/Exercise_35_Diagram.png){width=80%}
+![Exercise 3.5 Markov Model](Diagrams/Exercise_35_Diagram.png){width="80%"}
 
 ## Setup
 
@@ -44,6 +44,7 @@ uRevision <- 0.30 #utility of revision
 Now we will enter the survival model that is fit with a weibull distribution.
 
 Remember that the coefficients are on the log scale.
+
 ```{r 3.5.0 survival model 1}
 survModelSummary <- data.frame(
   
@@ -53,17 +54,13 @@ survModelSummary <- data.frame(
 )
 ```
 
-We can exponentiate the coefficients to get the hazards.
-```{r 3.5.0 survival model 2}
-survModelSummary$hazard_ratio <- exp(survModelSummary$coefficient)
-```
-
 To calculate lambda of the weibull distribution we can take the linear combination of the coefficients. Again, we need to remember to exponentiate the results as they are on the log scale.
 
-We can use the `$` operator to create new columns in the `survModelSummary` dataframe and extract any column from the dataframe by name. the `$` operator by default extracts a vector, which means vector operations can be done on them such as `[i]` to extract the *i*th element of the vector. If you want to refresh your memory on how to use `[i]` to extract a data element, review exercise 2.5. 
-```{r 3.5.0 survival model 3}
+We can use the `$` operator to create new columns in the `survModelSummary` dataframe and extract any column from the dataframe by name. the `$` operator by default extracts a vector, which means vector operations can be done on them such as `[i]` to extract the *i*th element of the vector. If you want to refresh your memory on how to use `[i]` to extract a data element, review exercise 2.5.
+
+```{r 3.5.0 survival model 2}
 #replace `columnname`
-survModelSummary$exp_coefficients <- exp(survModelSummary$coefficient)
+survModelSummary$hazard_ratio <- exp(survModelSummary$coefficient)
 
 #use the $ operator to extract the column of choice then use [i] to extract the coeficient of choice
 #for example [2] corresponds to the constant coefficient 
@@ -100,7 +97,7 @@ revisionRisk <- tProbsHazard(60,lambda = lambda,gamma = gamma)
 
 ## Step 2: Using life-tables for background mortality
 
-We want to make sure we are accounting for background mortality in our model. First, we will add the death rates and yearly transition probabilities provided in the exercise. 
+We want to make sure we are accounting for background mortality in our model. First, we will add the death rates and yearly transition probabilities provided in the exercise.
 
 ```{r 3.5.2 life-tables}
 #provided death rates and yearly transition probabilities
@@ -175,8 +172,8 @@ tProbs_time <- function(omrPTHR,omrRTHR,rr,mr,rrr,t){
   
 }
 ```
-**Check.** Manually check that each row sums to 1 by performing some algebra.
 
+**Check.** Manually check that each row sums to 1 by performing some algebra.
 
 We must now calculate the amount of individuals in each state for 60 cycles. We will re-use the function created in exercise 2.5 but modify it slightly for the new Markov model so that it includes the extra states and the time-dependent transition probabilities.
 
@@ -211,14 +208,17 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
 ```
 
 Just like in 2.5, we will create our initial vector. Again, everyone in the population starts in the PrimaryTHR state.
+
 ```{r 3.5.3 create initial vector}
 iVec <- c(1000,0,0,0,0)
 ```
 
 Then we will calculate all states for all 60 cycles
+
 ```{r 3.5.3 calculate all states}
 populationStates <- calculateYearlyProbs(iVec = iVec,omrPTHR,omrRTHR,rr= revisionRisk, mr = deathRisk,rrr=rrr,t=60)
 ```
+
 **Check.** We will use `rowSums` to make sure that all rows total to 1000
 
 ```{r 3.5.3 check row sums}
@@ -226,9 +226,11 @@ rowSums(populationStates)
 ```
 
 ## Step 4: Adapt the Model for a New Prosthesis
+
 To adapt the model for a new prosthesis, we will re-use the previous results while adding the treatment effect.
 
 The new revision risk adjusts the lambda value by a scalar -- the hazard ratio of `NP1`
+
 ```{r 3.5.4 new prothesis revision risk}
 #use the $ operator to extract the appropriate hazard ratio
 rrNP1 <- survModelSummary$hazard_ratio[5]
@@ -237,11 +239,13 @@ revisionRiskNP1 <- tProbsHazard(t=60,lambda = lambda*rrNP1,gamma = gamma)
 ```
 
 We will calculate the updated states using the `calculateYearlyProbs` function we created earlier and filling in the appropriate arguments
+
 ```{r 3.5.4 new prothesis population states}
 populationStatesNP1 <- calculateYearlyProbs(iVec,omrPTHR,omrRTHR,rr=revisionRiskNP1,mr=deathRisk,rrr,t=60)
 ```
 
 **Check.** We will check that the row sums are equal to 1000
+
 ```{r 3.5.4 new prosthesis row sums}
 rowSums(populationStatesNP1)
 ```
@@ -269,16 +273,19 @@ lifeYearsStandard <-rowSums(populationStates[,-5])
 ```
 
 Next, we create the cost vector. The length of the vector should only then be 4, the total of the states with costs in the model.(Death can have costs that you might want to integrate in other models. But in this model, there are no costs associated with death.)
+
 ```{r 3.5.5 cost vector}
 costs<- c(0,0,cRevision,0)
 ```
 
 We need to add a parameter for the initial cost. Note that we started with 1000 patients.
+
 ```{r 3.5.5 initial cost parameter}
 iCostStandard <- cStandard*1000
 ```
 
-We will calculate the total cost by using matrix multiplication to multiple our cost vector `costs` by our states matrix `populationStates`. We will use `discountFormula` to account for discounting over time. 
+We will calculate the total cost by using matrix multiplication to multiple our cost vector `costs` by our states matrix `populationStates`. We will use `discountFormula` to account for discounting over time.
+
 ```{r 3.5.5 calculate total costs}
 totalCosts <- populationStates[,-5] %*% costs
 
@@ -287,17 +294,20 @@ discCostStandard <- discountFormula(totalCosts,cDR,t = 60)
 ```
 
 Next we need to repeat the previous steps for utility of the treatment over time. Just like for costs, we start by creating a utility vector for all states except death which has a utility = 0
+
 ```{r 3.5.5 utility vector}
 utility<- c(0,uSuccessP,uRevision,uSuccessR)
 ```
 
-We will calculate the total utility over time using matrix multiplication and then we will calculate the discounted utility. 
+We will calculate the total utility over time using matrix multiplication and then we will calculate the discounted utility.
+
 ```{r 3.5.5 calculate total utility}
 totalQuality <-  populationStates[,-5] %*% utility
 QALYStandard <- discountFormula(totalQuality,discRate = oDR,t = 60)
 ```
 
 Lastly, we will calculate the total cost and utilities for all cycles/person, ensure to include the initial cost of the treatment
+
 ```{r 3.5.5 calculate total cost and utilities per person}
 STDcost <- sum(c(iCostStandard,discCostStandard))/1000
 STDLYs <- sum(lifeYearsStandard)/1000
@@ -332,6 +342,7 @@ NP1QALYS <- sum(QALYNP1)/1000
 ## Step 6: Calculate the ICER
 
 The final step is to calculate the ICER for the new prosthesis compared to standard care
+
 ```{r 3.5.6 calculate the ICER}
 #calculate the difference in costs
 diffCost <- NP1cost-STDcost

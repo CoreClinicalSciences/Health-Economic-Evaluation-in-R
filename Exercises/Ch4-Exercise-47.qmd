@@ -10,13 +10,16 @@ The general idea of this exercise is to revisit exercise 2.5, but add uncertaint
 
 Much of this exercise will re-use the results and functions from exercise 2.5.
 
-## Part 1 
-Drawing the log-normal distribution
+## Part 1: Drawing the log-normal distribution
 
 Some useful functions in R: 
-log(x) by default calculates the natural logarithm of x. R has many built in functions to generate random numbers. For example, rnorm(n,mean,sd) generates n random numbers with mean and sd parameters. Because random draws are taken from many distributions, the results of this exercise will vary for each user. To ensure reproducibility we set a seed which allows the random numbers generated to be the same for all those who use the same seed (provided the operating systems are the same).
+`log(x)` by default calculates the natural logarithm of *x*. R has many built in functions to generate random numbers. For example, `rnorm(n,mean,sd)` generates *n* random numbers with mean and sd parameters. 
 
-```{r log normal parameter values for relative risk}
+Because random draws are taken from many distributions, the results of this exercise will vary for each user. To ensure reproducibility we set a seed which allows the random numbers generated to be the same for all those who use the same seed (provided the operating systems are the same).
+
+We will start by setting the seed and adding in the provided parameters.
+
+```{r 4.7.1 log normal parameter values for relative risk}
 #set a seed for reproducibility
 set.seed(123)
 
@@ -28,33 +31,47 @@ cDR <- 0.06
 
 #the confidence interval
 CI_RR <- c(0.365, 0.710)
-##
 
-#re-arrange the confidence interval formula to calculate the standard error.
-#remember that the normal distribution's parameters are on the log scale. The confidence interval parameters and relative risk must be transformed accordingly.
+#drug costs, these are known and fixed
+cAZT <- 2278 #cost of Zidovudine
+cLam <- 2086.5 #cost of Lamivudine 
+```
 
+We need to re-arrange the confidence interval formula to calculate the standard error.
+
+Remember that the normal distribution's parameters are on the log scale. So, the confidence interval parameters and relative risk must be transformed accordingly.
+
+```{r 4.7.1 calculate the SE}
 SE_RR <- (log(CI_RR[2])-log(CI_RR[1]))/(2*1.96)
+```
 
-#check we've done it right. The number provided by the calculations below should match the results of the formula above
+**Check.** We can check we've done it properly by using the formulas below, They should provide the same results as the formula above.
+```{r 4.7.1 check SE calculation}
 exp(log(RR)-1.96*SE_RR)
 exp(log(RR)+1.96*SE_RR)
+```
 
-#calculate the log mean and logRR; these are the parameters of the log-normal distribution
+Next, calculate the log mean and logRR; these are the parameters of the log-normal distribution.
+```{r 4.7.1 calculate log mean and logrr}
 lnMeanRR <- log(RR)
 lnSERR <- SE_RR
+```
 
-#draw from the normal distribution
+We will now draw from the normal distribution.
+```{r 4.7.1 draw from normal distribution}
 lnRRDraw <- rnorm(1,mean = lnMeanRR,sd = lnSERR)
 RRSim <- exp(lnRRDraw) 
 ```
 
+## Part 2: Using the distribution to draw random costs 
 
-## Part 2
-Using the distribution to draw random costs 
+We may use the `rgamma(m,shape,scale)` function to draw random numbers from the gamma distribution. Recall the formulae from 4.4.3 for parameterizing the gamma distribution using the method of moments. Take care to ensure the parameterization of the gamma distribution matches that of 4.4.3. Use `rgamma()` to check the parameterization. By default the parameterization should be $\beta$ = scale. 
 
-We may use the rgamma(m,shape,scale) function to draw random numbers from the gamma distribution. Recall the formulae from 4.4.3 for parameterizing the gamma distribution using the method of moments. Take care the ensure the parameterization of the gamma distribution matches that of 4.4.3. Use rgamma() to check the parameterization. By default the parameterization should be $\beta$ = scale. Furthermore, for this exercise we assume the mean costs for the care are equal to their standard errors.
-```{r Draws using the gamma distribution}
-#mean costs taken directly from exercise 2.5, but here we assume that the standard error of the costs is the same as the mean. In R we can nest the assignment operator  <-  to save space
+For this exercise we will take the mean costs directly from exercise 2.5 and assume the mean costs for the care are equal to their standard errors.
+
+Note:  In R we can nest the assignment operator  `<-`  to save space
+
+```{r 4.7.2 Draws using the gamma distribution}
 
 dmca <- SEdmca <- 1701 #direct medical cost of A
 dmcb <- SEdmcb <- 1774 #direct medical cost of B
@@ -62,10 +79,11 @@ dmcc <- SEdmcc <- 6948 #direct medical cost of C
 ccca <- SEccca <- 1055 #community care cost of A
 cccb <- SEcccb <- 1278 #community care cost of B
 cccc <- SEcccc <- 2059 #community care cost of C
+```
 
+To simplify calculations, we will create a function that calculates the mean and sd of the gamma distribution based on the mean and standard deviation.
 
-#to simplify calculations, create a function that calculates the mean and sd of the gamma distribution based on the mean and standard deviation
-
+```{r 4.7.2 gamma distribution function}
 gammaDistAlpha <- function(mean,sd){
   
   return((mean^2)/(sd^2))
@@ -77,8 +95,10 @@ gammaDistBeta <- function(mean,sd){
   return((sd^2)/(mean))
   
 }
+```
 
-#create random draws
+Now we will create random draws
+```{r 4.7.2 random draws}
 dmcaSim <- rgamma(1, shape = gammaDistAlpha(dmca,SEdmca),scale = gammaDistBeta(dmca,SEdmca))
 dmcbSim <- rgamma(1, shape = gammaDistAlpha(dmcb,SEdmcb),scale = gammaDistBeta(dmcb,SEdmcb))
 dmccSim <- rgamma(1, shape = gammaDistAlpha(dmcc,SEdmcc),scale = gammaDistBeta(dmcc,SEdmcc))
@@ -86,27 +106,16 @@ dmccSim <- rgamma(1, shape = gammaDistAlpha(dmcc,SEdmcc),scale = gammaDistBeta(d
 cccaSim <- rgamma(1, shape = gammaDistAlpha(ccca,SEccca),scale = gammaDistBeta(ccca,SEccca))
 cccbSim <- rgamma(1, shape = gammaDistAlpha(cccb,SEcccb),scale = gammaDistBeta(cccb,SEcccb))
 ccccSim <- rgamma(1, shape = gammaDistAlpha(cccc,SEcccc),scale = gammaDistBeta(cccc,SEcccc))
-
-
-#drug costs, these are known and fixed
-cAZT <- 2278 #cost of Zidovudine
-cLam <- 2086.5 #cost of Lamivudine 
-
 ```
 
+## Part 3: Generating new transition probability matrices using the dirichlet distirbution
 
+Recall the transition matrix given in exercise 2.5. The exercise in the excel file has the reader separate the matrix into dichotomous and non-dichotomous transition probabilities and generate random numbers using a beta distribution for the dichotomous events and dirichlet distribution for the non-dichotomous events. There is also no dirichlet distribution in Excel. 
 
+In R we can tackle this issue more easily. We are able to quickly vectorize the random number generation to speed up calculations, and use the MCMCpack (Martin et al., 2011) to draw from the dirichlet distribution.
 
-## Part 4
-Generating new transition probability matrices using the dirichlet distirbution
-
-Recall that the transition matrix in exercise 2.5 is given. The exercises in the excel file has the reader separate the matrix into dichotomous and non-dichotomous transition probabilities and generate random numbers using a beta distribution for the dichotomous events and dirichlet distribution for the non-dichotomous events. There is also no dirichlet distribution in Excel. 
-
-Instead, in R, we can tackle this issue more easily. We quickly vectorize the random number generation to speed up calculations, and use the MCMCpack (Martin et al., 2011) to draw from the dirichlet distribution.
-
-```{r generating new transition matrices}
-
-
+Below we load in the transition matrix provided in exercise 2.5
+```{r 4.7.3 generating new transition matrices 1}
 #recall the transition matrix from the exercise 2.5
 tProbs <- matrix(
   c(0.721453287, 0.201845444, 0.066897347, 0.009803922,
@@ -115,10 +124,11 @@ tProbs <- matrix(
     0          , 0          , 0          , 1
   ),ncol = 4, nrow = 4, byrow = T
 )
+```
 
+The equivalent alphas are given (note the deterministic value is `alpha / (alpha + beta)`), which is exactly the transition matrix given above. The betas are excluded here for simplicity
 
-#the equivalent alphas are given (note the deterministic value is alpha / (alpha + beta)), which is exactly the transition matrix given above. The betas are excluded here for simplicity
-
+```{r 4.7.3 generating transition matrices 2}
 tAlpha <- matrix(
   
   c(1251, 350, 116  , 17 ,
@@ -127,30 +137,36 @@ tAlpha <- matrix(
     0   , 0  , 0    , 1749 #note this alpha is not required as we know all are in the last state
   ),ncol = 4, nrow = 4, byrow = T
 )
+```
 
-#lets use the apply function in R to quickly draw random numbers from the dirichlet distribution using the MCMC pack function and apply it to each row of tAlpha
+Lets use the `apply` function to quickly draw random numbers from the dirichlet distribution using the function from `MCMCpack` and apply it to each row of `tAlpha`. First, we will need load the MCMCpack library. In order to do this, you will need to have it installed. You can install it using this code `install.packages("MCMCpack")`
+
+```{r 4.7.3 install and load MCMC pack}
+#load library
 library(MCMCpack)
+```
 
-#note we only give n = 1 to the rdirichlet distribution as it generates a random vector of length length(alpha)
+Note we only give n = 1 to the rdirichlet distribution as it generates a random vector of `length(alpha)`.
 
+The rdirichlet function by default returns the vector of draws by columns, but when we want these results by rows. To get the matrix back into our original form, we can just use the `t()` function to transpose matrix.
+
+```{r 4.7.3 use the dirichlet distribution function from MCMCpack}
 #use "1" to specify to apply the function by rows
 tProbRand <- t(apply(tAlpha,1,function(x){
   
   return(rdirichlet(1,x))
 }))
 
-#the rdirichlet function by default returns the vector of draws by columns, when we want these results by rows. To get the matrix back into our original form, we can just use the t() function to transpose matrix.
-
 #our new transition probability matrix
 tProbRand 
 ```
 
-## Part 5
+## Part 4: Re-running the Markov model from exercise 2.5
 
-Re-running the Markov model from exercise 2.5
+Now that we have defined all our parameters in this exercise by drawing from random distributions where appropriate. Let us take the opportunity to merge all of the exercise into one function so that we can call it easily. This function will take in the costs, number of years, transition matrices of the two models, and the discount rate, and then output the costs and life years for each of the two treatments.
 
-Returning to create the model in 2.5. Now that we have defined all our parameters in this exercise by drawing from random distributions. Let us take the opportunity to merge all of exercise into one function so that we can call it easily. This function will take in the costs, number of years, transition matrices of the two models, and the discount rate, and then output the costs and life years of the two treatments.
-```{r Re-creating the model in 2.5 with random parameters.}
+To begin, we will load in all of our previously built functions.
+```{r 4.7.4 loading in previous functions}
 
 #ensure to list all the previously built functions over here
 calculatetProbCombination <- function(tProbs,RR){
@@ -198,11 +214,13 @@ calculateYearlyProbs <- function(tProbs, t, iVec){
   }
   return(matReturn)
   
-  #returns a 20 (years) x 4 (states) matrix where the rows represent the proportion in a given state at year t
+  #returns a t (years) x 4 (states) matrix where the rows represent the proportion in a given state at year t
   
 }
+```
 
-#build the function here for exercise 2.5 
+Then we will use these functions to create a single analysis function. We will build in an error check to make sure our rows sum to 1 as before.
+```{r 4.7.4 build analysis function}
 analysisFunc <- function(dmca,dmcb,dmcc,ccca,cccb,cccc,RR,cAZT,cALam,cDR,tProbs,iVec,t){
   
   #monotherapycost
@@ -211,7 +229,8 @@ analysisFunc <- function(dmca,dmcb,dmcc,ccca,cccb,cccc,RR,cAZT,cALam,cDR,tProbs,
   yearlyProbs <- calculateYearlyProbs(tProbs,t,iVec)
 
   #throw error if row sums are not equal to 1
-  #stopifnot(!rowsum(yearlyProbs)==1)
+  stopifnot(!rowsum(yearlyProbs)==1)
+  
   lifeYears <- rowSums(yearlyProbs[,-4])
   
   costA <- dmca+ccca+cAZT
@@ -244,7 +263,6 @@ analysisFunc <- function(dmca,dmcb,dmcc,ccca,cccb,cccc,RR,cAZT,cALam,cDR,tProbs,
   #combine them
   probsCombYearly <- rbind(probsCombYearly1_2,probsCombYearly3_20)
   
-    
   #calculate the life-years
   lifeYearsComb <- rowSums(probsCombYearly[,-4])
   
@@ -252,17 +270,18 @@ analysisFunc <- function(dmca,dmcb,dmcc,ccca,cccb,cccc,RR,cAZT,cALam,cDR,tProbs,
   costAComb <- costA+cLam
   costBComb <- costB+cLam
   costCComb <- costC+cLam
+  
   #combine the costs into a vector
   costVectorComb <- c(costAComb,costBComb,costCComb)
   
-  #hint: use matrix multiplication
+  #use matrix multiplication to calculate yearly costs
   costCombNonDisc1_2 <-   probsCombYearly[1:2,-4] %*% costVectorComb
   costCombNonDisc3_20 <- probsCombYearly[3:20,-4] %*% costVector
   
-  #hint use rbind to combine the non-discounted cost
+  #use rbind to combine the non-discounted cost
   costCombNonDisc <- rbind(costCombNonDisc1_2,costCombNonDisc3_20)
   
-  #calculate the discounted rate
+  #calculate the discounted costs
   costCombDisc <- discountFormula(costCombNonDisc, discRate = cDR,t)
   
   #calculate the total costs and life years for the combination therapy
@@ -270,31 +289,25 @@ analysisFunc <- function(dmca,dmcb,dmcc,ccca,cccb,cccc,RR,cAZT,cALam,cDR,tProbs,
   totalDiscCostComb <- sum(costCombDisc)
   
   #return a list of all the relevant values
-  
   return(list(MonoLYs = totalLifeYearsMonoTherapy,MonoDiscCost = totalDiscCostMonoTherapy,CombLYs = totalLifeYearsComb , CombDiscCost = totalDiscCostComb))
   
 }
-
-
 ```
 
+## Part 5: Calculating the ICER
 
-
-## Part 6
-Calculate the ICER using the function we created and the new random draws
-```{r calculate ICER}
-
+Just as in exercise 2.5, our last step is to calculate the ICER. We will use the function we created and the new random draws.
+```{r 4.7.5 user analysis function}
 #specify the initial vector
 iVec <- c(1,0,0,0)
 
-#call
+#call our new analysis function
 results <- analysisFunc(dmca = dmcaSim,dmcb = dmcbSim,dmcc = dmccSim,ccca = cccaSim,cccb = cccaSim,cccc = ccccSim,RR = RRSim,cAZT = cAZT, cALam = cALam, cDR = cDR, tProbs = tProbRand,iVec = iVec,t = 20)
+```
 
-
-#we can extract any element from the list by its name using the $ operator
+We can extract any element from the list by its name using the `$` operator
+```{r 4.7.5 calculate ICER}
 ICER <- (results$CombDiscCost-results$MonoDiscCost)/(results$CombLYs-results$MonoLYs)
 ICER
-
-
 ```
 

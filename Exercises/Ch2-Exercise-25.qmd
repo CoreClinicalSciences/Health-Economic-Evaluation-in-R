@@ -31,7 +31,9 @@ tProbs_example <- matrix(c(0.7,0.3,
 \
 Now, we want to calculate the proportion of individuals in the first time-cycle. The results will be saved in `time1Prop`
 
+:::{.callout-note}
 Note: the number of columns in the matrix must match the number of rows in the vector.
+:::
 
 ```{r example multiply matrix time 1}
 time1Prop <- tProbs_example %*% iVec_example
@@ -111,15 +113,21 @@ tProbs <- matrix(
 
 ```
 
-**Check.** We will use `rowSums` to make sure we've entered our transition matrix correctly. All the rows should equal 1
+:::{.callout-important} 
+## Check
+We will use `rowSums` to make sure we've entered our transition matrix correctly. All the rows should equal 1.
+:::
 
 ```{r 2.5.1 check row totals}
 rowSums(tProbs) 
 ```
 
 \
-Now, we will fill in other parameters that are provided in the exercise. After each parameter, we've used `#` and a description of what that parameter is so we can easily revisit our code at a future date.
+Now that we know our transition matrix is correct, we will fill in the other parameters that are provided in the exercise. 
 
+:::{.callout-tip}
+After each parameter, we've used `#` and a description of what that parameter is so we can easily revisit our code at a future date.
+:::
 ```{r 2.5.1 cost & other inputs}
 #costs
 dmca <- 1701 #direct medical cost of A
@@ -149,8 +157,8 @@ We assume all individuals start in State A. We are giving the vector the name `i
 
 iVec <-  c(1,0,0,0)
 ```
-
-We are going to create a funcation called `calculateYearlyProbs` that we can use to calculate the proportion of people in each state at a given time point. 
+\
+We are going to create a function called `calculateYearlyProbs` that we can use to calculate the proportion of people in each state at a given time point. 
 
 This function will return a t (years) x 4 (states) matrix where the rows represent the proportion in a given state at year t
 ```{r 2.5.2 calculate yearly proportions}
@@ -178,18 +186,20 @@ calculateYearlyProbs <- function(tProbs, t, iVec){
   
 }
 ```
-
+\
 Now, we will call the function, by entering our transition probabilities matrix, the number of years we want to calculate, and our starting vector as arguments. We've called the results of our function `yearlyProbs`. It will return a matrix that is 20 rows (years) long and 4 states wide. 
 ```{r 2.5.2 calculating yearly proportions for 20 years}
 yearlyProbs <- calculateYearlyProbs(tProbs,20,iVec)
 ```
-
-**Check.** Use `rowSums` to check that all rows sum to 1
+:::{.callout-important}
+## Check
+Use `rowSums` to check that all rows sum to 1.
+:::
 ```{r 2.5.2 check row totals}
 rowSums(yearlyProbs)
 ```
 
-Now we will calculate the number of life years for each year. This is equal to the the proportion that is not in State D (death). 
+Next we will calculate the number of life years for each year. This is equal to the the proportion that is not in State D (death). 
 ```{r 2.5.2 calculate life years for each cycle (year)}
 lifeYears <- rowSums(yearlyProbs[,-4])
 ```
@@ -207,7 +217,7 @@ costC <- dmcc+cccc+cAZT
 costVector <- c(costA,costB,costC)
 ```
 
-
+\
 We will use matrix multiplication to calculate the non-discounted cost. We will multiply `yearlyProbs`, the matrix holding the proportion in each health state by cycle (i.e. year), by our new `costVector`. 
 
 Remember, we need to make sure the vector and the matrix have the same number of columns. So, we will use `[-4]` to remove the death state column from the matrix. 
@@ -215,7 +225,7 @@ Remember, we need to make sure the vector and the matrix have the same number of
 nonDiscCost <- yearlyProbs[,-4] %*% costVector
 ```
 
-
+\
 Our non-discounted costs are saved in `nonDiscCost`. To get teh discounted cost, we will apply the discounting formula. We will create a discounting function that we can reuse in the future.
 
 So we can apply this function to multiple values of t at once we will use R's vectorization. All basic operations in R "-+^/*" support basic R vectorization. 
@@ -229,15 +239,16 @@ discountFormula <- function(nonDiscount,discRate,t){
   
 }
 ```
-
+\
 We can calculate the discounted costs by filling in the arguments for the newly created discount function.
+
 We need to specify: the non-discounted costs; the discount rate; and the number of years you are calculating for.
 
 ```{r 2.5.3 Calculate discounted costs}
 discCost <- discountFormula(nonDiscCost, discRate = cDR,20)
 ```
 
-
+\
 We will use the `sum` function to calculate the total costs and life years over the 20 years of the Markov model. 
 ```{r 2.5.3 Calculate total costs and life years}
 totalDiscCostMonoTherapy <- sum(discCost)
@@ -274,9 +285,10 @@ Now, we will use our function to calculate the transition probabilities for the 
 ```{r 2.5.4 Calculate proportions for combination therapy}
 tProbsComb <- calculateProbCombination(tProbs,RR = RR)
 ```
-
-**Check.** Just like before, we will use `rowSums` to check that all rows sum to 1
-
+:::{.callout-important}
+## Check
+Just like before, we will use `rowSums` to check that all rows sum to 1.
+:::
 ```{r 2.5.4 Use rowSums to check row totals}
 rowSums(tProbsComb)
 ```
@@ -287,7 +299,9 @@ Then we will calculate the yearly proportions for the first two years using the 
 probsCombYearly1_2 <- calculateYearlyProbs(tProbsComb,t = 2,iVec = iVec)
 ```
 
-Now we will calculate the yearly proportions for years 3-20. We will use the transition probabilities for monotherapy for these calculations, reflecting that the combination therapy is only used in years 1 and 2. We will then combined the two calculations to get the values for years 1-20, and check that each row sums to 1.
+We also need to calculate the yearly proportions for years 3-20. We will use the transition probabilities for monotherapy for these calculations, reflecting that the combination therapy is only used in years 1 and 2. 
+
+We will then use `rbind` to combine the two calculations to get the values for years 1-20, and check that each row sums to 1.
 ```{r 2.5.4 calculate proportions year 3-20}
 probsCombYearly3_20 <- calculateYearlyProbs(tProbs,t = 18,iVec =probsCombYearly1_2[2,])
 
@@ -297,7 +311,7 @@ probsCombYearly <- rbind(probsCombYearly1_2,probsCombYearly3_20)
 #check
 rowSums(probsCombYearly) # all sum to 1
 ```
-
+\
 Using the same approach as for the monotherapy, we will calculate the life years and the costs, being careful to apply the correct costs to the correct proportions. 
 ```{r 2.5.4. calculate life years and costs}
 #calculate the life-years
@@ -314,8 +328,10 @@ costVectorComb <- c(costAComb,costBComb,costCComb)
 costCombNonDisc1_2 <-   probsCombYearly[1:2,-4] %*% costVectorComb
 costCombNonDisc3_20 <- probsCombYearly[3:20,-4] %*% costVector
 ```
+\
+We will again use `rbind` to combine the non-discounted costs and then use the discount function to calculate the discounted costs. 
 
-We will use `rbind` to combine the non-discounted costs and then use the discount function to calculate the discounted costs. With the costs and life years calculated for each year, we will use `sum` to calculate the total costs and life years associated with the combination therapy. 
+With the costs and life years calculated for each year, we will use `sum` to calculate the total costs and life years associated with the combination therapy. 
 ```{r 2.5.4 discounted costs and total costs & life years}
 #use rbind to combine the non-discounted cost
 costCombNonDisc <- rbind(costCombNonDisc1_2,costCombNonDisc3_20)
@@ -330,7 +346,7 @@ totalDiscCostComb <- sum(costCombDisc)
 
 ### Part 5
 
-Lastly, compare the total life years and costs between the monotherapy and combination therapy to calculate the ICER
+Lastly, we compare the total life years and costs between the monotherapy and combination therapy to calculate the ICER.
 
 ```{r Calculating the ICER}
 #combination over monotherapy

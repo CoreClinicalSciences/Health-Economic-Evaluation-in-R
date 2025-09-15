@@ -10,7 +10,7 @@ Let's revisit exercise 4.8 by creating a few more functions that 1. automaticall
 
 ## Part 1 
 
-We start by initializing all fixed parameters, bring over all the functions from the previous exercises. We also load the MASS package required to sample random numbers from the multivariate normal distribution. 
+We start by initializing all fixed parameters, bring over all the functions from the previous exercises. We also load the MASS package required to sample random numbers from the multivariate normal distribution.
 ```{r Simulation functions}
 library(MASS)
 
@@ -120,7 +120,7 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
     #get the corresponding transition matrix based on the time
     tProbs <- tProbs_time(omrPTHR,omrRTHR,rr,mr,rrr,i)
     
-    matReturn[i,] <-   iVec %*% tProbs #round because we are using full population units
+    matReturn[i,] <-   iVec %*% tProbs 
     
     #update ivec
     iVec <- iVec %*% tProbs
@@ -219,11 +219,17 @@ Create our simulation function here:
 generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
    
    #we need to know how many columns or variable we have here in ncol
-   dfReturn <- data.frame(matrix(NA,nrow = nReps,ncol = 23))
+   cols <- c("omrPTHR","omrRTHR","rrNP1","rrr","lambda","gamma",
+             "cPrimary","cRevision","cSuccess","uSuccessP","uSuccessR",
+             "uRevision","cRatio","STDCost","STDQALYS","NP1Cost","NP1QALYS",
+             "STDNMB","NP1NMB","NP1Inc","CESTD","CENP1","CENP1Inc")
+   
+   
+   
+   dfReturn <- data.frame(matrix(NA,nrow = nReps,ncol = length(cols)))
   
    #fill out the column names for our dataframe
-   colnames(dfReturn) <- c("omrPTHR","omrRTHR","rrNP1","rrr","lambda","gamma","cPrimary","cRevision","cSuccess","uSuccessP","uSuccessR","uRevision",
-                          "cRatio","STDCost","STDQALYS","NP1Cost","NP1QALYS","STDNMB","NP1NMB","NP1Inc","CESTD","CENP1","CINP1Inc")
+   colnames(dfReturn) <- cols
 
    #cRatio is fixed at 10000
    dfReturn$cRatio <- cRatio

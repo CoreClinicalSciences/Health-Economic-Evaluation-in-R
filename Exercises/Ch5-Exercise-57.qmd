@@ -1,29 +1,40 @@
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
 # Exercise 5.7 {.unnumbered}
 
 This R markdown file reproduces exercise 5.7 in R from Chapter 5 in the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
 
+In this exercise we are going to extend the probabilistic parameter generation from exercise 4.8 by using simulations to account for the combined uncertainty of the parameters. As R is a language specifically for statistical computing, it is not surprising that statistical simulations are frequently run in R. These simulations can be constructed using a variety of core R functions. In this exercise, we will use either for-loops directly or call wrappers such as `lapply`,
+`apply`, or `sapply`.
 
-In this exercise we are going to extend the probabilistic parameter generation from exercise 4.8 by using simulations to account for the combined uncertainty of the parameters. Simulations are very common in R, and they can be constructed using a variety of functions. We will either use for-loops directly or call wrappers such as lapply, apply, or sapply.
+Let's revisit exercise 4.8 by creating a few more functions that: 
 
-Let's revisit exercise 4.8 by creating a few more functions that 1. automatically generate all necessary parameters from the corresponding distribution, and 2 apply the parameters to yield the results. First we copy the analysis function from 4.8 and create another function that generates parameters
+1. Automatically generate all necessary parameters from the corresponding distribution 
+2. Apply the parameters to yield the results
 
+First we copy the analysis function from 4.8 and create another function that generates parameters.
 
-## Part 1 
+## Part 1: Setting-up the analysis
 
-We start by initializing all fixed parameters, bring over all the functions from the previous exercises. We also load the MASS package required to sample random numbers from the multivariate normal distribution. 
-```{r Simulation functions}
+We start by initializing all fixed parameters, bring over all the functions from the previous exercises. We also load the MASS package required to sample random numbers from the multivariate normal distribution.
+
+```{r 5.7.1 Simulation functions}
 library(MASS)
 
 cStandard <- 394 #cost of standard implant
 cNP1 <- 579 #cost of new implant
 
-cDR <- 0.06 
-oDR <- 0.015 
-age <- 60
-male <- 0
+cDR <- 0.06 #cost discount rate
+oDR <- 0.015 #outcome discount rate
+age <- 60 #average age of all patients at receipt of primary implant
+male <- 0 #sex indicator (0 for female, 1 for male)
 
-iVec <- c(1000,0,0,0,0)
-t <- 60
+iVec <- c(1000,0,0,0,0) #starting vector; everyone starts in the first state
+t <- 60 #number of cycles
 
 covMat <- matrix(
   c(0.0022515  , -0.005691 , 0.000000028, 0.0000051, 0.000259,
@@ -68,7 +79,10 @@ tProbsHazard <- function(t,lambda,gamma){
 
 
 tProbs_time <- function(omrPTHR,omrRTHR,rr,mr,rrr,t){
-  #rr is revision risk, mr is mortality risk
+  #omrPTHR is operative mortality rate following primary THR
+  #omrRTHR is operative mortality rate following revision THR
+  #rrr is re-revision risk
+  #mr is mortality risk
   
   tProbs <- matrix(
   c(0, 1-(omrPTHR),     0,     0,                   omrPTHR,
@@ -120,7 +134,7 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
     #get the corresponding transition matrix based on the time
     tProbs <- tProbs_time(omrPTHR,omrRTHR,rr,mr,rrr,i)
     
-    matReturn[i,] <-   iVec %*% tProbs #round because we are using full population units
+    matReturn[i,] <-   iVec %*% tProbs 
     
     #update ivec
     iVec <- iVec %*% tProbs
@@ -128,12 +142,12 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
   }
   return(matReturn)
   
-  #returns a 60 (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t
+  #returns a t (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t
   
 }
 
 
-
+#complete primary analysis function for NP1
 analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,cPrimary,cRevision,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){
 
   #calculate the revision risk
@@ -208,28 +222,40 @@ analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,cPrimary,cRevision,cStandar
 }
 ```
 
-Now we create our simulation function here. We start by initializing a dataframe to store our results, then iterating through each parameter and running our analysis function. This could be created using lapply, however it is probably easier to view the logic by using a for-loop. 
+### Now we will create our simulation function.
 
-This function will encapsulate all statistics (functions of the data) or almost all values necessary to calculate the cost effectiveness. However, due to R's vectorization, and the fact that the cost effectiveness metrics are functions of other columns. We could alternatively calculate many of the metrics after the simulation is completed by using R's vectorization.
+We start by initializing a dataframe to store our results, then iterating through each parameter and running our analysis function. This could be created using `lapply`, however it is probably easier to view the logic by using a for-loop.
 
-In the following Code: NMB refers to "Net Montetary Benefit" and CE refers to "Cost effective".
+This simulation function will encapsulate all statistics (functions of the data) or almost all values necessary to calculate the cost-effectiveness. However, due to R's vectorization, and the fact that the cost effectiveness metrics are functions of other columns. We could alternatively calculate many of the metrics after the simulation is completed using R's vectorization.
+
+In the following Code: 
+
+* **NMB** refers to "Net Monetary Benefit" 
+* **CE** refers to "Cost effective"
 
 Create our simulation function here:
-```{r simulation function}
+
+```{r 5.7.1 simulation function}
 generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
    
    #we need to know how many columns or variable we have here in ncol
-   dfReturn <- data.frame(matrix(NA,nrow = nReps,ncol = 23))
+   cols <- c("omrPTHR","omrRTHR","rrNP1","rrr","lambda","gamma",
+             "cPrimary","cRevision","cSuccess","uSuccessP","uSuccessR",
+             "uRevision","cRatio","STDCost","STDQALYS","NP1Cost","NP1QALYS",
+             "STDNMB","NP1NMB","NP1Inc","CESTD","CENP1","CENP1Inc")
+   
+   
+   
+   dfReturn <- data.frame(matrix(NA,nrow = nReps,ncol = length(cols)))
   
    #fill out the column names for our dataframe
-   colnames(dfReturn) <- c("omrPTHR","omrRTHR","rrNP1","rrr","lambda","gamma","cPrimary","cRevision","cSuccess","uSuccessP","uSuccessR","uRevision",
-                          "cRatio","STDCost","STDQALYS","NP1Cost","NP1QALYS","STDNMB","NP1NMB","NP1Inc","CESTD","CENP1","CINP1Inc")
+   colnames(dfReturn) <- cols
 
-   #cRatio is fixed at 10000
+   #cRatio is fixed at 100000
+   #This is the threshold ratio
    dfReturn$cRatio <- cRatio
    alpha <- (5294/1487)^2
    beta <- 1487^2 / 5294
-   
    
    #due to R's vectorization, we can sample all the parameters at once in the "n" parameter
    omrPTHR <- rbeta(nReps,2,98) #operative mortality rate following primary THR
@@ -296,38 +322,63 @@ generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
 }
 ```
 
+## Part 2: Calling our simulation function & plotting our cost-effectiveness plane
 
+In this section we will be using `ggplot2` to plot our results. `ggplot2` is
+generally the plotting package of choice in R and has it own unique
+syntax.  If you don't have `ggplot2` installed, you can install it using `install.packages("ggplot2")`
 
-## Part 2
+:::{.callout-tip}
+We suggest briefly reviewing
+<https://ggplot2.tidyverse.org/articles/ggplot2.html> to get a sense of
+how `ggplot2` works. We will provide the syntax here.
+:::
 
-Call our simulation function and plot the CE plane
-
-In this section we will be using ggplot2 to plot our results. ggplot is generally the plotting software of choice in R and has it own unique syntax. We suggest briefly reviewing https://ggplot2.tidyverse.org/articles/ggplot2.html to get a sense of how it works. We will provide the syntax here.
-
-```{r plotting cea plane}
+We will begin by loading the `ggplot2` library and setting our starting seed.
+```{r 5.7.2 load library & set seed}
 library(ggplot2)
 
 set.seed(1)
-#we can call the simulation by specifying any number of repetitions and the seed
-res <- generateSimulations(nReps = 1000)
-
-#quickly create the difference in costs and difference in QALYs for each method, note since we have access to all columns we can quickly perform vector operations on them
-res$diffCost <- res$NP1Cost-res$STDCost
-res$diffQALYs <- res$NP1QALYS-res$STDQALYS
-
-#lets create a plot using ggplot
-#the syntax takes a bit of getting used to but the plots are generally quite pretty
-ggplot(res,aes(x = diffQALYs,y = diffCost)) + geom_point(colour = "green4") + theme_minimal()+ labs(x = "QALYs", y = "Cost", title = "Increase in Cost Effectiveness Plane")
-
 ```
 
+We can call the simulation by specifying any number of repetitions after the `nReps =` argument
 
-## Part 3
-Let's analyse the proportion of our simulation based on the threshold ratio that we specified earlier of 100,000. Let's also consider changing the threshold value by looping through various possibilities.
+```{r 5.7.2 set number of reps}
+res <- generateSimulations(nReps = 1000)
+```
 
+Now we will quickly create the difference in costs and difference in QALYs for each intervention. 
 
-```{r proportion of cost effectiveness}
+Because we have access to all columns we can quickly perform vector operations on them.
+```{r 5.7.2 calculate differences in costs and QALYs}
+res$diffCost <- res$NP1Cost-res$STDCost
+res$diffQALYs <- res$NP1QALYS-res$STDQALYS
+```
 
+We will use these calculations to create a plot using `ggplot2`
+
+The syntax takes a bit of getting used to but the plots are generally quite pretty.
+```{r 5.7.2 create plot}
+ggplot(res,
+       aes(
+         x = diffQALYs,
+         y = diffCost)) + 
+      geom_point(
+        colour = "#414487") + 
+      theme_minimal() + 
+      labs(
+        x = "QALYs", 
+        y = "Cost", 
+        title = "Increase in Cost Effectiveness Plane")
+```
+
+## Part 3: Adding a threshold
+
+Let's analyse the proportion of our simulation based on the threshold ratio that we specified earlier of $100,000/QALY. 
+
+Let's also consider changing the threshold value by looping through various possibilities.
+
+```{r 5.7.3 proportion of cost effectiveness cRatio 100,000}
 #mean proportion of STD cost effective
 mean(res$CESTD)
 
@@ -336,15 +387,20 @@ mean(res$CENP1)
 
 #equivalently, the same NP1 net monetary benefit as the "increase" over the standard
 mean(res$CENP1Inc)
+```
 
-#the NP1 implant is chosen over the standard implant 99.9% of the time with a cost threshold of 100,000
-#what if instead we want to see what happens if we plot this threshold value from 0 to 100,000
-#we can estimate this numerically by running our simulation many times for different values of cRatio and plotting the results
-cRatios <- seq(0,100000,by = 2500)
+The NP1 implant is chosen over the standard implant 99.9% of the time with a cost threshold of $100,000/QALY.
 
-#to loop through the cRatios and calculate the proportion of cost effectiveness we can write another for-loop or...
-#instead since cRatios is a vector, we can use sapply to quickly loop through the vector and calculate the proportion output from the resultsNP1() function
+What if instead we want to see what happens if we plot this threshold value from 0 to 100,000?
+We can estimate this numerically by running our simulation many times for different values of cRatio and plotting the results
+```{r 5.7.3 cRatio 0 to 100000}
+cRatios <- seq(0, 100000, by = 2500)
+```
 
+To loop through the cRatios and calculate the proportion of cost effectiveness we can write another for-loop or...
+instead since cRatios is a vector, we can use `sapply` to quickly loop through the vector and calculate the proportion output from the `resultsNP1()` function.
+
+```{r 5.7.3 cRatio sapply and resultsNP1() function}
 cRatioResults <- sapply(cRatios,function(x){
   
   #call the simulation
@@ -359,25 +415,49 @@ cRatioResults <- sapply(cRatios,function(x){
 ncRatios <- length(cRatios)
 
 dfcRatios <- data.frame(cRatio = cRatios,probCENP1 = cRatioResults,probCESTD = 1-cRatioResults)
-
-#plot our results using ggplot
-ggplot(dfcRatios,aes(x = cRatio,y = probCENP1)) + geom_line(colour = 'green',linewidth = 1.2) + theme_minimal()+ labs(x = "Value of ceiling ratio", y = "Probability of cost-effective of NP1 treatment", title = "Probability of cost-effective by value of ceiling ratio",colour = "Treatment") 
 ```
 
-## Part 4
-(more advanced)
-Up to this point, we have only been looking at one age category and one gender. Let's now build a function that loops through all possible combinations of age and gender and evaluate the proportion of cost-effectiveness treatment of NP1. Instead of using the convenient sapply() as in the previous part, we will use a for-loop to explicitly show which intersection of the subgroup is being analyzed.
-```{r subgroup analyses}
-#subgroups of interest
+Now we can plot our results using `ggplot2`.
+```{r 5.7.3 plot results with varying cRatios}
+ggplot(dfcRatios,
+       aes(
+         x = cRatio,
+         y = probCENP1)) + 
+      geom_line(
+        colour = '#414487',
+        linewidth = 1.2) + 
+      theme_minimal()+ 
+      labs(
+        x = "Value of ceiling ratio", 
+        y = "Probability of cost-effective of NP1 treatment", 
+        title = "Probability of cost-effective by value of ceiling ratio",
+        colour = "Treatment") 
+```
+
+## Part 4: Examining subgroups
+
+Up to this point, we have only been looking at one age category and one gender. Let's now build a function that loops through all possible combinations of age and gender and evaluate the proportion of cost-effectiveness treatment of NP1. 
+
+Instead of using the convenient `sapply()` as in the previous part, we will use a for-loop to explicitly show which intersection of the subgroup is being analyzed.
+
+We'll start by specifying our subgroups of interest
+```{r 5.7.4 subgroup analyses 1}
 ages <- c(40,60,80)
 gender <- c(0,1)
+```
 
-#all possible combinations can be easily calculated using expand.grid, note we also want all possible ceiling ratios as well
-factorsOfInterest <- expand.grid(cRatio = cRatios,age=ages,male = gender)
-#add the column that we will fill in in our function
+Now, all possible combinations of these values can be easily calculated using `expand.grid`, note we also want all possible ceiling ratios (cRatios).
+```{r 5.7.4 subgroup analyses 2}
+factorsOfInterest <- expand.grid(cRatio = cRatios, age=ages, male = gender)
+```
+
+We want to add the column that we will hold our results
+```{r 5.7.4 subgroup analyses 3}
 factorsOfInterest$propNP1CE <- NA
+```
 
-#loop through the grid and perform the simulation on each row
+We will then loop through the grid and perform the simulation on each row. Below we specify our function,
+```{r 5.7.4 subgroup analyses 4}
 subGroupSimulation <- function(nReps,factorsOfInterest){
    
   #calculate the number of combinations
@@ -401,20 +481,38 @@ subGroupSimulation <- function(nReps,factorsOfInterest){
   return(factorsOfInterest)
   
 }
-
-subGroupResults <- subGroupSimulation(1000,factorsOfInterest)
-
-#to make plotting easier to combine the age and gender columns so that it is one variable
-subGroupResults$combined_factor <- interaction(as.factor(subGroupResults$age),as.factor(subGroupResults$male),sep = "_")
-
-#again plot in ggplot2, here, we manually change the names of the subgroups
-ggplot(subGroupResults,aes(x = cRatio,y = propNP1CE,colour = combined_factor)) + geom_line(linewidth = 1.2,alpha = 0.5) + 
-  labs(x = "Threshold Ratio", y = "Proportion of NP1 cost effective", "Line plot of cost effectiveness of NP1 implant by age and gender", colour = 'Factor') +
-  scale_color_manual(labels = c("40_0"="Age 40 Female","60_0"= "Age 60 Female","80_0"="Age 80 Female",
-                                "40_1"="Age 40 Male","60_1"= "Age 60 Male","80_1"="Age 81 Male"),
-                     values = c("40_0" = "red3","60_0" = "orange2","80_0" = "purple3",
-                                "40_1" = "blue2", "60_1" = "skyblue2","80_1" = "green3"))
 ```
 
+Now we'll use our function to calculate our results
+```{r 5.7.4 subgroup analyses 5}
+subGroupResults <- subGroupSimulation(1000,factorsOfInterest)
+```
 
+To make plotting easier, we will combine the age and gender columns so that they are in one variable
+```{r 5.7.4 combine columns}
+subGroupResults$combined_factor <- interaction(as.factor(subGroupResults$age),as.factor(subGroupResults$male),sep = "_")
+```
 
+We will again plot the results using `ggplot2`. This time, we manually change the names of the subgroups to provide appropriate labels in our graph. 
+
+:::{.callout-tip}
+You can specify colours for your graph by writing the colour names directly (e.g., "blue") or by entering hex codes as we have here. In this example, we've used 6 colours from the viridis colour palette because it is an accessible color palette and renders well in grey scale. <https://search.r-project.org/CRAN/refmans/viridisLite/html/viridis.html>
+:::
+```{r 5.7.4 plotting subgroup analysis results}
+ggplot(subGroupResults,
+       aes(
+         x = cRatio,
+         y = propNP1CE,
+         colour = combined_factor)) + 
+      geom_line(
+        linewidth = 1.2,
+        alpha = 0.8) + 
+      labs(
+        x = "Threshold Ratio", 
+        y = "Proportion of NP1 cost effective", 
+        title = "Line plot of cost effectiveness of NP1 implant by age and gender", 
+        colour = 'Factor') +
+      scale_color_manual(
+        labels = c("40_0"="Female Age 40","60_0"= "Female Age 60","80_0"="Female Age 80", "40_1"="Male Age 40","60_1"= "Male Age 60","80_1"="Male Age 80"),
+        values = c("40_0" = "#fde725","60_0" = "#7ad151","80_0" = "#22a884", "40_1" = "#2a788e", "60_1" = "#414487","80_1" = "#440154"))
+```

@@ -1,12 +1,6 @@
----
-editor: 
-  markdown: 
-    wrap: 72
----
-
 # Exercise 5.7 {.unnumbered}
 
-This R markdown file reproduces exercise 5.7 in R from Chapter 5 in the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+This section reproduces exercise 5.7 in R from Chapter 5 in the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
 
 In this exercise we are going to extend the probabilistic parameter generation from exercise 4.8 by using simulations to account for the combined uncertainty of the parameters. As R is a language specifically for statistical computing, it is not surprising that statistical simulations are frequently run in R. These simulations can be constructed using a variety of core R functions. In this exercise, we will use either for-loops directly or call wrappers such as `lapply`,
 `apply`, or `sapply`.

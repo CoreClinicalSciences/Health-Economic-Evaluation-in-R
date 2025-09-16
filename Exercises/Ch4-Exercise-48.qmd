@@ -1,6 +1,6 @@
 # Exercise 4.8 {.unnumbered}
 
-This R markdown file reproduces exercise 4.8 in R from Chapter 4 in the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+This section reproduces exercise 4.8 in R from Chapter 4 in the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
 
 This exercise re-evaluates the hip-replacement analysis from exercise 3.5. However, we assign probability distributions to parameters that are, in general, estimated with uncertainty.
 

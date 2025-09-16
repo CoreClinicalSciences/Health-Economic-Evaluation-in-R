@@ -1,6 +1,6 @@
 # Exercise 5.8
 
-This Quarto file reproduces exercise 5.8 in R from Chapter 5 of the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+This section reproduces exercise 5.8 in R from Chapter 5 of the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
 
 In this exercise we will add upon the pre-existing prosthesis example, but explore the idea of adding a third prosthesis option, which we will refer to as "NP2". We will now update the hazard function estimates with the additional "NP2" variable, and the corresponding covariance matrix. Note that neither the estimates nor the standard errors for any of the variables will be the same when we add a new variable in the model.  Note the coefficients and the variance matrix is one dimension larger due to the addition of the NP2 effect.
 

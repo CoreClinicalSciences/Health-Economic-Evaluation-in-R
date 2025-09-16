@@ -1,5 +1,0 @@
-# Chapter 1 - Introduction {.unnumbered}
-
-This book reviews the exercises in "Decision Modeling for Health Economic Evaluation" by Andrew Briggs, Karl Claxton, and Mark Sculpher. We aim to re-create all the exercises, which are originally written in Excel, in R. We provide a breakdown of how to perform the analyses in R, as well, as a discussion on the advantages and dis-advantages of moving from Excel to a scripting language like R.
-
-We will first start off by reviewing some basic concepts in R that may be unfamiliar to the reader, even coming from another scripting language such as python. The introduction will review R's vectorization, matrix multiplication, and vector operations.

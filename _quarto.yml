@@ -3,7 +3,7 @@ project:
   output-dir: Output
 
 book:
-  title: "Decision Modelling for Health Economic Evaluation in R"
+  title: "Guide to Health Economic Evaluation in R"
   author: "Core Clinical Sciences"
   # logo: X
   # repo-url: X

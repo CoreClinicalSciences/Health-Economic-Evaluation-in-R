@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Core Clinical Sciences">
 
-<title>Decision Modelling for Health Economic Evaluation in R</title>
+<title>Chapter 2 - Decision Modelling for Health Economic Evaluation – Decision Modelling for Health Economic Evaluation in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,24 +23,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./Chapters/Ch2-Decision-Modeling-for-Health-Economic-Evaluation.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../Exercises/Ch2-Exercise-25.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Chapter 1 - Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chapters/Ch2-Decision-Modeling-for-Health-Economic-Evaluation.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../Chapters/Ch2-Decision-Modeling-for-Health-Economic-Evaluation.html">Chapter 2 - Decision Modelling for Health Economic Evaluation</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -97,7 +97,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Decision Modelling for Health Economic Evaluation in R</a> 
+      <a href="../">Decision Modelling for Health Economic Evaluation in R</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -109,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Chapter 1 - Introduction</span></a>
   </div>
 </li>
@@ -124,43 +124,43 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chapters/Ch2-Decision-Modeling-for-Health-Economic-Evaluation.html" class="sidebar-item-text sidebar-link">
+  <a href="../Chapters/Ch2-Decision-Modeling-for-Health-Economic-Evaluation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Chapter 2 - Decision Modelling for Health Economic Evaluation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/Ch2-Exercise-25.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/Ch2-Exercise-25.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 2.5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/Ch3-Exercise-35.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/Ch3-Exercise-35.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 3.5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/Ch4-Exercise-47.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/Ch4-Exercise-47.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4.7</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/Ch4-Exercise-48.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/Ch4-Exercise-48.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4.8</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/Ch5-Exercise-57.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/Ch5-Exercise-57.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 5.7</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Exercises/Ch5-Exercise-57.html" class="sidebar-item-text sidebar-link">
+  <a href="../Exercises/Ch5-Exercise-57.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 5.7</span></a>
   </div>
 </li>
@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Chapters/Appendix-1-Codes.html" class="sidebar-item-text sidebar-link">
+  <a href="../Chapters/Appendix-1-Codes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Appendix</span></span></a>
   </div>
 </li>
@@ -193,30 +193,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#chapter-1---introduction" id="toc-chapter-1---introduction" class="nav-link active" data-scroll-target="#chapter-1---introduction">Chapter 1 - Introduction</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#coding-style-and-good-practices" id="toc-coding-style-and-good-practices" class="nav-link" data-scroll-target="#coding-style-and-good-practices">Coding style and good practices</a></li>
+  <li><a href="#overview-of-exercises" id="toc-overview-of-exercises" class="nav-link active" data-scroll-target="#overview-of-exercises">Overview of Exercises</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Chapters/Ch2-Decision-Modeling-for-Health-Economic-Evaluation.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../Chapters/Ch2-Decision-Modeling-for-Health-Economic-Evaluation.html">Chapter 2 - Decision Modelling for Health Economic Evaluation</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Decision Modelling for Health Economic Evaluation in R</h1>
+<h1 class="title">Chapter 2 - Decision Modelling for Health Economic Evaluation</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Core Clinical Sciences </p>
-          </div>
-  </div>
     
   
     
@@ -227,30 +219,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="chapter-1---introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Chapter 1 - Introduction</h1>
-</section>
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>Welcome to this online guidebook on health economic evaluation in R. This is a living resource, designed to grow and evolve over time as new examples, exercises, and methods are added. Our goal is to support learners, researchers, and practitioners in developing the skills needed to build and analyze health economic models directly in R.</p>
-<p>By working in R rather than in spreadsheets alone, analysts can take advantage of a flexible, script-based environment that enhances the transparency, reproducibility, and robustness of health economic evaluation. The guide introduces key concepts step by step, with practical exercises translated from standard texts and supplemented with modern R workflows.</p>
-<p>Throughout, we draw on widely used packages such as dplyr and tidyr for data manipulation, ggplot2 for visualization, and tools such as MASS and MCMCpack for probability distributions and simulation. Together, these exercises and examples aim to build both technical fluency in R and a deeper understanding of best practices in health economic modelling.</p>
-</section>
-<section id="coding-style-and-good-practices" class="level1">
-<h1>Coding style and good practices</h1>
-<p>Good coding style is an important part of reproducible research. While individual preferences may vary, there are core elements of good practice that make code easier to read, share, and maintain. These include:</p>
+<p>This section of the guide presents the exercises from Decision Modelling for Health Economic Evaluation by Andrew Briggs, Mark Sculpher, and Karl Claxton. We have translated these tasks from their original Excel format into R, providing an opportunity to practice decision modelling using a reproducible, script-based approach.</p>
+<p>The original book is a key reference for decision modelling in health economics. While the official supporting materials are provided in other formats<br>
+(<a href="https://www.herc.ox.ac.uk/downloads/decision-modelling-for-health-economic-evaluation">available here</a>), our contribution is to:</p>
 <ul>
-<li>Using human-readable names for variables and functions<br>
+<li>Recreate model examples fully in R</li>
+<li>Translate supporting datasets and model logic into R scripts and functions</li>
+<li>Highlight key points from the book and show practical implementation<br>
 </li>
-<li>Writing comprehensive annotations and comments<br>
-</li>
-<li>Breaking code into modular, reusable functions<br>
-</li>
-<li>Maintaining consistent formatting and indentation<br>
-</li>
-<li>Keeping scripts organized and well-structured</li>
+<li>Demonstrate best practices for transparency and reproducibility in health economic modelling</li>
 </ul>
-<p>For those just getting started with R, we recommend following the <a href="https://style.tidyverse.org/">tidyverse style guide</a> as a helpful reference.</p>
+<section id="overview-of-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-exercises">Overview of Exercises</h2>
+<p>Through these exercises, learners develop skills in writing functions, performing matrix operations, running simulations, and incorporating parameter uncertainty via probability distributions and probabilistic sensitivity analysis. The exercises also introduce widely used R packages:</p>
+<ul>
+<li><code>dplyr</code> and <code>tidyr</code> for data manipulation</li>
+<li><code>ggplot2</code> for creating visualizations such as cost-effectiveness planes</li>
+<li><code>MASS</code> and <code>MCMCpack</code> for probability distributions and simulation, alongside base R functions</li>
+</ul>
+<p>By combining these tools, the exercises strengthen both programming fluency and applied expertise in constructing, analyzing, and interpreting health economic decision models.</p>
 
 
 </section>
@@ -657,10 +644,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="Chapter 1 - Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Chapter 1 - Introduction</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Chapters/Ch2-Decision-Modeling-for-Health-Economic-Evaluation.html" class="pagination-link" aria-label="Chapter 2 - Decision Modelling for Health Economic Evaluation">
-        <span class="nav-page-text">Chapter 2 - Decision Modelling for Health Economic Evaluation</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../Exercises/Ch2-Exercise-25.html" class="pagination-link" aria-label="Exercise 2.5">
+        <span class="nav-page-text">Exercise 2.5</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

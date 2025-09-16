@@ -1,6 +1,6 @@
 # Exercise 2.5 {.unnumbered}
 
-This R markdown file reproduces exercise 2.5 in R from Chapter 2 of the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+This section reproduces exercise 2.5 in R from Chapter 2 of the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
 
 ## Preamble on matrix operations
 

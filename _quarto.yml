@@ -14,16 +14,16 @@ book:
       - index.qmd
       - part: "Decision Modeling for Health Economic Evaluation"
         chapters: 
-          - Chapters/Ch1-Decision-Modeling-for-Health-Economic-Evaluation.qmd
-          - Exercises/Ch2-Exercise-25.qmd
-          - Exercises/Ch3-Exercise-35.qmd
-          - Exercises/Ch4-Exercise-47.qmd
-          - Exercises/Ch4-Exercise-48.qmd    
-          - Exercises/Ch5-Exercise-57.qmd  
-          - Exercises/Ch5-Exercise-57.qmd             
+          - Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.qmd
+          - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.qmd
+          - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.qmd
+          - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-47.qmd
+          - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-48.qmd    
+          - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.qmd  
+          - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.qmd             
       - part: Appendices
         chapters: 
-            - Chapters/Appendix-1-Codes.qmd
+            - Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.qmd
 
 # bibliography: references.bib
 

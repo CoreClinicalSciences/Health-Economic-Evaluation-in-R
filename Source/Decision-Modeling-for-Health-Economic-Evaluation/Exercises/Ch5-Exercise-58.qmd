@@ -1,4 +1,4 @@
-# Exercise 5.8
+# Exercise 5.8 {.unnumbered}
 
 This section reproduces exercise 5.8 in R from Chapter 5 of the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
 

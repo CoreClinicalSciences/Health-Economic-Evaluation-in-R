@@ -1,0 +1,640 @@
+# Exercise 6.6a & b
+
+This section reproduces exercise 6.6a and 6.6b in R from Chapter 6 in the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+
+
+## Setup
+Much of all the code will come from the previous Exercise 5.8 where we will use the simulations results to calculate the expected value of perfect information. In this code chunk we bring all the previous functions over that generate the cost effectiveness data for each of the implant treatments from 5.8. In this case, we are only focusing on the standard implant and the "new implant" NP1. So the values for NP2 will ignored for now.
+
+```{r Setup functions and parameters}
+library(MASS)
+#fixed parameters
+
+cStandard <- 394 #cost of standard implant
+cNP1 <- 579 #cost of new implant
+
+cDR <- 0.06 
+oDR <- 0.015 
+age <- 60
+male <- 0
+
+iVec <- c(1000,0,0,0,0)
+t <- 60
+
+covMat <- matrix(
+  c(0.0022515  , -0.005691 ,  0.000000028,  0.0000051,  0.000259 ,
+   -0.005691   ,  0.0432191, -0.000783   , -0.007247 , -0.000642 ,
+    0.000000028, -0.000783 ,  2.716e-05  ,  0.000033 , -0.000111 ,
+    0.0000051  , -0.007247 ,  0.000033   ,  0.0118954,  0.000184 ,
+    0.000259   , -0.000642 , -0.000111   ,  0.000184 ,  0.1463686
+   ),
+  nrow = 5, ncol = 5, byrow = T
+)
+
+colnames(covMat) <- rownames(covMat) <- c("lngamma","cons","age","male","NP1")
+
+survModelSummary <- data.frame(
+  
+  variable = c("lngamma","cons","age","male","NP1"),
+  coefficient = c(0.3740968,-5.490935,-0.0367022,0.768536,-1.344474),
+  SE = c(0.0474501,0.207892,0.0052112,0.109066,0.3825815)
+)
+survModelSummary$hazard_ratio <- exp(survModelSummary$coefficient)
+
+
+#if we need cholesky decomposition
+cholcovMat <- chol(covMat)
+
+#fixed mortality rates and transition probabilities
+deathRates <- data.frame(
+  Age = c("35-44","45-54","55-64","65-74","75-84","85 and over"),
+  Males = c(1.51,3.93,10.9,31.6,80.1,187.9),
+  Females = c(0.99,2.6,6.7,19.3,53.5,154.8)
+  
+)
+yearlyTProbs <- data.frame(
+    Age = c("35-44","45-54","55-64","65-74","75-84","85 and over"),
+    Index = c(35,45,55,65,75,85),
+    Males = c(0.00151,0.00393,0.0109,0.0316,0.0801,0.1879),
+    Females = c(0.00099,0.0026,0.0067,0.0193,0.0535,0.1548)
+)
+
+```
+
+
+## Functions
+
+Bring all previous functions relevant to NP1 analysis here
+```{r helper function}
+discountFormula <- function(nonDiscount,discRate,t){
+  
+  return(nonDiscount/(1+discRate)^(1:t))
+  
+}
+
+drawBetaMethodMoments <- function(n,mu,s){
+  
+  #functions estimates alpha and beta using the method of moments then draws from the beta distribution
+  alpha <- ((mu*(1-mu)/s^2) -1)*mu
+  beta <- alpha*(1-mu )/mu
+  
+  #draw our random number
+  draw <- rbeta(n,alpha,beta)
+  
+  return(draw)
+}
+
+
+tProbsHazard <- function(t,lambda,gamma){
+  
+  return(1-exp(lambda*(((1:t)-1)^gamma - ((1:t)^gamma))))
+  
+}
+
+tProbs_time <- function(omrPTHR,omrRTHR,rr,mr,rrr,t){
+  #rr is revision risk, mr is mortality risk
+  
+  tProbs <- matrix(
+  c(0, 1-(omrPTHR),     0,     0,                   omrPTHR,
+    0, 1-(rr[t]+mr[t]), rr[t], 0,                   mr[t],
+    0, 0,               0,     1-(omrRTHR + mr[t]), omrRTHR + mr[t],
+    0, 0,               rrr,   1-(rrr+mr[t]),       mr[t],
+    0, 0,               0,     0,                   1
+  ),ncol = 5, nrow = 5, byrow = T
+)
+  
+}
+
+
+calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
+  
+  #create empty matrix that we will fill in
+  
+  matReturn <- matrix(nrow = t, ncol = 5)
+  
+  #initialize first vector of proportions
+  
+  #create column names
+  colnames(matReturn) <- c("PrimaryTHR","SuccessP","RevisionTHR","SucessR","Death")
+
+  for(i in 1:t){
+    
+    #get the corresponding transition matrix based on the time
+    tProbs <- tProbs_time(omrPTHR,omrRTHR,rr,mr,rrr,i)
+    
+    matReturn[i,] <-   iVec %*% tProbs #round because we are using full population units
+    
+    #update ivec
+    iVec <- iVec %*% tProbs
+    
+  }
+  return(matReturn)
+  
+  #returns a 60 (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t
+  
+}
+
+analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,cPrimary,cRevision,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){
+
+    #calculate the revision risk
+    rr <- tProbsHazard(t=t,lambda = lambda,gamma = gamma)
+    
+    mr <- sapply(1:t,function(x){
+    
+    #calculate which index select based on the age group
+    inds <- sum(x+age >= yearlyTProbs$Index)
+    
+    #select the gender columns
+    #if else takes 3 arguments, the first is a logical check, if true, it returns the second value, if false it returns the 3rd argument. Equivalent code can be written use if(x){}else{}.
+    genderCol <- ifelse(male ==1,3,4)
+    
+    return(yearlyTProbs[inds,genderCol])
+    
+  })
+    
+  #calculate standard states
+  standPopStates <- calculateYearlyProbs(iVec = iVec,omrPTHR=omrPTHR, omrRTHR=omrPTHR,rr= rr, mr = mr,rrr=rrr,t=t)
+  lifeYearsStandard <- rowSums(standPopStates[,-5])
+  #excludes death year
+  costVec <- c(0,0,cRevision,0)
+
+  #add a parameter for the initial cost we had 1000 initial patients
+  iCostStandard <- cStandard*1000
+  
+  #first calculate the total cost
+  totalCosts <- standPopStates[,-5] %*% costVec
+  
+  #calculate the discounted cost
+  discCostStandard <- discountFormula(totalCosts,cDR,t=t)
+  
+  #calculate the quality adjusted life years by creating a vector for each state utility except death
+  utility<- c(0,uSuccessP,uRevision,uSuccessR)
+  
+  #multiply by the cohort
+  totalQuality <-  standPopStates[,-5] %*% utility
+  QALYStandard <- discountFormula(totalQuality,discRate = oDR,t=t)
+  
+  #calculate the total cost for all cycles/person
+  STDCost <- sum(c(iCostStandard,discCostStandard))/1000
+  STDLYs <- sum(lifeYearsStandard)/1000
+  STDQALYS <- sum(QALYStandard)/1000
+
+  ###repeat this for the NP1###
+  rrNP1_vec <- tProbsHazard(t,lambda = lambda*rrNP1,gamma = gamma)
+
+  #call the previous function created
+  populationStatesNP1 <- calculateYearlyProbs(iVec,omrPTHR,omrRTHR,rr=rrNP1_vec,mr=mr,rrr=rrr,t=t)
+  
+  #calculate life years for np1
+  lifeYearsNP1 <- rowSums(populationStatesNP1[,-5])
+  
+  #total and discounted costs
+  totalCostsNP1 <- populationStatesNP1[,-5] %*% costVec
+  discCostsNP1 <- discountFormula(totalCostsNP1,cDR,t=t)
+  #add the initial cost for NP1
+  iCostNP1 <- cNP1*1000
+  #Utility
+  totalQualityNP1 <- populationStatesNP1[,-5] %*% utility
+  QALYNP1 <- discountFormula(totalQualityNP1,discRate = oDR,t=t)
+  
+  #calculate the total cost for all cycles/person
+  NP1Cost <- sum(c(iCostNP1,discCostsNP1))/1000
+  NP1LYs <- sum(lifeYearsNP1)/1000
+  NP1QALYS <- sum(QALYNP1)/1000
+  
+  #returns a list of discounted cost and QALYs for each method
+  return(list(STDCost = STDCost, STDQALYS = STDQALYS, NP1Cost = NP1Cost,NP1QALYS = NP1QALYS, ICER = (NP1Cost-STDCost)/(NP1QALYS-STDQALYS)))
+  
+}
+
+#generate simulation function from exercise 5.7
+generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
+   
+   #we need to know how many columns or variable we have here in ncol
+   cols <- c("omrPTHR","omrRTHR","rrNP1","rrr","lambda","gamma",
+             "cPrimary","cRevision","cSuccess","uSuccessP","uSuccessR",
+             "uRevision","cRatio","STDCost","STDQALYS","NP1Cost","NP1QALYS",
+             "STDNMB","NP1NMB","NP1Inc","CESTD","CENP1","CENP1Inc")
+   
+   #initialize our return dataframe
+   dfReturn <- data.frame(matrix(NA, nrow = nReps, ncol = length(cols)))
+  
+   #fill out the column names for our dataframe
+   colnames(dfReturn) <- cols
+
+   #cRatio is fixed at 10000
+   dfReturn$cRatio <- cRatio
+   alpha <- (5294/1487)^2
+   beta <- 1487^2 / 5294
+   
+   
+   #due to R's vectorization, we can sample all the parameters at once in the "n" parameter
+   omrPTHR <- rbeta(nReps,2,98) #operative mortality rate following primary THR
+   omrRTHR <- rbeta(nReps,2,98) #operative mortality rate following revision THR
+   rrr <- rbeta(nReps,4,96) #re-revision risk
+   
+   #save them here using R's vectorization
+   dfReturn$omrPTHR <- omrPTHR
+   dfReturn$omrRTHR <- omrRTHR 
+   dfReturn$rrr <- rrr
+   
+   #cost and utility
+   cRevision <- rgamma(nReps,shape = alpha,scale = beta)
+   uSuccessP <- drawBetaMethodMoments(nReps,0.85,0.03)
+   uSuccessR <- drawBetaMethodMoments(nReps,0.75,0.04)
+   uRevision <- drawBetaMethodMoments(nReps,0.3,0.03)
+   
+   dfReturn$cRevision <- cRevision
+   dfReturn$uSuccessP <- uSuccessP
+   dfReturn$uSuccessR <- uSuccessR
+   dfReturn$uRevision <- uRevision 
+   
+   #draw from multivariate normal
+   normDraw <- MASS::mvrnorm(nReps, mu = survModelSummary$coefficient,Sigma = covMat)
+   
+   #using R's vectorization, we can calculate operations on the entire vector, we must use [,"name"]as normDraw is not a matrix rather than a vector
+   lambda <- exp(normDraw[,'cons'] + normDraw[,'age']*age + normDraw[,'male']*male)
+   gamma <- exp(normDraw[,'lngamma'])
+   rrNP1 <- exp(normDraw[,'NP1'])
+   
+   dfReturn$lambda <- lambda
+   dfReturn$gamma <- gamma
+   dfReturn$rrNP1 <- rrNP1
+
+  #start the for-loop
+  
+  for(i in 1:nReps){
+    
+    #call the analysis function and specify the iteration for the parameter to be selected
+    #those with a parameter that is constant do not need to be called from dfReturn
+    results <- analysisNP1(dfReturn$omrPTHR[i],dfReturn$omrRTHR[i],mr,dfReturn$rrr[i],dfReturn$rrNP1[i],cPrimary,dfReturn$cRevision[i],cStandard,dfReturn$uSuccessP[i],dfReturn$uSuccessR[i],dfReturn$uRevision[i],cDR,oDR,cNP1,dfReturn$gamma[i],dfReturn$lambda[i],iVec,t)
+    
+    #save the results
+    dfReturn$STDCost[i] <- results$STDCost
+    dfReturn$STDQALYS[i] <- results$STDQALYS
+    dfReturn$NP1Cost[i] <- results$NP1Cost
+    dfReturn$NP1QALYS[i] <- results$NP1QALYS
+    
+    #calculate net monetary benefit
+    dfReturn$STDNMB[i] <- results$STDQALYS*dfReturn$cRatio[i]-results$STDCost
+    dfReturn$NP1NMB[i] <- results$NP1QALYS*dfReturn$cRatio[i]-results$NP1Cost
+    dfReturn$NP1Inc[i] <- (results$NP1QALYS-results$STDQALYS)*dfReturn$cRatio[i] - (results$NP1Cost-results$STDCost)
+    
+    #calculate the cost effectiveness
+    dfReturn$CESTD[i] <- ifelse(dfReturn$STDNMB[i]>= dfReturn$NP1NMB[i],1,0)
+    dfReturn$CENP1[i] <- ifelse(dfReturn$CESTD[i]==1,0,1)
+    dfReturn$CENP1Inc[i] <- ifelse(dfReturn$NP1Inc[i]>0,1,0)
+    
+    #the above formulae come directly from the textbook 5.1.4
+  }
+  return(dfReturn)
+}
+
+```
+
+
+
+## Part 1
+
+Start the simulation, same as in Exercise 5.7 and 5.8 and calculate the mean Net Monetary Benefit for the standard and NP1 treatment, the maximum Net Monetary Benefit, and the maximum net monetary benefit under perfect information
+```{r Simulation run}
+
+set.seed(123)
+cRatio <- 100000
+
+simResults <- generateSimulations(nReps = 10000,cRatio = cRatio)
+
+#simplest using colMeans
+meanNMB <- colMeans(simResults[,c("STDNMB","NP1NMB")])
+
+
+#get the maximum NMB within each treatment iteration
+maxPINMB <- pmax(simResults[,c("STDNMB")],simResults[,c("NP1NMB")])
+```
+
+
+Now we can calculate the EVPI which is 
+
+$$
+E_{\theta} [\max_j \text{NMB}(j,\theta)]- \max_j E_{\theta}[\text{NMB}(j,\theta)]
+$$
+
+Note we only need the STD and NP1 columns
+
+```{r Calculate EVPI}
+
+EVPI <- mean(maxPINMB)-max(meanNMB) 
+
+EVPI 
+```
+
+This is the expected value of information for a given patient. Next, we aim to calculate the EVPI at the population level by multiplying by the population, discounted for future years
+
+## Part 2
+
+Calculating the EVPI at the population level
+```{r EVPI at the population level}
+annualPop <- 40000
+
+#discounted population
+discPop <- discountFormula(40000,cDR,9)
+
+#calculate the sum of the population years
+perAnumEffPop <- sum(c(40000,discPop))
+
+
+popEVPI <- EVPI*perAnumEffPop
+
+
+popEVPI 
+```
+
+## Part 3
+
+Plotting EVPI by the cost effectiveness threshold (cRatio). Here we run the simulation loop by sequencing through cRatio to plot the curve. We may use the sapply family of functions.
+```{r plotting EVPI}
+library(ggplot2)
+#calculate the cRatios to be looped over
+cRatios <- seq(0,50000,by = 500)
+  annualPop <- 40000
+
+
+#using the same sapply function as before
+cRatioResults <- sapply(cRatios,function(x){
+  
+  #call the simulation
+  NP1sim <- generateSimulations(nReps = 1000,cRatio = x)
+  
+  #simplest using colMeans
+  meanNMB <- colMeans(NP1sim[,c("STDNMB","NP1NMB")])
+  #get the maximum NMB within each treatment iteration
+  maxPINMB <- pmax(NP1sim[,c("STDNMB")],NP1sim[,c("NP1NMB")])
+  
+  EVPI <- mean(maxPINMB)-max(meanNMB) 
+    
+  #multiply EVPI by discounted population
+  popEVPI <- EVPI*perAnumEffPop
+
+  return(popEVPI)
+})
+
+dfEVPI <- data.frame(cRatio = cRatios, EVPI = cRatioResults)
+
+#plot the population EVPI by 
+ggplot(dfEVPI,aes(x = cRatio, y = EVPI)) + geom_line(colour = "navyblue",linewidth = 1.5) + labs(x = "Ceiling Ratio",
+                                                                                                 y = "Population EVPI", title = "EVPI by cRatio")
+
+```
+
+# Exercise 6.6b)
+
+In the section of this exercise we will investigate the EVPI of grouped parameters. Based on the previous plot, to maximize the EVPI for a given cRatio, we should pick cRatio = 2200. This is the value provided by the textbook that maximizes the EVPI, however, due to Monte Carlo variability the empirical value here will be different, and different for each seed used.
+
+Recall that the Expected Value of Perfect information for Parameters (EVPPI) for some parameter $\phi$, where $\theta = \phi \cup \psi$ is
+
+$$
+ E_\phi\max_j[E_{\psi|\phi}[NMB(j,\phi,\psi)]- \max_j E_{\theta}[\text{NMB}(j,\theta)].
+$$
+
+```{r Parameter information with rrNP1}
+
+cRatios[which.max(cRatioResults)]
+
+#however, the textbook states 2200, due to variability in the simulations, a larger number of repetitions and finer grid of cRatios would approximate the maximum better.
+cRatio <- 2200
+
+#we can capture the value of information for a certain parameter by fixing them before the simulation. To make these changes, we must make some alterations tot he generateSimulations function
+
+drawBetaMethodMoments <- function(n,mu,s){
+  
+  #functions estimates alpha and beta using the method of moments then draws from the beta distribution
+  alpha <- ((mu*(1-mu)/s^2) -1)*mu
+  beta <- alpha*(1-mu )/mu
+  
+  #draw our random number
+  draw <- rbeta(n,alpha,beta)
+  
+  return(draw)
+}
+
+generateSimulationsParam <- function(nReps = 1000,age=60,male=0,cRatio = 100000, keepFixed = "rrNP1"){
+  
+  
+   #we need to know how many columns or variable we have here in ncol
+   cols <- c("omrPTHR","omrRTHR","rrNP1","rrr","lambda","gamma",
+             "cPrimary","cRevision","cSuccess","uSuccessP","uSuccessR",
+             "uRevision","cRatio","STDCost","STDQALYS","NP1Cost","NP1QALYS",
+             "STDNMB","NP1NMB","NP1Inc","CESTD","CENP1","CENP1Inc")
+   
+   #initialize our return dataframe
+   dfReturn <- data.frame(matrix(NA, nrow = nReps, ncol = length(cols)))
+  
+   #fill out the column names for our dataframe
+   colnames(dfReturn) <- cols
+   
+   
+   #cRatio is fixed at 10000
+   dfReturn$cRatio <- cRatio
+   alpha <- (5294/1487)^2
+   beta <- 1487^2 / 5294
+   
+   
+   #due to R's vectorization, we can sample all the parameters at once in the "n" parameter
+   omrPTHR <- rbeta(nReps,2,98) #operative mortality rate following primary THR
+   omrRTHR <- rbeta(nReps,2,98) #operative mortality rate following revision THR
+   rrr <- rbeta(nReps,4,96) #re-revision risk
+   
+   #save them here using R's vectorization
+   dfReturn$omrPTHR <- omrPTHR
+   dfReturn$omrRTHR <- omrRTHR 
+   dfReturn$rrr <- rrr
+   
+   #cost and utility
+   cRevision <- rgamma(nReps,shape = alpha,scale = beta)
+   uSuccessP <- drawBetaMethodMoments(nReps,0.85,0.03)
+   uSuccessR <- drawBetaMethodMoments(nReps,0.75,0.04)
+   uRevision <- drawBetaMethodMoments(nReps,0.3,0.03)
+   
+   dfReturn$cRevision <- cRevision
+   dfReturn$uSuccessP <- uSuccessP
+   dfReturn$uSuccessR <- uSuccessR
+   dfReturn$uRevision <- uRevision 
+   
+   #draw from multivariate normal
+   normDraw <- MASS::mvrnorm(nReps, mu = survModelSummary$coefficient,Sigma = covMat)
+   
+   #using R's vectorization, we can calculate operations on the entire vector, we must use [,"name"]as normDraw is not a matrix rather than a vector
+   lambda <- exp(normDraw[,'cons'] + normDraw[,'age']*age + normDraw[,'male']*male)
+   gamma <- exp(normDraw[,'lngamma'])
+   rrNP1 <- exp(normDraw[,'NP1'])
+   
+   dfReturn$lambda <- lambda
+   dfReturn$gamma <- gamma
+   dfReturn$rrNP1 <- rrNP1
+
+  #start the for-loop
+    
+    #choose which parameter will be kept fixed based on the first draw
+    if(keepFixed == "rrNP1"){
+      
+      dfReturn$rrNP1 <- rrNP1[1]
+    }else if(keepFixed == "OMRs"){
+      
+      dfReturn$omrPTHR <- omrPTHR[1]
+      dfReturn$omrRTHR <- omrRTHR[1]   
+      
+    }else if(keepFixed == "cRevision"){
+      dfReturn$cRevision <- cRevision[1]
+      
+    }else if(keepFixed == "rrr"){
+      
+        dfReturn$rrr <- rrr[1]
+      
+    }else if(keepFixed == "utilities"){
+      
+        dfReturn$uSuccessP <- uSuccessP[1]
+        dfReturn$uRevision <- uRevision[1]
+        dfReturn$uSuccessR <- uSuccessR[1]
+    }else if(keepFixed == "survParams"){
+      
+        dfReturn$lambda <- lambda[1]
+        dfReturn$gamma <- gamma[1]
+      
+      
+    }
+
+  for(i in 1:nReps){
+
+    results <- analysisNP1(dfReturn$omrPTHR[i],dfReturn$omrRTHR[i],mr,dfReturn$rrr[i],dfReturn$rrNP1[i],cPrimary,dfReturn$cRevision[i],cStandard,dfReturn$uSuccessP[i],dfReturn$uSuccessR[i],dfReturn$uRevision[i],cDR,oDR,cNP1,dfReturn$gamma[i],dfReturn$lambda[i],iVec,t)
+    
+    #save the results, including NP2
+    dfReturn$STDCost[i] <- results$STDCost
+    dfReturn$STDQALYS[i] <- results$STDQALYS
+    dfReturn$NP1Cost[i] <- results$NP1Cost
+    dfReturn$NP1QALYS[i] <- results$NP1QALYS
+    #dfReturn$NP2Cost[i] <- results$NP2cost
+    #dfReturn$NP2QALYS[i] <- results$NP2QALYS
+    
+    
+    #calculate net monetary benefit, we now remove the redundant  "NP1 inc"
+    dfReturn$STDNMB[i] <- results$STDQALYS*dfReturn$cRatio[i]-results$STDCost
+    dfReturn$NP1NMB[i] <- results$NP1QALYS*dfReturn$cRatio[i]-results$NP1Cost
+    dfReturn$NP1Inc[i] <- (results$NP1QALYS-results$STDQALYS)*dfReturn$cRatio[i] - (results$NP1Cost-results$STDCost)
+    
+    #dfReturn$NP2NMB[i] <- results$NP2QALYS*dfReturn$cRatio[i]-results$NP2cost    
+    #calculate the cost effectiveness. Note with 3 methods, we must take the maximum 
+    bestTreatment <- max(dfReturn$STDNMB[i], dfReturn$NP1NMB[i], dfReturn$NP2NMB[i] )
+   
+    #save the cost effectiveness winner
+    dfReturn$CISTD[i] <- ifelse(dfReturn$STDNMB[i]==bestTreatment,1,0)
+    dfReturn$CINP1[i] <- ifelse(dfReturn$NP1NMB[i]==bestTreatment,1,0)
+    dfReturn$CINP1Inc[i] <- ifelse(dfReturn$NP1Inc[i]>0,1,0)
+    #dfReturn$CINP2[i] <- ifelse(dfReturn$NP2NMB[i]==bestTreatment,1,0)
+
+  }
+  
+  return(dfReturn)
+}
+
+
+#we repeat this 100 or (many times), while keeping the rrNP1 fixed
+
+fixrrNP1 <- t(sapply(1:100,function(x){
+  
+  
+  simResults <- generateSimulationsParam(cRatio = 2200,keepFixed = "rrNP1",nReps = 1000)
+  meanBenefit <- colMeans(simResults[,c("STDNMB","NP1NMB")])
+  
+  
+  return(meanBenefit)
+  
+}))
+
+#expected maximum
+expMaxrrNP1 <- mean(pmax(fixrrNP1[,"STDNMB"],fixrrNP1[,"NP1NMB"]))
+maxExpNP1 <- max(colMeans(fixrrNP1))
+
+EVPI <- expMaxrrNP1-maxExpNP1
+
+#adjust for discounting the population over time
+EVPI_pop <- EVPI*perAnumEffPop
+
+EVPI_pop
+```
+
+
+
+## 6.6b part 2
+
+Now that we have established how to perform partial value of information by fixing one parameter, we can apply this to every set of parameter. We will loop through every parameter group while keeping it fixed while calculating the EVPI. Ideally we would want the number of trials and the number of repetitions to each be 1000 however this becomes quite computationally intense. Using parallel processing would speed up this process significantly. In this section we first write the code only using sequential (base) processing but add the parallelized version in the appendix.
+
+```{r parameter looping}
+
+outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rrNP1","OMRs","cRevision","rrr","utilities","survParams")){
+  
+  #Run the simulation for each fixed parameter
+
+  nParams <- length(paramGroups)  
+  
+  EVPIs <- data.frame(matrix(NA,nrow =1,ncol = nParams))
+  colnames(EVPIs) <- paramGroups
+
+  for(p in 1:nParams){
+    
+    fixedParam <- paramGroups[p]
+    print(fixedParam )
+    
+    #call the sapply function from earlier (also referred to as the "inner loop" in the excel file.)
+    trialResults <- t(sapply(1:trials,function(x){
+      
+      #get the simulation results
+      simResults <- generateSimulationsParam(cRatio = cRatio,keepFixed = fixedParam ,nReps = nReps)
+      
+      #get the mean benefit across the trials
+      meanBenefit <- colMeans(simResults[,c("STDNMB","NP1NMB")])
+      
+      
+      return(meanBenefit)
+      
+    }))
+        
+    #calculate the EVPI
+    expMaxrrNP1 <- mean(pmax(trialResults[,"STDNMB"],trialResults[,"NP1NMB"]))
+    maxExpNP1 <- max(colMeans(trialResults))
+    
+    EVPI <- expMaxrrNP1-maxExpNP1
+    
+    #adjust for discounting the population over time
+    EVPI_pop <- EVPI*perAnumEffPop
+    
+    #save the EVPI
+    EVPIs[,p] <- EVPI_pop
+    
+  }
+  
+  #return
+  return(EVPIs)
+  
+}
+
+#here we only run the simulations of 100x100 this is already 100,000 
+EVPI_simResults <- outerSimLoop(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rrNP1","OMRs","cRevision","rrr","utilities","survParams"))
+
+```
+
+
+## Plot the results
+Lastly, plot the results of the the partial EVPI for each parameter
+```{r plot the results}
+library(tidyr)
+EVPI_plotDF <- pivot_longer(EVPI_simResults,everything(),names_to = "paramGroup",values_to = "partialEVPI")
+
+ggplot(EVPI_plotDF,aes(x = paramGroup,y = partialEVPI,colour = paramGroup)) + geom_bar(stat = 'identity',colour = 'grey4') + labs(x = "Parameter Group",y = "Partial EVPI",title = "Expected value of partial perfect information by parameter group")
+```
+
+
+
+
+
+
+

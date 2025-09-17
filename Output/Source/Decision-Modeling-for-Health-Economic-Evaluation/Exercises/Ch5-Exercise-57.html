@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Exercise 5.7 – Guide to Health Economic Evaluation in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html" rel="next">
+<link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-48.html" rel="prev">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head>
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.html">Exercise 5.7</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../../">Guide to Health Economic Evaluation in R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Decision Modeling for Health Economic Evaluation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Chapter 1 - Decision Modelling for Health Economic Evaluation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 2.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 3.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-47.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 4.7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-48.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 4.8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Exercise 5.7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exercise 5.8</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Appendix</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#part-1-setting-up-the-analysis" id="toc-part-1-setting-up-the-analysis" class="nav-link active" data-scroll-target="#part-1-setting-up-the-analysis">Part 1: Setting-up the analysis</a>
+  <ul class="collapse">
+<li><a href="#now-we-will-create-our-simulation-function." id="toc-now-we-will-create-our-simulation-function." class="nav-link" data-scroll-target="#now-we-will-create-our-simulation-function.">Now we will create our simulation function.</a></li>
+  </ul>
+</li>
+  <li><a href="#part-2-calling-our-simulation-function-plotting-our-cost-effectiveness-plane" id="toc-part-2-calling-our-simulation-function-plotting-our-cost-effectiveness-plane" class="nav-link" data-scroll-target="#part-2-calling-our-simulation-function-plotting-our-cost-effectiveness-plane">Part 2: Calling our simulation function &amp; plotting our cost-effectiveness plane</a></li>
+  <li><a href="#part-3-adding-a-threshold" id="toc-part-3-adding-a-threshold" class="nav-link" data-scroll-target="#part-3-adding-a-threshold">Part 3: Adding a threshold</a></li>
+  <li><a href="#part-4-examining-subgroups" id="toc-part-4-examining-subgroups" class="nav-link" data-scroll-target="#part-4-examining-subgroups">Part 4: Examining subgroups</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.html">Exercise 5.7</a></li></ol></nav><div class="quarto-title">
+<h1 class="title">Exercise 5.7</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><p>This section reproduces exercise 5.7 in R from Chapter 5 in the book “Decision Modelling for Health Economic Evaluation” by Andrew Briggs, Mark Sculpher, and Karl Claxton</p>
+<p>In this exercise we are going to extend the probabilistic parameter generation from exercise 4.8 by using simulations to account for the combined uncertainty of the parameters. As R is a language specifically for statistical computing, it is not surprising that statistical simulations are frequently run in R. These simulations can be constructed using a variety of core R functions. In this exercise, we will use either for-loops directly or call wrappers such as <code>lapply</code>, <code>apply</code>, or <code>sapply</code>.</p>
+<p>Let’s revisit exercise 4.8 by creating a few more functions that:</p>
+<ol type="1">
+<li>Automatically generate all necessary parameters from the corresponding distribution</li>
+<li>Apply the parameters to yield the results</li>
+</ol>
+<p>First we copy the analysis function from 4.8 and create another function that generates parameters.</p>
+<section id="part-1-setting-up-the-analysis" class="level2"><h2 class="anchored" data-anchor-id="part-1-setting-up-the-analysis">Part 1: Setting-up the analysis</h2>
+<p>We start by initializing all fixed parameters, bring over all the functions from the previous exercises. We also load the MASS package required to sample random numbers from the multivariate normal distribution.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cStandard</span> <span class="op">&lt;-</span> <span class="fl">394</span> <span class="co">#cost of standard implant</span></span>
+<span><span class="va">cNP1</span> <span class="op">&lt;-</span> <span class="fl">579</span> <span class="co">#cost of new implant</span></span>
+<span></span>
+<span><span class="va">cDR</span> <span class="op">&lt;-</span> <span class="fl">0.06</span> <span class="co">#cost discount rate</span></span>
+<span><span class="va">oDR</span> <span class="op">&lt;-</span> <span class="fl">0.015</span> <span class="co">#outcome discount rate</span></span>
+<span><span class="va">age</span> <span class="op">&lt;-</span> <span class="fl">60</span> <span class="co">#average age of all patients at receipt of primary implant</span></span>
+<span><span class="va">male</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">#sex indicator (0 for female, 1 for male)</span></span>
+<span></span>
+<span><span class="va">iVec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span> <span class="co">#starting vector; everyone starts in the first state</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fl">60</span> <span class="co">#number of cycles</span></span>
+<span></span>
+<span><span class="va">covMat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.0022515</span>  , <span class="op">-</span><span class="fl">0.005691</span> , <span class="fl">0.000000028</span>, <span class="fl">0.0000051</span>, <span class="fl">0.000259</span>,</span>
+<span>   <span class="op">-</span><span class="fl">0.005691</span>   ,  <span class="fl">0.0432191</span>,<span class="op">-</span><span class="fl">0.000783</span>   ,<span class="op">-</span><span class="fl">0.007247</span> ,<span class="op">-</span><span class="fl">0.000642</span>,</span>
+<span>    <span class="fl">0.000000028</span>, <span class="op">-</span><span class="fl">0.000783</span> , <span class="fl">2.716e-05</span>  , <span class="fl">0.000033</span> ,<span class="op">-</span><span class="fl">0.000111</span>,</span>
+<span>    <span class="fl">0.0000051</span>  , <span class="op">-</span><span class="fl">0.007247</span> , <span class="fl">0.000033</span>   , <span class="fl">0.0118954</span>, <span class="fl">0.000184</span>,</span>
+<span>    <span class="fl">0.000259</span>   , <span class="op">-</span><span class="fl">0.000642</span> ,<span class="op">-</span><span class="fl">0.000111</span>   , <span class="fl">0.000184</span> , <span class="fl">0.1463686</span><span class="op">)</span>,</span>
+<span>  nrow <span class="op">=</span> <span class="fl">5</span>, ncol <span class="op">=</span> <span class="fl">5</span>, byrow <span class="op">=</span> <span class="cn">T</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">covMat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">covMat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">survModelSummary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  </span>
+<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span><span class="op">)</span>,</span>
+<span>  coefficient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.3740968</span>,<span class="op">-</span><span class="fl">5.490935</span>,<span class="op">-</span><span class="fl">0.0367022</span>,<span class="fl">0.768536</span>,<span class="op">-</span><span class="fl">1.344474</span><span class="op">)</span>,</span>
+<span>  SE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.0474501</span>,<span class="fl">0.207892</span>,<span class="fl">0.0052112</span>,<span class="fl">0.109066</span>,<span class="fl">0.3825815</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">survModelSummary</span><span class="op">$</span><span class="va">hazard_ratio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">survModelSummary</span><span class="op">$</span><span class="va">coefficient</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span class="va">drawBetaMethodMoments</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>,<span class="va">mu</span>,<span class="va">s</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co">#functions estimates alpha and beta using the method of moments then draws from the beta distribution</span></span>
+<span>  <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="op">(</span><span class="va">mu</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">mu</span><span class="op">)</span><span class="op">/</span><span class="va">s</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">*</span><span class="va">mu</span></span>
+<span>  <span class="va">beta</span> <span class="op">&lt;-</span> <span class="va">alpha</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">mu</span> <span class="op">)</span><span class="op">/</span><span class="va">mu</span></span>
+<span>  </span>
+<span>  <span class="co">#draw our random number</span></span>
+<span>  <span class="va">draw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="va">n</span>,<span class="va">alpha</span>,<span class="va">beta</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">draw</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span></span>
+<span><span class="va">tProbsHazard</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>,<span class="va">lambda</span>,<span class="va">gamma</span><span class="op">)</span><span class="op">{</span></span>
+<span>   </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">*</span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">t</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">^</span><span class="va">gamma</span> <span class="op">-</span> <span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">t</span><span class="op">)</span><span class="op">^</span><span class="va">gamma</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>   </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span></span>
+<span><span class="va">tProbs_time</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,<span class="va">rr</span>,<span class="va">mr</span>,<span class="va">rrr</span>,<span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="co">#omrPTHR is operative mortality rate following primary THR</span></span>
+<span>  <span class="co">#omrRTHR is operative mortality rate following revision THR</span></span>
+<span>  <span class="co">#rrr is re-revision risk</span></span>
+<span>  <span class="co">#mr is mortality risk</span></span>
+<span>  </span>
+<span>  <span class="va">tProbs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">omrPTHR</span><span class="op">)</span>,     <span class="fl">0</span>,     <span class="fl">0</span>,                   <span class="va">omrPTHR</span>,</span>
+<span>    <span class="fl">0</span>, <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">rr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">+</span><span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span>, <span class="va">rr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span>, <span class="fl">0</span>,                   <span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span>,</span>
+<span>    <span class="fl">0</span>, <span class="fl">0</span>,               <span class="fl">0</span>,     <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">omrRTHR</span> <span class="op">+</span> <span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span>, <span class="va">omrRTHR</span> <span class="op">+</span> <span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span>,</span>
+<span>    <span class="fl">0</span>, <span class="fl">0</span>,               <span class="va">rrr</span>,   <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">rrr</span><span class="op">+</span><span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span>,       <span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span>,</span>
+<span>    <span class="fl">0</span>, <span class="fl">0</span>,               <span class="fl">0</span>,     <span class="fl">0</span>,                   <span class="fl">1</span></span>
+<span>  <span class="op">)</span>,ncol <span class="op">=</span> <span class="fl">5</span>, nrow <span class="op">=</span> <span class="fl">5</span>, byrow <span class="op">=</span> <span class="cn">T</span></span>
+<span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">#provided death rates and yearly transition probabilities</span></span>
+<span><span class="va">deathRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  Age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span><span class="op">)</span>,</span>
+<span>  Males <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.51</span>,<span class="fl">3.93</span>,<span class="fl">10.9</span>,<span class="fl">31.6</span>,<span class="fl">80.1</span>,<span class="fl">187.9</span><span class="op">)</span>,</span>
+<span>  Females <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.99</span>,<span class="fl">2.6</span>,<span class="fl">6.7</span>,<span class="fl">19.3</span>,<span class="fl">53.5</span>,<span class="fl">154.8</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">)</span></span>
+<span><span class="va">yearlyTProbs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    Age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span><span class="op">)</span>,</span>
+<span>    Index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">35</span>,<span class="fl">45</span>,<span class="fl">55</span>,<span class="fl">65</span>,<span class="fl">75</span>,<span class="fl">85</span><span class="op">)</span>,</span>
+<span>    Males <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.00151</span>,<span class="fl">0.00393</span>,<span class="fl">0.0109</span>,<span class="fl">0.0316</span>,<span class="fl">0.0801</span>,<span class="fl">0.1879</span><span class="op">)</span>,</span>
+<span>    Females <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.00099</span>,<span class="fl">0.0026</span>,<span class="fl">0.0067</span>,<span class="fl">0.0193</span>,<span class="fl">0.0535</span>,<span class="fl">0.1548</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">discountFormula</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nonDiscount</span>,<span class="va">discRate</span>,<span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">nonDiscount</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">discRate</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">t</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span></span>
+<span></span>
+<span><span class="va">calculateYearlyProbs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">iVec</span>,<span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,<span class="va">rr</span>,<span class="va">mr</span>,<span class="va">rrr</span>,<span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co">#create empty matrix that we will fill in</span></span>
+<span>  </span>
+<span>  <span class="va">matReturn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="va">t</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#initialize first vector of proportions</span></span>
+<span>  </span>
+<span>  <span class="co">#create column names</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">matReturn</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PrimaryTHR"</span>,<span class="st">"SuccessP"</span>,<span class="st">"RevisionTHR"</span>,<span class="st">"SucessR"</span>,<span class="st">"Death"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="co">#get the corresponding transition matrix based on the time</span></span>
+<span>    <span class="va">tProbs</span> <span class="op">&lt;-</span> <span class="fu">tProbs_time</span><span class="op">(</span><span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,<span class="va">rr</span>,<span class="va">mr</span>,<span class="va">rrr</span>,<span class="va">i</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="va">matReturn</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span> <span class="op">&lt;-</span>   <span class="va">iVec</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">tProbs</span> </span>
+<span>    </span>
+<span>    <span class="co">#update ivec</span></span>
+<span>    <span class="va">iVec</span> <span class="op">&lt;-</span> <span class="va">iVec</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">tProbs</span></span>
+<span>    </span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">matReturn</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#returns a t (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t</span></span>
+<span>  </span>
+<span><span class="op">}</span></span>
+<span></span>
+<span></span>
+<span><span class="co">#complete primary analysis function for NP1</span></span>
+<span><span class="va">analysisNP1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,<span class="va">mr</span>,<span class="va">rrr</span>,<span class="va">rrNP1</span>,<span class="va">cPrimary</span>,<span class="va">cRevision</span>,<span class="va">cStandard</span>,<span class="va">uSuccessP</span>,<span class="va">uSuccessR</span>,<span class="va">uRevision</span>,<span class="va">cDR</span>,<span class="va">oDR</span>,<span class="va">cNP1</span>,<span class="va">gamma</span>,<span class="va">lambda</span>,<span class="va">iVec</span>,<span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
+<span></span>
+<span>  <span class="co">#calculate the revision risk</span></span>
+<span>    <span class="va">rr</span> <span class="op">&lt;-</span> <span class="fu">tProbsHazard</span><span class="op">(</span>t<span class="op">=</span><span class="va">t</span>,lambda <span class="op">=</span> <span class="va">lambda</span>,gamma <span class="op">=</span> <span class="va">gamma</span><span class="op">)</span></span>
+<span>    <span class="va">mr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">t</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="co">#calculate which index select based on the age group</span></span>
+<span>    <span class="va">inds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="va">yearlyTProbs</span><span class="op">$</span><span class="va">Index</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#select the gender columns</span></span>
+<span>    <span class="co">#if else takes 3 arguments, the first is a logical check, if true, it returns the second value, if false it returns the 3rd argument. Equivalent code can be written use if(x){}else{}.</span></span>
+<span>    <span class="va">genderCol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">male</span> <span class="op">==</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">yearlyTProbs</span><span class="op">[</span><span class="va">inds</span>,<span class="va">genderCol</span><span class="op">]</span><span class="op">)</span></span>
+<span>    </span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>    </span>
+<span>  <span class="co">#calculate standard states</span></span>
+<span>  <span class="va">standPopStates</span> <span class="op">&lt;-</span> <span class="fu">calculateYearlyProbs</span><span class="op">(</span>iVec <span class="op">=</span> <span class="va">iVec</span>,omrPTHR<span class="op">=</span><span class="va">omrPTHR</span>, omrRTHR<span class="op">=</span><span class="va">omrPTHR</span>,rr<span class="op">=</span> <span class="va">rr</span>, mr <span class="op">=</span> <span class="va">mr</span>,rrr<span class="op">=</span><span class="va">rrr</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
+<span>  <span class="va">lifeYearsStandard</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">standPopStates</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="co">#excludes death year</span></span>
+<span>  <span class="va">costVec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="va">cRevision</span>,<span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co">#add a parameter for the initial cost we had 1000 initial patients</span></span>
+<span>  <span class="va">iCostStandard</span> <span class="op">&lt;-</span> <span class="va">cStandard</span><span class="op">*</span><span class="fl">1000</span></span>
+<span>  </span>
+<span>  <span class="co">#first calculate the total cost</span></span>
+<span>  <span class="va">totalCosts</span> <span class="op">&lt;-</span> <span class="va">standPopStates</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">costVec</span></span>
+<span>  </span>
+<span>  <span class="co">#calculate the discounted cost</span></span>
+<span>  <span class="va">discCostStandard</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalCosts</span>,<span class="va">cDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#calculate the quality adjusted life years by creating a vector for each state utility except death</span></span>
+<span>  <span class="va">utility</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">uSuccessP</span>,<span class="va">uRevision</span>,<span class="va">uSuccessR</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#multiply by the cohort</span></span>
+<span>  <span class="va">totalQuality</span> <span class="op">&lt;-</span>  <span class="va">standPopStates</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">utility</span></span>
+<span>  <span class="va">QALYStandard</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalQuality</span>,discRate <span class="op">=</span> <span class="va">oDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#calculate the total cost for all cycles/person</span></span>
+<span>  <span class="va">STDcost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">iCostStandard</span>,<span class="va">discCostStandard</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
+<span>  <span class="va">STDLYs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lifeYearsStandard</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
+<span>  <span class="va">STDQALYS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">QALYStandard</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
+<span></span>
+<span>  </span>
+<span>  <span class="co">###repeat this for the NP1###</span></span>
+<span>  <span class="va">rrNP1_vec</span> <span class="op">&lt;-</span> <span class="fu">tProbsHazard</span><span class="op">(</span><span class="va">t</span>,lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">*</span><span class="va">rrNP1</span>,gamma <span class="op">=</span> <span class="va">gamma</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co">#call the previous function created</span></span>
+<span>  <span class="va">populationStatesNP1</span> <span class="op">&lt;-</span> <span class="fu">calculateYearlyProbs</span><span class="op">(</span><span class="va">iVec</span>,<span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,rr<span class="op">=</span><span class="va">rrNP1_vec</span>,mr<span class="op">=</span><span class="va">mr</span>,rrr<span class="op">=</span><span class="va">rrr</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#calculate life years for np1</span></span>
+<span>  <span class="va">lifeYearsNP1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">populationStatesNP1</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#total and discounted costs</span></span>
+<span>  <span class="va">totalCostsNP1</span> <span class="op">&lt;-</span> <span class="va">populationStatesNP1</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">costVec</span></span>
+<span>  <span class="va">discCostsNP1</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalCostsNP1</span>,<span class="va">cDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
+<span>  <span class="co">#add the initial cost for NP1</span></span>
+<span>  <span class="va">iCostNP1</span> <span class="op">&lt;-</span> <span class="va">cNP1</span><span class="op">*</span><span class="fl">1000</span></span>
+<span>  <span class="co">#Utility</span></span>
+<span>  <span class="va">totalQualityNP1</span> <span class="op">&lt;-</span> <span class="va">populationStatesNP1</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">utility</span></span>
+<span>  <span class="va">QALYNP1</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalQualityNP1</span>,discRate <span class="op">=</span> <span class="va">oDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#calculate the total cost for all cycles/person</span></span>
+<span>  <span class="va">NP1cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">iCostNP1</span>,<span class="va">discCostsNP1</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
+<span>  <span class="va">NP1LYs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lifeYearsNP1</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
+<span>  <span class="va">NP1QALYS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">QALYNP1</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
+<span>  </span>
+<span>  <span class="co">#returns a list of discounted cost and QALYs for each method</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>STDcost <span class="op">=</span> <span class="va">STDcost</span>, STDQALYS <span class="op">=</span> <span class="va">STDQALYS</span>, NP1cost <span class="op">=</span> <span class="va">NP1cost</span>,NP1QALYS <span class="op">=</span> <span class="va">NP1QALYS</span>, ICER <span class="op">=</span> <span class="op">(</span><span class="va">NP1cost</span><span class="op">-</span><span class="va">STDcost</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">NP1QALYS</span><span class="op">-</span><span class="va">STDQALYS</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="now-we-will-create-our-simulation-function." class="level3"><h3 class="anchored" data-anchor-id="now-we-will-create-our-simulation-function.">Now we will create our simulation function.</h3>
+<p>We start by initializing a dataframe to store our results, then iterating through each parameter and running our analysis function. This could be created using <code>lapply</code>, however it is probably easier to view the logic by using a for-loop.</p>
+<p>This simulation function will encapsulate all statistics (functions of the data) or almost all values necessary to calculate the cost-effectiveness. However, due to R’s vectorization, and the fact that the cost effectiveness metrics are functions of other columns. We could alternatively calculate many of the metrics after the simulation is completed using R’s vectorization.</p>
+<p>In the following Code:</p>
+<ul>
+<li>
+<strong>NMB</strong> refers to “Net Monetary Benefit”</li>
+<li>
+<strong>CE</strong> refers to “Cost effective”</li>
+</ul>
+<p>Create our simulation function here:</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">generateSimulations</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nReps</span> <span class="op">=</span> <span class="fl">1000</span>,<span class="va">age</span><span class="op">=</span><span class="fl">60</span>,<span class="va">male</span><span class="op">=</span><span class="fl">0</span>,<span class="va">cRatio</span> <span class="op">=</span> <span class="fl">100000</span><span class="op">)</span><span class="op">{</span></span>
+<span>   </span>
+<span>   <span class="co">#we need to know how many columns or variable we have here in ncol</span></span>
+<span>   <span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"omrPTHR"</span>,<span class="st">"omrRTHR"</span>,<span class="st">"rrNP1"</span>,<span class="st">"rrr"</span>,<span class="st">"lambda"</span>,<span class="st">"gamma"</span>,</span>
+<span>             <span class="st">"cPrimary"</span>,<span class="st">"cRevision"</span>,<span class="st">"cSuccess"</span>,<span class="st">"uSuccessP"</span>,<span class="st">"uSuccessR"</span>,</span>
+<span>             <span class="st">"uRevision"</span>,<span class="st">"cRatio"</span>,<span class="st">"STDCost"</span>,<span class="st">"STDQALYS"</span>,<span class="st">"NP1Cost"</span>,<span class="st">"NP1QALYS"</span>,</span>
+<span>             <span class="st">"STDNMB"</span>,<span class="st">"NP1NMB"</span>,<span class="st">"NP1Inc"</span>,<span class="st">"CESTD"</span>,<span class="st">"CENP1"</span>,<span class="st">"CENP1Inc"</span><span class="op">)</span></span>
+<span>   </span>
+<span>   </span>
+<span>   </span>
+<span>   <span class="va">dfReturn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="cn">NA</span>,nrow <span class="op">=</span> <span class="va">nReps</span>,ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">cols</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>   <span class="co">#fill out the column names for our dataframe</span></span>
+<span>   <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">cols</span></span>
+<span></span>
+<span>   <span class="co">#cRatio is fixed at 100000</span></span>
+<span>   <span class="co">#This is the threshold ratio</span></span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">cRatio</span> <span class="op">&lt;-</span> <span class="va">cRatio</span></span>
+<span>   <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">5294</span><span class="op">/</span><span class="fl">1487</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
+<span>   <span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">1487</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">5294</span></span>
+<span>   </span>
+<span>   <span class="co">#due to R's vectorization, we can sample all the parameters at once in the "n" parameter</span></span>
+<span>   <span class="va">omrPTHR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">2</span>,<span class="fl">98</span><span class="op">)</span> <span class="co">#operative mortality rate following primary THR</span></span>
+<span>   <span class="va">omrRTHR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">2</span>,<span class="fl">98</span><span class="op">)</span> <span class="co">#operative mortality rate following revision THR</span></span>
+<span>   <span class="va">rrr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">4</span>,<span class="fl">96</span><span class="op">)</span> <span class="co">#re-revision risk</span></span>
+<span>   </span>
+<span>   <span class="co">#save them here using R's vectorization</span></span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">omrPTHR</span> <span class="op">&lt;-</span> <span class="va">omrPTHR</span></span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">omrRTHR</span> <span class="op">&lt;-</span> <span class="va">omrRTHR</span> </span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">rrr</span> <span class="op">&lt;-</span> <span class="va">rrr</span></span>
+<span>   </span>
+<span>   <span class="co">#cost and utility</span></span>
+<span>   <span class="va">cRevision</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html">rgamma</a></span><span class="op">(</span><span class="va">nReps</span>,shape <span class="op">=</span> <span class="va">alpha</span>,scale <span class="op">=</span> <span class="va">beta</span><span class="op">)</span></span>
+<span>   <span class="va">uSuccessP</span> <span class="op">&lt;-</span> <span class="fu">drawBetaMethodMoments</span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">0.85</span>,<span class="fl">0.03</span><span class="op">)</span></span>
+<span>   <span class="va">uSuccessR</span> <span class="op">&lt;-</span> <span class="fu">drawBetaMethodMoments</span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">0.75</span>,<span class="fl">0.04</span><span class="op">)</span></span>
+<span>   <span class="va">uRevision</span> <span class="op">&lt;-</span> <span class="fu">drawBetaMethodMoments</span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">0.3</span>,<span class="fl">0.03</span><span class="op">)</span></span>
+<span>   </span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">cRevision</span> <span class="op">&lt;-</span> <span class="va">cRevision</span></span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">uSuccessP</span> <span class="op">&lt;-</span> <span class="va">uSuccessP</span></span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">uSuccessR</span> <span class="op">&lt;-</span> <span class="va">uSuccessR</span></span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">uRevision</span> <span class="op">&lt;-</span> <span class="va">uRevision</span> </span>
+<span>   </span>
+<span>   <span class="co">#draw from multivariate normal</span></span>
+<span>   <span class="va">normDraw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/mvrnorm.html">mvrnorm</a></span><span class="op">(</span><span class="va">nReps</span>, mu <span class="op">=</span> <span class="va">survModelSummary</span><span class="op">$</span><span class="va">coefficient</span>,Sigma <span class="op">=</span> <span class="va">covMat</span><span class="op">)</span></span>
+<span>   </span>
+<span>   <span class="co">#using R's vectorization, we can calculate operations on the entire vector, we must use [,"name"]as normDraw is not a matrix rather than a vector</span></span>
+<span>   <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">normDraw</span><span class="op">[</span>,<span class="st">'cons'</span><span class="op">]</span> <span class="op">+</span> <span class="va">normDraw</span><span class="op">[</span>,<span class="st">'age'</span><span class="op">]</span><span class="op">*</span><span class="va">age</span> <span class="op">+</span> <span class="va">normDraw</span><span class="op">[</span>,<span class="st">'male'</span><span class="op">]</span><span class="op">*</span><span class="va">male</span><span class="op">)</span></span>
+<span>   <span class="va">gamma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">normDraw</span><span class="op">[</span>,<span class="st">'lngamma'</span><span class="op">]</span><span class="op">)</span></span>
+<span>   <span class="va">rrNP1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">normDraw</span><span class="op">[</span>,<span class="st">'NP1'</span><span class="op">]</span><span class="op">)</span></span>
+<span>   </span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="va">lambda</span></span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">gamma</span> <span class="op">&lt;-</span> <span class="va">gamma</span></span>
+<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">rrNP1</span> <span class="op">&lt;-</span> <span class="va">rrNP1</span></span>
+<span></span>
+<span>  <span class="co">#start the for-loop</span></span>
+<span>  </span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">nReps</span><span class="op">)</span><span class="op">{</span></span>
+<span>    </span>
+<span>    <span class="co">#call the analysis function and specify the iteration for the parameter to be selected</span></span>
+<span>    <span class="co">#those with a parameter that is constant do not need to be called from dfReturn</span></span>
+<span>    <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">analysisNP1</span><span class="op">(</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">omrPTHR</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">omrRTHR</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">mr</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">rrr</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">rrNP1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
+<span>                           <span class="va">dfReturn</span><span class="op">$</span><span class="va">cPrimary</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">cRevision</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">cStandard</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">uSuccessP</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
+<span>                           <span class="va">dfReturn</span><span class="op">$</span><span class="va">uSuccessR</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">uRevision</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">cDR</span>,<span class="va">oDR</span>,<span class="va">cNP1</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">gamma</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">lambda</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">iVec</span>,<span class="va">t</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#save the results</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">STDCost</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">STDcost</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">STDQALYS</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">STDQALYS</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1Cost</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">NP1cost</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1QALYS</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">NP1QALYS</span></span>
+<span>    </span>
+<span>    <span class="co">#calculate net monetary benefit</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">STDNMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">STDQALYS</span><span class="op">*</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">cRatio</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">-</span><span class="va">results</span><span class="op">$</span><span class="va">STDcost</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1NMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">NP1QALYS</span><span class="op">*</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">cRatio</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">-</span><span class="va">results</span><span class="op">$</span><span class="va">NP1cost</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1Inc</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">NP1QALYS</span><span class="op">-</span><span class="va">results</span><span class="op">$</span><span class="va">STDQALYS</span><span class="op">)</span><span class="op">*</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">cRatio</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">NP1cost</span><span class="op">-</span><span class="va">results</span><span class="op">$</span><span class="va">STDcost</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#calculate the cost effectiveness</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">CESTD</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">STDNMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&gt;=</span> <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1NMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">CENP1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">CESTD</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">==</span><span class="fl">1</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span></span>
+<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">CENP1Inc</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1Inc</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">&gt;</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span></span>
+<span>    </span>
+<span>    <span class="co">#the above formulae come directly from the textbook 5.1.4</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section id="part-2-calling-our-simulation-function-plotting-our-cost-effectiveness-plane" class="level2"><h2 class="anchored" data-anchor-id="part-2-calling-our-simulation-function-plotting-our-cost-effectiveness-plane">Part 2: Calling our simulation function &amp; plotting our cost-effectiveness plane</h2>
+<p>In this section we will be using <code>ggplot2</code> to plot our results. <code>ggplot2</code> is generally the plotting package of choice in R and has it own unique syntax. If you don’t have <code>ggplot2</code> installed, you can install it using <code>install.packages("ggplot2")</code></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We suggest briefly reviewing <a href="https://ggplot2.tidyverse.org/articles/ggplot2.html" class="uri">https://ggplot2.tidyverse.org/articles/ggplot2.html</a> to get a sense of how <code>ggplot2</code> works. We will provide the syntax here.</p>
+</div>
+</div>
+<p>We will begin by loading the <code>ggplot2</code> library and setting our starting seed.</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can call the simulation by specifying any number of repetitions after the <code>nReps =</code> argument</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">generateSimulations</span><span class="op">(</span>nReps <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we will quickly create the difference in costs and difference in QALYs for each intervention.</p>
+<p>Because we have access to all columns we can quickly perform vector operations on them.</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">res</span><span class="op">$</span><span class="va">diffCost</span> <span class="op">&lt;-</span> <span class="va">res</span><span class="op">$</span><span class="va">NP1Cost</span><span class="op">-</span><span class="va">res</span><span class="op">$</span><span class="va">STDCost</span></span>
+<span><span class="va">res</span><span class="op">$</span><span class="va">diffQALYs</span> <span class="op">&lt;-</span> <span class="va">res</span><span class="op">$</span><span class="va">NP1QALYS</span><span class="op">-</span><span class="va">res</span><span class="op">$</span><span class="va">STDQALYS</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will use these calculations to create a plot using <code>ggplot2</code></p>
+<p>The syntax takes a bit of getting used to but the plots are generally quite pretty.</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">res</span>,</span>
+<span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>         x <span class="op">=</span> <span class="va">diffQALYs</span>,</span>
+<span>         y <span class="op">=</span> <span class="va">diffCost</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
+<span>        colour <span class="op">=</span> <span class="st">"#414487"</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>        x <span class="op">=</span> <span class="st">"QALYs"</span>, </span>
+<span>        y <span class="op">=</span> <span class="st">"Cost"</span>, </span>
+<span>        title <span class="op">=</span> <span class="st">"Increase in Cost Effectiveness Plane"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="Ch5-Exercise-57_files/figure-html/5.7.2 create plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="part-3-adding-a-threshold" class="level2"><h2 class="anchored" data-anchor-id="part-3-adding-a-threshold">Part 3: Adding a threshold</h2>
+<p>Let’s analyse the proportion of our simulation based on the threshold ratio that we specified earlier of $100,000/QALY.</p>
+<p>Let’s also consider changing the threshold value by looping through various possibilities.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#mean proportion of STD cost effective</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">CESTD</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.001</code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#mean proportion of NP1 cost effective</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">CENP1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.999</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#equivalently, the same NP1 net monetary benefit as the "increase" over the standard</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">CENP1Inc</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.999</code></pre>
+</div>
+</div>
+<p>The NP1 implant is chosen over the standard implant 99.9% of the time with a cost threshold of $100,000/QALY.</p>
+<p>What if instead we want to see what happens if we plot this threshold value from 0 to 100,000? We can estimate this numerically by running our simulation many times for different values of cRatio and plotting the results</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cRatios</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100000</span>, by <span class="op">=</span> <span class="fl">2500</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To loop through the cRatios and calculate the proportion of cost effectiveness we can write another for-loop or… instead since cRatios is a vector, we can use <code>sapply</code> to quickly loop through the vector and calculate the proportion output from the <code>resultsNP1()</code> function.</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cRatioResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">cRatios</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co">#call the simulation</span></span>
+<span>  <span class="va">NP1sim</span> <span class="op">&lt;-</span> <span class="fu">generateSimulations</span><span class="op">(</span>nReps <span class="op">=</span> <span class="fl">1000</span>,cRatio <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#calculate the proportion for each simulatiom</span></span>
+<span>  <span class="va">propNP1CE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">NP1sim</span><span class="op">$</span><span class="va">CENP1</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">propNP1CE</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ncRatios</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">cRatios</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dfcRatios</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>cRatio <span class="op">=</span> <span class="va">cRatios</span>,probCENP1 <span class="op">=</span> <span class="va">cRatioResults</span>,probCESTD <span class="op">=</span> <span class="fl">1</span><span class="op">-</span><span class="va">cRatioResults</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can plot our results using <code>ggplot2</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">dfcRatios</span>,</span>
+<span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>         x <span class="op">=</span> <span class="va">cRatio</span>,</span>
+<span>         y <span class="op">=</span> <span class="va">probCENP1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span></span>
+<span>        colour <span class="op">=</span> <span class="st">'#414487'</span>,</span>
+<span>        linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span> </span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>        x <span class="op">=</span> <span class="st">"Value of ceiling ratio"</span>, </span>
+<span>        y <span class="op">=</span> <span class="st">"Probability of cost-effective of NP1 treatment"</span>, </span>
+<span>        title <span class="op">=</span> <span class="st">"Probability of cost-effective by value of ceiling ratio"</span>,</span>
+<span>        colour <span class="op">=</span> <span class="st">"Treatment"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="Ch5-Exercise-57_files/figure-html/5.7.3 plot results with varying cRatios-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="part-4-examining-subgroups" class="level2"><h2 class="anchored" data-anchor-id="part-4-examining-subgroups">Part 4: Examining subgroups</h2>
+<p>Up to this point, we have only been looking at one age category and one gender. Let’s now build a function that loops through all possible combinations of age and gender and evaluate the proportion of cost-effectiveness treatment of NP1.</p>
+<p>Instead of using the convenient <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> as in the previous part, we will use a for-loop to explicitly show which intersection of the subgroup is being analyzed.</p>
+<p>We’ll start by specifying our subgroups of interest</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">40</span>,<span class="fl">60</span>,<span class="fl">80</span><span class="op">)</span></span>
+<span><span class="va">gender</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, all possible combinations of these values can be easily calculated using <code>expand.grid</code>, note we also want all possible ceiling ratios (cRatios).</p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">factorsOfInterest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>cRatio <span class="op">=</span> <span class="va">cRatios</span>, age<span class="op">=</span><span class="va">ages</span>, male <span class="op">=</span> <span class="va">gender</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We want to add the column that we will hold our results</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">factorsOfInterest</span><span class="op">$</span><span class="va">propNP1CE</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will then loop through the grid and perform the simulation on each row. Below we specify our function,</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">subGroupSimulation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nReps</span>,<span class="va">factorsOfInterest</span><span class="op">)</span><span class="op">{</span></span>
+<span>   </span>
+<span>  <span class="co">#calculate the number of combinations</span></span>
+<span>  <span class="va">nCombinations</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">factorsOfInterest</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw">for</span><span class="op">(</span><span class="va">c</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">nCombinations</span><span class="op">)</span><span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co">#our current combination of the loop (current row)</span></span>
+<span>  <span class="va">currentCombination</span> <span class="op">&lt;-</span> <span class="va">factorsOfInterest</span><span class="op">[</span><span class="va">c</span>,<span class="op">]</span></span>
+<span>  </span>
+<span>  <span class="co">#call our simulation function</span></span>
+<span>  <span class="va">NP1sim</span> <span class="op">&lt;-</span> <span class="fu">generateSimulations</span><span class="op">(</span>nReps <span class="op">=</span> <span class="va">nReps</span>, cRatio <span class="op">=</span> <span class="va">currentCombination</span><span class="op">$</span><span class="va">cRatio</span> ,age <span class="op">=</span> <span class="va">currentCombination</span><span class="op">$</span><span class="va">age</span>, male <span class="op">=</span> <span class="va">currentCombination</span><span class="op">$</span><span class="va">male</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#calculate the proportion of cost effectiveness</span></span>
+<span>  <span class="va">propNP1CE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">NP1sim</span><span class="op">$</span><span class="va">CENP1</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co">#fill in the dataframe with the proportion</span></span>
+<span>  <span class="va">factorsOfInterest</span><span class="op">$</span><span class="va">propNP1CE</span><span class="op">[</span><span class="va">c</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">propNP1CE</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">factorsOfInterest</span><span class="op">)</span></span>
+<span>  </span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we’ll use our function to calculate our results</p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">subGroupResults</span> <span class="op">&lt;-</span> <span class="fu">subGroupSimulation</span><span class="op">(</span><span class="fl">1000</span>,<span class="va">factorsOfInterest</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To make plotting easier, we will combine the age and gender columns so that they are in one variable</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">subGroupResults</span><span class="op">$</span><span class="va">combined_factor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/interaction.html">interaction</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">subGroupResults</span><span class="op">$</span><span class="va">age</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">subGroupResults</span><span class="op">$</span><span class="va">male</span><span class="op">)</span>,sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will again plot the results using <code>ggplot2</code>. This time, we manually change the names of the subgroups to provide appropriate labels in our graph.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can specify colours for your graph by writing the colour names directly (e.g., “blue”) or by entering hex codes as we have here. In this example, we’ve used 6 colours from the viridis colour palette because it is an accessible color palette and renders well in grey scale. <a href="https://search.r-project.org/CRAN/refmans/viridisLite/html/viridis.html" class="uri">https://search.r-project.org/CRAN/refmans/viridisLite/html/viridis.html</a></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">subGroupResults</span>,</span>
+<span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>         x <span class="op">=</span> <span class="va">cRatio</span>,</span>
+<span>         y <span class="op">=</span> <span class="va">propNP1CE</span>,</span>
+<span>         colour <span class="op">=</span> <span class="va">combined_factor</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span></span>
+<span>        linewidth <span class="op">=</span> <span class="fl">1.2</span>,</span>
+<span>        alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>        x <span class="op">=</span> <span class="st">"Threshold Ratio"</span>, </span>
+<span>        y <span class="op">=</span> <span class="st">"Proportion of NP1 cost effective"</span>, </span>
+<span>        title <span class="op">=</span> <span class="st">"Line plot of cost effectiveness of NP1 implant by age and gender"</span>, </span>
+<span>        colour <span class="op">=</span> <span class="st">'Factor'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span></span>
+<span>        labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"40_0"</span><span class="op">=</span><span class="st">"Female Age 40"</span>,<span class="st">"60_0"</span><span class="op">=</span> <span class="st">"Female Age 60"</span>,<span class="st">"80_0"</span><span class="op">=</span><span class="st">"Female Age 80"</span>, <span class="st">"40_1"</span><span class="op">=</span><span class="st">"Male Age 40"</span>,<span class="st">"60_1"</span><span class="op">=</span> <span class="st">"Male Age 60"</span>,<span class="st">"80_1"</span><span class="op">=</span><span class="st">"Male Age 80"</span><span class="op">)</span>,</span>
+<span>        values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"40_0"</span> <span class="op">=</span> <span class="st">"#fde725"</span>,<span class="st">"60_0"</span> <span class="op">=</span> <span class="st">"#7ad151"</span>,<span class="st">"80_0"</span> <span class="op">=</span> <span class="st">"#22a884"</span>, <span class="st">"40_1"</span> <span class="op">=</span> <span class="st">"#2a788e"</span>, <span class="st">"60_1"</span> <span class="op">=</span> <span class="st">"#414487"</span>,<span class="st">"80_1"</span> <span class="op">=</span> <span class="st">"#440154"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="Ch5-Exercise-57_files/figure-html/5.7.4 plotting subgroup analysis results-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-48.html" class="pagination-link" aria-label="Exercise 4.8">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercise 4.8</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html" class="pagination-link" aria-label="Exercise 5.8">
+        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exercise 5.8</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

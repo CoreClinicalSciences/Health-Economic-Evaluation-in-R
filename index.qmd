@@ -1,4 +1,4 @@
-# Introduction 
+# Introduction  {.unnumbered}
 
 
 Welcome to this online guidebook on health economic evaluation in R. This is a living resource, designed to grow and evolve over time as new examples, exercises, and methods are added. Our goal is to support learners, researchers, and practitioners in developing the skills needed to build and analyze health economic models directly in R.  

@@ -14,7 +14,7 @@ book:
       - index.qmd
       - part: "Decision Modeling for Health Economic Evaluation"
         chapters: 
-          - Chapters/Ch2-Decision-Modeling-for-Health-Economic-Evaluation.qmd
+          - Chapters/Ch1-Decision-Modeling-for-Health-Economic-Evaluation.qmd
           - Exercises/Ch2-Exercise-25.qmd
           - Exercises/Ch3-Exercise-35.qmd
           - Exercises/Ch4-Exercise-47.qmd

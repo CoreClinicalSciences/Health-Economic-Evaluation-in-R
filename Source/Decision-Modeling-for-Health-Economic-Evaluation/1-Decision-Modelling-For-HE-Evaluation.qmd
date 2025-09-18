@@ -13,8 +13,9 @@ The original book is a key reference for decision modelling in health economics.
 ## Overview of Exercises
 Through these exercises, learners develop skills in writing functions, performing matrix operations, running simulations, and incorporating parameter uncertainty via probability distributions and probabilistic sensitivity analysis. The exercises also introduce widely used R packages:
 
+* `MASS` and `MCMCpack` for probability distributions and simulation, alongside base R functions
 * `dplyr` and `tidyr` for data manipulation
 * `ggplot2` for creating visualizations such as cost-effectiveness planes
-* `MASS` and `MCMCpack` for probability distributions and simulation, alongside base R functions
+* `scales` and `viridis` for visualization formatting
 
 By combining these tools, the exercises strengthen both programming fluency and applied expertise in constructing, analyzing, and interpreting health economic decision models.

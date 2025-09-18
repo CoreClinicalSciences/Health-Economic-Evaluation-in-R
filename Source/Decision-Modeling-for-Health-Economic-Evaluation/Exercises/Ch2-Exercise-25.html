@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
 <link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html" rel="next">
-<link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html" rel="prev">
+<link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html" rel="prev">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html">Exercise 2.5</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html">Exercise 2.5</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,8 +153,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Decision Modeling for Health Economic Evaluation</span></a>
+            <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -162,8 +162,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble on matrix operations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -202,6 +202,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Exercise 5.8</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 6.6A &amp; 6.6B</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -231,25 +237,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preamble-on-matrix-operations" id="toc-preamble-on-matrix-operations" class="nav-link active" data-scroll-target="#preamble-on-matrix-operations">Preamble on matrix operations</a>
-  <ul class="collapse">
-  <li><a href="#matrix-multiplication-example" id="toc-matrix-multiplication-example" class="nav-link" data-scroll-target="#matrix-multiplication-example">Matrix multiplication example</a></li>
-  </ul></li>
-  <li><a href="#start-of-exercise-2.5" id="toc-start-of-exercise-2.5" class="nav-link" data-scroll-target="#start-of-exercise-2.5">Start of Exercise 2.5</a>
-  <ul class="collapse">
-  <li><a href="#part-1" id="toc-part-1" class="nav-link" data-scroll-target="#part-1">Part 1</a></li>
-  <li><a href="#part-2" id="toc-part-2" class="nav-link" data-scroll-target="#part-2">Part 2</a></li>
-  <li><a href="#part-3" id="toc-part-3" class="nav-link" data-scroll-target="#part-3">Part 3</a></li>
-  <li><a href="#part-4" id="toc-part-4" class="nav-link" data-scroll-target="#part-4">Part 4</a></li>
-  <li><a href="#part-5" id="toc-part-5" class="nav-link" data-scroll-target="#part-5">Part 5</a></li>
-  </ul></li>
+  <li><a href="#part-1-populating-transition-probability-matrix" id="toc-part-1-populating-transition-probability-matrix" class="nav-link active" data-scroll-target="#part-1-populating-transition-probability-matrix">Part 1: Populating transition probability matrix</a></li>
+  <li><a href="#part-2-calculating-proportion-of-individuals-in-each-state" id="toc-part-2-calculating-proportion-of-individuals-in-each-state" class="nav-link" data-scroll-target="#part-2-calculating-proportion-of-individuals-in-each-state">Part 2: Calculating proportion of individuals in each state</a></li>
+  <li><a href="#part-3-calculating-costs" id="toc-part-3-calculating-costs" class="nav-link" data-scroll-target="#part-3-calculating-costs">Part 3: Calculating costs</a></li>
+  <li><a href="#part-4-conducting-analysis-for-combination-therapy" id="toc-part-4-conducting-analysis-for-combination-therapy" class="nav-link" data-scroll-target="#part-4-conducting-analysis-for-combination-therapy">Part 4: Conducting analysis for combination therapy</a></li>
+  <li><a href="#part-5-calculating-the-icer" id="toc-part-5-calculating-the-icer" class="nav-link" data-scroll-target="#part-5-calculating-the-icer">Part 5: Calculating the ICER</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html">Exercise 2.5</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html">Exercise 2.5</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Exercise 2.5</h1>
 </div>
@@ -269,68 +268,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This section reproduces exercise 2.5 in R from Chapter 2 of the book “Decision Modelling for Health Economic Evaluation” by Andrew Briggs, Mark Sculpher, and Karl Claxton</p>
-<section id="preamble-on-matrix-operations" class="level2">
-<h2 class="anchored" data-anchor-id="preamble-on-matrix-operations">Preamble on matrix operations</h2>
-<p>When building markov molds and building transition matrices, using matrix-vector multiplications simplifies manual computation significantly.</p>
-<p>To multiply a matrix by a vector we must have the same number of columns in the matrix as rows in a vector. Consider below an example of a two-state markov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.</p>
-<section id="matrix-multiplication-example" class="level3">
-<h3 class="anchored" data-anchor-id="matrix-multiplication-example">Matrix multiplication example</h3>
-<p>First, we will create our vector called <code>iVec_example</code>. The number of entries in this vector should be the same as the number of states. In this example we will assume that everyone starts in the first state.</p>
-<p>Note: the <code>c()</code> operation initializes a vector (it is considered by default a column vector)</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>iVec_example <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><br>
-Below, we consider a two-state markov model. We build a 2 x 2 matrix of the transition probabilities:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tProbs_example <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.7</span>,<span class="fl">0.3</span>,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                           <span class="fl">0.1</span>,<span class="fl">0.9</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">byrow =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><br>
-Now, we want to calculate the proportion of individuals in the first time-cycle. The results will be saved in <code>time1Prop</code></p>
-<p>Note: the number of columns in the matrix must match the number of rows in the vector.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>time1Prop <span class="ot">&lt;-</span> tProbs_example <span class="sc">%*%</span> iVec_example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><br>
-To get the proportion after the second-time we can multiply the first-time proportion that we just calculated by the transition probability matrix</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>time2Prop <span class="ot">&lt;-</span> tProbs_example <span class="sc">%*%</span> time1Prop</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><br>
-We can use the <code>[i,j]</code> operator to extract row <em>i</em> and column <em>j</em> of a matrix</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[<span class="dv">1</span>,] <span class="co">#extracts the first row</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7 0.3</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[,<span class="dv">2</span>] <span class="co">#extracts the second column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3 0.9</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[<span class="dv">1</span>,<span class="dv">2</span>] <span class="co">#extracts first row and second column entry</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3</code></pre>
-</div>
-</div>
-<p><br>
-We can also use the <em>-i</em> operator to extract <strong>all except</strong> <em>i</em></p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[<span class="sc">-</span><span class="dv">1</span>,]  <span class="co">#extracts all but the first row</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1 0.9</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[,<span class="sc">-</span><span class="dv">1</span>]  <span class="co">#extracts all but the column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3 0.9</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="start-of-exercise-2.5" class="level2">
-<h2 class="anchored" data-anchor-id="start-of-exercise-2.5">Start of Exercise 2.5</h2>
 <p>First, we will calculate the monotherapy transition probabilities for the control based on the data provided in Table 2.5. These probabilities should match the transition probabilities provided in Table 2.2. part 1(a)</p>
 <p>We need to calculate the following transition probabilities:</p>
 <ul>
@@ -344,241 +281,300 @@ We can also use the <em>-i</em> operator to extract <strong>all except</strong> 
 <li>Transition probability from C to C</li>
 <li>Transition probability from C to D</li>
 </ul>
-<section id="part-1" class="level3">
-<h3 class="anchored" data-anchor-id="part-1">Part 1</h3>
+<section id="part-1-populating-transition-probability-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-populating-transition-probability-matrix">Part 1: Populating transition probability matrix</h2>
 <p>Now that we have calculated the transition probabilities, we will use these values to populate the transition probability matrix and initialize the parameters necessary for modelling.</p>
 <p>The matrix will follow the structure below, as shown in table 2.6:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#         To State</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#           A B C D</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># From    A</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># State   B</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#         C</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#         D</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#         To State</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#           A B C D</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># From    A</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># State   B</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#         C</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#         D</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><br>
 As you complete the matrix, remember, that it’s not possible to go backwards in this model, so any transition probability below the diagonal values will be 0.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tProbs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">0.721453287</span>, <span class="fl">0.201845444</span>, <span class="fl">0.066897347</span>, <span class="fl">0.009803922</span>,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>          , <span class="fl">0.581081081</span>, <span class="fl">0.406995231</span>, <span class="fl">0.011923688</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>          , <span class="dv">0</span>          , <span class="fl">0.750142939</span>, <span class="fl">0.249857061</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>          , <span class="dv">0</span>          , <span class="dv">0</span>          , <span class="dv">1</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  ),<span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> T</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#please note that there are more decimals here than in Table 2.2a and other figures. This is because we aim to maintain the exact decimals used in the Excel sheet for consistency. To get decimals closer to what we achieve here, we recommend using Table 2.5 as a guide.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tProbs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">0.721453287</span>, <span class="fl">0.201845444</span>, <span class="fl">0.066897347</span>, <span class="fl">0.009803922</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>          , <span class="fl">0.581081081</span>, <span class="fl">0.406995231</span>, <span class="fl">0.011923688</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>          , <span class="dv">0</span>          , <span class="fl">0.750142939</span>, <span class="fl">0.249857061</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>          , <span class="dv">0</span>          , <span class="dv">0</span>          , <span class="dv">1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ),<span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> T</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#please note that there are more decimals here than in Table 2.2a and other figures. This is because we aim to maintain the exact decimals used in the Excel sheet for consistency. To get decimals closer to what we achieve here, we recommend using Table 2.5 as a guide.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Check.</strong> We will use <code>rowSums</code> to make sure we’ve entered our transition matrix correctly. All the rows should equal 1</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We will use <code>rowSums</code> to make sure we’ve entered our transition matrix correctly. All the rows should equal 1.</p>
+</div>
+</div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(tProbs) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(tProbs) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 1 1 1</code></pre>
 </div>
 </div>
 <p><br>
-Now, we will fill in other parameters that are provided in the exercise. After each parameter, we’ve used <code>#</code> and a description of what that parameter is so we can easily revisit our code at a future date.</p>
+Now that we know our transition matrix is correct, we will fill in the other parameters that are provided in the exercise.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After each parameter, we’ve used <code>#</code> and a description of what that parameter is so we can easily revisit our code at a future date.</p>
+</div>
+</div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#costs</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>dmca <span class="ot">&lt;-</span> <span class="dv">1701</span> <span class="co">#direct medical cost of A</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>dmcb <span class="ot">&lt;-</span> <span class="dv">1774</span> <span class="co">#direct medical cost of B</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>dmcc <span class="ot">&lt;-</span> <span class="dv">6948</span> <span class="co">#direct medical cost of C</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>ccca <span class="ot">&lt;-</span> <span class="dv">1055</span> <span class="co">#community care cost of A</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>cccb <span class="ot">&lt;-</span> <span class="dv">1278</span> <span class="co">#community care cost of B</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>cccc <span class="ot">&lt;-</span> <span class="dv">2059</span> <span class="co">#community care cost of C</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>cAZT <span class="ot">&lt;-</span> <span class="dv">2278</span> <span class="co">#cost of Zidovudine</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>cLam <span class="ot">&lt;-</span> <span class="fl">2086.5</span> <span class="co">#cost of Lamivudine </span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">#other parameters</span></span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>RR <span class="ot">&lt;-</span> <span class="fl">0.509</span> <span class="co">#relative risk of treatment</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>cDR <span class="ot">&lt;-</span> <span class="fl">0.06</span> <span class="co">#annual discount rate cost (proportion)</span></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>oDR <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#annual discount rate benefits (proportion)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#costs</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dmca <span class="ot">&lt;-</span> <span class="dv">1701</span> <span class="co">#direct medical cost of A</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>dmcb <span class="ot">&lt;-</span> <span class="dv">1774</span> <span class="co">#direct medical cost of B</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>dmcc <span class="ot">&lt;-</span> <span class="dv">6948</span> <span class="co">#direct medical cost of C</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ccca <span class="ot">&lt;-</span> <span class="dv">1055</span> <span class="co">#community care cost of A</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>cccb <span class="ot">&lt;-</span> <span class="dv">1278</span> <span class="co">#community care cost of B</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>cccc <span class="ot">&lt;-</span> <span class="dv">2059</span> <span class="co">#community care cost of C</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>cAZT <span class="ot">&lt;-</span> <span class="dv">2278</span> <span class="co">#cost of Zidovudine</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>cLam <span class="ot">&lt;-</span> <span class="fl">2086.5</span> <span class="co">#cost of Lamivudine </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#other parameters</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>RR <span class="ot">&lt;-</span> <span class="fl">0.509</span> <span class="co">#relative risk of treatment</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>cDR <span class="ot">&lt;-</span> <span class="fl">0.06</span> <span class="co">#annual discount rate cost (proportion)</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>oDR <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#annual discount rate benefits (proportion)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="part-2" class="level3">
-<h3 class="anchored" data-anchor-id="part-2">Part 2</h3>
+<section id="part-2-calculating-proportion-of-individuals-in-each-state" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-calculating-proportion-of-individuals-in-each-state">Part 2: Calculating proportion of individuals in each state</h2>
 <p>Now, we will calculate the proportion of individuals in each state for years 1-20 (Monotherapy), their life-years, and associated costs.</p>
 <p>We will input the initial vector for the state space, where each element refers to the initial proportion of individuals in state A-D respectively.</p>
 <p>We assume all individuals start in State A. We are giving the vector the name <code>iVec</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>iVec <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>iVec <span class="ot">&lt;-</span>  <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We are going to create a funcation called <code>calculateYearlyProbs</code> that we can use to calculate the proportion of people in each state at a given time point.</p>
+<p><br>
+We are going to create a function called <code>calculateYearlyProbs</code> that we can use to calculate the proportion of people in each state at a given time point.</p>
 <p>This function will return a t (years) x 4 (states) matrix where the rows represent the proportion in a given state at year t</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>calculateYearlyProbs <span class="ot">&lt;-</span> <span class="cf">function</span>(tProbs, t, iVec){</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create empty matrix that we will fill in</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  matReturn <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> t, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#initialize first vector of proportions</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create column names</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(matReturn) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Loop through all time-points and multiply the vector by </span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(t)){</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    matReturn[i,] <span class="ot">&lt;-</span>   iVec <span class="sc">%*%</span> tProbs</span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#update ivec</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    iVec <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(matReturn)</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>calculateYearlyProbs <span class="ot">&lt;-</span> <span class="cf">function</span>(tProbs, t, iVec){</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create empty matrix that we will fill in</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  matReturn <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> t, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#initialize first vector of proportions</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create column names</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(matReturn) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Loop through all time-points and multiply the vector by </span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(t)){</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    matReturn[i,] <span class="ot">&lt;-</span>   iVec <span class="sc">%*%</span> tProbs</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#update ivec</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    iVec <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(matReturn)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Now, we will call the function, by entering our transition probabilities matrix, the number of years we want to calculate, and our starting vector as arguments. We’ve called the results of our function <code>yearlyProbs</code>. It will return a matrix that is 20 rows (years) long and 4 states wide.</p>
+<p><br>
+Now, we will call the function, by entering our transition probabilities matrix, the number of years we want to calculate, and our starting vector as arguments. We’ve called the results of our function <code>yearlyProbs</code>. It will return a matrix that is 20 rows (years) long and 4 states wide.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>yearlyProbs <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbs,<span class="dv">20</span>,iVec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>yearlyProbs <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbs,<span class="dv">20</span>,iVec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Check.</strong> Use <code>rowSums</code> to check that all rows sum to 1</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <code>rowSums</code> to check that all rows sum to 1.</p>
+</div>
+</div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(yearlyProbs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(yearlyProbs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</code></pre>
 </div>
 </div>
-<p>Now we will calculate the number of life years for each year. This is equal to the the proportion that is not in State D (death).</p>
+<p>Next we will calculate the number of life years for each year. This is equal to the the proportion that is not in State D (death).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>lifeYears <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(yearlyProbs[,<span class="sc">-</span><span class="dv">4</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>lifeYears <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(yearlyProbs[,<span class="sc">-</span><span class="dv">4</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="part-3" class="level3">
-<h3 class="anchored" data-anchor-id="part-3">Part 3</h3>
+<section id="part-3-calculating-costs" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-calculating-costs">Part 3: Calculating costs</h2>
 <p>Using the cost inputs from before, we will calculate the cost. Then, based on those costs, we will calculate the discounted cost using the discounted cost formula provided in the text.</p>
 <p>To calculate the non-discounted costs, we will calculate a cost associated with each health state in our markov model, and then create a vector to hold the costs associated with each state.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>costA <span class="ot">&lt;-</span> dmca<span class="sc">+</span>ccca<span class="sc">+</span>cAZT</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>costB <span class="ot">&lt;-</span> dmcb<span class="sc">+</span>cccb<span class="sc">+</span>cAZT</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>costC <span class="ot">&lt;-</span> dmcc<span class="sc">+</span>cccc<span class="sc">+</span>cAZT</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>costVector <span class="ot">&lt;-</span> <span class="fu">c</span>(costA,costB,costC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>costA <span class="ot">&lt;-</span> dmca<span class="sc">+</span>ccca<span class="sc">+</span>cAZT</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>costB <span class="ot">&lt;-</span> dmcb<span class="sc">+</span>cccb<span class="sc">+</span>cAZT</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>costC <span class="ot">&lt;-</span> dmcc<span class="sc">+</span>cccc<span class="sc">+</span>cAZT</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>costVector <span class="ot">&lt;-</span> <span class="fu">c</span>(costA,costB,costC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We will use matrix multiplication to calculate the non-discounted cost. We will multiply <code>yearlyProbs</code>, the matrix holding the proportion in each health state by cycle (i.e.&nbsp;year), by our new <code>costVector</code>.</p>
+<p><br>
+We will use matrix multiplication to calculate the non-discounted cost. We will multiply <code>yearlyProbs</code>, the matrix holding the proportion in each health state by cycle (i.e.&nbsp;year), by our new <code>costVector</code>.</p>
 <p>Remember, we need to make sure the vector and the matrix have the same number of columns. So, we will use <code>[-4]</code> to remove the death state column from the matrix.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>nonDiscCost <span class="ot">&lt;-</span> yearlyProbs[,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVector</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>nonDiscCost <span class="ot">&lt;-</span> yearlyProbs[,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVector</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Our non-discounted costs are saved in <code>nonDiscCost</code>. To get teh discounted cost, we will apply the discounting formula. We will create a discounting function that we can reuse in the future.</p>
+<p><br>
+Our non-discounted costs are saved in <code>nonDiscCost</code>. To get teh discounted cost, we will apply the discounting formula. We will create a discounting function that we can reuse in the future.</p>
 <p>So we can apply this function to multiple values of t at once we will use R’s vectorization. All basic operations in R “-+^/*” support basic R vectorization.</p>
 <p>This means we can use the discount formula for all values of t at once (t = 1,..,20). We can do this by using 1:t in place of “t” in the formula</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>discountFormula <span class="ot">&lt;-</span> <span class="cf">function</span>(nonDiscount,discRate,t){</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(nonDiscount<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>discRate)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>t))</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>discountFormula <span class="ot">&lt;-</span> <span class="cf">function</span>(nonDiscount,discRate,t){</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(nonDiscount<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>discRate)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>t))</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We can calculate the discounted costs by filling in the arguments for the newly created discount function. We need to specify: the non-discounted costs; the discount rate; and the number of years you are calculating for.</p>
+<p><br>
+We can calculate the discounted costs by filling in the arguments for the newly created discount function.</p>
+<p>We need to specify: the non-discounted costs; the discount rate; and the number of years you are calculating for.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>discCost <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(nonDiscCost, <span class="at">discRate =</span> cDR,<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>discCost <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(nonDiscCost, <span class="at">discRate =</span> cDR,<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We will use the <code>sum</code> function to calculate the total costs and life years over the 20 years of the Markov model.</p>
+<p><br>
+We will use the <code>sum</code> function to calculate the total costs and life years over the 20 years of the Markov model.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>totalDiscCostMonoTherapy <span class="ot">&lt;-</span> <span class="fu">sum</span>(discCost)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>totalLifeYearsMonoTherapy <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYears)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>totalDiscCostMonoTherapy <span class="ot">&lt;-</span> <span class="fu">sum</span>(discCost)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>totalLifeYearsMonoTherapy <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYears)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="part-4" class="level3">
-<h3 class="anchored" data-anchor-id="part-4">Part 4</h3>
+<section id="part-4-conducting-analysis-for-combination-therapy" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-conducting-analysis-for-combination-therapy">Part 4: Conducting analysis for combination therapy</h2>
 <p>Having completed the analysis for the monotherapy, we will repeat the same steps for the combination therapy, with a few changes. Use table 2.2 part 1(b) as a guide to calculate the combination transition matrix. Recall that the combination therapy is only used for the first two years of treatment.</p>
 <p>To begin, lets create a function that converts the original transition matrix to the combination transition matrix by using the risk ratio provided</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>calculateProbCombination <span class="ot">&lt;-</span> <span class="cf">function</span>(tProbs,<span class="at">RR =</span> <span class="fl">0.506</span>){</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  newMat <span class="ot">&lt;-</span> tProbs</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#change the upper diagonals and multiply by risk rate</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  newMat[<span class="fu">upper.tri</span>(newMat)] <span class="ot">&lt;-</span>   newMat[<span class="fu">upper.tri</span>(newMat)]<span class="sc">*</span>RR </span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>(newMat) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#change the diagonals to be 1- the rowsums</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>(newMat) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">rowSums</span>(newMat)</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(newMat)</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>calculateProbCombination <span class="ot">&lt;-</span> <span class="cf">function</span>(tProbs,<span class="at">RR =</span> <span class="fl">0.506</span>){</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  newMat <span class="ot">&lt;-</span> tProbs</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#change the upper diagonals and multiply by risk rate</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  newMat[<span class="fu">upper.tri</span>(newMat)] <span class="ot">&lt;-</span>   newMat[<span class="fu">upper.tri</span>(newMat)]<span class="sc">*</span>RR </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>(newMat) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#change the diagonals to be 1- the rowsums</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diag</span>(newMat) <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">rowSums</span>(newMat)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(newMat)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, we will use our function to calculate the transition probabilities for the combination therapy:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>tProbsComb <span class="ot">&lt;-</span> <span class="fu">calculateProbCombination</span>(tProbs,<span class="at">RR =</span> RR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tProbsComb <span class="ot">&lt;-</span> <span class="fu">calculateProbCombination</span>(tProbs,<span class="at">RR =</span> RR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Check.</strong> Just like before, we will use <code>rowSums</code> to check that all rows sum to 1</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Just like before, we will use <code>rowSums</code> to check that all rows sum to 1.</p>
+</div>
+</div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(tProbsComb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(tProbsComb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 1 1 1</code></pre>
 </div>
 </div>
 <p>Then we will calculate the yearly proportions for the first two years using the function <code>calculateYearlyProbs</code> that we created above. The function arguments will include <code>tProbsComb</code>–the new proportions matrix for the combination therapy.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>probsCombYearly1_2 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbsComb,<span class="at">t =</span> <span class="dv">2</span>,<span class="at">iVec =</span> iVec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>probsCombYearly1_2 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbsComb,<span class="at">t =</span> <span class="dv">2</span>,<span class="at">iVec =</span> iVec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Now we will calculate the yearly proportions for years 3-20. We will use the transition probabilities for monotherapy for these calculations, reflecting that the combination therapy is only used in years 1 and 2. We will then combined the two calculations to get the values for years 1-20, and check that each row sums to 1.</p>
+<p>We also need to calculate the yearly proportions for years 3-20. We will use the transition probabilities for monotherapy for these calculations, reflecting that the combination therapy is only used in years 1 and 2.</p>
+<p>We will then use <code>rbind</code> to combine the two calculations to get the values for years 1-20, and check that each row sums to 1.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>probsCombYearly3_20 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbs,<span class="at">t =</span> <span class="dv">18</span>,<span class="at">iVec =</span>probsCombYearly1_2[<span class="dv">2</span>,])</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#combine them</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>probsCombYearly <span class="ot">&lt;-</span> <span class="fu">rbind</span>(probsCombYearly1_2,probsCombYearly3_20)</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#check</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(probsCombYearly) <span class="co"># all sum to 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>probsCombYearly3_20 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbs,<span class="at">t =</span> <span class="dv">18</span>,<span class="at">iVec =</span>probsCombYearly1_2[<span class="dv">2</span>,])</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#combine them</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>probsCombYearly <span class="ot">&lt;-</span> <span class="fu">rbind</span>(probsCombYearly1_2,probsCombYearly3_20)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#check</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(probsCombYearly) <span class="co"># all sum to 1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</code></pre>
 </div>
 </div>
-<p>Using the same approach as for the monotherapy, we will calculate the life years and the costs, being careful to apply the correct costs to the correct proportions.</p>
+<p><br>
+Using the same approach as for the monotherapy, we will calculate the life years and the costs, being careful to apply the correct costs to the correct proportions.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the life-years</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>lifeYearsComb <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(probsCombYearly[,<span class="sc">-</span><span class="dv">4</span>])</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the costs</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>costAComb <span class="ot">&lt;-</span> costA<span class="sc">+</span>cLam</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>costBComb <span class="ot">&lt;-</span> costB<span class="sc">+</span>cLam</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>costCComb <span class="ot">&lt;-</span> costC<span class="sc">+</span>cLam</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co">#combine the costs into a vector</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>costVectorComb <span class="ot">&lt;-</span> <span class="fu">c</span>(costAComb,costBComb,costCComb)</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co">#use matrix multiplication</span></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>costCombNonDisc1_2 <span class="ot">&lt;-</span>   probsCombYearly[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVectorComb</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>costCombNonDisc3_20 <span class="ot">&lt;-</span> probsCombYearly[<span class="dv">3</span><span class="sc">:</span><span class="dv">20</span>,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVector</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the life-years</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>lifeYearsComb <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(probsCombYearly[,<span class="sc">-</span><span class="dv">4</span>])</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the costs</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>costAComb <span class="ot">&lt;-</span> costA<span class="sc">+</span>cLam</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>costBComb <span class="ot">&lt;-</span> costB<span class="sc">+</span>cLam</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>costCComb <span class="ot">&lt;-</span> costC<span class="sc">+</span>cLam</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#combine the costs into a vector</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>costVectorComb <span class="ot">&lt;-</span> <span class="fu">c</span>(costAComb,costBComb,costCComb)</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co">#use matrix multiplication</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>costCombNonDisc1_2 <span class="ot">&lt;-</span>   probsCombYearly[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVectorComb</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>costCombNonDisc3_20 <span class="ot">&lt;-</span> probsCombYearly[<span class="dv">3</span><span class="sc">:</span><span class="dv">20</span>,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVector</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We will use <code>rbind</code> to combine the non-discounted costs and then use the discount function to calculate the discounted costs. With the costs and life years calculated for each year, we will use <code>sum</code> to calculate the total costs and life years associated with the combination therapy.</p>
+<p><br>
+We will again use <code>rbind</code> to combine the non-discounted costs and then use the discount function to calculate the discounted costs.</p>
+<p>With the costs and life years calculated for each year, we will use <code>sum</code> to calculate the total costs and life years associated with the combination therapy.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use rbind to combine the non-discounted cost</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>costCombNonDisc <span class="ot">&lt;-</span> <span class="fu">rbind</span>(costCombNonDisc1_2,costCombNonDisc3_20)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the discounted rate</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>costCombDisc <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(costCombNonDisc, <span class="at">discRate =</span> cDR,<span class="dv">20</span>)</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the total costs and life years for the combination therapy</span></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>totalLifeYearsComb <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsComb)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>totalDiscCostComb <span class="ot">&lt;-</span> <span class="fu">sum</span>(costCombDisc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use rbind to combine the non-discounted cost</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>costCombNonDisc <span class="ot">&lt;-</span> <span class="fu">rbind</span>(costCombNonDisc1_2,costCombNonDisc3_20)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the discounted rate</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>costCombDisc <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(costCombNonDisc, <span class="at">discRate =</span> cDR,<span class="dv">20</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the total costs and life years for the combination therapy</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>totalLifeYearsComb <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsComb)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>totalDiscCostComb <span class="ot">&lt;-</span> <span class="fu">sum</span>(costCombDisc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="part-5" class="level3">
-<h3 class="anchored" data-anchor-id="part-5">Part 5</h3>
-<p>Lastly, compare the total life years and costs between the monotherapy and combination therapy to calculate the ICER</p>
+<section id="part-5-calculating-the-icer" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-calculating-the-icer">Part 5: Calculating the ICER</h2>
+<p>Lastly, we compare the total life years and costs between the monotherapy and combination therapy to calculate the ICER.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#combination over monotherapy</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>lifeYearsGained <span class="ot">&lt;-</span> totalLifeYearsComb <span class="sc">-</span> totalLifeYearsMonoTherapy</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>increasedCost <span class="ot">&lt;-</span> totalDiscCostComb <span class="sc">-</span> totalDiscCostMonoTherapy</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate ICER</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>ICER <span class="ot">&lt;-</span> increasedCost<span class="sc">/</span>lifeYearsGained</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>ICER </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#combination over monotherapy</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>lifeYearsGained <span class="ot">&lt;-</span> totalLifeYearsComb <span class="sc">-</span> totalLifeYearsMonoTherapy</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>increasedCost <span class="ot">&lt;-</span> totalDiscCostComb <span class="sc">-</span> totalDiscCostMonoTherapy</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate ICER</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>ICER <span class="ot">&lt;-</span> increasedCost<span class="sc">/</span>lifeYearsGained</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>ICER </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6275.956</code></pre>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -984,8 +980,8 @@ Now, we will fill in other parameters that are provided in the exercise. After e
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html" class="pagination-link" aria-label="Book: Decision Modelling for Health Economic Evaluation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Book: Decision Modelling for Health Economic Evaluation</span>
+      <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html" class="pagination-link" aria-label="Preamble on matrix operations">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preamble on matrix operations</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

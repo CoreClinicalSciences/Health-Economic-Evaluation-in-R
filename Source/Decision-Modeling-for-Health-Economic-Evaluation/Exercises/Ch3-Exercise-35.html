@@ -106,6 +106,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -118,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html">Exercise 3.5</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html">Exercise 3.5</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,8 +182,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Decision Modeling for Health Economic Evaluation</span></a>
+            <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -162,8 +191,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble on matrix operations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -202,6 +231,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Exercise 5.8</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 6.6A &amp; 6.6B</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -232,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#step-1-calculate-the-transition-probabilities" id="toc-step-1-calculate-the-transition-probabilities" class="nav-link" data-scroll-target="#step-1-calculate-the-transition-probabilities">Step 1: Calculate the transition probabilities</a></li>
+  <li><a href="#step-1-calculating-the-transition-probabilities" id="toc-step-1-calculating-the-transition-probabilities" class="nav-link" data-scroll-target="#step-1-calculating-the-transition-probabilities">Step 1: Calculating the transition probabilities</a></li>
   <li><a href="#step-2-using-life-tables-for-background-mortality" id="toc-step-2-using-life-tables-for-background-mortality" class="nav-link" data-scroll-target="#step-2-using-life-tables-for-background-mortality">Step 2: Using life-tables for background mortality</a></li>
   <li><a href="#step-3-creating-the-markov-model" id="toc-step-3-creating-the-markov-model" class="nav-link" data-scroll-target="#step-3-creating-the-markov-model">Step 3: Creating the Markov Model</a></li>
   <li><a href="#step-4-adapt-the-model-for-a-new-prosthesis" id="toc-step-4-adapt-the-model-for-a-new-prosthesis" class="nav-link" data-scroll-target="#step-4-adapt-the-model-for-a-new-prosthesis">Step 4: Adapt the Model for a New Prosthesis</a></li>
@@ -248,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html">Exercise 3.5</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html">Exercise 3.5</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Exercise 3.5</h1>
 </div>
@@ -305,7 +340,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>uSuccessR <span class="ot">&lt;-</span> <span class="fl">0.75</span> <span class="co">#utility of revision success</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>uRevision <span class="ot">&lt;-</span> <span class="fl">0.30</span> <span class="co">#utility of revision</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Now we will enter the survival model that is fit with a weibull distribution.</p>
+<p><br>
+Now we will enter the survival model that is fit with a Weibull distribution.</p>
 <p>Remember that the coefficients are on the log scale.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>survModelSummary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -315,8 +351,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">SE =</span> <span class="fu">c</span>(<span class="fl">0.0474501</span>,<span class="fl">0.207892</span>,<span class="fl">0.0052112</span>,<span class="fl">0.109066</span>,<span class="fl">0.3825815</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>To calculate lambda of the weibull distribution we can take the linear combination of the coefficients. Again, we need to remember to exponentiate the results as they are on the log scale.</p>
-<p>We can use the <code>$</code> operator to create new columns in the <code>survModelSummary</code> dataframe and extract any column from the dataframe by name. the <code>$</code> operator by default extracts a vector, which means vector operations can be done on them such as <code>[i]</code> to extract the <em>i</em>th element of the vector. If you want to refresh your memory on how to use <code>[i]</code> to extract a data element, review exercise 2.5.</p>
+<p><br>
+To calculate lambda of the weibull distribution we can take the linear combination of the coefficients. Again, we need to remember to exponentiate the results as they are on the log scale.</p>
+<p>We can use the <code>$</code> operator to create new columns in the <code>survModelSummary</code> dataframe and extract any column from the dataframe by name.</p>
+<p>the <code>$</code> operator by default extracts a vector, which means vector operations can be done on them such as <code>[i]</code> to extract the <em>i</em>th element of the vector. If you want to refresh your memory on how to use <code>[i]</code> to extract a data element, review exercise 2.5.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#replace `columnname`</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>survModelSummary<span class="sc">$</span>hazard_ratio <span class="ot">&lt;-</span> <span class="fu">exp</span>(survModelSummary<span class="sc">$</span>coefficient)</span>
@@ -330,18 +368,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>gamma <span class="ot">&lt;-</span> <span class="fu">exp</span>(survModelSummary<span class="sc">$</span>coefficient[<span class="dv">1</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="step-1-calculate-the-transition-probabilities" class="level2">
-<h2 class="anchored" data-anchor-id="step-1-calculate-the-transition-probabilities">Step 1: Calculate the transition probabilities</h2>
-<p>Lets create a function to calculate the transition probabilities for a yearly cycle t. The formula is given in Section 3.5.2 Section 2 iii).</p>
+<section id="step-1-calculating-the-transition-probabilities" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-calculating-the-transition-probabilities">Step 1: Calculating the transition probabilities</h2>
+<p>Lets create a function to calculate the transition probabilities for a yearly cycle <span class="math inline">\(t\)</span>. The formula is given in <em>Section 3.5.2</em>.</p>
 <p>As we noted above, R is vectorized. That means we can input a vector as an argument and each element of the vector will be passed through.</p>
-<p>We want all of t = 1,…,60 to be calculated so we can simply use <code>1:t</code> which creates a vector 1,…,t</p>
+<p>We want all of <span class="math inline">\(t\)</span> = 1,…,60 to be calculated so we can simply use <code>1:t</code> which creates a vector 1,…,<span class="math inline">\(t\)</span></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tProbsHazard <span class="ot">&lt;-</span> <span class="cf">function</span>(t,lambda,gamma){</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(lambda<span class="sc">*</span>(((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">^</span>gamma <span class="sc">-</span> ((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">^</span>gamma))))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We can use this function to calculate the revision risk or the time-dependent transition probability per year.</p>
+<p><br>
+We can use this function to calculate the revision risk or the time-dependent transition probability per year.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>revisionRisk <span class="ot">&lt;-</span> <span class="fu">tProbsHazard</span>(<span class="dv">60</span>,<span class="at">lambda =</span> lambda,<span class="at">gamma =</span> gamma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -364,7 +403,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Females =</span> <span class="fu">c</span>(<span class="fl">0.00099</span>,<span class="fl">0.0026</span>,<span class="fl">0.0067</span>,<span class="fl">0.0193</span>,<span class="fl">0.0535</span>,<span class="fl">0.1548</span>)</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Note that by default this exercise uses female. Lets create the death risk by analyzing the cycle for those who are female and have an average age of 60 plus the cycle year due to all cause mortality</p>
+<p><br>
+Note that by default this exercise uses female.</p>
+<p>Lets create the death risk by analyzing the cycle for those who are female and have an average age of 60 plus the cycle year due to all cause mortality</p>
 <p>To do this we will us use a special function in R called the <code>apply family</code>. This function takes two arguments <code>x</code> and <code>a function of x</code>. This function is then applied to all elements of <code>x</code>. We can use this to extract the appropriate cell of the <code>yearlyTProbs</code> dataset for all 60 cycles. The apply function family is essentially a wrapper of a for-loop, that can be quickly written. If you prefer the equivalent code, it can be written as a for-loop.</p>
 <p>Here we are using the sum function on a “logical if”. For example we are on cycle 5 then the average patient age is now 5+60 which is 65, then there are 4 rows (which all show up as true or false values) that are less than or equal to 65, taking the sum gives us an index of 4 which is the appropriate index to select.</p>
 <div class="cell">
@@ -374,19 +415,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  inds <span class="ot">&lt;-</span> <span class="fu">sum</span>(x<span class="sc">+</span>age <span class="sc">&gt;=</span> yearlyTProbs<span class="sc">$</span>Index)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#select the gender columns</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#if else takes 3 arguments, the first is a logic check, if true, it returns the second value, </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#if false it returns the 3rd argument. Equivalent code can be written use if(x){}else{}.</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  genderCol <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(male <span class="sc">==</span><span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  genderCol <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(male <span class="sc">==</span><span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(yearlyTProbs[inds,genderCol])</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(yearlyTProbs[inds,genderCol])</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>ifelse</code> takes 3 arguments. The first is a logic check. If true, it returns the second value. If false it returns the 3rd argument. Equivalent code can be written use <code>if(x){}else{}</code>.</p>
+</div>
 </div>
 </section>
 <section id="step-3-creating-the-markov-model" class="level2">
 <h2 class="anchored" data-anchor-id="step-3-creating-the-markov-model">Step 3: Creating the Markov Model</h2>
 <p>To create the Markov Model, we must specify a transition matrix as in Exercise 2.5 and then calculate the number of individuals in each state for 60 cycles. The change here from Exercise 2.5 is that the transition probabilities change depending on the cycle.</p>
-<p>Let’s use the Figure shown at the beginning of the file. Let the first column be PrimaryTHR, the second column be Success of primary THR (SuccessP), the third column be Revision THR, the fourth column be Success of Revision (SuccessR), and the fifth column be Death. Thus we have a 5 state Markov model.</p>
+<p>Revisit the figure shown at the beginning of this exercise.</p>
+<p>In our matrix, we will et the first column be PrimaryTHR, the second column be Success of primary THR (SuccessP), the third column be Revision THR, the fourth column be Success of Revision (SuccessR), and the fifth column be Death. Thus we will have a 5 state Markov model.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The matrix will follow this structure, shown in Figure 3.7:</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
@@ -398,7 +451,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#         SuccessR</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#         Death</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Note that our transition matrix is now time-dependent. That is, depending on the cycle, the transition probability will change. Therefore we must make a function that alters the transition matrix based on the cycle. We will fill in the transition matrix function with the appropriate transition probabilities. To get the <em>t</em>’th value of vector such as <code>mr</code>, we can use the <code>[t]</code> operator.</p>
+<p><br>
+Note that our transition matrix is now time-dependent. That is, depending on the cycle, the transition probability will change. Therefore we must make a function that alters the transition matrix based on the cycle. We will fill in the transition matrix function with the appropriate transition probabilities.</p>
+<p>To get the <span class="math inline">\(t\)</span>’th value of vector such as <code>mr</code>, we can use the <code>[t]</code> operator.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tProbs_time <span class="ot">&lt;-</span> <span class="cf">function</span>(omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rr is revision risk, mr is mortality risk</span></span>
@@ -414,7 +469,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Check.</strong> Manually check that each row sums to 1 by performing some algebra.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Manually check that each row sums to 1 by performing some algebra.</p>
+</div>
+</div>
 <p>We must now calculate the amount of individuals in each state for 60 cycles. We will re-use the function created in exercise 2.5 but modify it slightly for the new Markov model so that it includes the extra states and the time-dependent transition probabilities.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>calculateYearlyProbs <span class="ot">&lt;-</span> <span class="cf">function</span>(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
@@ -445,15 +512,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Just like in 2.5, we will create our initial vector. Again, everyone in the population starts in the PrimaryTHR state.</p>
+<p><br>
+Just like in exercise 2.5, we will create our initial vector. Again, everyone in the population starts in the first state: PrimaryTHR.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>iVec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Then we will calculate all states for all 60 cycles</p>
+<p><br>
+Then we will calculate all states for all 60 cycles</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>populationStates <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(<span class="at">iVec =</span> iVec,omrPTHR,omrRTHR,<span class="at">rr=</span> revisionRisk, <span class="at">mr =</span> deathRisk,<span class="at">rrr=</span>rrr,<span class="at">t=</span><span class="dv">60</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Check.</strong> We will use <code>rowSums</code> to make sure that all rows total to 1000</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We will use <code>rowSums</code> to make sure that all rows total to 1000.</p>
+</div>
+</div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(populationStates)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -474,11 +555,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>revisionRiskNP1 <span class="ot">&lt;-</span> <span class="fu">tProbsHazard</span>(<span class="at">t=</span><span class="dv">60</span>,<span class="at">lambda =</span> lambda<span class="sc">*</span>rrNP1,<span class="at">gamma =</span> gamma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We will calculate the updated states using the <code>calculateYearlyProbs</code> function we created earlier and filling in the appropriate arguments</p>
+<p><br>
+We will calculate the updated states using the <code>calculateYearlyProbs</code> function we created earlier and filling in the appropriate arguments</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>populationStatesNP1 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(iVec,omrPTHR,omrRTHR,<span class="at">rr=</span>revisionRiskNP1,<span class="at">mr=</span>deathRisk,rrr,<span class="at">t=</span><span class="dv">60</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Check.</strong> We will check that the row sums are equal to 1000</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <code>rowSums</code> to check that the row totals are equal to 1000.</p>
+</div>
+</div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rowSums</span>(populationStatesNP1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -506,31 +600,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lifeYearsStandard <span class="ot">&lt;-</span><span class="fu">rowSums</span>(populationStates[,<span class="sc">-</span><span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Next, we create the cost vector. The length of the vector should only then be 4, the total of the states with costs in the model.(Death can have costs that you might want to integrate in other models. But in this model, there are no costs associated with death.)</p>
+<p><br>
+Next, we create the cost vector. The length of the vector should only then be 4, the total of the states with costs in the model.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Death can have costs that you might want to integrate in other models. But in this model, there are no costs associated with death.</p>
+</div>
+</div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>costs<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,cRevision,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We need to add a parameter for the initial cost. Note that we started with 1000 patients.</p>
+<p><br>
+We need to add a parameter for the initial cost. In this exercise, we started with 1000 patients.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>iCostStandard <span class="ot">&lt;-</span> cStandard<span class="sc">*</span><span class="dv">1000</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We will calculate the total cost by using matrix multiplication to multiple our cost vector <code>costs</code> by our states matrix <code>populationStates</code>. We will use <code>discountFormula</code> to account for discounting over time.</p>
+<p><br>
+We will calculate the total cost by using matrix multiplication to multiple our cost vector <code>costs</code> by our states matrix <code>populationStates</code>. We will use our <code>discountFormula</code> to account for discounting over time.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>totalCosts <span class="ot">&lt;-</span> populationStates[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> costs</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#update the costs to account for discounting over time</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>discCostStandard <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalCosts,cDR,<span class="at">t =</span> <span class="dv">60</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Next we need to repeat the previous steps for utility of the treatment over time. Just like for costs, we start by creating a utility vector for all states except death which has a utility = 0</p>
+<p><br>
+Next we need to repeat the previous steps for utility of the treatment over time. Just like for costs, we start by creating a utility vector for all states except death, for which utility = 0.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>utility<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,uSuccessP,uRevision,uSuccessR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>We will calculate the total utility over time using matrix multiplication and then we will calculate the discounted utility.</p>
+<p><br>
+We will calculate the total utility over time using matrix multiplication and then we will calculate the discounted utility.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>totalQuality <span class="ot">&lt;-</span>  populationStates[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> utility</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>QALYStandard <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalQuality,<span class="at">discRate =</span> oDR,<span class="at">t =</span> <span class="dv">60</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Lastly, we will calculate the total cost and utilities for all cycles/person, ensure to include the initial cost of the treatment</p>
+<p><br>
+Lastly, we will calculate the total cost and utilities for all cycles/person, ensuring to include the initial cost of the treatment.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>STDcost <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(iCostStandard,discCostStandard))<span class="sc">/</span><span class="dv">1000</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>STDLYs <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsStandard)<span class="sc">/</span><span class="dv">1000</span></span>
@@ -564,7 +677,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-6-calculate-the-icer" class="level2">
 <h2 class="anchored" data-anchor-id="step-6-calculate-the-icer">Step 6: Calculate the ICER</h2>
-<p>The final step is to calculate the ICER for the new prosthesis compared to standard care</p>
+<p>The final step is to calculate the ICER for the new prosthesis compared to standard care.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the difference in costs</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>diffCost <span class="ot">&lt;-</span> NP1cost<span class="sc">-</span>STDcost</span>

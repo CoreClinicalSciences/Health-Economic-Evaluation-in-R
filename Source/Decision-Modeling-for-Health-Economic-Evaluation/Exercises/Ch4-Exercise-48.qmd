@@ -25,8 +25,9 @@ set.seed(12345)
 age <- 60
 male <- 0
 
-cDR <- 0.06
-oDR <- 0.015
+#discount rates
+cDR <- 0.06 
+oDR <- 0.015 
 
 #fixed costs
 cStandard <- 394 #cost of standard implant
@@ -47,6 +48,7 @@ We will create a function to calculate the standard errors.
 ```{r 4.8.1 create standard error functions}
 
 SE_p <- function(p,n){
+   
   return(sqrt(p*(1-p)/n))
   
 }
@@ -54,6 +56,7 @@ SE_p <- function(p,n){
 SE_beta <- function(alpha,beta){
 
   return(sqrt(alpha*beta/((alpha+beta)^2 *(alpha+beta+1))))
+   
 }
 ```
 
@@ -119,6 +122,7 @@ drawBetaMethodMoments <- function(n,mu,s){
   draw <- rbeta(n,alpha,beta)
   
   return(draw)
+  
 }
 ```
 
@@ -127,7 +131,6 @@ Now we will draw our beta distribution based on the mean and standard errors usi
 uSuccessP <- drawBetaMethodMoments(1,0.85,0.03)
 uSuccessR <- drawBetaMethodMoments(1,0.75,0.04)
 uRevision <- drawBetaMethodMoments(1,0.3,0.03)
-
 ```
 
 
@@ -148,7 +151,6 @@ library(MASS)
 
 #the survival model from exercise 3.5
 survModelSummary <- data.frame(
-  
   variable = c("lngamma","cons","age","male","NP1"),
   coefficient = c(0.3740968,-5.490935,-0.0367022,0.768536,-1.344474),
   SE = c(0.0474501,0.207892,0.0052112,0.109066,0.3825815)
@@ -192,7 +194,6 @@ We can extract the necessary parameters using the `[i]` operator, or, since the 
 gamma <- exp(normDraw['lngamma'])
 lambda <- exp(normDraw['cons'] + normDraw['age']*age + normDraw['male']*male)
 rrNP1 <- exp(normDraw['NP1'])
-
 ```
 
 ## Part 5: Combining all our functions
@@ -204,6 +205,7 @@ The first step is to load in all of our previous functions
 ```{r 4.8.5 load in previous functions}
 
 tProbsHazard <- function(t,lambda,gamma){
+   
   return(1-exp(lambda*(((1:t)-1)^gamma - ((1:t)^gamma))))
   
 }
@@ -221,6 +223,8 @@ tProbs_time <- function(omrPTHR,omrRTHR,rr,mr,rrr,t){
   ),ncol = 5, nrow = 5, byrow = T
 )
   
+  return(tProbs)
+  
 }
 
 #provided death rates and yearly transition probabilities
@@ -228,7 +232,6 @@ deathRates <- data.frame(
   Age = c("35-44","45-54","55-64","65-74","75-84","85 and over"),
   Males = c(1.51,3.93,10.9,31.6,80.1,187.9),
   Females = c(0.99,2.6,6.7,19.3,53.5,154.8)
-  
 )
 yearlyTProbs <- data.frame(
     Age = c("35-44","45-54","55-64","65-74","75-84","85 and over"),
@@ -254,16 +257,15 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
     #get the corresponding transition matrix based on the time
     tProbs <- tProbs_time(omrPTHR,omrRTHR,rr,mr,rrr,i)
     
-    matReturn[i,] <-   iVec %*% tProbs 
+    matReturn[i,] <- iVec %*% tProbs 
     
     #update iVec
     iVec <- iVec %*% tProbs
     
   }
-  return(matReturn)
-  
   #returns a t (years) x 5 (states) matrix where the rows represent 
   #the proportion in a given state at year t
+  return(matReturn)
   
 }
 
@@ -280,8 +282,8 @@ Then we compile all the functions into a single analysis function:
 analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,cPrimary,cRevision,cPSuccess,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){
 
   #calculate the revision risk
-    rr <- tProbsHazard(t=t,lambda = lambda,gamma = gamma)
-    mr <- sapply(1:t,function(x){
+   rr <- tProbsHazard(t=t,lambda = lambda,gamma = gamma)
+   mr <- sapply(1:t,function(x){
     
     #calculate which index select based on the age group
     inds <- sum(x+age >= yearlyTProbs$Index)
@@ -317,7 +319,7 @@ analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,cPrimary,cRevision,cPSuccess,cSta
   utility<- c(0,uSuccessP,uRevision,uSuccessR)
   
   #multiply by the cohort
-  totalQuality <-  standPopStates[,-5] %*% utility
+  totalQuality <- standPopStates[,-5] %*% utility
   QALYStandard <- discountFormula(totalQuality,discRate = oDR,t=t)
   
   #calculate the total cost for all cycles/person

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.32">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>1&nbsp; Exercise 5.8 – Guide to Health Economic Evaluation in R</title>
+
+
+<title>Exercise 5.8 – Guide to Health Economic Evaluation in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
@@ -61,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../../">
-<link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.html" rel="next">
+<link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" rel="next">
 <link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.html" rel="prev">
 <script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -72,7 +76,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../../../site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -99,24 +104,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+
+
 </head>
+
 <body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exercise 5.8</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html">Exercise 5.8</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../../../">Guide to Health Economic Evaluation in R</a> 
     </div>
@@ -128,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
@@ -136,17 +150,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Decision Modeling for Health Economic Evaluation</span></a>
+            <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Chapter 1 - Decision Modelling for Health Economic Evaluation</span></a>
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble on matrix operations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -182,11 +196,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exercise 5.8</span></span></a>
+ <span class="menu-text">Exercise 5.8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 6.6A &amp; 6.6B</span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
@@ -195,34 +215,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Appendix</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Appendix</span></span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup"><span class="header-section-number">1.1</span> Setup</a></li>
-  <li><a href="#part-1-bringing-in-helper-functions-adapting-code" id="toc-part-1-bringing-in-helper-functions-adapting-code" class="nav-link" data-scroll-target="#part-1-bringing-in-helper-functions-adapting-code"><span class="header-section-number">1.2</span> Part 1: Bringing in helper functions &amp; adapting code</a></li>
-  <li><a href="#part-2-running-the-simulations" id="toc-part-2-running-the-simulations" class="nav-link" data-scroll-target="#part-2-running-the-simulations"><span class="header-section-number">1.3</span> Part 2: Running the simulations</a></li>
-  <li><a href="#part-3-vary-the-threshold-ratio" id="toc-part-3-vary-the-threshold-ratio" class="nav-link" data-scroll-target="#part-3-vary-the-threshold-ratio"><span class="header-section-number">1.4</span> Part 3: Vary the threshold ratio</a></li>
-  </ul></nav>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#part-1-bringing-in-helper-functions-adapting-code" id="toc-part-1-bringing-in-helper-functions-adapting-code" class="nav-link" data-scroll-target="#part-1-bringing-in-helper-functions-adapting-code">Part 1: Bringing in helper functions &amp; adapting code</a></li>
+  <li><a href="#part-2-running-the-simulations" id="toc-part-2-running-the-simulations" class="nav-link" data-scroll-target="#part-2-running-the-simulations">Part 2: Running the simulations</a></li>
+  <li><a href="#part-3-vary-the-threshold-ratio" id="toc-part-3-vary-the-threshold-ratio" class="nav-link" data-scroll-target="#part-3-vary-the-threshold-ratio">Part 3: Vary the threshold ratio</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html">Decision Modeling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exercise 5.8</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exercise 5.8</span>
-</h1>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html">Exercise 5.8</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Exercise 5.8</h1>
 </div>
 
 
@@ -236,68 +260,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>This section reproduces exercise 5.8 in R from Chapter 5 of the book “Decision Modelling for Health Economic Evaluation” by Andrew Briggs, Mark Sculpher, and Karl Claxton</p>
-<p>In this exercise we will add upon the pre-existing prosthesis example, but explore the idea of adding a third prosthesis option, which we will refer to as “NP2”. We will now update the hazard function estimates with the additional “NP2” variable, and the corresponding covariance matrix. Note that neither the estimates nor the standard errors for any of the variables will be the same when we add a new variable in the model. Note the coefficients and the variance matrix is one dimension larger due to the addition of the NP2 effect.</p>
-<section id="setup" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="setup">
-<span class="header-section-number">1.1</span> Setup</h2>
+</header>
+
+
+<p>This section reproduces exercise 5.8 in R from Chapter 5 of the book “Decision Modelling for Health Economic Evaluation” by Andrew Briggs, Mark Sculpher, and Karl Claxton.</p>
+<p>In this exercise we will build upon the pre-existing prosthesis example, and explore the idea of adding a third prosthesis option, which we will refer to as <em>“NP2”</em>. We will now update the hazard function estimates with the additional NP2 variable, and the corresponding covariance matrix. Note that neither the estimates nor the standard errors for any of the variables will be the same when we add a new variable in the model. Note the coefficients and the variance matrix is one dimension larger due to the addition of the NP2 effect.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/">MASS</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#fixed parameters</span></span>
-<span></span>
-<span><span class="va">cStandard</span> <span class="op">&lt;-</span> <span class="fl">394</span> <span class="co">#cost of standard prosthesis</span></span>
-<span><span class="va">cNP1</span> <span class="op">&lt;-</span> <span class="fl">579</span> <span class="co">#cost of new prosthesis 1</span></span>
-<span><span class="va">cNP2</span> <span class="op">&lt;-</span> <span class="fl">788</span> <span class="co">#cost of new prosthesis 2</span></span>
-<span></span>
-<span><span class="va">cDR</span> <span class="op">&lt;-</span> <span class="fl">0.06</span> <span class="co">#cost discount rate</span></span>
-<span><span class="va">oDR</span> <span class="op">&lt;-</span> <span class="fl">0.015</span> <span class="co">#outcome discount rate</span></span>
-<span><span class="va">age</span> <span class="op">&lt;-</span> <span class="fl">60</span> <span class="co">#average age of all patients at receipt of primary implant</span></span>
-<span><span class="va">male</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co">#sex indicator (0 for female, 1 for male)</span></span>
-<span></span>
-<span><span class="va">iVec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span> <span class="co">#starting vector; everyone starts in the first state</span></span>
-<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fl">60</span> <span class="co">#number of cycles</span></span>
-<span></span>
-<span><span class="co">#fixed mortality rates and transition probabilities</span></span>
-<span><span class="va">deathRates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>  Age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span><span class="op">)</span>,</span>
-<span>  Males <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.51</span>,<span class="fl">3.93</span>,<span class="fl">10.9</span>,<span class="fl">31.6</span>,<span class="fl">80.1</span>,<span class="fl">187.9</span><span class="op">)</span>,</span>
-<span>  Females <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.99</span>,<span class="fl">2.6</span>,<span class="fl">6.7</span>,<span class="fl">19.3</span>,<span class="fl">53.5</span>,<span class="fl">154.8</span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="op">)</span></span>
-<span><span class="va">yearlyTProbs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>    Age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span><span class="op">)</span>,</span>
-<span>    Index <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">35</span>,<span class="fl">45</span>,<span class="fl">55</span>,<span class="fl">65</span>,<span class="fl">75</span>,<span class="fl">85</span><span class="op">)</span>,</span>
-<span>    Males <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.00151</span>,<span class="fl">0.00393</span>,<span class="fl">0.0109</span>,<span class="fl">0.0316</span>,<span class="fl">0.0801</span>,<span class="fl">0.1879</span><span class="op">)</span>,</span>
-<span>    Females <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.00099</span>,<span class="fl">0.0026</span>,<span class="fl">0.0067</span>,<span class="fl">0.0193</span>,<span class="fl">0.0535</span>,<span class="fl">0.1548</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#fixed parameters</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>cStandard <span class="ot">&lt;-</span> <span class="dv">394</span> <span class="co">#cost of standard prosthesis</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>cNP1 <span class="ot">&lt;-</span> <span class="dv">579</span> <span class="co">#cost of new prosthesis 1</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>cNP2 <span class="ot">&lt;-</span> <span class="dv">788</span> <span class="co">#cost of new prosthesis 2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>cDR <span class="ot">&lt;-</span> <span class="fl">0.06</span> <span class="co">#cost discount rate</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>oDR <span class="ot">&lt;-</span> <span class="fl">0.015</span> <span class="co">#outcome discount rate</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">60</span> <span class="co">#average age of all patients at receipt of primary implant</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#sex indicator (0 for female, 1 for male)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>iVec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="co">#starting vector; everyone starts in the first state</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">60</span> <span class="co">#number of cycles</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#fixed mortality rates and transition probabilities</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>deathRates <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span>),</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">Males =</span> <span class="fu">c</span>(<span class="fl">1.51</span>,<span class="fl">3.93</span>,<span class="fl">10.9</span>,<span class="fl">31.6</span>,<span class="fl">80.1</span>,<span class="fl">187.9</span>),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">Females =</span> <span class="fu">c</span>(<span class="fl">0.99</span>,<span class="fl">2.6</span>,<span class="fl">6.7</span>,<span class="fl">19.3</span>,<span class="fl">53.5</span>,<span class="fl">154.8</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>yearlyTProbs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">c</span>(<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span>),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">Index =</span> <span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">45</span>,<span class="dv">55</span>,<span class="dv">65</span>,<span class="dv">75</span>,<span class="dv">85</span>),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">Males =</span> <span class="fu">c</span>(<span class="fl">0.00151</span>,<span class="fl">0.00393</span>,<span class="fl">0.0109</span>,<span class="fl">0.0316</span>,<span class="fl">0.0801</span>,<span class="fl">0.1879</span>),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">Females =</span> <span class="fu">c</span>(<span class="fl">0.00099</span>,<span class="fl">0.0026</span>,<span class="fl">0.0067</span>,<span class="fl">0.0193</span>,<span class="fl">0.0535</span>,<span class="fl">0.1548</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note the modified covMat and survModelSummary</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">covMat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.0022515</span>  , <span class="op">-</span><span class="fl">0.005691</span> , <span class="fl">0.000000028</span>, <span class="fl">0.0000051</span> , <span class="fl">0.000259</span>   , <span class="fl">0.000351</span>,</span>
-<span>   <span class="op">-</span><span class="fl">0.005691</span>   ,  <span class="fl">0.0432191</span>,<span class="op">-</span><span class="fl">0.000783</span>   ,<span class="op">-</span><span class="fl">0.007247</span>  ,<span class="op">-</span><span class="fl">0.000642</span>   ,<span class="op">-</span><span class="fl">0.000537</span>,</span>
-<span>    <span class="fl">0.000000028</span>, <span class="op">-</span><span class="fl">0.000783</span> , <span class="fl">2.716e-05</span>  , <span class="fl">0.000033</span>  ,<span class="op">-</span><span class="fl">0.000111</span>   ,<span class="op">-</span><span class="fl">0.000299</span>,</span>
-<span>    <span class="fl">0.0000051</span>  , <span class="op">-</span><span class="fl">0.007247</span> , <span class="fl">0.000033</span>   , <span class="fl">0.0118954</span> , <span class="fl">0.000184</span>   , <span class="fl">0.000098</span>,</span>
-<span>    <span class="fl">0.000259</span>   , <span class="op">-</span><span class="fl">0.000642</span> ,<span class="op">-</span><span class="fl">0.000111</span>   , <span class="fl">0.000184</span>  , <span class="fl">0.1463686</span>  , <span class="fl">0.00035468</span>,</span>
-<span>    <span class="fl">0.000351</span>   , <span class="op">-</span><span class="fl">0.000537</span> ,<span class="op">-</span><span class="fl">0.000299</span>   , <span class="fl">0.000098</span>  , <span class="fl">0.00035468</span> , <span class="fl">0.267964628</span>   <span class="op">)</span>,</span>
-<span>  nrow <span class="op">=</span> <span class="fl">6</span>, ncol <span class="op">=</span> <span class="fl">6</span>, byrow <span class="op">=</span> <span class="cn">T</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">covMat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">covMat</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>,<span class="st">"NP2"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">#if we need cholesky decomposition</span></span>
-<span><span class="va">cholcovMat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chol.html">chol</a></span><span class="op">(</span><span class="va">covMat</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">survModelSummary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
-<span>  </span>
-<span>  variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>,<span class="st">"NP2"</span><span class="op">)</span>,</span>
-<span>  coefficient <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.3740968</span>,<span class="op">-</span><span class="fl">5.490935</span>,<span class="op">-</span><span class="fl">0.0367022</span>,<span class="fl">0.768536</span>,<span class="op">-</span><span class="fl">1.344474</span>,<span class="op">-</span><span class="fl">1.6687</span><span class="op">)</span>,</span>
-<span>  SE <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.0474501</span>,<span class="fl">0.207892</span>,<span class="fl">0.0052112</span>,<span class="fl">0.109066</span>,<span class="fl">0.3825815</span>,<span class="fl">0.517653</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">survModelSummary</span><span class="op">$</span><span class="va">hazard_ratio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">survModelSummary</span><span class="op">$</span><span class="va">coefficient</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>covMat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">0.0022515</span>  , <span class="sc">-</span><span class="fl">0.005691</span> , <span class="fl">0.000000028</span>, <span class="fl">0.0000051</span> , <span class="fl">0.000259</span>   , <span class="fl">0.000351</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">-</span><span class="fl">0.005691</span>   ,  <span class="fl">0.0432191</span>,<span class="sc">-</span><span class="fl">0.000783</span>   ,<span class="sc">-</span><span class="fl">0.007247</span>  ,<span class="sc">-</span><span class="fl">0.000642</span>   ,<span class="sc">-</span><span class="fl">0.000537</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.000000028</span>, <span class="sc">-</span><span class="fl">0.000783</span> , <span class="fl">2.716e-05</span>  , <span class="fl">0.000033</span>  ,<span class="sc">-</span><span class="fl">0.000111</span>   ,<span class="sc">-</span><span class="fl">0.000299</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0000051</span>  , <span class="sc">-</span><span class="fl">0.007247</span> , <span class="fl">0.000033</span>   , <span class="fl">0.0118954</span> , <span class="fl">0.000184</span>   , <span class="fl">0.000098</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.000259</span>   , <span class="sc">-</span><span class="fl">0.000642</span> ,<span class="sc">-</span><span class="fl">0.000111</span>   , <span class="fl">0.000184</span>  , <span class="fl">0.1463686</span>  , <span class="fl">0.00035468</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.000351</span>   , <span class="sc">-</span><span class="fl">0.000537</span> ,<span class="sc">-</span><span class="fl">0.000299</span>   , <span class="fl">0.000098</span>  , <span class="fl">0.00035468</span> , <span class="fl">0.267964628</span>   ),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">6</span>, <span class="at">ncol =</span> <span class="dv">6</span>, <span class="at">byrow =</span> T</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(covMat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(covMat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>,<span class="st">"NP2"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#if we need cholesky decomposition</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>cholcovMat <span class="ot">&lt;-</span> <span class="fu">chol</span>(covMat)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>survModelSummary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>,<span class="st">"NP2"</span>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">coefficient =</span> <span class="fu">c</span>(<span class="fl">0.3740968</span>,<span class="sc">-</span><span class="fl">5.490935</span>,<span class="sc">-</span><span class="fl">0.0367022</span>,<span class="fl">0.768536</span>,<span class="sc">-</span><span class="fl">1.344474</span>,<span class="sc">-</span><span class="fl">1.6687</span>),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">SE =</span> <span class="fu">c</span>(<span class="fl">0.0474501</span>,<span class="fl">0.207892</span>,<span class="fl">0.0052112</span>,<span class="fl">0.109066</span>,<span class="fl">0.3825815</span>,<span class="fl">0.517653</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>survModelSummary<span class="sc">$</span>hazard_ratio <span class="ot">&lt;-</span> <span class="fu">exp</span>(survModelSummary<span class="sc">$</span>coefficient)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="part-1-bringing-in-helper-functions-adapting-code" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="part-1-bringing-in-helper-functions-adapting-code">
-<span class="header-section-number">1.2</span> Part 1: Bringing in helper functions &amp; adapting code</h2>
+</section>
+<section id="part-1-bringing-in-helper-functions-adapting-code" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-bringing-in-helper-functions-adapting-code">Part 1: Bringing in helper functions &amp; adapting code</h2>
 <p>As in exercise 5.7, we will need to bring in all the functions from the previous exercise.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -314,303 +342,304 @@ Tip
 </div>
 <p>We will also need to alter the <code>resultsNP1</code> (and rename it) along with the simulations function to include a third treatment. While these changes will have a big impact on our analyses, they are relatively small changed programmatially because the logic has already been built.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drawBetaMethodMoments</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">n</span>,<span class="va">mu</span>,<span class="va">s</span><span class="op">)</span><span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="co">#functions estimates alpha and beta using the method of moments then draws from the beta distribution</span></span>
-<span>  <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="op">(</span><span class="va">mu</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">mu</span><span class="op">)</span><span class="op">/</span><span class="va">s</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">*</span><span class="va">mu</span></span>
-<span>  <span class="va">beta</span> <span class="op">&lt;-</span> <span class="va">alpha</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">mu</span> <span class="op">)</span><span class="op">/</span><span class="va">mu</span></span>
-<span>  </span>
-<span>  <span class="co">#draw our random number</span></span>
-<span>  <span class="va">draw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="va">n</span>,<span class="va">alpha</span>,<span class="va">beta</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">draw</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span></span>
-<span><span class="va">tProbsHazard</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>,<span class="va">lambda</span>,<span class="va">gamma</span><span class="op">)</span><span class="op">{</span></span>
-<span>   </span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">*</span><span class="op">(</span><span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">t</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">^</span><span class="va">gamma</span> <span class="op">-</span> <span class="op">(</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">t</span><span class="op">)</span><span class="op">^</span><span class="va">gamma</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span>   </span>
-<span><span class="op">}</span></span>
-<span></span>
-<span></span>
-<span><span class="va">tProbs_time</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,<span class="va">rr</span>,<span class="va">mr</span>,<span class="va">rrr</span>,<span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="co">#rr is revision risk, mr is mortality risk</span></span>
-<span>  </span>
-<span>  <span class="va">tProbs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">omrPTHR</span><span class="op">)</span>,     <span class="fl">0</span>,     <span class="fl">0</span>,                   <span class="va">omrPTHR</span>,</span>
-<span>    <span class="fl">0</span>, <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">rr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">+</span><span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span>, <span class="va">rr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span>, <span class="fl">0</span>,                   <span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span>,</span>
-<span>    <span class="fl">0</span>, <span class="fl">0</span>,               <span class="fl">0</span>,     <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">omrRTHR</span> <span class="op">+</span> <span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span>, <span class="va">omrRTHR</span> <span class="op">+</span> <span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span>,</span>
-<span>    <span class="fl">0</span>, <span class="fl">0</span>,               <span class="va">rrr</span>,   <span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="va">rrr</span><span class="op">+</span><span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span><span class="op">)</span>,       <span class="va">mr</span><span class="op">[</span><span class="va">t</span><span class="op">]</span>,</span>
-<span>    <span class="fl">0</span>, <span class="fl">0</span>,               <span class="fl">0</span>,     <span class="fl">0</span>,                   <span class="fl">1</span></span>
-<span>  <span class="op">)</span>,ncol <span class="op">=</span> <span class="fl">5</span>, nrow <span class="op">=</span> <span class="fl">5</span>, byrow <span class="op">=</span> <span class="cn">T</span></span>
-<span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="op">}</span></span>
-<span></span>
-<span></span>
-<span><span class="va">discountFormula</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nonDiscount</span>,<span class="va">discRate</span>,<span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">nonDiscount</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="va">discRate</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">t</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="op">}</span></span>
-<span></span>
-<span></span>
-<span><span class="va">calculateYearlyProbs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">iVec</span>,<span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,<span class="va">rr</span>,<span class="va">mr</span>,<span class="va">rrr</span>,<span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="co">#create empty matrix that we will fill in</span></span>
-<span>  </span>
-<span>  <span class="va">matReturn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow <span class="op">=</span> <span class="va">t</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#initialize first vector of proportions</span></span>
-<span>  </span>
-<span>  <span class="co">#create column names</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">matReturn</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PrimaryTHR"</span>,<span class="st">"SuccessP"</span>,<span class="st">"RevisionTHR"</span>,<span class="st">"SucessR"</span>,<span class="st">"Death"</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
-<span>    </span>
-<span>    <span class="co">#get the corresponding transition matrix based on the time</span></span>
-<span>    <span class="va">tProbs</span> <span class="op">&lt;-</span> <span class="fu">tProbs_time</span><span class="op">(</span><span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,<span class="va">rr</span>,<span class="va">mr</span>,<span class="va">rrr</span>,<span class="va">i</span><span class="op">)</span></span>
-<span>    </span>
-<span>    <span class="va">matReturn</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span> <span class="op">&lt;-</span>   <span class="va">iVec</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">tProbs</span> </span>
-<span>    </span>
-<span>    <span class="co">#update ivec</span></span>
-<span>    <span class="va">iVec</span> <span class="op">&lt;-</span> <span class="va">iVec</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">tProbs</span></span>
-<span>    </span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">matReturn</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#returns a t (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t</span></span>
-<span>  </span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>drawBetaMethodMoments <span class="ot">&lt;-</span> <span class="cf">function</span>(n,mu,s){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#functions estimates alpha and beta using the method of moments then draws from the beta distribution</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  alpha <span class="ot">&lt;-</span> ((mu<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>mu)<span class="sc">/</span>s<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span><span class="dv">1</span>)<span class="sc">*</span>mu</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> alpha<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>mu )<span class="sc">/</span>mu</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#draw our random number</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  draw <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n,alpha,beta)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(draw)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>tProbsHazard <span class="ot">&lt;-</span> <span class="cf">function</span>(t,lambda,gamma){</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(lambda<span class="sc">*</span>(((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">^</span>gamma <span class="sc">-</span> ((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">^</span>gamma))))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>tProbs_time <span class="ot">&lt;-</span> <span class="cf">function</span>(omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rr is revision risk, mr is mortality risk</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  tProbs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span><span class="sc">-</span>(omrPTHR),     <span class="dv">0</span>,     <span class="dv">0</span>,                   omrPTHR,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">1</span><span class="sc">-</span>(rr[t]<span class="sc">+</span>mr[t]), rr[t], <span class="dv">0</span>,                   mr[t],</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               <span class="dv">0</span>,     <span class="dv">1</span><span class="sc">-</span>(omrRTHR <span class="sc">+</span> mr[t]), omrRTHR <span class="sc">+</span> mr[t],</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               rrr,   <span class="dv">1</span><span class="sc">-</span>(rrr<span class="sc">+</span>mr[t]),       mr[t],</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               <span class="dv">0</span>,     <span class="dv">0</span>,                   <span class="dv">1</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  ),<span class="at">ncol =</span> <span class="dv">5</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">byrow =</span> T</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>discountFormula <span class="ot">&lt;-</span> <span class="cf">function</span>(nonDiscount,discRate,t){</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(nonDiscount<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>discRate)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>t))</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>calculateYearlyProbs <span class="ot">&lt;-</span> <span class="cf">function</span>(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create empty matrix that we will fill in</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  matReturn <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> t, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">#initialize first vector of proportions</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create column names</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(matReturn) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PrimaryTHR"</span>,<span class="st">"SuccessP"</span>,<span class="st">"RevisionTHR"</span>,<span class="st">"SucessR"</span>,<span class="st">"Death"</span>)</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>t){</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    <span class="co">#get the corresponding transition matrix based on the time</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    tProbs <span class="ot">&lt;-</span> <span class="fu">tProbs_time</span>(omrPTHR,omrRTHR,rr,mr,rrr,i)</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    matReturn[i,] <span class="ot">&lt;-</span>   iVec <span class="sc">%*%</span> tProbs </span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    <span class="co">#update ivec</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    iVec <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(matReturn)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>  <span class="co">#returns a t (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next we alter the analysis and simulation functions to add the third prosthesis. We will omit the NP1Inc variable from exercise 5.7, as it is redundant.</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">analysisNP2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,<span class="va">mr</span>,<span class="va">rrr</span>,<span class="va">rrNP1</span>,<span class="va">rrNP2</span>,<span class="va">cPrimary</span>,<span class="va">cRevision</span>,<span class="va">cStandard</span>,<span class="va">uSuccessP</span>,<span class="va">uSuccessR</span>,<span class="va">uRevision</span>,<span class="va">cDR</span>,<span class="va">oDR</span>,<span class="va">cNP1</span>,<span class="va">gamma</span>,<span class="va">lambda</span>,<span class="va">iVec</span>,<span class="va">t</span><span class="op">)</span><span class="op">{</span></span>
-<span></span>
-<span>    <span class="co">#calculate the revision risk</span></span>
-<span>    <span class="va">rr</span> <span class="op">&lt;-</span> <span class="fu">tProbsHazard</span><span class="op">(</span>t<span class="op">=</span><span class="va">t</span>,lambda <span class="op">=</span> <span class="va">lambda</span>,gamma <span class="op">=</span> <span class="va">gamma</span><span class="op">)</span></span>
-<span>    <span class="va">mr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">t</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
-<span>    </span>
-<span>    <span class="co">#calculate which index select based on the age group</span></span>
-<span>    <span class="va">inds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="va">age</span> <span class="op">&gt;=</span> <span class="va">yearlyTProbs</span><span class="op">$</span><span class="va">Index</span><span class="op">)</span></span>
-<span>    </span>
-<span>    <span class="co">#select the gender columns</span></span>
-<span>    <span class="co">#if else takes 3 arguments, the first is a logical check, if true, it returns the second value, if false it returns the 3rd argument. Equivalent code can be written use if(x){}else{}.</span></span>
-<span>    <span class="va">genderCol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">male</span> <span class="op">==</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span></span>
-<span>    </span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">yearlyTProbs</span><span class="op">[</span><span class="va">inds</span>,<span class="va">genderCol</span><span class="op">]</span><span class="op">)</span></span>
-<span>    </span>
-<span>  <span class="op">}</span><span class="op">)</span></span>
-<span>    </span>
-<span>  <span class="co">#calculate standard states</span></span>
-<span>  <span class="va">standPopStates</span> <span class="op">&lt;-</span> <span class="fu">calculateYearlyProbs</span><span class="op">(</span>iVec <span class="op">=</span> <span class="va">iVec</span>,omrPTHR<span class="op">=</span><span class="va">omrPTHR</span>, omrRTHR<span class="op">=</span><span class="va">omrPTHR</span>,rr<span class="op">=</span> <span class="va">rr</span>, mr <span class="op">=</span> <span class="va">mr</span>,rrr<span class="op">=</span><span class="va">rrr</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
-<span>  <span class="va">lifeYearsStandard</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">standPopStates</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
-<span>  <span class="co">#excludes death year</span></span>
-<span>  <span class="va">costVec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="va">cRevision</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co">#add a parameter for the initial cost we had 1000 initial patients</span></span>
-<span>  <span class="va">iCostStandard</span> <span class="op">&lt;-</span> <span class="va">cStandard</span><span class="op">*</span><span class="fl">1000</span></span>
-<span>  </span>
-<span>  <span class="co">#first calculate the total cost</span></span>
-<span>  <span class="va">totalCosts</span> <span class="op">&lt;-</span> <span class="va">standPopStates</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">costVec</span></span>
-<span>  </span>
-<span>  <span class="co">#calculate the discounted cost</span></span>
-<span>  <span class="va">discCostStandard</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalCosts</span>,<span class="va">cDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#calculate the quality adjusted life years by creating a vector for each state utility except death</span></span>
-<span>  <span class="va">utility</span><span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="va">uSuccessP</span>,<span class="va">uRevision</span>,<span class="va">uSuccessR</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#multiply by the cohort</span></span>
-<span>  <span class="va">totalQuality</span> <span class="op">&lt;-</span>  <span class="va">standPopStates</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">utility</span></span>
-<span>  <span class="va">QALYStandard</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalQuality</span>,discRate <span class="op">=</span> <span class="va">oDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#calculate the total cost for all cycles/person</span></span>
-<span>  <span class="va">STDcost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">iCostStandard</span>,<span class="va">discCostStandard</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
-<span>  <span class="va">STDLYs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lifeYearsStandard</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
-<span>  <span class="va">STDQALYS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">QALYStandard</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
-<span></span>
-<span>  </span>
-<span>  <span class="co">###repeat this for the NP1###</span></span>
-<span>  <span class="va">rrNP1_vec</span> <span class="op">&lt;-</span> <span class="fu">tProbsHazard</span><span class="op">(</span><span class="va">t</span>,lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">*</span><span class="va">rrNP1</span>,gamma <span class="op">=</span> <span class="va">gamma</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co">#call the previous function created</span></span>
-<span>  <span class="va">populationStatesNP1</span> <span class="op">&lt;-</span> <span class="fu">calculateYearlyProbs</span><span class="op">(</span><span class="va">iVec</span>,<span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,rr<span class="op">=</span><span class="va">rrNP1_vec</span>,mr<span class="op">=</span><span class="va">mr</span>,rrr<span class="op">=</span><span class="va">rrr</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#calculate life years for np1</span></span>
-<span>  <span class="va">lifeYearsNP1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">populationStatesNP1</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#total and discounted costs</span></span>
-<span>  <span class="va">totalCostsNP1</span> <span class="op">&lt;-</span> <span class="va">populationStatesNP1</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">costVec</span></span>
-<span>  <span class="va">discCostsNP1</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalCostsNP1</span>,<span class="va">cDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
-<span>  <span class="co">#add the initial cost for NP1</span></span>
-<span>  <span class="va">iCostNP1</span> <span class="op">&lt;-</span> <span class="va">cNP1</span><span class="op">*</span><span class="fl">1000</span></span>
-<span>  <span class="co">#Utility</span></span>
-<span>  <span class="va">totalQualityNP1</span> <span class="op">&lt;-</span> <span class="va">populationStatesNP1</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">utility</span></span>
-<span>  <span class="va">QALYNP1</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalQualityNP1</span>,discRate <span class="op">=</span> <span class="va">oDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#calculate the total cost for all cycles/person</span></span>
-<span>  <span class="va">NP1cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">iCostNP1</span>,<span class="va">discCostsNP1</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
-<span>  <span class="va">NP1LYs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lifeYearsNP1</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
-<span>  <span class="va">NP1QALYS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">QALYNP1</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
-<span>  </span>
-<span>  <span class="co">#####################################</span></span>
-<span>  <span class="co">#                                   #</span></span>
-<span>  <span class="co">#   Add the NP2 analysis here       # </span></span>
-<span>  <span class="co">#                                   # </span></span>
-<span>  <span class="co">#####################################</span></span>
-<span>  <span class="va">rrNP2_vec</span> <span class="op">&lt;-</span> <span class="fu">tProbsHazard</span><span class="op">(</span><span class="va">t</span>,lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">*</span><span class="va">rrNP2</span>,gamma <span class="op">=</span> <span class="va">gamma</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co">#call the previous function created</span></span>
-<span>  <span class="va">populationStatesNP2</span> <span class="op">&lt;-</span> <span class="fu">calculateYearlyProbs</span><span class="op">(</span><span class="va">iVec</span>,<span class="va">omrPTHR</span>,<span class="va">omrRTHR</span>,rr<span class="op">=</span><span class="va">rrNP2_vec</span>,mr<span class="op">=</span><span class="va">mr</span>,rrr<span class="op">=</span><span class="va">rrr</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#calculate life years for np2</span></span>
-<span>  <span class="va">lifeYearsNP2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">populationStatesNP2</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#total and discounted costs</span></span>
-<span>  <span class="va">totalCostsNP2</span> <span class="op">&lt;-</span> <span class="va">populationStatesNP2</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">costVec</span></span>
-<span>  <span class="va">discCostsNP2</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalCostsNP2</span>,<span class="va">cDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
-<span>  <span class="co">#add the initial cost for NP2</span></span>
-<span>  <span class="va">iCostNP2</span> <span class="op">&lt;-</span> <span class="va">cNP2</span><span class="op">*</span><span class="fl">1000</span></span>
-<span>  <span class="co">#Utility</span></span>
-<span>  <span class="va">totalQualityNP2</span> <span class="op">&lt;-</span> <span class="va">populationStatesNP2</span><span class="op">[</span>,<span class="op">-</span><span class="fl">5</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">utility</span></span>
-<span>  <span class="va">QALYNP2</span> <span class="op">&lt;-</span> <span class="fu">discountFormula</span><span class="op">(</span><span class="va">totalQualityNP2</span>,discRate <span class="op">=</span> <span class="va">oDR</span>,t<span class="op">=</span><span class="va">t</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#calculate the total cost for all cycles/person</span></span>
-<span>  <span class="va">NP2cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">iCostNP2</span>,<span class="va">discCostsNP2</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
-<span>  <span class="va">NP2LYs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lifeYearsNP2</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
-<span>  <span class="va">NP2QALYS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">QALYNP2</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span></span>
-<span></span>
-<span>  <span class="co">#returns a list of discounted cost and QALYs for each method</span></span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>STDcost <span class="op">=</span> <span class="va">STDcost</span>, STDQALYS <span class="op">=</span> <span class="va">STDQALYS</span>, NP1cost <span class="op">=</span> <span class="va">NP1cost</span>,NP1QALYS <span class="op">=</span> <span class="va">NP1QALYS</span>,</span>
-<span>              NP2cost <span class="op">=</span> <span class="va">NP2cost</span>, NP2QALYS <span class="op">=</span> <span class="va">NP2QALYS</span> <span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>analysisNP2 <span class="ot">&lt;-</span> <span class="cf">function</span>(omrPTHR,omrRTHR,mr,rrr,rrNP1,rrNP2,cPrimary,cRevision,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate the revision risk</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    rr <span class="ot">&lt;-</span> <span class="fu">tProbsHazard</span>(<span class="at">t=</span>t,<span class="at">lambda =</span> lambda,<span class="at">gamma =</span> gamma)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    mr <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>t,<span class="cf">function</span>(x){</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate which index select based on the age group</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    inds <span class="ot">&lt;-</span> <span class="fu">sum</span>(x<span class="sc">+</span>age <span class="sc">&gt;=</span> yearlyTProbs<span class="sc">$</span>Index)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#select the gender columns</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">#if else takes 3 arguments, the first is a logical check, if true, it returns the second value, if false it returns the 3rd argument. Equivalent code can be written use if(x){}else{}.</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    genderCol <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(male <span class="sc">==</span><span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(yearlyTProbs[inds,genderCol])</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate standard states</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  standPopStates <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(<span class="at">iVec =</span> iVec,<span class="at">omrPTHR=</span>omrPTHR, <span class="at">omrRTHR=</span>omrPTHR,<span class="at">rr=</span> rr, <span class="at">mr =</span> mr,<span class="at">rrr=</span>rrr,<span class="at">t=</span>t)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  lifeYearsStandard <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(standPopStates[,<span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">#excludes death year</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  costVec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,cRevision,<span class="dv">0</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">#add a parameter for the initial cost we had 1000 initial patients</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  iCostStandard <span class="ot">&lt;-</span> cStandard<span class="sc">*</span><span class="dv">1000</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#first calculate the total cost</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  totalCosts <span class="ot">&lt;-</span> standPopStates[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> costVec</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the discounted cost</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  discCostStandard <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalCosts,cDR,<span class="at">t=</span>t)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the quality adjusted life years by creating a vector for each state utility except death</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  utility<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,uSuccessP,uRevision,uSuccessR)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">#multiply by the cohort</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  totalQuality <span class="ot">&lt;-</span>  standPopStates[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> utility</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  QALYStandard <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalQuality,<span class="at">discRate =</span> oDR,<span class="at">t=</span>t)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total cost for all cycles/person</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  STDcost <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(iCostStandard,discCostStandard))<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  STDLYs <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsStandard)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  STDQALYS <span class="ot">&lt;-</span> <span class="fu">sum</span>(QALYStandard)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="do">###repeat this for the NP1###</span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  rrNP1_vec <span class="ot">&lt;-</span> <span class="fu">tProbsHazard</span>(t,<span class="at">lambda =</span> lambda<span class="sc">*</span>rrNP1,<span class="at">gamma =</span> gamma)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">#call the previous function created</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  populationStatesNP1 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(iVec,omrPTHR,omrRTHR,<span class="at">rr=</span>rrNP1_vec,<span class="at">mr=</span>mr,<span class="at">rrr=</span>rrr,<span class="at">t=</span>t)</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate life years for np1</span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>  lifeYearsNP1 <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(populationStatesNP1[,<span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  <span class="co">#total and discounted costs</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>  totalCostsNP1 <span class="ot">&lt;-</span> populationStatesNP1[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> costVec</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>  discCostsNP1 <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalCostsNP1,cDR,<span class="at">t=</span>t)</span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>  <span class="co">#add the initial cost for NP1</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>  iCostNP1 <span class="ot">&lt;-</span> cNP1<span class="sc">*</span><span class="dv">1000</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Utility</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  totalQualityNP1 <span class="ot">&lt;-</span> populationStatesNP1[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> utility</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  QALYNP1 <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalQualityNP1,<span class="at">discRate =</span> oDR,<span class="at">t=</span>t)</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total cost for all cycles/person</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>  NP1cost <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(iCostNP1,discCostsNP1))<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>  NP1LYs <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsNP1)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  NP1QALYS <span class="ot">&lt;-</span> <span class="fu">sum</span>(QALYNP1)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>  <span class="do">#####################################</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                                   #</span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>  <span class="co">#   Add the NP2 analysis here       # </span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                                   # </span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  <span class="do">#####################################</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>  rrNP2_vec <span class="ot">&lt;-</span> <span class="fu">tProbsHazard</span>(t,<span class="at">lambda =</span> lambda<span class="sc">*</span>rrNP2,<span class="at">gamma =</span> gamma)</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>  <span class="co">#call the previous function created</span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  populationStatesNP2 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(iVec,omrPTHR,omrRTHR,<span class="at">rr=</span>rrNP2_vec,<span class="at">mr=</span>mr,<span class="at">rrr=</span>rrr,<span class="at">t=</span>t)</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate life years for np2</span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>  lifeYearsNP2 <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(populationStatesNP2[,<span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>  <span class="co">#total and discounted costs</span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>  totalCostsNP2 <span class="ot">&lt;-</span> populationStatesNP2[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> costVec</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>  discCostsNP2 <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalCostsNP2,cDR,<span class="at">t=</span>t)</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>  <span class="co">#add the initial cost for NP2</span></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>  iCostNP2 <span class="ot">&lt;-</span> cNP2<span class="sc">*</span><span class="dv">1000</span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Utility</span></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>  totalQualityNP2 <span class="ot">&lt;-</span> populationStatesNP2[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> utility</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>  QALYNP2 <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalQualityNP2,<span class="at">discRate =</span> oDR,<span class="at">t=</span>t)</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total cost for all cycles/person</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>  NP2cost <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(iCostNP2,discCostsNP2))<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>  NP2LYs <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsNP2)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>  NP2QALYS <span class="ot">&lt;-</span> <span class="fu">sum</span>(QALYNP2)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>  <span class="co">#returns a list of discounted cost and QALYs for each method</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">STDcost =</span> STDcost, <span class="at">STDQALYS =</span> STDQALYS, <span class="at">NP1cost =</span> NP1cost,<span class="at">NP1QALYS =</span> NP1QALYS,</span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>              <span class="at">NP2cost =</span> NP2cost, <span class="at">NP2QALYS =</span> NP2QALYS ))</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next we will change the simulation function to store the results of the NP2 analysis</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">generateSimulations</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">nReps</span> <span class="op">=</span> <span class="fl">1000</span>,<span class="va">age</span><span class="op">=</span><span class="fl">60</span>,<span class="va">male</span><span class="op">=</span><span class="fl">0</span>,<span class="va">cRatio</span> <span class="op">=</span> <span class="fl">100000</span><span class="op">)</span><span class="op">{</span></span>
-<span>   </span>
-<span>   <span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"omrPTHR"</span>,<span class="st">"omrRTHR"</span>,<span class="st">"rrNP1"</span>,<span class="st">"rrNP2"</span>,<span class="st">"rrr"</span>,<span class="st">"lambda"</span>,<span class="st">"gamma"</span>,<span class="st">"cPrimary"</span>,<span class="st">"cRevision"</span>,<span class="st">"cSuccess"</span>,<span class="st">"uSuccessP"</span>,<span class="st">"uSuccessR"</span>,<span class="st">"uRevision"</span>,</span>
-<span>                          <span class="st">"cRatio"</span>,<span class="st">"STDCost"</span>,<span class="st">"STDQALYS"</span>,<span class="st">"NP1Cost"</span>,<span class="st">"NP1QALYS"</span>,<span class="st">"NP2Cost"</span>,<span class="st">"NP2QALYS"</span>,<span class="st">"STDNMB"</span>,<span class="st">"NP1NMB"</span>,<span class="st">"NP2NMB"</span>,<span class="st">"CESTD"</span>,<span class="st">"CENP1"</span>,<span class="st">"CINP2"</span><span class="op">)</span></span>
-<span>   </span>
-<span>  </span>
-<span>     <span class="co">#we need to know how many columns or variable we have here in ncol</span></span>
-<span>   <span class="va">dfReturn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="cn">NA</span>,nrow <span class="op">=</span> <span class="va">nReps</span>,ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">cols</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
-<span>   <span class="co">#fill out the column names for our dataframe</span></span>
-<span>   <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">cols</span></span>
-<span>  </span>
-<span>  </span>
-<span>   <span class="co">#cRatio is fixed at 100000</span></span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">cRatio</span> <span class="op">&lt;-</span> <span class="va">cRatio</span></span>
-<span>   <span class="va">alpha</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">5294</span><span class="op">/</span><span class="fl">1487</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
-<span>   <span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">1487</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fl">5294</span></span>
-<span>   </span>
-<span>   </span>
-<span>   <span class="co">#due to R's vectorization, we can sample all the parameters at once in the "n" parameter</span></span>
-<span>   <span class="va">omrPTHR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">2</span>,<span class="fl">98</span><span class="op">)</span> <span class="co">#operative mortality rate following primary THR</span></span>
-<span>   <span class="va">omrRTHR</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">2</span>,<span class="fl">98</span><span class="op">)</span> <span class="co">#operative mortality rate following revision THR</span></span>
-<span>   <span class="va">rrr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Beta.html">rbeta</a></span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">4</span>,<span class="fl">96</span><span class="op">)</span> <span class="co">#re-revision risk</span></span>
-<span>   </span>
-<span>   <span class="co">#save them here using R's vectorization</span></span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">omrPTHR</span> <span class="op">&lt;-</span> <span class="va">omrPTHR</span></span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">omrRTHR</span> <span class="op">&lt;-</span> <span class="va">omrRTHR</span> </span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">rrr</span> <span class="op">&lt;-</span> <span class="va">rrr</span></span>
-<span>   </span>
-<span>   <span class="co">#cost and utility</span></span>
-<span>   <span class="va">cRevision</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/GammaDist.html">rgamma</a></span><span class="op">(</span><span class="va">nReps</span>,shape <span class="op">=</span> <span class="va">alpha</span>,scale <span class="op">=</span> <span class="va">beta</span><span class="op">)</span></span>
-<span>   <span class="va">uSuccessP</span> <span class="op">&lt;-</span> <span class="fu">drawBetaMethodMoments</span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">0.85</span>,<span class="fl">0.03</span><span class="op">)</span></span>
-<span>   <span class="va">uSuccessR</span> <span class="op">&lt;-</span> <span class="fu">drawBetaMethodMoments</span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">0.75</span>,<span class="fl">0.04</span><span class="op">)</span></span>
-<span>   <span class="va">uRevision</span> <span class="op">&lt;-</span> <span class="fu">drawBetaMethodMoments</span><span class="op">(</span><span class="va">nReps</span>,<span class="fl">0.3</span>,<span class="fl">0.03</span><span class="op">)</span></span>
-<span>   </span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">cRevision</span> <span class="op">&lt;-</span> <span class="va">cRevision</span></span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">uSuccessP</span> <span class="op">&lt;-</span> <span class="va">uSuccessP</span></span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">uSuccessR</span> <span class="op">&lt;-</span> <span class="va">uSuccessR</span></span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">uRevision</span> <span class="op">&lt;-</span> <span class="va">uRevision</span> </span>
-<span>   </span>
-<span>   <span class="co">#draw from multivariate normal</span></span>
-<span>   <span class="va">normDraw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/mvrnorm.html">mvrnorm</a></span><span class="op">(</span><span class="va">nReps</span>, mu <span class="op">=</span> <span class="va">survModelSummary</span><span class="op">$</span><span class="va">coefficient</span>, Sigma <span class="op">=</span> <span class="va">covMat</span><span class="op">)</span></span>
-<span>   </span>
-<span>   <span class="co">#using R's vectorization, we can calculate operations on the entire vector, we must use [,"name"]as normDraw is not a matrix rather than a vector</span></span>
-<span>   <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">normDraw</span><span class="op">[</span>,<span class="st">'cons'</span><span class="op">]</span> <span class="op">+</span> <span class="va">normDraw</span><span class="op">[</span>,<span class="st">'age'</span><span class="op">]</span><span class="op">*</span><span class="va">age</span> <span class="op">+</span> <span class="va">normDraw</span><span class="op">[</span>,<span class="st">'male'</span><span class="op">]</span><span class="op">*</span><span class="va">male</span><span class="op">)</span></span>
-<span>   <span class="va">gamma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">normDraw</span><span class="op">[</span>,<span class="st">'lngamma'</span><span class="op">]</span><span class="op">)</span></span>
-<span>   <span class="va">rrNP1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">normDraw</span><span class="op">[</span>,<span class="st">'NP1'</span><span class="op">]</span><span class="op">)</span></span>
-<span>   <span class="va">rrNP2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">normDraw</span><span class="op">[</span>,<span class="st">'NP2'</span><span class="op">]</span><span class="op">)</span></span>
-<span>   </span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="va">lambda</span></span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">gamma</span> <span class="op">&lt;-</span> <span class="va">gamma</span></span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">rrNP1</span> <span class="op">&lt;-</span> <span class="va">rrNP1</span></span>
-<span>   <span class="va">dfReturn</span><span class="op">$</span><span class="va">rrNP2</span> <span class="op">&lt;-</span> <span class="va">rrNP2</span></span>
-<span></span>
-<span>  <span class="co">#start the for-loop</span></span>
-<span>  </span>
-<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">nReps</span><span class="op">)</span><span class="op">{</span></span>
-<span>     </span>
-<span>    <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">analysisNP2</span><span class="op">(</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">omrPTHR</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">omrRTHR</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">mr</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">rrr</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">rrNP1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">dfReturn</span><span class="op">$</span><span class="va">rrNP2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
-<span>                           <span class="va">dfReturn</span><span class="op">$</span><span class="va">cPrimary</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">cRevision</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">cStandard</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">uSuccessP</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
-<span>                           <span class="va">dfReturn</span><span class="op">$</span><span class="va">uSuccessR</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">uRevision</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">cDR</span>,<span class="va">oDR</span>,<span class="va">cNP1</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">gamma</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">dfReturn</span><span class="op">$</span><span class="va">lambda</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
-<span>                           <span class="va">iVec</span>,<span class="va">t</span><span class="op">)</span></span>
-<span>    </span>
-<span>    </span>
-<span>    <span class="co">#save the results, including NP2</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">STDCost</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">STDcost</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">STDQALYS</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">STDQALYS</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1Cost</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">NP1cost</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1QALYS</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">NP1QALYS</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP2Cost</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">NP2cost</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP2QALYS</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">NP2QALYS</span></span>
-<span>    </span>
-<span>    </span>
-<span>    <span class="co">#calculate net monetary benefit, we now remove the redundant  "NP1 inc"</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">STDNMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">STDQALYS</span><span class="op">*</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">cRatio</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">-</span><span class="va">results</span><span class="op">$</span><span class="va">STDcost</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1NMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">NP1QALYS</span><span class="op">*</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">cRatio</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">-</span><span class="va">results</span><span class="op">$</span><span class="va">NP1cost</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP2NMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">NP2QALYS</span><span class="op">*</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">cRatio</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">-</span><span class="va">results</span><span class="op">$</span><span class="va">NP2cost</span>    </span>
-<span>    <span class="co">#calculate the cost effectiveness. Note with 3 methods, we must take the maximum </span></span>
-<span>    <span class="va">bestTreatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">STDNMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1NMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>, <span class="va">dfReturn</span><span class="op">$</span><span class="va">NP2NMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
-<span>   </span>
-<span>    <span class="co">#save the cost effectiveness winner</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">CESTD</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">STDNMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">==</span><span class="va">bestTreatment</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">CENP1</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">NP1NMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">==</span><span class="va">bestTreatment</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span>    <span class="va">dfReturn</span><span class="op">$</span><span class="va">CENP2</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">$</span><span class="va">NP2NMB</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">==</span><span class="va">bestTreatment</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="op">}</span></span>
-<span>  </span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">dfReturn</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>generateSimulations <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">nReps =</span> <span class="dv">1000</span>,<span class="at">age=</span><span class="dv">60</span>,<span class="at">male=</span><span class="dv">0</span>,<span class="at">cRatio =</span> <span class="dv">100000</span>){</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"omrPTHR"</span>,<span class="st">"omrRTHR"</span>,<span class="st">"rrNP1"</span>,<span class="st">"rrNP2"</span>,<span class="st">"rrr"</span>,<span class="st">"lambda"</span>,<span class="st">"gamma"</span>,<span class="st">"cPrimary"</span>,<span class="st">"cRevision"</span>,<span class="st">"cSuccess"</span>,<span class="st">"uSuccessP"</span>,<span class="st">"uSuccessR"</span>,<span class="st">"uRevision"</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"cRatio"</span>,<span class="st">"STDCost"</span>,<span class="st">"STDQALYS"</span>,<span class="st">"NP1Cost"</span>,<span class="st">"NP1QALYS"</span>,<span class="st">"NP2Cost"</span>,<span class="st">"NP2QALYS"</span>,<span class="st">"STDNMB"</span>,<span class="st">"NP1NMB"</span>,<span class="st">"NP2NMB"</span>,<span class="st">"CESTD"</span>,<span class="st">"CENP1"</span>,<span class="st">"CINP2"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>     <span class="co">#we need to know how many columns or variable we have here in ncol</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>   dfReturn <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="at">nrow =</span> nReps,<span class="at">ncol =</span> <span class="fu">length</span>(cols)))</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>   <span class="co">#fill out the column names for our dataframe</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">colnames</span>(dfReturn) <span class="ot">&lt;-</span> cols</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>   <span class="co">#cRatio is fixed at 100000</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>cRatio <span class="ot">&lt;-</span> cRatio</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>   alpha <span class="ot">&lt;-</span> (<span class="dv">5294</span><span class="sc">/</span><span class="dv">1487</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>   beta <span class="ot">&lt;-</span> <span class="dv">1487</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">5294</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>   <span class="co">#due to R's vectorization, we can sample all the parameters at once in the "n" parameter</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>   omrPTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nReps,<span class="dv">2</span>,<span class="dv">98</span>) <span class="co">#operative mortality rate following primary THR</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>   omrRTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nReps,<span class="dv">2</span>,<span class="dv">98</span>) <span class="co">#operative mortality rate following revision THR</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>   rrr <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nReps,<span class="dv">4</span>,<span class="dv">96</span>) <span class="co">#re-revision risk</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>   <span class="co">#save them here using R's vectorization</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>omrPTHR <span class="ot">&lt;-</span> omrPTHR</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>omrRTHR <span class="ot">&lt;-</span> omrRTHR </span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>rrr <span class="ot">&lt;-</span> rrr</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>   <span class="co">#cost and utility</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>   cRevision <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(nReps,<span class="at">shape =</span> alpha,<span class="at">scale =</span> beta)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>   uSuccessP <span class="ot">&lt;-</span> <span class="fu">drawBetaMethodMoments</span>(nReps,<span class="fl">0.85</span>,<span class="fl">0.03</span>)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>   uSuccessR <span class="ot">&lt;-</span> <span class="fu">drawBetaMethodMoments</span>(nReps,<span class="fl">0.75</span>,<span class="fl">0.04</span>)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>   uRevision <span class="ot">&lt;-</span> <span class="fu">drawBetaMethodMoments</span>(nReps,<span class="fl">0.3</span>,<span class="fl">0.03</span>)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>cRevision <span class="ot">&lt;-</span> cRevision</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>uSuccessP <span class="ot">&lt;-</span> uSuccessP</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>uSuccessR <span class="ot">&lt;-</span> uSuccessR</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>uRevision <span class="ot">&lt;-</span> uRevision </span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>   <span class="co">#draw from multivariate normal</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>   normDraw <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(nReps, <span class="at">mu =</span> survModelSummary<span class="sc">$</span>coefficient, <span class="at">Sigma =</span> covMat)</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>   <span class="co">#using R's vectorization, we can calculate operations on the entire vector, we must use [,"name"]as normDraw is not a matrix rather than a vector</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>   lambda <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'cons'</span>] <span class="sc">+</span> normDraw[,<span class="st">'age'</span>]<span class="sc">*</span>age <span class="sc">+</span> normDraw[,<span class="st">'male'</span>]<span class="sc">*</span>male)</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>   gamma <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'lngamma'</span>])</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>   rrNP1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'NP1'</span>])</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>   rrNP2 <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'NP2'</span>])</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>lambda <span class="ot">&lt;-</span> lambda</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>gamma <span class="ot">&lt;-</span> gamma</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>rrNP1 <span class="ot">&lt;-</span> rrNP1</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>rrNP2 <span class="ot">&lt;-</span> rrNP2</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>  <span class="co">#start the for-loop</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nReps){</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">analysisNP2</span>(dfReturn<span class="sc">$</span>omrPTHR[i],dfReturn<span class="sc">$</span>omrRTHR[i],mr,dfReturn<span class="sc">$</span>rrr[i],dfReturn<span class="sc">$</span>rrNP1[i], dfReturn<span class="sc">$</span>rrNP2[i],</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>                           dfReturn<span class="sc">$</span>cPrimary[i],dfReturn<span class="sc">$</span>cRevision[i],dfReturn<span class="sc">$</span>cStandard[i],dfReturn<span class="sc">$</span>uSuccessP[i],</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>                           dfReturn<span class="sc">$</span>uSuccessR[i],dfReturn<span class="sc">$</span>uRevision[i],cDR,oDR,cNP1,dfReturn<span class="sc">$</span>gamma[i],dfReturn<span class="sc">$</span>lambda[i],</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>                           iVec,t)</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>    <span class="co">#save the results, including NP2</span></span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>STDCost[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>STDcost</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>STDQALYS[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>STDQALYS</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1Cost[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP1cost</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1QALYS[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP1QALYS</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP2Cost[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP2cost</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP2QALYS[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP2QALYS</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate net monetary benefit, we now remove the redundant  "NP1 inc"</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>STDNMB[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>STDQALYS<span class="sc">*</span>dfReturn<span class="sc">$</span>cRatio[i]<span class="sc">-</span>results<span class="sc">$</span>STDcost</span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1NMB[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP1QALYS<span class="sc">*</span>dfReturn<span class="sc">$</span>cRatio[i]<span class="sc">-</span>results<span class="sc">$</span>NP1cost</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP2NMB[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP2QALYS<span class="sc">*</span>dfReturn<span class="sc">$</span>cRatio[i]<span class="sc">-</span>results<span class="sc">$</span>NP2cost    </span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate the cost effectiveness. Note with 3 methods, we must take the maximum </span></span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>    bestTreatment <span class="ot">&lt;-</span> <span class="fu">max</span>(dfReturn<span class="sc">$</span>STDNMB[i], dfReturn<span class="sc">$</span>NP1NMB[i], dfReturn<span class="sc">$</span>NP2NMB[i])</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>    <span class="co">#save the cost effectiveness winner</span></span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>CESTD[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dfReturn<span class="sc">$</span>STDNMB[i]<span class="sc">==</span>bestTreatment,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>CENP1[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dfReturn<span class="sc">$</span>NP1NMB[i]<span class="sc">==</span>bestTreatment,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>CENP2[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dfReturn<span class="sc">$</span>NP2NMB[i]<span class="sc">==</span>bestTreatment,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(dfReturn)</span>
+<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="part-2-running-the-simulations" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="part-2-running-the-simulations">
-<span class="header-section-number">1.3</span> Part 2: Running the simulations</h2>
+</section>
+<section id="part-2-running-the-simulations" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-running-the-simulations">Part 2: Running the simulations</h2>
 <p>We will run the simulations with the new prosthesis treatment and calculate a probabilistic ICER for each treatment. Then we will plot the cost-effectiveness plane for each of the treatments using all simulation points.</p>
 <p>We start by setting our seed and then calling our <code>generateSimulations</code> function.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12345</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">simResults</span> <span class="op">&lt;-</span> <span class="fu">generateSimulations</span><span class="op">(</span>nReps <span class="op">=</span> <span class="fl">1000</span>,age<span class="op">=</span><span class="fl">60</span>,male<span class="op">=</span><span class="fl">0</span>,cRatio <span class="op">=</span> <span class="fl">100000</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>simResults <span class="ot">&lt;-</span> <span class="fu">generateSimulations</span>(<span class="at">nReps =</span> <span class="dv">1000</span>,<span class="at">age=</span><span class="dv">60</span>,<span class="at">male=</span><span class="dv">0</span>,<span class="at">cRatio =</span> <span class="dv">100000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can easily calculate means using <code>colMeans</code></p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">meanResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">simResults</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"STDCost"</span>,<span class="st">"STDQALYS"</span>,<span class="st">"NP1Cost"</span>,<span class="st">"NP1QALYS"</span>,<span class="st">"NP2Cost"</span>,<span class="st">"NP2QALYS"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>meanResults <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(simResults[,<span class="fu">c</span>(<span class="st">"STDCost"</span>,<span class="st">"STDQALYS"</span>,<span class="st">"NP1Cost"</span>,<span class="st">"NP1QALYS"</span>,<span class="st">"NP2Cost"</span>,<span class="st">"NP2QALYS"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then, we calculate the ICER for each treatment comparison.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ICER_NP2vNP1</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">meanResults</span><span class="op">[</span><span class="st">"NP2Cost"</span><span class="op">]</span><span class="op">-</span><span class="va">meanResults</span><span class="op">[</span><span class="st">"NP1Cost"</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span> <span class="va">meanResults</span><span class="op">[</span><span class="st">"NP2QALYS"</span><span class="op">]</span><span class="op">-</span> <span class="va">meanResults</span><span class="op">[</span><span class="st">"NP1QALYS"</span><span class="op">]</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ICER_NP2vNP1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ICER_NP2vNP1 <span class="ot">&lt;-</span> (meanResults[<span class="st">"NP2Cost"</span>]<span class="sc">-</span>meanResults[<span class="st">"NP1Cost"</span>])<span class="sc">/</span>( meanResults[<span class="st">"NP2QALYS"</span>]<span class="sc">-</span> meanResults[<span class="st">"NP1QALYS"</span>])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ICER_NP2vNP1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> NP2Cost 
 49850.39 </code></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ICER_NP2vSTD</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">meanResults</span><span class="op">[</span><span class="st">"NP2Cost"</span><span class="op">]</span><span class="op">-</span><span class="va">meanResults</span><span class="op">[</span><span class="st">"STDCost"</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span> <span class="va">meanResults</span><span class="op">[</span><span class="st">"NP2QALYS"</span><span class="op">]</span><span class="op">-</span> <span class="va">meanResults</span><span class="op">[</span><span class="st">"STDQALYS"</span><span class="op">]</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ICER_NP2vSTD</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ICER_NP2vSTD <span class="ot">&lt;-</span> (meanResults[<span class="st">"NP2Cost"</span>]<span class="sc">-</span>meanResults[<span class="st">"STDCost"</span>])<span class="sc">/</span>( meanResults[<span class="st">"NP2QALYS"</span>]<span class="sc">-</span> meanResults[<span class="st">"STDQALYS"</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ICER_NP2vSTD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> NP2Cost 
 14322.57 </code></pre>
 </div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ICER_NP1vSTD</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">meanResults</span><span class="op">[</span><span class="st">"NP1Cost"</span><span class="op">]</span><span class="op">-</span><span class="va">meanResults</span><span class="op">[</span><span class="st">"STDCost"</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="op">(</span> <span class="va">meanResults</span><span class="op">[</span><span class="st">"NP1QALYS"</span><span class="op">]</span><span class="op">-</span> <span class="va">meanResults</span><span class="op">[</span><span class="st">"STDQALYS"</span><span class="op">]</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ICER_NP1vSTD</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ICER_NP1vSTD <span class="ot">&lt;-</span> (meanResults[<span class="st">"NP1Cost"</span>]<span class="sc">-</span>meanResults[<span class="st">"STDCost"</span>])<span class="sc">/</span>( meanResults[<span class="st">"NP1QALYS"</span>]<span class="sc">-</span> meanResults[<span class="st">"STDQALYS"</span>])</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ICER_NP1vSTD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> NP1Cost 
 11097.74 </code></pre>
@@ -619,7 +648,7 @@ Tip
 <p>We will plot the cost and QALYS for each intervention.</p>
 <p>Note since we have 3 response variables we want to plot, we must transform the data into “long format”. The easiest way to do this is to use the <code>dplyr</code> and <code>tidyr</code> packages for data manipulation. If you don’t have these installed, you can install them using <code>install.packages("dplyr", "tidyr")</code>. You should have installed <code>ggplot2</code> when completing exercise 5.7.</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Attaching package: 'dplyr'</code></pre>
@@ -639,8 +668,8 @@ Attaching package: 'dplyr'</code></pre>
 
     intersect, setdiff, setequal, union</code></pre>
 </div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The code below requires additional knowledge of <code>dplyr</code>, <code>tidyr</code>, and regex and a bit of knowledge of pipes ‘%&gt;%’.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -655,91 +684,92 @@ Tip
 <div class="callout-body-container callout-body">
 <p>You will use these packages a lot so it is worth taking the time to learn some of their key functions</p>
 <ul>
-<li>
-<code>dplyr</code> cheat sheet: <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf</a>
-</li>
-<li>
-<code>tidyr</code> cheat sheet: <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf</a>
-</li>
-<li>You can learn more about regex (regular expressions) here: <a href="https://www.datacamp.com/tutorial/regex-r-regular-expressions-guide" class="uri">https://www.datacamp.com/tutorial/regex-r-regular-expressions-guide</a>
-</li>
+<li><code>dplyr</code> cheat sheet: <a href="https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/main/data-transformation.pdf</a></li>
+<li><code>tidyr</code> cheat sheet: <a href="https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf" class="uri">https://github.com/rstudio/cheatsheets/blob/main/tidyr.pdf</a></li>
+<li>You can learn more about regex (regular expressions) here: <a href="https://www.datacamp.com/tutorial/regex-r-regular-expressions-guide" class="uri">https://www.datacamp.com/tutorial/regex-r-regular-expressions-guide</a></li>
 </ul>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">simResultsLong</span> <span class="op">&lt;-</span> <span class="va">simResults</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">STDCost</span><span class="op">:</span><span class="va">NP2QALYS</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">STDCost</span><span class="op">:</span><span class="va">NP2QALYS</span>,names_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"treatment"</span>,<span class="st">".value"</span><span class="op">)</span>,  names_pattern <span class="op">=</span> <span class="st">"([A-Z 0-9]+)(Cost|QALYS)"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>simResultsLong <span class="ot">&lt;-</span> simResults <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(STDCost<span class="sc">:</span>NP2QALYS) <span class="sc">%&gt;%</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(STDCost<span class="sc">:</span>NP2QALYS,<span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"treatment"</span>,<span class="st">".value"</span>),  <span class="at">names_pattern =</span> <span class="st">"([A-Z 0-9]+)(Cost|QALYS)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally, we plot the results of each treatment.</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">simResultsLong</span>, </span>
-<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>                  x <span class="op">=</span> <span class="va">QALYS</span>,</span>
-<span>                  y <span class="op">=</span> <span class="va">Cost</span>, </span>
-<span>                  colour <span class="op">=</span> <span class="va">treatment</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> </span>
-<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Cost effectiveness plane for each treatment"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(simResultsLong, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> QALYS,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> Cost, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">colour =</span> treatment))<span class="sc">+</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cost effectiveness plane for each treatment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="Ch5-Exercise-58_files/figure-html/5.8.2 plot results-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure">
+<p><img src="Ch5-Exercise-58_files/figure-html/5.8.2 plot results-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</section><section id="part-3-vary-the-threshold-ratio" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="part-3-vary-the-threshold-ratio">
-<span class="header-section-number">1.4</span> Part 3: Vary the threshold ratio</h2>
+</section>
+<section id="part-3-vary-the-threshold-ratio" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-vary-the-threshold-ratio">Part 3: Vary the threshold ratio</h2>
 <p>Run the analysis while varying the ceiling or threshold ratio <code>cRatio</code> to plot the treatments with the highest net monetary benefits. Much of the code structure comes from exercise 5.7.</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># create a sequence of cRatios</span></span>
-<span><span class="va">cRatios</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">100000</span>,by <span class="op">=</span> <span class="fl">2500</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a sequence of cRatios</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>cRatios <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">100000</span>,<span class="at">by =</span> <span class="dv">2500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Take the sapply structure directly from the previous exercise and make alterations to calculate the ratio for every treatment.</p>
-<p>Again by default, when returning a vector <code>(propCE)</code>, it defaults to a column vector which is stacked row-wise. We can use <code><a href="https://rdrr.io/r/base/t.html">t()</a></code> to transform into row vectors</p>
+<p>Again by default, when returning a vector <code>(propCE)</code>, it defaults to a column vector which is stacked row-wise. We can use <code>t()</code> to transform into row vectors</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cRatioResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">cRatios</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
-<span>  </span>
-<span>  <span class="co">#call the simulation</span></span>
-<span>  <span class="va">allSimResults</span> <span class="op">&lt;-</span> <span class="fu">generateSimulations</span><span class="op">(</span>nReps <span class="op">=</span> <span class="fl">1000</span>,cRatio <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co">#calculate the proportion for each simulation</span></span>
-<span>  <span class="va">propCE</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">colMeans</a></span><span class="op">(</span><span class="va">allSimResults</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CESTD"</span>,<span class="st">"CENP1"</span>,<span class="st">"CENP2"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">propCE</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cRatioResults <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(cRatios,<span class="cf">function</span>(x){</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#call the simulation</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  allSimResults <span class="ot">&lt;-</span> <span class="fu">generateSimulations</span>(<span class="at">nReps =</span> <span class="dv">1000</span>,<span class="at">cRatio =</span> x)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the proportion for each simulation</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  propCE <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(allSimResults[,<span class="fu">c</span>(<span class="st">"CESTD"</span>,<span class="st">"CENP1"</span>,<span class="st">"CENP2"</span>)])</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(propCE)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Turn the matrix into a dataframe and add the <code>cRatio</code> vector.</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cRatioResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">cRatioResults</span><span class="op">)</span></span>
-<span><span class="va">cRatioResults</span><span class="op">$</span><span class="va">cRatio</span> <span class="op">&lt;-</span> <span class="va">cRatios</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cRatioResults <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(cRatioResults)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>cRatioResults<span class="sc">$</span>cRatio <span class="ot">&lt;-</span> cRatios</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Just as in the previous section, we need to transform the dataframe from wide to long format.</p>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">CEAcurveLong</span> <span class="op">&lt;-</span> <span class="va">cRatioResults</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="va">CESTD</span><span class="op">:</span><span class="va">CENP2</span>,names_to <span class="op">=</span> <span class="st">"treatment"</span>, values_to <span class="op">=</span> <span class="st">"propCI"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>CEAcurveLong <span class="ot">&lt;-</span> cRatioResults <span class="sc">%&gt;%</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(CESTD<span class="sc">:</span>CENP2,<span class="at">names_to =</span> <span class="st">"treatment"</span>, <span class="at">values_to =</span> <span class="st">"propCI"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Again, as a final step we will plot these results using <code>ggplot2</code></p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">CEAcurveLong</span>,</span>
-<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>                  x <span class="op">=</span> <span class="va">cRatio</span>, </span>
-<span>                  y <span class="op">=</span> <span class="va">propCI</span>, </span>
-<span>                  colour <span class="op">=</span> <span class="va">treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span></span>
-<span>                  linewidth <span class="op">=</span> <span class="fl">1.2</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>                <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
-<span>                  x <span class="op">=</span> <span class="st">"Ceiling Ratio"</span>, </span>
-<span>                  y <span class="op">=</span> <span class="st">"Proportion of treatment cost effective"</span>, </span>
-<span>                  title <span class="op">=</span> <span class="st">"Cost Effective Analysis Curves for three prosthesis treatments"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(CEAcurveLong,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> cRatio, </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> propCI, </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">colour =</span> treatment)) <span class="sc">+</span> </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">geom_line</span>(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span> </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                <span class="fu">labs</span>(</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> <span class="st">"Ceiling Ratio"</span>, </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> <span class="st">"Proportion of treatment cost effective"</span>, </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="st">"Cost Effective Analysis Curves for three prosthesis treatments"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="Ch5-Exercise-58_files/figure-html/5.8.3 plot results-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure">
+<p><img src="Ch5-Exercise-58_files/figure-html/5.8.3 plot results-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -1137,18 +1167,21 @@ Tip
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.html" class="pagination-link" aria-label="Exercise 5.7">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercise 5.7</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.html" class="pagination-link" aria-label="Appendix">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Appendix</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" class="pagination-link" aria-label="Exercise 6.6A &amp; 6.6B">
+        <span class="nav-page-text">Exercise 6.6A &amp; 6.6B</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

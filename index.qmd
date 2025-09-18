@@ -5,9 +5,9 @@ Welcome to this online guidebook on health economic evaluation in R. This is a l
 
 By working in R rather than in spreadsheets alone, analysts can take advantage of a flexible, script-based environment that enhances the transparency, reproducibility, and robustness of health economic evaluation. The guide introduces key concepts step by step, with practical exercises translated from standard texts and supplemented with modern R workflows.  
 
-Throughout, we draw on widely used packages such as dplyr and tidyr for data manipulation, ggplot2 for visualization, and tools such as MASS and MCMCpack for probability distributions and simulation. Together, these exercises and examples aim to build both technical fluency in R and a deeper understanding of best practices in health economic modelling.  
+Throughout, we draw on widely used packages such as `dplyr` and `tidyr` for data manipulation, `ggplot2` for visualization, and tools such as `MASS` and `MCMCpack` for probability distributions and simulation. Together, these exercises and examples aim to build both technical fluency in R and a deeper understanding of best practices in health economic modelling.  
 
-# Coding style and good practices
+## Coding style and good practices
 
 Good coding style is an important part of reproducible research. While individual preferences may vary, there are core elements of good practice that make code easier to read, share, and maintain. These include:  
 
@@ -17,4 +17,6 @@ Good coding style is an important part of reproducible research. While individua
 - Maintaining consistent formatting and indentation  
 - Keeping scripts organized and well-structured  
 
-For those just getting started with R, we recommend following the [tidyverse style guide](https://style.tidyverse.org/) as a helpful reference. 
+In this guidebook, we use the the [Biopharmaceutical Software Working Group's R Style Guide](https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/).
+
+For those just getting started with R, we recommend the [tidyverse style guide](https://style.tidyverse.org/) as a helpful reference. 

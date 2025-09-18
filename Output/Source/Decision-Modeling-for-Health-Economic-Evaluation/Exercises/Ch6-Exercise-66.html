@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>ch6-exercise-66</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Ch6-Exercise-66_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Ch6-Exercise-66_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Ch6-Exercise-66_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Ch6-Exercise-66_files/libs/quarto-html/popper.min.js"></script>
+<script src="Ch6-Exercise-66_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Ch6-Exercise-66_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Ch6-Exercise-66_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Ch6-Exercise-66_files/libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Ch6-Exercise-66_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Ch6-Exercise-66_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Ch6-Exercise-66_files/libs/bootstrap/bootstrap-81267100e462c21b3d6c0d5bf76a3417.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<section id="exercise-6.6a-6.6b" class="level1 unnumbered">
+<h1 class="unnumbered">Exercise 6.6A &amp; 6.6B</h1>
+<p>This section reproduces exercise 6.6a and 6.6b in R from Chapter 6 in the book “Decision Modelling for Health Economic Evaluation” by Andrew Briggs, Mark Sculpher, and Karl Claxton.</p>
+<p>#Exercise 6.6A</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Much of the code will come from exercise 5.8. In this exercise, we will use the simulation results to calculate the expected value of perfect information (EVPI). In this first code chunk we bring over all the previous functions that generated the cost effectiveness data for each of the prosthesis interventions considered in exercise 5.8.</p>
+<p>In this case, we are only focusing on the standard prosthesis and the “new prosthesis” NP1. So the values for NP2 will ignored for now.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#fixed parameters</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>cStandard <span class="ot">&lt;-</span> <span class="dv">394</span> <span class="co">#cost of standard prosthesis</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>cNP1 <span class="ot">&lt;-</span> <span class="dv">579</span> <span class="co">#cost of new prosthesis 1</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>cDR <span class="ot">&lt;-</span> <span class="fl">0.06</span> <span class="co">#cost discount rate</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>oDR <span class="ot">&lt;-</span> <span class="fl">0.015</span> <span class="co">#outcome discount rate</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">60</span> <span class="co">#average age of all patients at receipt of primary implant</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co">#sex indicator (0 for female, 1 for male)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>iVec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>) <span class="co">#starting vector; everyone starts in the first state</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">60</span> <span class="co">#number of cycles</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>covMat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">0.0022515</span>  , <span class="sc">-</span><span class="fl">0.005691</span> ,  <span class="fl">0.000000028</span>,  <span class="fl">0.0000051</span>,  <span class="fl">0.000259</span> ,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>   <span class="sc">-</span><span class="fl">0.005691</span>   ,  <span class="fl">0.0432191</span>, <span class="sc">-</span><span class="fl">0.000783</span>   , <span class="sc">-</span><span class="fl">0.007247</span> , <span class="sc">-</span><span class="fl">0.000642</span> ,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.000000028</span>, <span class="sc">-</span><span class="fl">0.000783</span> ,  <span class="fl">2.716e-05</span>  ,  <span class="fl">0.000033</span> , <span class="sc">-</span><span class="fl">0.000111</span> ,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0000051</span>  , <span class="sc">-</span><span class="fl">0.007247</span> ,  <span class="fl">0.000033</span>   ,  <span class="fl">0.0118954</span>,  <span class="fl">0.000184</span> ,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.000259</span>   , <span class="sc">-</span><span class="fl">0.000642</span> , <span class="sc">-</span><span class="fl">0.000111</span>   ,  <span class="fl">0.000184</span> ,  <span class="fl">0.1463686</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>   ),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">5</span>, <span class="at">byrow =</span> T</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(covMat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(covMat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>survModelSummary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>),</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">coefficient =</span> <span class="fu">c</span>(<span class="fl">0.3740968</span>,<span class="sc">-</span><span class="fl">5.490935</span>,<span class="sc">-</span><span class="fl">0.0367022</span>,<span class="fl">0.768536</span>,<span class="sc">-</span><span class="fl">1.344474</span>),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">SE =</span> <span class="fu">c</span>(<span class="fl">0.0474501</span>,<span class="fl">0.207892</span>,<span class="fl">0.0052112</span>,<span class="fl">0.109066</span>,<span class="fl">0.3825815</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>survModelSummary<span class="sc">$</span>hazard_ratio <span class="ot">&lt;-</span> <span class="fu">exp</span>(survModelSummary<span class="sc">$</span>coefficient)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co">#if we need cholesky decomposition</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>cholcovMat <span class="ot">&lt;-</span> <span class="fu">chol</span>(covMat)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">#fixed mortality rates and transition probabilities</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>deathRates <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span>),</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">Males =</span> <span class="fu">c</span>(<span class="fl">1.51</span>,<span class="fl">3.93</span>,<span class="fl">10.9</span>,<span class="fl">31.6</span>,<span class="fl">80.1</span>,<span class="fl">187.9</span>),</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">Females =</span> <span class="fu">c</span>(<span class="fl">0.99</span>,<span class="fl">2.6</span>,<span class="fl">6.7</span>,<span class="fl">19.3</span>,<span class="fl">53.5</span>,<span class="fl">154.8</span>)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>yearlyTProbs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">c</span>(<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span>),</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">Index =</span> <span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">45</span>,<span class="dv">55</span>,<span class="dv">65</span>,<span class="dv">75</span>,<span class="dv">85</span>),</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="at">Males =</span> <span class="fu">c</span>(<span class="fl">0.00151</span>,<span class="fl">0.00393</span>,<span class="fl">0.0109</span>,<span class="fl">0.0316</span>,<span class="fl">0.0801</span>,<span class="fl">0.1879</span>),</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">Females =</span> <span class="fu">c</span>(<span class="fl">0.00099</span>,<span class="fl">0.0026</span>,<span class="fl">0.0067</span>,<span class="fl">0.0193</span>,<span class="fl">0.0535</span>,<span class="fl">0.1548</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we will bring in all the previous functions relevant to the NP1 analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>discountFormula <span class="ot">&lt;-</span> <span class="cf">function</span>(nonDiscount,discRate,t){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(nonDiscount<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>discRate)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>t))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>drawBetaMethodMoments <span class="ot">&lt;-</span> <span class="cf">function</span>(n,mu,s){</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#functions estimates alpha and beta using the method of moments then draws from the beta distribution</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  alpha <span class="ot">&lt;-</span> ((mu<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>mu)<span class="sc">/</span>s<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span><span class="dv">1</span>)<span class="sc">*</span>mu</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  beta <span class="ot">&lt;-</span> alpha<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>mu )<span class="sc">/</span>mu</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#draw our random number</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  draw <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n,alpha,beta)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(draw)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>tProbsHazard <span class="ot">&lt;-</span> <span class="cf">function</span>(t,lambda,gamma){</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(lambda<span class="sc">*</span>(((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">^</span>gamma <span class="sc">-</span> ((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">^</span>gamma))))</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>tProbs_time <span class="ot">&lt;-</span> <span class="cf">function</span>(omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rr is revision risk, mr is mortality risk</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  tProbs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span><span class="sc">-</span>(omrPTHR),     <span class="dv">0</span>,     <span class="dv">0</span>,                   omrPTHR,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">1</span><span class="sc">-</span>(rr[t]<span class="sc">+</span>mr[t]), rr[t], <span class="dv">0</span>,                   mr[t],</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               <span class="dv">0</span>,     <span class="dv">1</span><span class="sc">-</span>(omrRTHR <span class="sc">+</span> mr[t]), omrRTHR <span class="sc">+</span> mr[t],</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               rrr,   <span class="dv">1</span><span class="sc">-</span>(rrr<span class="sc">+</span>mr[t]),       mr[t],</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               <span class="dv">0</span>,     <span class="dv">0</span>,                   <span class="dv">1</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  ),<span class="at">ncol =</span> <span class="dv">5</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">byrow =</span> T</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>calculateYearlyProbs <span class="ot">&lt;-</span> <span class="cf">function</span>(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create empty matrix that we will fill in</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  matReturn <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> t, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="co">#initialize first vector of proportions</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create column names</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(matReturn) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PrimaryTHR"</span>,<span class="st">"SuccessP"</span>,<span class="st">"RevisionTHR"</span>,<span class="st">"SucessR"</span>,<span class="st">"Death"</span>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>t){</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">#get the corresponding transition matrix based on the time</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    tProbs <span class="ot">&lt;-</span> <span class="fu">tProbs_time</span>(omrPTHR,omrRTHR,rr,mr,rrr,i)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    matReturn[i,] <span class="ot">&lt;-</span>   iVec <span class="sc">%*%</span> tProbs <span class="co">#round because we are using full population units</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    <span class="co">#update ivec</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    iVec <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(matReturn)</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="co">#returns a t (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>analysisNP1 <span class="ot">&lt;-</span> <span class="cf">function</span>(omrPTHR,omrRTHR,mr,rrr,rrNP1,cPrimary,cRevision,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate the revision risk</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    rr <span class="ot">&lt;-</span> <span class="fu">tProbsHazard</span>(<span class="at">t=</span>t,<span class="at">lambda =</span> lambda,<span class="at">gamma =</span> gamma)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    mr <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>t,<span class="cf">function</span>(x){</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate which index select based on the age group</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    inds <span class="ot">&lt;-</span> <span class="fu">sum</span>(x<span class="sc">+</span>age <span class="sc">&gt;=</span> yearlyTProbs<span class="sc">$</span>Index)</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    <span class="co">#select the gender columns</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    <span class="co">#if else takes 3 arguments, the first is a logical check, if true, it returns the second value, if false it returns the 3rd argument. Equivalent code can be written use if(x){}else{}.</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    genderCol <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(male <span class="sc">==</span><span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(yearlyTProbs[inds,genderCol])</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate standard states</span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>  standPopStates <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(<span class="at">iVec =</span> iVec,<span class="at">omrPTHR=</span>omrPTHR, <span class="at">omrRTHR=</span>omrPTHR,<span class="at">rr=</span> rr, <span class="at">mr =</span> mr,<span class="at">rrr=</span>rrr,<span class="at">t=</span>t)</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>  lifeYearsStandard <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(standPopStates[,<span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  <span class="co">#excludes death year</span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>  costVec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,cRevision,<span class="dv">0</span>)</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  <span class="co">#add a parameter for the initial cost we had 1000 initial patients</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>  iCostStandard <span class="ot">&lt;-</span> cStandard<span class="sc">*</span><span class="dv">1000</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  <span class="co">#first calculate the total cost</span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  totalCosts <span class="ot">&lt;-</span> standPopStates[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> costVec</span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the discounted cost</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>  discCostStandard <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalCosts,cDR,<span class="at">t=</span>t)</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the quality adjusted life years by creating a vector for each state utility except death</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>  utility<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,uSuccessP,uRevision,uSuccessR)</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>  <span class="co">#multiply by the cohort</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>  totalQuality <span class="ot">&lt;-</span>  standPopStates[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> utility</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>  QALYStandard <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalQuality,<span class="at">discRate =</span> oDR,<span class="at">t=</span>t)</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total cost for all cycles/person</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>  STDCost <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(iCostStandard,discCostStandard))<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>  STDLYs <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsStandard)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>  STDQALYS <span class="ot">&lt;-</span> <span class="fu">sum</span>(QALYStandard)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>  <span class="do">###repeat this for the NP1###</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>  rrNP1_vec <span class="ot">&lt;-</span> <span class="fu">tProbsHazard</span>(t,<span class="at">lambda =</span> lambda<span class="sc">*</span>rrNP1,<span class="at">gamma =</span> gamma)</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>  <span class="co">#call the previous function created</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>  populationStatesNP1 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(iVec,omrPTHR,omrRTHR,<span class="at">rr=</span>rrNP1_vec,<span class="at">mr=</span>mr,<span class="at">rrr=</span>rrr,<span class="at">t=</span>t)</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate life years for np1</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>  lifeYearsNP1 <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(populationStatesNP1[,<span class="sc">-</span><span class="dv">5</span>])</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>  <span class="co">#total and discounted costs</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>  totalCostsNP1 <span class="ot">&lt;-</span> populationStatesNP1[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> costVec</span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>  discCostsNP1 <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalCostsNP1,cDR,<span class="at">t=</span>t)</span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>  <span class="co">#add the initial cost for NP1</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>  iCostNP1 <span class="ot">&lt;-</span> cNP1<span class="sc">*</span><span class="dv">1000</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Utility</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>  totalQualityNP1 <span class="ot">&lt;-</span> populationStatesNP1[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> utility</span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>  QALYNP1 <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalQualityNP1,<span class="at">discRate =</span> oDR,<span class="at">t=</span>t)</span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total cost for all cycles/person</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a>  NP1Cost <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(iCostNP1,discCostsNP1))<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a>  NP1LYs <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsNP1)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a>  NP1QALYS <span class="ot">&lt;-</span> <span class="fu">sum</span>(QALYNP1)<span class="sc">/</span><span class="dv">1000</span></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a>  <span class="co">#returns a list of discounted cost and QALYs for each method</span></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">STDCost =</span> STDCost, <span class="at">STDQALYS =</span> STDQALYS, <span class="at">NP1Cost =</span> NP1Cost,<span class="at">NP1QALYS =</span> NP1QALYS, <span class="at">ICER =</span> (NP1Cost<span class="sc">-</span>STDCost)<span class="sc">/</span>(NP1QALYS<span class="sc">-</span>STDQALYS)))</span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a><span class="co">#generate simulation function</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a>generateSimulations <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">nReps =</span> <span class="dv">1000</span>,<span class="at">age=</span><span class="dv">60</span>,<span class="at">male=</span><span class="dv">0</span>,<span class="at">cRatio =</span> <span class="dv">100000</span>){</span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a>   <span class="co">#we need to know how many columns or variable we have here in ncol</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a>   cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"omrPTHR"</span>,<span class="st">"omrRTHR"</span>,<span class="st">"rrNP1"</span>,<span class="st">"rrr"</span>,<span class="st">"lambda"</span>,<span class="st">"gamma"</span>,</span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a>             <span class="st">"cPrimary"</span>,<span class="st">"cRevision"</span>,<span class="st">"cSuccess"</span>,<span class="st">"uSuccessP"</span>,<span class="st">"uSuccessR"</span>,</span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>             <span class="st">"uRevision"</span>,<span class="st">"cRatio"</span>,<span class="st">"STDCost"</span>,<span class="st">"STDQALYS"</span>,<span class="st">"NP1Cost"</span>,<span class="st">"NP1QALYS"</span>,</span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>             <span class="st">"STDNMB"</span>,<span class="st">"NP1NMB"</span>,<span class="st">"NP1Inc"</span>,<span class="st">"CESTD"</span>,<span class="st">"CENP1"</span>,<span class="st">"CENP1Inc"</span>)</span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>   <span class="co">#initialize our return dataframe</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>   dfReturn <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> nReps, <span class="at">ncol =</span> <span class="fu">length</span>(cols)))</span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>   <span class="co">#fill out the column names for our dataframe</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>   <span class="fu">colnames</span>(dfReturn) <span class="ot">&lt;-</span> cols</span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>   <span class="co">#cRatio is fixed at 10000</span></span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>cRatio <span class="ot">&lt;-</span> cRatio</span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>   alpha <span class="ot">&lt;-</span> (<span class="dv">5294</span><span class="sc">/</span><span class="dv">1487</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>   beta <span class="ot">&lt;-</span> <span class="dv">1487</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">5294</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>   <span class="co">#due to R's vectorization, we can sample all the parameters at once in the "n" parameter</span></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>   omrPTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nReps,<span class="dv">2</span>,<span class="dv">98</span>) <span class="co">#operative mortality rate following primary THR</span></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>   omrRTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nReps,<span class="dv">2</span>,<span class="dv">98</span>) <span class="co">#operative mortality rate following revision THR</span></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a>   rrr <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nReps,<span class="dv">4</span>,<span class="dv">96</span>) <span class="co">#re-revision risk</span></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>   <span class="co">#save them here using R's vectorization</span></span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>omrPTHR <span class="ot">&lt;-</span> omrPTHR</span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>omrRTHR <span class="ot">&lt;-</span> omrRTHR </span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>rrr <span class="ot">&lt;-</span> rrr</span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>   <span class="co">#cost and utility</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>   cRevision <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(nReps,<span class="at">shape =</span> alpha,<span class="at">scale =</span> beta)</span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>   uSuccessP <span class="ot">&lt;-</span> <span class="fu">drawBetaMethodMoments</span>(nReps,<span class="fl">0.85</span>,<span class="fl">0.03</span>)</span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>   uSuccessR <span class="ot">&lt;-</span> <span class="fu">drawBetaMethodMoments</span>(nReps,<span class="fl">0.75</span>,<span class="fl">0.04</span>)</span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>   uRevision <span class="ot">&lt;-</span> <span class="fu">drawBetaMethodMoments</span>(nReps,<span class="fl">0.3</span>,<span class="fl">0.03</span>)</span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>cRevision <span class="ot">&lt;-</span> cRevision</span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>uSuccessP <span class="ot">&lt;-</span> uSuccessP</span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>uSuccessR <span class="ot">&lt;-</span> uSuccessR</span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>uRevision <span class="ot">&lt;-</span> uRevision </span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a>   <span class="co">#draw from multivariate normal</span></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a>   normDraw <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(nReps, <span class="at">mu =</span> survModelSummary<span class="sc">$</span>coefficient,<span class="at">Sigma =</span> covMat)</span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>   <span class="co">#using R's vectorization, we can calculate operations on the entire vector, we must use [,"name"]as normDraw is not a matrix rather than a vector</span></span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>   lambda <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'cons'</span>] <span class="sc">+</span> normDraw[,<span class="st">'age'</span>]<span class="sc">*</span>age <span class="sc">+</span> normDraw[,<span class="st">'male'</span>]<span class="sc">*</span>male)</span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>   gamma <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'lngamma'</span>])</span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a>   rrNP1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'NP1'</span>])</span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>lambda <span class="ot">&lt;-</span> lambda</span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>gamma <span class="ot">&lt;-</span> gamma</span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>rrNP1 <span class="ot">&lt;-</span> rrNP1</span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>  <span class="co">#start the for-loop</span></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nReps){</span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a>    <span class="co">#call the analysis function and specify the iteration for the parameter to be selected</span></span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a>    <span class="co">#those with a parameter that is constant do not need to be called from dfReturn</span></span>
+<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">analysisNP1</span>(dfReturn<span class="sc">$</span>omrPTHR[i],dfReturn<span class="sc">$</span>omrRTHR[i],mr,dfReturn<span class="sc">$</span>rrr[i],dfReturn<span class="sc">$</span>rrNP1[i],cPrimary,dfReturn<span class="sc">$</span>cRevision[i],cStandard,dfReturn<span class="sc">$</span>uSuccessP[i],dfReturn<span class="sc">$</span>uSuccessR[i],dfReturn<span class="sc">$</span>uRevision[i],cDR,oDR,cNP1,dfReturn<span class="sc">$</span>gamma[i],dfReturn<span class="sc">$</span>lambda[i],iVec,t)</span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a>    <span class="co">#save the results</span></span>
+<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>STDCost[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>STDCost</span>
+<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>STDQALYS[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>STDQALYS</span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1Cost[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP1Cost</span>
+<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1QALYS[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP1QALYS</span>
+<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate net monetary benefit</span></span>
+<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>STDNMB[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>STDQALYS<span class="sc">*</span>dfReturn<span class="sc">$</span>cRatio[i]<span class="sc">-</span>results<span class="sc">$</span>STDCost</span>
+<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1NMB[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP1QALYS<span class="sc">*</span>dfReturn<span class="sc">$</span>cRatio[i]<span class="sc">-</span>results<span class="sc">$</span>NP1Cost</span>
+<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1Inc[i] <span class="ot">&lt;-</span> (results<span class="sc">$</span>NP1QALYS<span class="sc">-</span>results<span class="sc">$</span>STDQALYS)<span class="sc">*</span>dfReturn<span class="sc">$</span>cRatio[i] <span class="sc">-</span> (results<span class="sc">$</span>NP1Cost<span class="sc">-</span>results<span class="sc">$</span>STDCost)</span>
+<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate the cost effectiveness</span></span>
+<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>CESTD[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dfReturn<span class="sc">$</span>STDNMB[i]<span class="sc">&gt;=</span> dfReturn<span class="sc">$</span>NP1NMB[i],<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>CENP1[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dfReturn<span class="sc">$</span>CESTD[i]<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>CENP1Inc[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dfReturn<span class="sc">$</span>NP1Inc[i]<span class="sc">&gt;</span><span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a>    <span class="co">#the above formulae come directly from the textbook 5.1.4</span></span>
+<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(dfReturn)</span>
+<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="part-1-calculating-net-monetary-benefit" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-calculating-net-monetary-benefit">Part 1: Calculating net monetary benefit</h2>
+<p>We will start the simulation the way as in Exercise 5.7 and 5.8. Then we will calculate the mean net monetary benefit for the standard and NP1 treatment; the maximum net monetary benefit; and the maximum net monetary benefit under perfect information.</p>
+<p>Net monetary benefit is often referred to as NMB. We use this initialism in the R code below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cRatio <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>simResults <span class="ot">&lt;-</span> <span class="fu">generateSimulations</span>(<span class="at">nReps =</span> <span class="dv">10000</span>,<span class="at">cRatio =</span> cRatio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will calculate the mean and and maximum net monetary benefit</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#simplest using colMeans</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>meanNMB <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(simResults[,<span class="fu">c</span>(<span class="st">"STDNMB"</span>,<span class="st">"NP1NMB"</span>)])</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#get the maximum NMB within each treatment iteration</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>maxPINMB <span class="ot">&lt;-</span> <span class="fu">pmax</span>(simResults[,<span class="fu">c</span>(<span class="st">"STDNMB"</span>)],simResults[,<span class="fu">c</span>(<span class="st">"NP1NMB"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we can calculate the EVPI which is: <span class="math display">\[
+E_{\theta} [\max_j \text{NMB}(j,\theta)]- \max_j E_{\theta}[\text{NMB}(j,\theta)]
+\]</span> For this exercise, we only need the STD and NP1 columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>EVPI <span class="ot">&lt;-</span> <span class="fu">mean</span>(maxPINMB)<span class="sc">-</span><span class="fu">max</span>(meanNMB) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>EVPI </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5860773</code></pre>
+</div>
+</div>
+<p>This is the expected value of information for a given patient.</p>
+</section>
+<section id="part-2-calculating-the-evpi-at-the-population-level" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-calculating-the-evpi-at-the-population-level">Part 2: Calculating the EVPI at the population level</h2>
+<p>Next, we aim to calculate the EVPI at the population level by multiplying by the population, applying discounting for future years.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>annualPop <span class="ot">&lt;-</span> <span class="dv">40000</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#discounted population</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>discPop <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(annualPop,cDR,<span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we calculate the sum of the population years and multiply the result by the per person EVPI to get the population-level EVPI, here labeled <code>popEVPI</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>perAnnumEffPop <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">c</span>(annualPop,discPop))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>popEVPI <span class="ot">&lt;-</span> EVPI<span class="sc">*</span>perAnnumEffPop</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>popEVPI </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 182895.8</code></pre>
+</div>
+</div>
+</section>
+<section id="part-3-plotting-evpi" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-plotting-evpi">Part 3: Plotting EVPI</h2>
+<p>We will visualize our results by plotting the EVPI by the cost-effectiveness threshold ratio <code>cRatio</code>.</p>
+<p>Here we run the simulation loop by sequencing through cRatio to plot the curve. We may use the sapply family of functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#calculate the cRatios to be looped over</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>cRatios <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">50000</span>,<span class="at">by =</span> <span class="dv">500</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  annualPop <span class="ot">&lt;-</span> <span class="dv">40000</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#using the same sapply function as before</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>cRatioResults <span class="ot">&lt;-</span> <span class="fu">sapply</span>(cRatios,<span class="cf">function</span>(x){</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#call the simulation</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  NP1sim <span class="ot">&lt;-</span> <span class="fu">generateSimulations</span>(<span class="at">nReps =</span> <span class="dv">1000</span>,<span class="at">cRatio =</span> x)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="co">#simplest using colMeans</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  meanNMB <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(NP1sim[,<span class="fu">c</span>(<span class="st">"STDNMB"</span>,<span class="st">"NP1NMB"</span>)])</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#get the maximum NMB within each treatment iteration</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  maxPINMB <span class="ot">&lt;-</span> <span class="fu">pmax</span>(NP1sim[,<span class="fu">c</span>(<span class="st">"STDNMB"</span>)],NP1sim[,<span class="fu">c</span>(<span class="st">"NP1NMB"</span>)])</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  EVPI <span class="ot">&lt;-</span> <span class="fu">mean</span>(maxPINMB)<span class="sc">-</span><span class="fu">max</span>(meanNMB) </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">#multiply EVPI by discounted population</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  popEVPI <span class="ot">&lt;-</span> EVPI<span class="sc">*</span>perAnnumEffPop</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(popEVPI)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, we compile our results in a data frame</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dfEVPI <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cRatio =</span> cRatios, <span class="at">EVPI =</span> cRatioResults)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Lastly, we plot the population EVPI by the cRatio using <code>ggplot2</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load package</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#specify plot </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(dfEVPI,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">aes</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> cRatio, </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> EVPI)) <span class="sc">+</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                <span class="fu">geom_line</span>(</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">colour =</span> <span class="st">"#414487"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                  <span class="at">linewidth =</span> <span class="fl">1.5</span>) <span class="sc">+</span> </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                <span class="fu">labs</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                  <span class="at">x =</span> <span class="st">"Ceiling Ratio"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>                  <span class="at">y =</span> <span class="st">"Population EVPI"</span>, </span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="st">"EVPI by cRatio"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Ch6-Exercise-66_files/figure-html/6.6A.3%20plot%20EVPI%20&amp;%20cRatio%20results-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-6.6b" class="level1">
+<h1>Exercise 6.6B</h1>
+<p>In the section of this exercise we will investigate the EVPI of grouped parameters. Based on the previous plot, to maximize the EVPI for a given cRatio, we should pick cRatio = 2200. This is the value provided by the textbook that maximizes the EVPI, however, due to Monte Carlo variability the empirical value here will be different, and different for each seed used.</p>
+<section id="part-1-calculating-the-expected-value-of-perfect-information-for-parameters-evppi" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-calculating-the-expected-value-of-perfect-information-for-parameters-evppi">Part 1: Calculating the expected value of perfect information for parameters (EVPPI)</h2>
+<p>Recall that the Expected Value of Perfect information for Parameters (EVPPI) for some parameter <span class="math inline">\(\phi\)</span>, where <span class="math inline">\(\theta = \phi \cup \psi\)</span> is</p>
+<p><span class="math display">\[
+E_\phi\max_j[E_{\psi|\phi}[NMB(j,\phi,\psi)]- \max_j E_{\theta}[\text{NMB}(j,\theta)].
+\]</span> First, if we wanted to use the results from our simulation above, we could use the <code>which.max</code> function to select the element from <code>cRatios</code> that corresponds to the largest value in the <code>cRatioResults</code> we calculated in 6.6A.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cRatios[<span class="fu">which.max</span>(cRatioResults)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2000</code></pre>
+</div>
+</div>
+<p>While, the textbook states 2200, due to variability in the simulations, a larger number of repetitions and finer grid of cRatios would better approximate the maximum.</p>
+<p>Despite this, we will use the textbook value of 2200.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cRatio <span class="ot">&lt;-</span> <span class="dv">2200</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can capture the value of information for a certain parameter by fixing that parameter before the simulation. To make these changes, we must make some alterations to the <code>generateSimulations</code> function.</p>
+<p>The main alteration is by adding a <code>keepFixed</code> argument. Here, <code>keepFixed</code> determines which parameters are held constant in the simulation. For the fixed parameter, the first element [1] is used as the “fixed” value. All other parameters not chosen by <code>keepFixed</code> vary as before through draws from distributions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>generateSimulationsParam <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">nReps =</span> <span class="dv">1000</span>,<span class="at">age=</span><span class="dv">60</span>,<span class="at">male=</span><span class="dv">0</span>,<span class="at">cRatio =</span> <span class="dv">100000</span>, <span class="at">keepFixed =</span> <span class="st">"rrNP1"</span>){</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>   <span class="co">#we need to know how many columns or variable we have here in ncol</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>   cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"omrPTHR"</span>,<span class="st">"omrRTHR"</span>,<span class="st">"rrNP1"</span>,<span class="st">"rrr"</span>,<span class="st">"lambda"</span>,<span class="st">"gamma"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">"cPrimary"</span>,<span class="st">"cRevision"</span>,<span class="st">"cSuccess"</span>,<span class="st">"uSuccessP"</span>,<span class="st">"uSuccessR"</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">"uRevision"</span>,<span class="st">"cRatio"</span>,<span class="st">"STDCost"</span>,<span class="st">"STDQALYS"</span>,<span class="st">"NP1Cost"</span>,<span class="st">"NP1QALYS"</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"STDNMB"</span>,<span class="st">"NP1NMB"</span>,<span class="st">"NP1Inc"</span>,<span class="st">"CESTD"</span>,<span class="st">"CENP1"</span>,<span class="st">"CENP1Inc"</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>   <span class="co">#initialize our return dataframe</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>   dfReturn <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> nReps, <span class="at">ncol =</span> <span class="fu">length</span>(cols)))</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>   <span class="co">#fill out the column names for our dataframe</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>   <span class="fu">colnames</span>(dfReturn) <span class="ot">&lt;-</span> cols</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>   <span class="co">#cRatio is fixed at 10000</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>cRatio <span class="ot">&lt;-</span> cRatio</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>   alpha <span class="ot">&lt;-</span> (<span class="dv">5294</span><span class="sc">/</span><span class="dv">1487</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>   beta <span class="ot">&lt;-</span> <span class="dv">1487</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">5294</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>   <span class="co">#due to R's vectorization, we can sample all the parameters at once in the "n" parameter</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>   omrPTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nReps,<span class="dv">2</span>,<span class="dv">98</span>) <span class="co">#operative mortality rate following primary THR</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>   omrRTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nReps,<span class="dv">2</span>,<span class="dv">98</span>) <span class="co">#operative mortality rate following revision THR</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>   rrr <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(nReps,<span class="dv">4</span>,<span class="dv">96</span>) <span class="co">#re-revision risk</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>   <span class="co">#save them here using R's vectorization</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>omrPTHR <span class="ot">&lt;-</span> omrPTHR</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>omrRTHR <span class="ot">&lt;-</span> omrRTHR </span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>rrr <span class="ot">&lt;-</span> rrr</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>   <span class="co">#cost and utility</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>   cRevision <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(nReps,<span class="at">shape =</span> alpha,<span class="at">scale =</span> beta)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>   uSuccessP <span class="ot">&lt;-</span> <span class="fu">drawBetaMethodMoments</span>(nReps,<span class="fl">0.85</span>,<span class="fl">0.03</span>)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>   uSuccessR <span class="ot">&lt;-</span> <span class="fu">drawBetaMethodMoments</span>(nReps,<span class="fl">0.75</span>,<span class="fl">0.04</span>)</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>   uRevision <span class="ot">&lt;-</span> <span class="fu">drawBetaMethodMoments</span>(nReps,<span class="fl">0.3</span>,<span class="fl">0.03</span>)</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>cRevision <span class="ot">&lt;-</span> cRevision</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>uSuccessP <span class="ot">&lt;-</span> uSuccessP</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>uSuccessR <span class="ot">&lt;-</span> uSuccessR</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>uRevision <span class="ot">&lt;-</span> uRevision </span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>   <span class="co">#draw from multivariate normal</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>   normDraw <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(nReps, <span class="at">mu =</span> survModelSummary<span class="sc">$</span>coefficient,<span class="at">Sigma =</span> covMat)</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>   <span class="co">#using R's vectorization, we can calculate operations on the entire vector, we must use [,"name"]as normDraw is not a matrix rather than a vector</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>   lambda <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'cons'</span>] <span class="sc">+</span> normDraw[,<span class="st">'age'</span>]<span class="sc">*</span>age <span class="sc">+</span> normDraw[,<span class="st">'male'</span>]<span class="sc">*</span>male)</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>   gamma <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'lngamma'</span>])</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>   rrNP1 <span class="ot">&lt;-</span> <span class="fu">exp</span>(normDraw[,<span class="st">'NP1'</span>])</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>lambda <span class="ot">&lt;-</span> lambda</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>gamma <span class="ot">&lt;-</span> gamma</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>   dfReturn<span class="sc">$</span>rrNP1 <span class="ot">&lt;-</span> rrNP1</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>  <span class="co">#start the for-loop</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>    <span class="co">#choose which parameter will be kept fixed based on the first draw</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(keepFixed <span class="sc">==</span> <span class="st">"rrNP1"</span>){</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>      dfReturn<span class="sc">$</span>rrNP1 <span class="ot">&lt;-</span> rrNP1[<span class="dv">1</span>]</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(keepFixed <span class="sc">==</span> <span class="st">"OMRs"</span>){</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>      dfReturn<span class="sc">$</span>omrPTHR <span class="ot">&lt;-</span> omrPTHR[<span class="dv">1</span>]</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>      dfReturn<span class="sc">$</span>omrRTHR <span class="ot">&lt;-</span> omrRTHR[<span class="dv">1</span>]   </span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(keepFixed <span class="sc">==</span> <span class="st">"cRevision"</span>){</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>      dfReturn<span class="sc">$</span>cRevision <span class="ot">&lt;-</span> cRevision[<span class="dv">1</span>]</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(keepFixed <span class="sc">==</span> <span class="st">"rrr"</span>){</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>        dfReturn<span class="sc">$</span>rrr <span class="ot">&lt;-</span> rrr[<span class="dv">1</span>]</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(keepFixed <span class="sc">==</span> <span class="st">"utilities"</span>){</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>        dfReturn<span class="sc">$</span>uSuccessP <span class="ot">&lt;-</span> uSuccessP[<span class="dv">1</span>]</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>        dfReturn<span class="sc">$</span>uRevision <span class="ot">&lt;-</span> uRevision[<span class="dv">1</span>]</span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>        dfReturn<span class="sc">$</span>uSuccessR <span class="ot">&lt;-</span> uSuccessR[<span class="dv">1</span>]</span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(keepFixed <span class="sc">==</span> <span class="st">"survParams"</span>){</span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>        dfReturn<span class="sc">$</span>lambda <span class="ot">&lt;-</span> lambda[<span class="dv">1</span>]</span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>        dfReturn<span class="sc">$</span>gamma <span class="ot">&lt;-</span> gamma[<span class="dv">1</span>]</span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nReps){</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">analysisNP1</span>(dfReturn<span class="sc">$</span>omrPTHR[i],dfReturn<span class="sc">$</span>omrRTHR[i],mr,dfReturn<span class="sc">$</span>rrr[i],dfReturn<span class="sc">$</span>rrNP1[i],cPrimary,dfReturn<span class="sc">$</span>cRevision[i],cStandard,dfReturn<span class="sc">$</span>uSuccessP[i],dfReturn<span class="sc">$</span>uSuccessR[i],dfReturn<span class="sc">$</span>uRevision[i],cDR,oDR,cNP1,dfReturn<span class="sc">$</span>gamma[i],dfReturn<span class="sc">$</span>lambda[i],iVec,t)</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>    <span class="co">#save the results, including NP2</span></span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>STDCost[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>STDCost</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>STDQALYS[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>STDQALYS</span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1Cost[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP1Cost</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1QALYS[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP1QALYS</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>    <span class="co">#dfReturn$NP2Cost[i] &lt;- results$NP2cost</span></span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>    <span class="co">#dfReturn$NP2QALYS[i] &lt;- results$NP2QALYS</span></span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate net monetary benefit, we now remove the redundant  "NP1 inc"</span></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>STDNMB[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>STDQALYS<span class="sc">*</span>dfReturn<span class="sc">$</span>cRatio[i]<span class="sc">-</span>results<span class="sc">$</span>STDCost</span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1NMB[i] <span class="ot">&lt;-</span> results<span class="sc">$</span>NP1QALYS<span class="sc">*</span>dfReturn<span class="sc">$</span>cRatio[i]<span class="sc">-</span>results<span class="sc">$</span>NP1Cost</span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>NP1Inc[i] <span class="ot">&lt;-</span> (results<span class="sc">$</span>NP1QALYS<span class="sc">-</span>results<span class="sc">$</span>STDQALYS)<span class="sc">*</span>dfReturn<span class="sc">$</span>cRatio[i] <span class="sc">-</span> (results<span class="sc">$</span>NP1Cost<span class="sc">-</span>results<span class="sc">$</span>STDCost)</span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>    <span class="co">#dfReturn$NP2NMB[i] &lt;- results$NP2QALYS*dfReturn$cRatio[i]-results$NP2cost    </span></span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate the cost effectiveness. Note with 3 methods, we must take the maximum </span></span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>    bestTreatment <span class="ot">&lt;-</span> <span class="fu">max</span>(dfReturn<span class="sc">$</span>STDNMB[i], dfReturn<span class="sc">$</span>NP1NMB[i], dfReturn<span class="sc">$</span>NP2NMB[i] )</span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>    <span class="co">#save the cost effectiveness winner</span></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>CISTD[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dfReturn<span class="sc">$</span>STDNMB[i]<span class="sc">==</span>bestTreatment,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>CINP1[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dfReturn<span class="sc">$</span>NP1NMB[i]<span class="sc">==</span>bestTreatment,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>    dfReturn<span class="sc">$</span>CINP1Inc[i] <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dfReturn<span class="sc">$</span>NP1Inc[i]<span class="sc">&gt;</span><span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>    <span class="co">#dfReturn$CINP2[i] &lt;- ifelse(dfReturn$NP2NMB[i]==bestTreatment,1,0)</span></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(dfReturn)</span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a><span class="co">#we repeat this 100 or (many times), while keeping the rrNP1 fixed</span></span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>fixrrNP1 <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="cf">function</span>(x){</span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>  simResults <span class="ot">&lt;-</span> <span class="fu">generateSimulationsParam</span>(<span class="at">cRatio =</span> <span class="dv">2200</span>,<span class="at">keepFixed =</span> <span class="st">"rrNP1"</span>,<span class="at">nReps =</span> <span class="dv">1000</span>)</span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a>  meanBenefit <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(simResults[,<span class="fu">c</span>(<span class="st">"STDNMB"</span>,<span class="st">"NP1NMB"</span>)])</span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(meanBenefit)</span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then we calculate the expected maximum and adjust for the population and future discounting using the <code>perAnnumEffPop</code> value we calculated before.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#expected maximum</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>expMaxrrNP1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">pmax</span>(fixrrNP1[,<span class="st">"STDNMB"</span>],fixrrNP1[,<span class="st">"NP1NMB"</span>]))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>maxExpNP1 <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">colMeans</span>(fixrrNP1))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>EVPI <span class="ot">&lt;-</span> expMaxrrNP1<span class="sc">-</span>maxExpNP1</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#adjust for discounting the population over time</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>EVPI_pop <span class="ot">&lt;-</span> EVPI<span class="sc">*</span>perAnnumEffPop</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>EVPI_pop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3275354</code></pre>
+</div>
+</div>
+</section>
+<section id="part-2-conducting-evppi-for-all-parameters" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-conducting-evppi-for-all-parameters">Part 2: Conducting EVPPI for all parameters</h2>
+<p>Now that we have established how to perform partial value of information by fixing one parameter, we can apply this to every set of parameters.</p>
+<p>We will loop through every parameter group while keeping it fixed while calculating the EVPI. Ideally we would want the number of trials and the number of repetitions to each be 1000 however this becomes quite computationally intensive. Using parallel processing would speed up this process significantly. In this section we first write the code only using sequential (base) processing but add the parallelized version in the appendix.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the loop below, the function <code>outerSimLoop</code> uses the vector <code>paramGroups</code>to hold all the parameter names that we want to loop through. This vector is passed as a default argument to the function, so it doesn’t need to be manually typed each time the function is called. Using a vector like this reduces the chance of typos or errors and makes the code more flexible and easier to maintain.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>outerSimLoop <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">trials =</span> <span class="dv">100</span>,<span class="at">nReps=</span><span class="dv">100</span>,<span class="at">cRatio=</span><span class="dv">2200</span>, <span class="at">paramGroups =</span> <span class="fu">c</span>(<span class="st">"rrNP1"</span>,<span class="st">"OMRs"</span>,<span class="st">"cRevision"</span>,<span class="st">"rrr"</span>,<span class="st">"utilities"</span>,<span class="st">"survParams"</span>)){</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Run the simulation for each fixed parameter</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  nParams <span class="ot">&lt;-</span> <span class="fu">length</span>(paramGroups)  </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  EVPIs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="cn">NA</span>,<span class="at">nrow =</span><span class="dv">1</span>,<span class="at">ncol =</span> nParams))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="do">##set the column names to match our parameters of interest using paramGroups vector</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(EVPIs) <span class="ot">&lt;-</span> paramGroups</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(p <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nParams){</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    fixedParam <span class="ot">&lt;-</span> paramGroups[p]</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(fixedParam )</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#call the sapply function from earlier (also referred to as the "inner loop" in the excel file.)</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    trialResults <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>trials,<span class="cf">function</span>(x){</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>      <span class="co">#get the simulation results</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>      simResults <span class="ot">&lt;-</span> <span class="fu">generateSimulationsParam</span>(<span class="at">cRatio =</span> cRatio, <span class="at">keepFixed =</span> fixedParam ,<span class="at">nReps =</span> nReps)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>      <span class="co">#get the mean benefit across the trials</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>      meanBenefit <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(simResults[,<span class="fu">c</span>(<span class="st">"STDNMB"</span>,<span class="st">"NP1NMB"</span>)])</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">return</span>(meanBenefit)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    }))</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate the EVPI</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    expMaxrrNP1 <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">pmax</span>(trialResults[,<span class="st">"STDNMB"</span>],trialResults[,<span class="st">"NP1NMB"</span>]))</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    maxExpNP1 <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">colMeans</span>(trialResults))</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    EVPI <span class="ot">&lt;-</span> expMaxrrNP1<span class="sc">-</span>maxExpNP1</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    <span class="co">#adjust for discounting the population over time</span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    EVPI_pop <span class="ot">&lt;-</span> EVPI<span class="sc">*</span>perAnnumEffPop</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">#save the EVPI</span></span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    EVPIs[,p] <span class="ot">&lt;-</span> EVPI_pop</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>  <span class="co">#return</span></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(EVPIs)</span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here we only run the simulations of 100x100 this is already 100,000. Note that:</p>
+<ul>
+<li><strong><code>trials</code></strong>: the number of times the simulation is run for each fixed parameter (outer loop).<br>
+</li>
+<li><strong><code>nReps</code></strong>: the number of individual simulation replications within each trial (inner loop), used to estimate outcomes for that trial.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>EVPPI_simResults <span class="ot">&lt;-</span> <span class="fu">outerSimLoop</span>(<span class="at">trials =</span> <span class="dv">100</span>,<span class="at">nReps=</span><span class="dv">100</span>,<span class="at">cRatio=</span><span class="dv">2200</span>, <span class="at">paramGroups =</span> <span class="fu">c</span>(<span class="st">"rrNP1"</span>,<span class="st">"OMRs"</span>,<span class="st">"cRevision"</span>,<span class="st">"rrr"</span>,<span class="st">"utilities"</span>,<span class="st">"survParams"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "rrNP1"
+[1] "OMRs"
+[1] "cRevision"
+[1] "rrr"
+[1] "utilities"
+[1] "survParams"</code></pre>
+</div>
+</div>
+</section>
+<section id="part-3-ploting-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-ploting-the-results">Part 3: Ploting the results</h2>
+<p>Lastly, transform the dataframe and then plot the results of the the partial EVPI for each parameter</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">##load tidyr package </span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>EVPPI_plotDF <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(EVPPI_simResults,<span class="fu">everything</span>(),<span class="at">names_to =</span> <span class="st">"paramGroup"</span>,<span class="at">values_to =</span> <span class="st">"partialEVPI"</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="do">##load the viridis package</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: viridisLite</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(EVPPI_plotDF,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> paramGroup,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> partialEVPI,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> paramGroup  <span class="co"># fill bars by parameter group</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>       )) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">stat =</span> <span class="st">"identity"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"grey4"</span>     <span class="co"># dark outlines for contrast</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">discrete =</span> <span class="cn">TRUE</span>,      <span class="co"># categorical variable</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"D"</span>          <span class="co"># choose a viridis palette (A-D)</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Parameter Group"</span>,</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Partial EVPI"</span>,</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Expected value of partial perfect information by parameter group"</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Ch6-Exercise-66_files/figure-html/plot%20the%20results-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,25 +1,29 @@
-# Exercise 6.6a & b
+# Exercise 6.6A & 6.6B {.unnumbered}
 
-This section reproduces exercise 6.6a and 6.6b in R from Chapter 6 in the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+This section reproduces exercise 6.6a and 6.6b in R from Chapter 6 in the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton.
 
+#Exercise 6.6A
 
 ## Setup
-Much of all the code will come from the previous Exercise 5.8 where we will use the simulations results to calculate the expected value of perfect information. In this code chunk we bring all the previous functions over that generate the cost effectiveness data for each of the implant treatments from 5.8. In this case, we are only focusing on the standard implant and the "new implant" NP1. So the values for NP2 will ignored for now.
+Much of the code will come from exercise 5.8. In this exercise, we will use the simulation results to calculate the expected value of perfect information (EVPI). In this first code chunk we bring over all the previous functions that generated the cost effectiveness data for each of the prosthesis interventions considered in exercise 5.8. 
 
-```{r Setup functions and parameters}
+In this case, we are only focusing on the standard prosthesis and the "new prosthesis" NP1. So the values for NP2 will ignored for now.
+
+```{r 6.6A.0 Setup parameters}
 library(MASS)
+
 #fixed parameters
 
-cStandard <- 394 #cost of standard implant
-cNP1 <- 579 #cost of new implant
+cStandard <- 394 #cost of standard prosthesis
+cNP1 <- 579 #cost of new prosthesis 1
 
-cDR <- 0.06 
-oDR <- 0.015 
-age <- 60
-male <- 0
+cDR <- 0.06 #cost discount rate
+oDR <- 0.015 #outcome discount rate
+age <- 60 #average age of all patients at receipt of primary implant
+male <- 0 #sex indicator (0 for female, 1 for male)
 
-iVec <- c(1000,0,0,0,0)
-t <- 60
+iVec <- c(1000,0,0,0,0) #starting vector; everyone starts in the first state
+t <- 60 #number of cycles
 
 covMat <- matrix(
   c(0.0022515  , -0.005691 ,  0.000000028,  0.0000051,  0.000259 ,
@@ -34,13 +38,12 @@ covMat <- matrix(
 colnames(covMat) <- rownames(covMat) <- c("lngamma","cons","age","male","NP1")
 
 survModelSummary <- data.frame(
-  
   variable = c("lngamma","cons","age","male","NP1"),
   coefficient = c(0.3740968,-5.490935,-0.0367022,0.768536,-1.344474),
   SE = c(0.0474501,0.207892,0.0052112,0.109066,0.3825815)
 )
-survModelSummary$hazard_ratio <- exp(survModelSummary$coefficient)
 
+survModelSummary$hazard_ratio <- exp(survModelSummary$coefficient)
 
 #if we need cholesky decomposition
 cholcovMat <- chol(covMat)
@@ -50,8 +53,8 @@ deathRates <- data.frame(
   Age = c("35-44","45-54","55-64","65-74","75-84","85 and over"),
   Males = c(1.51,3.93,10.9,31.6,80.1,187.9),
   Females = c(0.99,2.6,6.7,19.3,53.5,154.8)
-  
 )
+
 yearlyTProbs <- data.frame(
     Age = c("35-44","45-54","55-64","65-74","75-84","85 and over"),
     Index = c(35,45,55,65,75,85),
@@ -62,10 +65,8 @@ yearlyTProbs <- data.frame(
 ```
 
 
-## Functions
-
-Bring all previous functions relevant to NP1 analysis here
-```{r helper function}
+Now we will bring in all the previous functions relevant to the NP1 analysis.
+```{r 6.6A.0 Bring in helper functions}
 discountFormula <- function(nonDiscount,discRate,t){
   
   return(nonDiscount/(1+discRate)^(1:t))
@@ -130,7 +131,7 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
   }
   return(matReturn)
   
-  #returns a 60 (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t
+  #returns a t (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t
   
 }
 
@@ -207,7 +208,7 @@ analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,cPrimary,cRevision,cStandar
   
 }
 
-#generate simulation function from exercise 5.7
+#generate simulation function
 generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
    
    #we need to know how many columns or variable we have here in ncol
@@ -292,67 +293,70 @@ generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
 
 ```
 
+## Part 1: Calculating net monetary benefit
 
+We will start the simulation the way as in Exercise 5.7 and 5.8. Then we will calculate the mean net monetary benefit for the standard and NP1 treatment; the maximum net monetary benefit; and the maximum net monetary benefit under perfect information. 
 
-## Part 1
-
-Start the simulation, same as in Exercise 5.7 and 5.8 and calculate the mean Net Monetary Benefit for the standard and NP1 treatment, the maximum Net Monetary Benefit, and the maximum net monetary benefit under perfect information
-```{r Simulation run}
+Net monetary benefit is often referred to as NMB. We use this initialism in the R code below.
+```{r 6.6A.1 run the simulation}
 
 set.seed(123)
 cRatio <- 100000
 
 simResults <- generateSimulations(nReps = 10000,cRatio = cRatio)
+```
 
+We will calculate the mean and and maximum net monetary benefit
+```{r 6.6A.1 calculating mean and maximum NMB}
 #simplest using colMeans
 meanNMB <- colMeans(simResults[,c("STDNMB","NP1NMB")])
-
 
 #get the maximum NMB within each treatment iteration
 maxPINMB <- pmax(simResults[,c("STDNMB")],simResults[,c("NP1NMB")])
 ```
 
-
-Now we can calculate the EVPI which is 
-
+Now we can calculate the EVPI which is: 
 $$
 E_{\theta} [\max_j \text{NMB}(j,\theta)]- \max_j E_{\theta}[\text{NMB}(j,\theta)]
 $$
-
-Note we only need the STD and NP1 columns
-
-```{r Calculate EVPI}
+For this exercise, we only need the STD and NP1 columns.
+```{r 6.6A.1 Calculate EVPI}
 
 EVPI <- mean(maxPINMB)-max(meanNMB) 
 
 EVPI 
 ```
 
-This is the expected value of information for a given patient. Next, we aim to calculate the EVPI at the population level by multiplying by the population, discounted for future years
+This is the expected value of information for a given patient. 
 
-## Part 2
+## Part 2: Calculating the EVPI at the population level
 
-Calculating the EVPI at the population level
-```{r EVPI at the population level}
+Next, we aim to calculate the EVPI at the population level by multiplying by the population, applying discounting for future years.
+
+```{r 6.6A.2 EVPI at the population level 1}
 annualPop <- 40000
 
 #discounted population
-discPop <- discountFormula(40000,cDR,9)
+discPop <- discountFormula(annualPop,cDR,9)
+```
 
-#calculate the sum of the population years
-perAnumEffPop <- sum(c(40000,discPop))
+Now we calculate the sum of the population years and multiply the result by the per person EVPI to get the population-level EVPI, here labeled `popEVPI`.
+```{r 6.6A.2 EVPI at the population level 2}
+perAnnumEffPop <- sum(c(annualPop,discPop))
 
 
-popEVPI <- EVPI*perAnumEffPop
+popEVPI <- EVPI*perAnnumEffPop
 
 
 popEVPI 
 ```
 
-## Part 3
+## Part 3: Plotting EVPI
 
-Plotting EVPI by the cost effectiveness threshold (cRatio). Here we run the simulation loop by sequencing through cRatio to plot the curve. We may use the sapply family of functions.
-```{r plotting EVPI}
+We will visualize our results by plotting the EVPI by the cost-effectiveness threshold ratio `cRatio`. 
+
+Here we run the simulation loop by sequencing through cRatio to plot the curve. We may use the sapply family of functions.
+```{r 6.6A.3 plotting EVPI}
 library(ggplot2)
 #calculate the cRatios to be looped over
 cRatios <- seq(0,50000,by = 500)
@@ -373,50 +377,65 @@ cRatioResults <- sapply(cRatios,function(x){
   EVPI <- mean(maxPINMB)-max(meanNMB) 
     
   #multiply EVPI by discounted population
-  popEVPI <- EVPI*perAnumEffPop
+  popEVPI <- EVPI*perAnnumEffPop
 
   return(popEVPI)
 })
-
-dfEVPI <- data.frame(cRatio = cRatios, EVPI = cRatioResults)
-
-#plot the population EVPI by 
-ggplot(dfEVPI,aes(x = cRatio, y = EVPI)) + geom_line(colour = "navyblue",linewidth = 1.5) + labs(x = "Ceiling Ratio",
-                                                                                                 y = "Population EVPI", title = "EVPI by cRatio")
-
 ```
 
-# Exercise 6.6b)
+Now, we compile our results in a data frame
+```{r 6.6A.3 save EVPI and cRatios in a dataframe}
+dfEVPI <- data.frame(cRatio = cRatios, EVPI = cRatioResults)
+```
+
+Lastly, we plot the population EVPI by the cRatio using `ggplot2`
+```{r 6.6A.3 plot EVPI & cRatio results}
+#load package
+library("ggplot2")
+
+#specify plot 
+ggplot2::ggplot(dfEVPI,
+                aes(
+                  x = cRatio, 
+                  y = EVPI)) + 
+                geom_line(
+                  colour = "#414487",
+                  linewidth = 1.5) + 
+                labs(
+                  x = "Ceiling Ratio",
+                  y = "Population EVPI", 
+                  title = "EVPI by cRatio")
+```
+
+# Exercise 6.6B
 
 In the section of this exercise we will investigate the EVPI of grouped parameters. Based on the previous plot, to maximize the EVPI for a given cRatio, we should pick cRatio = 2200. This is the value provided by the textbook that maximizes the EVPI, however, due to Monte Carlo variability the empirical value here will be different, and different for each seed used.
+
+## Part 1: Calculating the expected value of perfect information for parameters (EVPPI)
 
 Recall that the Expected Value of Perfect information for Parameters (EVPPI) for some parameter $\phi$, where $\theta = \phi \cup \psi$ is
 
 $$
  E_\phi\max_j[E_{\psi|\phi}[NMB(j,\phi,\psi)]- \max_j E_{\theta}[\text{NMB}(j,\theta)].
 $$
+First, if we wanted to use the results from our simulation above, we could use the `which.max` function to select the element from `cRatios` that corresponds to the largest value in the `cRatioResults` we calculated in 6.6A.
 
-```{r Parameter information with rrNP1}
-
+```{r 6.6B.1 Parameter information with rrNP1}
 cRatios[which.max(cRatioResults)]
+```
 
-#however, the textbook states 2200, due to variability in the simulations, a larger number of repetitions and finer grid of cRatios would approximate the maximum better.
+While, the textbook states 2200, due to variability in the simulations, a larger number of repetitions and finer grid of cRatios would better approximate the maximum.
+
+Despite this, we will use the textbook value of 2200.
+```{r 6.6B.1 set cRatio value}
 cRatio <- 2200
+```
 
-#we can capture the value of information for a certain parameter by fixing them before the simulation. To make these changes, we must make some alterations tot he generateSimulations function
+We can capture the value of information for a certain parameter by fixing that parameter before the simulation. To make these changes, we must make some alterations to the `generateSimulations` function. 
 
-drawBetaMethodMoments <- function(n,mu,s){
-  
-  #functions estimates alpha and beta using the method of moments then draws from the beta distribution
-  alpha <- ((mu*(1-mu)/s^2) -1)*mu
-  beta <- alpha*(1-mu )/mu
-  
-  #draw our random number
-  draw <- rbeta(n,alpha,beta)
-  
-  return(draw)
-}
+The main alteration is by adding a `keepFixed` argument. Here, `keepFixed` determines which parameters are held constant in the simulation. For the fixed parameter, the first element [1] is used as the “fixed” value. All other parameters not chosen by `keepFixed` vary as before through draws from distributions.
 
+```{r 6.6b.1}
 generateSimulationsParam <- function(nReps = 1000,age=60,male=0,cRatio = 100000, keepFixed = "rrNP1"){
   
   
@@ -549,7 +568,10 @@ fixrrNP1 <- t(sapply(1:100,function(x){
   return(meanBenefit)
   
 }))
+```
 
+Then we calculate the expected maximum and adjust for the population and future discounting using the `perAnnumEffPop` value we calculated before.
+```{r 6.6b.1 Calculate EVPI for the population}
 #expected maximum
 expMaxrrNP1 <- mean(pmax(fixrrNP1[,"STDNMB"],fixrrNP1[,"NP1NMB"]))
 maxExpNP1 <- max(colMeans(fixrrNP1))
@@ -557,18 +579,23 @@ maxExpNP1 <- max(colMeans(fixrrNP1))
 EVPI <- expMaxrrNP1-maxExpNP1
 
 #adjust for discounting the population over time
-EVPI_pop <- EVPI*perAnumEffPop
+EVPI_pop <- EVPI*perAnnumEffPop
 
 EVPI_pop
 ```
 
 
+## Part 2: Conducting EVPPI for all parameters
 
-## 6.6b part 2
+Now that we have established how to perform partial value of information by fixing one parameter, we can apply this to every set of parameters. 
 
-Now that we have established how to perform partial value of information by fixing one parameter, we can apply this to every set of parameter. We will loop through every parameter group while keeping it fixed while calculating the EVPI. Ideally we would want the number of trials and the number of repetitions to each be 1000 however this becomes quite computationally intense. Using parallel processing would speed up this process significantly. In this section we first write the code only using sequential (base) processing but add the parallelized version in the appendix.
+We will loop through every parameter group while keeping it fixed while calculating the EVPI. Ideally we would want the number of trials and the number of repetitions to each be 1000 however this becomes quite computationally intensive. Using parallel processing would speed up this process significantly. In this section we first write the code only using sequential (base) processing but add the parallelized version in the appendix.
 
-```{r parameter looping}
+:::{.callout-tip}
+In the loop below, the function `outerSimLoop` uses the vector `paramGroups `to hold all the parameter names that we want to loop through. This vector is passed as a default argument to the function, so it doesn’t need to be manually typed each time the function is called. Using a vector like this reduces the chance of typos or errors and makes the code more flexible and easier to maintain.
+:::
+
+```{r 6.6b.2 parameter looping}
 
 outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rrNP1","OMRs","cRevision","rrr","utilities","survParams")){
   
@@ -577,6 +604,7 @@ outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rr
   nParams <- length(paramGroups)  
   
   EVPIs <- data.frame(matrix(NA,nrow =1,ncol = nParams))
+  ##set the column names to match our parameters of interest using paramGroups vector
   colnames(EVPIs) <- paramGroups
 
   for(p in 1:nParams){
@@ -588,7 +616,7 @@ outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rr
     trialResults <- t(sapply(1:trials,function(x){
       
       #get the simulation results
-      simResults <- generateSimulationsParam(cRatio = cRatio,keepFixed = fixedParam ,nReps = nReps)
+      simResults <- generateSimulationsParam(cRatio = cRatio, keepFixed = fixedParam ,nReps = nReps)
       
       #get the mean benefit across the trials
       meanBenefit <- colMeans(simResults[,c("STDNMB","NP1NMB")])
@@ -597,7 +625,7 @@ outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rr
       return(meanBenefit)
       
     }))
-        
+
     #calculate the EVPI
     expMaxrrNP1 <- mean(pmax(trialResults[,"STDNMB"],trialResults[,"NP1NMB"]))
     maxExpNP1 <- max(colMeans(trialResults))
@@ -605,7 +633,7 @@ outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rr
     EVPI <- expMaxrrNP1-maxExpNP1
     
     #adjust for discounting the population over time
-    EVPI_pop <- EVPI*perAnumEffPop
+    EVPI_pop <- EVPI*perAnnumEffPop
     
     #save the EVPI
     EVPIs[,p] <- EVPI_pop
@@ -616,20 +644,53 @@ outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rr
   return(EVPIs)
   
 }
+```
 
-#here we only run the simulations of 100x100 this is already 100,000 
-EVPI_simResults <- outerSimLoop(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rrNP1","OMRs","cRevision","rrr","utilities","survParams"))
+Here we only run the simulations of 100x100 this is already 100,000. Note that:
+
+- **`trials`**: the number of times the simulation is run for each fixed parameter (outer loop).  
+- **`nReps`**: the number of individual simulation replications within each trial (inner loop), used to estimate outcomes for that trial.  
+
+```{r 6.6b.2 EVPPI simulation results}
+EVPPI_simResults <- outerSimLoop(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rrNP1","OMRs","cRevision","rrr","utilities","survParams"))
 
 ```
 
-
-## Plot the results
-Lastly, plot the results of the the partial EVPI for each parameter
+## Part 3: Ploting the results
+Lastly, transform the dataframe and then plot the results of the the partial EVPI for each parameter
 ```{r plot the results}
+##load tidyr package 
 library(tidyr)
-EVPI_plotDF <- pivot_longer(EVPI_simResults,everything(),names_to = "paramGroup",values_to = "partialEVPI")
+EVPPI_plotDF <- tidyr::pivot_longer(EVPPI_simResults,everything(),names_to = "paramGroup",values_to = "partialEVPI")
 
-ggplot(EVPI_plotDF,aes(x = paramGroup,y = partialEVPI,colour = paramGroup)) + geom_bar(stat = 'identity',colour = 'grey4') + labs(x = "Parameter Group",y = "Partial EVPI",title = "Expected value of partial perfect information by parameter group")
+##load the viridis and scales package for colors and label formatting
+library(viridis)
+library(scales)
+
+ggplot2::ggplot(EVPPI_plotDF,
+       aes(
+         x = paramGroup,
+         y = partialEVPI,
+         fill = paramGroup  # fill bars by parameter group
+       )) +
+  geom_bar(
+    stat = "identity",
+    colour = "grey4"     # dark outlines for contrast
+  ) +
+  scale_fill_viridis(
+    discrete = TRUE,      # categorical variable
+    option = "D"          # choose a viridis palette (A-D)
+  ) +
+  scale_y_continuous(labels = comma) +  # format y-axis numbers with commas
+  labs(
+    x = "Parameter Group",
+    y = "Partial EVPI",
+    title = "Expected value of partial perfect information by parameter group"
+  ) +
+  theme_minimal()+
+   theme(
+    legend.position = "none"  # hide legend if bars are self-explanatory
+  )
 ```
 
 

@@ -1,8 +1,8 @@
 # Exercise 5.8 {.unnumbered}
 
-This section reproduces exercise 5.8 in R from Chapter 5 of the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton
+This section reproduces exercise 5.8 in R from Chapter 5 of the book "Decision Modelling for Health Economic Evaluation" by Andrew Briggs, Mark Sculpher, and Karl Claxton.
 
-In this exercise we will add upon the pre-existing prosthesis example, but explore the idea of adding a third prosthesis option, which we will refer to as "NP2". We will now update the hazard function estimates with the additional "NP2" variable, and the corresponding covariance matrix. Note that neither the estimates nor the standard errors for any of the variables will be the same when we add a new variable in the model.  Note the coefficients and the variance matrix is one dimension larger due to the addition of the NP2 effect.
+In this exercise we will build upon the pre-existing prosthesis example, and explore the idea of adding a third prosthesis option, which we will refer to as *"NP2"*. We will now update the hazard function estimates with the additional NP2 variable, and the corresponding covariance matrix. Note that neither the estimates nor the standard errors for any of the variables will be the same when we add a new variable in the model.  Note the coefficients and the variance matrix is one dimension larger due to the addition of the NP2 effect.
 
 ## Setup
 ```{r 5.8.0 setup and parameters 1}
@@ -379,12 +379,13 @@ ICER_NP1vSTD
 
 We will plot the cost and QALYS for each intervention. 
 
-Note since we have 3 response variables we want to plot, we must transform the data into "long format". The easiest way to do this is to use the `dplyr` and `tidyr` packages for data manipulation. If you don't have these installed, you can install them using `install.packages("dplyr", "tidyr")`. You should have installed `ggplot2` when completing exercise 5.7.
+Note since we have 3 response variables we want to plot, we must transform the data into "long format". The easiest way to do this is to use the `dplyr` and `tidyr` packages for data manipulation. We are also using the `viridis` package for color theming. If you don't have these installed, you can install them using `install.packages("dplyr", "tidyr", "viridis")`. You should have installed `ggplot2` when completing exercise 5.7.
 
 ```{r 5.8.2 load libraries}
 library(dplyr)
 library(tidyr)
 library(ggplot2)
+library(viridis)
 ```
 
 The code below requires additional knowledge of `dplyr`, `tidyr`, and regex and a bit of knowledge of pipes '%>%'. 
@@ -406,8 +407,12 @@ ggplot2::ggplot(simResultsLong,
                 aes(
                   x = QALYS,
                   y = Cost, 
-                  colour = treatment))+ 
+                  colour = treatment)) + 
                 geom_point() + 
+                viridis::scale_colour_viridis(
+                  discrete = TRUE,  # categorical variable
+                  option = "D"      # viridis palette option
+                ) +
                 theme_minimal() + 
                 labs(title = "Cost effectiveness plane for each treatment")
 ```
@@ -451,6 +456,7 @@ CEAcurveLong <- cRatioResults %>% tidyr::pivot_longer(CESTD:CENP2,names_to = "tr
 
 Again, as a final step we will plot these results using `ggplot2`
 ```{r 5.8.3 plot results}
+
 ggplot2::ggplot(CEAcurveLong,
                 aes(
                   x = cRatio, 
@@ -458,6 +464,10 @@ ggplot2::ggplot(CEAcurveLong,
                   colour = treatment)) + 
                 geom_line(
                   linewidth = 1.2) + 
+                viridis::scale_colour_viridis(
+                  discrete = TRUE,   # categorical variable
+                  option = "D"       # choose one of the viridis palettes
+                ) +
                 theme_minimal() + 
                 labs(
                   x = "Ceiling Ratio", 

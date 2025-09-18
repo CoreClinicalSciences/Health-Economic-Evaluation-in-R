@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html" rel="next">
+<link href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -115,8 +115,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Decision Modeling for Health Economic Evaluation</span></a>
+            <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -124,8 +124,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Chapter 1 - Decision Modelling for Health Economic Evaluation</span></a>
+  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble on matrix operations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -161,7 +161,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Exercise 5.8</span></span></a>
+ <span class="menu-text">Exercise 5.8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 6.6A &amp; 6.6B</span></a>
   </div>
 </li>
       </ul>
@@ -178,7 +184,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Appendix</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Appendix</span></span></a>
   </div>
 </li>
       </ul>
@@ -193,8 +199,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
   <li><a href="#coding-style-and-good-practices" id="toc-coding-style-and-good-practices" class="nav-link" data-scroll-target="#coding-style-and-good-practices">Coding style and good practices</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -230,10 +238,9 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="unnumbered">Introduction</h1>
 <p>Welcome to this online guidebook on health economic evaluation in R. This is a living resource, designed to grow and evolve over time as new examples, exercises, and methods are added. Our goal is to support learners, researchers, and practitioners in developing the skills needed to build and analyze health economic models directly in R.</p>
 <p>By working in R rather than in spreadsheets alone, analysts can take advantage of a flexible, script-based environment that enhances the transparency, reproducibility, and robustness of health economic evaluation. The guide introduces key concepts step by step, with practical exercises translated from standard texts and supplemented with modern R workflows.</p>
-<p>Throughout, we draw on widely used packages such as dplyr and tidyr for data manipulation, ggplot2 for visualization, and tools such as MASS and MCMCpack for probability distributions and simulation. Together, these exercises and examples aim to build both technical fluency in R and a deeper understanding of best practices in health economic modelling.</p>
-</section>
-<section id="coding-style-and-good-practices" class="level1">
-<h1>Coding style and good practices</h1>
+<p>Throughout, we draw on widely used packages such as <code>dplyr</code> and <code>tidyr</code> for data manipulation, <code>ggplot2</code> for visualization, and tools such as <code>MASS</code> and <code>MCMCpack</code> for probability distributions and simulation. Together, these exercises and examples aim to build both technical fluency in R and a deeper understanding of best practices in health economic modelling.</p>
+<section id="coding-style-and-good-practices" class="level2">
+<h2 class="anchored" data-anchor-id="coding-style-and-good-practices">Coding style and good practices</h2>
 <p>Good coding style is an important part of reproducible research. While individual preferences may vary, there are core elements of good practice that make code easier to read, share, and maintain. These include:</p>
 <ul>
 <li>Using human-readable names for variables and functions<br>
@@ -246,9 +253,11 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li>Keeping scripts organized and well-structured</li>
 </ul>
-<p>For those just getting started with R, we recommend following the <a href="https://style.tidyverse.org/">tidyverse style guide</a> as a helpful reference.</p>
+<p>In this guidebook, we use the the <a href="https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/">Biopharmaceutical Software Working Group’s R Style Guide</a>.</p>
+<p>For those just getting started with R, we recommend the <a href="https://style.tidyverse.org/">tidyverse style guide</a> as a helpful reference.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -655,8 +664,8 @@ ul.task-list li input[type="checkbox"] {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Introduction.html" class="pagination-link" aria-label="Chapter 1 - Decision Modelling for Health Economic Evaluation">
-        <span class="nav-page-text">Chapter 1 - Decision Modelling for Health Economic Evaluation</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="pagination-link" aria-label="Book: Decision Modelling for Health Economic Evaluation">
+        <span class="nav-page-text">Book: Decision Modelling for Health Economic Evaluation</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

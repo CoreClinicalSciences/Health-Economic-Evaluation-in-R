@@ -40,8 +40,8 @@ uSuccessP <- 0.85 #utility of primary success
 uSuccessR <- 0.75 #utility of revision success
 uRevision <- 0.30 #utility of revision
 ```
-
-Now we will enter the survival model that is fit with a weibull distribution.
+\
+Now we will enter the survival model that is fit with a Weibull distribution.
 
 Remember that the coefficients are on the log scale.
 
@@ -53,10 +53,12 @@ survModelSummary <- data.frame(
   SE = c(0.0474501,0.207892,0.0052112,0.109066,0.3825815)
 )
 ```
-
+\
 To calculate lambda of the weibull distribution we can take the linear combination of the coefficients. Again, we need to remember to exponentiate the results as they are on the log scale.
 
-We can use the `$` operator to create new columns in the `survModelSummary` dataframe and extract any column from the dataframe by name. the `$` operator by default extracts a vector, which means vector operations can be done on them such as `[i]` to extract the *i*th element of the vector. If you want to refresh your memory on how to use `[i]` to extract a data element, review exercise 2.5.
+We can use the `$` operator to create new columns in the `survModelSummary` dataframe and extract any column from the dataframe by name. 
+
+the `$` operator by default extracts a vector, which means vector operations can be done on them such as `[i]` to extract the *i*th element of the vector. If you want to refresh your memory on how to use `[i]` to extract a data element, review exercise 2.5.
 
 ```{r 3.5.0 survival model 2}
 #replace `columnname`
@@ -71,13 +73,13 @@ lambda <- exp(lnLambda)
 gamma <- exp(survModelSummary$coefficient[1])
 ```
 
-## Step 1: Calculate the transition probabilities
+## Step 1: Calculating the transition probabilities
 
-Lets create a function to calculate the transition probabilities for a yearly cycle t. The formula is given in Section 3.5.2 Section 2 iii).
+Lets create a function to calculate the transition probabilities for a yearly cycle $t$. The formula is given in *Section 3.5.2*.
 
 As we noted above, R is vectorized. That means we can input a vector as an argument and each element of the vector will be passed through.
 
-We want all of t = 1,...,60 to be calculated so we can simply use `1:t` which creates a vector 1,...,t
+We want all of $t$ = 1,...,60 to be calculated so we can simply use `1:t` which creates a vector 1,...,$t$
 
 ```{r 3.5.1 transition probabilities from the hazard function}
 
@@ -86,7 +88,7 @@ tProbsHazard <- function(t,lambda,gamma){
   
 }
 ```
-
+\
 We can use this function to calculate the revision risk or the time-dependent transition probability per year.
 
 ```{r 3.5.1 revision risk}
@@ -114,8 +116,10 @@ yearlyTProbs <- data.frame(
     Females = c(0.00099,0.0026,0.0067,0.0193,0.0535,0.1548)
 )
 ```
+\
+Note that by default this exercise uses female. 
 
-Note that by default this exercise uses female. Lets create the death risk by analyzing the cycle for those who are female and have an average age of 60 plus the cycle year due to all cause mortality
+Lets create the death risk by analyzing the cycle for those who are female and have an average age of 60 plus the cycle year due to all cause mortality
 
 To do this we will us use a special function in R called the `apply family`. This function takes two arguments `x` and `a function of x`. This function is then applied to all elements of `x`. We can use this to extract the appropriate cell of the `yearlyTProbs` dataset for all 60 cycles. The apply function family is essentially a wrapper of a for-loop, that can be quickly written. If you prefer the equivalent code, it can be written as a for-loop.
 
@@ -128,20 +132,23 @@ deathRisk <- sapply(1:60,function(x){
   inds <- sum(x+age >= yearlyTProbs$Index)
   
   #select the gender columns
-  #if else takes 3 arguments, the first is a logic check, if true, it returns the second value, 
-  #if false it returns the 3rd argument. Equivalent code can be written use if(x){}else{}.
   genderCol <- ifelse(male ==1,3,4)
   
   return(yearlyTProbs[inds,genderCol])
   
 })
 ```
-
+:::{.callout-note}
+`ifelse` takes 3 arguments. The first is a logic check. If true, it returns the second value. If false it returns the 3rd argument. 
+Equivalent code can be written use `if(x){}else{}`.
+:::
 ## Step 3: Creating the Markov Model
 
 To create the Markov Model, we must specify a transition matrix as in Exercise 2.5 and then calculate the number of individuals in each state for 60 cycles. The change here from Exercise 2.5 is that the transition probabilities change depending on the cycle.
 
-Let's use the Figure shown at the beginning of the file. Let the first column be PrimaryTHR, the second column be Success of primary THR (SuccessP), the third column be Revision THR, the fourth column be Success of Revision (SuccessR), and the fifth column be Death. Thus we have a 5 state Markov model.
+Revisit the figure shown at the beginning of this exercise. 
+
+In our matrix, we will et the first column be PrimaryTHR, the second column be Success of primary THR (SuccessP), the third column be Revision THR, the fourth column be Success of Revision (SuccessR), and the fifth column be Death. Thus we will have a 5 state Markov model.
 
 ```{r 3.5.3 create transition probs 1}
 # The matrix will follow this structure, shown in Figure 3.7:
@@ -154,8 +161,10 @@ Let's use the Figure shown at the beginning of the file. Let the first column be
 #         SuccessR
 #         Death
 ```
+\
+Note that our transition matrix is now time-dependent. That is, depending on the cycle, the transition probability will change. Therefore we must make a function that alters the transition matrix based on the cycle. We will fill in the transition matrix function with the appropriate transition probabilities. 
 
-Note that our transition matrix is now time-dependent. That is, depending on the cycle, the transition probability will change. Therefore we must make a function that alters the transition matrix based on the cycle. We will fill in the transition matrix function with the appropriate transition probabilities. To get the *t*'th value of vector such as `mr`, we can use the `[t]` operator.
+To get the $t$'th value of vector such as `mr`, we can use the `[t]` operator.
 
 ```{r 3.5.3 create transition probs 2}
 tProbs_time <- function(omrPTHR,omrRTHR,rr,mr,rrr,t){
@@ -173,8 +182,10 @@ tProbs_time <- function(omrPTHR,omrRTHR,rr,mr,rrr,t){
 }
 ```
 
-**Check.** Manually check that each row sums to 1 by performing some algebra.
-
+:::{.callout-important} 
+## Check
+Manually check that each row sums to 1 by performing some algebra.
+:::
 We must now calculate the amount of individuals in each state for 60 cycles. We will re-use the function created in exercise 2.5 but modify it slightly for the new Markov model so that it includes the extra states and the time-dependent transition probabilities.
 
 ```{r 3.5.3 calculate proportion in each state}
@@ -206,21 +217,23 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
   
 }
 ```
-
-Just like in 2.5, we will create our initial vector. Again, everyone in the population starts in the PrimaryTHR state.
+\
+Just like in exercise 2.5, we will create our initial vector. Again, everyone in the population starts in the first state: PrimaryTHR.
 
 ```{r 3.5.3 create initial vector}
 iVec <- c(1000,0,0,0,0)
 ```
-
+\
 Then we will calculate all states for all 60 cycles
 
 ```{r 3.5.3 calculate all states}
 populationStates <- calculateYearlyProbs(iVec = iVec,omrPTHR,omrRTHR,rr= revisionRisk, mr = deathRisk,rrr=rrr,t=60)
 ```
 
-**Check.** We will use `rowSums` to make sure that all rows total to 1000
-
+:::{.callout-important}
+## Check
+We will use `rowSums` to make sure that all rows total to 1000.
+:::
 ```{r 3.5.3 check row sums}
 rowSums(populationStates)
 ```
@@ -237,14 +250,17 @@ rrNP1 <- survModelSummary$hazard_ratio[5]
 
 revisionRiskNP1 <- tProbsHazard(t=60,lambda = lambda*rrNP1,gamma = gamma)
 ```
-
+\
 We will calculate the updated states using the `calculateYearlyProbs` function we created earlier and filling in the appropriate arguments
 
 ```{r 3.5.4 new prothesis population states}
 populationStatesNP1 <- calculateYearlyProbs(iVec,omrPTHR,omrRTHR,rr=revisionRiskNP1,mr=deathRisk,rrr,t=60)
 ```
 
-**Check.** We will check that the row sums are equal to 1000
+:::{.callout-important} 
+## Check
+Use `rowSums` to check that the row totals are equal to 1000.
+:::
 
 ```{r 3.5.4 new prosthesis row sums}
 rowSums(populationStatesNP1)
@@ -271,20 +287,23 @@ We will calculate Life-Years using `rowSums`, being sure to exclude the last sta
 ```{r 3.5.5 calculate life years}
 lifeYearsStandard <-rowSums(populationStates[,-5])
 ```
+\
+Next, we create the cost vector. The length of the vector should only then be 4, the total of the states with costs in the model.
 
-Next, we create the cost vector. The length of the vector should only then be 4, the total of the states with costs in the model.(Death can have costs that you might want to integrate in other models. But in this model, there are no costs associated with death.)
-
+:::{.callout-note}
+Death can have costs that you might want to integrate in other models. But in this model, there are no costs associated with death.
+:::
 ```{r 3.5.5 cost vector}
 costs<- c(0,0,cRevision,0)
 ```
-
-We need to add a parameter for the initial cost. Note that we started with 1000 patients.
+\
+We need to add a parameter for the initial cost. In this exercise, we started with 1000 patients.
 
 ```{r 3.5.5 initial cost parameter}
 iCostStandard <- cStandard*1000
 ```
-
-We will calculate the total cost by using matrix multiplication to multiple our cost vector `costs` by our states matrix `populationStates`. We will use `discountFormula` to account for discounting over time.
+\
+We will calculate the total cost by using matrix multiplication to multiple our cost vector `costs` by our states matrix `populationStates`. We will use our `discountFormula` to account for discounting over time.
 
 ```{r 3.5.5 calculate total costs}
 totalCosts <- populationStates[,-5] %*% costs
@@ -292,21 +311,21 @@ totalCosts <- populationStates[,-5] %*% costs
 #update the costs to account for discounting over time
 discCostStandard <- discountFormula(totalCosts,cDR,t = 60)
 ```
-
-Next we need to repeat the previous steps for utility of the treatment over time. Just like for costs, we start by creating a utility vector for all states except death which has a utility = 0
+\
+Next we need to repeat the previous steps for utility of the treatment over time. Just like for costs, we start by creating a utility vector for all states except death, for which utility = 0.
 
 ```{r 3.5.5 utility vector}
 utility<- c(0,uSuccessP,uRevision,uSuccessR)
 ```
-
+\
 We will calculate the total utility over time using matrix multiplication and then we will calculate the discounted utility.
 
 ```{r 3.5.5 calculate total utility}
 totalQuality <-  populationStates[,-5] %*% utility
 QALYStandard <- discountFormula(totalQuality,discRate = oDR,t = 60)
 ```
-
-Lastly, we will calculate the total cost and utilities for all cycles/person, ensure to include the initial cost of the treatment
+\
+Lastly, we will calculate the total cost and utilities for all cycles/person, ensuring to include the initial cost of the treatment.
 
 ```{r 3.5.5 calculate total cost and utilities per person}
 STDcost <- sum(c(iCostStandard,discCostStandard))/1000
@@ -341,7 +360,7 @@ NP1QALYS <- sum(QALYNP1)/1000
 
 ## Step 6: Calculate the ICER
 
-The final step is to calculate the ICER for the new prosthesis compared to standard care
+The final step is to calculate the ICER for the new prosthesis compared to standard care.
 
 ```{r 3.5.6 calculate the ICER}
 #calculate the difference in costs

@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Core Clinical Sciences">
 
-<title>Guide to Health Economic Evaluation in R</title>
+<title>Overview of exercises – Guide to Health Economic Evaluation in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,24 +23,25 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./Source/General-Guide/Ch0-Preamble-Matrix-Multiplication.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" rel="next">
+<link href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-364982630eef5352dd1537128a8ed5cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.html">Overview of exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -97,7 +97,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Guide to Health Economic Evaluation in R</a> 
+      <a href="../../">Guide to Health Economic Evaluation in R</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
@@ -112,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -127,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/General-Guide/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Source/General-Guide/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preamble on R and matrix operations</span></a>
   </div>
 </li>
@@ -135,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -144,49 +144,49 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Overview of exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 2.5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 3.5</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-47.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-47.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4.7</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-48.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-48.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 4.8</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 5.7</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 5.8</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 6.6A &amp; 6.6B</span></a>
   </div>
 </li>
@@ -206,9 +206,31 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <li><a href="#exercise-2.5---a-simple-markov-model-for-two-hiv-treatments" id="toc-exercise-2.5---a-simple-markov-model-for-two-hiv-treatments" class="nav-link active" data-scroll-target="#exercise-2.5---a-simple-markov-model-for-two-hiv-treatments">Exercise 2.5 - A Simple Markov Model for Two HIV Treatments</a>
   <ul class="collapse">
-  <li><a href="#coding-style-and-good-practices" id="toc-coding-style-and-good-practices" class="nav-link" data-scroll-target="#coding-style-and-good-practices">Coding style and good practices</a></li>
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments" id="toc-exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments" class="nav-link" data-scroll-target="#exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments">Exercise 3.5 - A Time-Dependent Markov Model for two Hip-Replacement Treaments</a>
+  <ul class="collapse">
+  <li><a href="#steps-1" id="toc-steps-1" class="nav-link" data-scroll-target="#steps-1">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version" id="toc-exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version" class="nav-link" data-scroll-target="#exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version">Exercise 4.7 – Adapt the HIV Treatment Model into a Probabilistic Version</a>
+  <ul class="collapse">
+  <li><a href="#steps-2" id="toc-steps-2" class="nav-link" data-scroll-target="#steps-2">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-4.8-adapt-the-model-into-a-probabilistic-version" id="toc-exercise-4.8-adapt-the-model-into-a-probabilistic-version" class="nav-link" data-scroll-target="#exercise-4.8-adapt-the-model-into-a-probabilistic-version">Exercise 4.8 – Adapt the Model into a Probabilistic Version</a></li>
+  <li><a href="#steps-3" id="toc-steps-3" class="nav-link" data-scroll-target="#steps-3">Steps</a></li>
+  <li><a href="#exercise-5.7-use-simulations-and-generate-ce-plane-ceac" id="toc-exercise-5.7-use-simulations-and-generate-ce-plane-ceac" class="nav-link" data-scroll-target="#exercise-5.7-use-simulations-and-generate-ce-plane-ceac">Exercise 5.7 – Use Simulations and Generate CE Plane &amp; CEAC</a>
+  <ul class="collapse">
+  <li><a href="#steps-4" id="toc-steps-4" class="nav-link" data-scroll-target="#steps-4">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example" id="toc-exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example" class="nav-link" data-scroll-target="#exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example">Exercise 5.8 – Adding a Third Treatment Option to the total hip replacement example</a>
+  <ul class="collapse">
+  <li><a href="#steps-5" id="toc-steps-5" class="nav-link" data-scroll-target="#steps-5">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi" id="toc-exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi" class="nav-link" data-scroll-target="#exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi">Exercise 6.6 – Calculate the Expected Value of Perfect Information (EVPI)</a>
+  <ul class="collapse">
+  <li><a href="#steps-6" id="toc-steps-6" class="nav-link" data-scroll-target="#steps-6">Steps</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
@@ -216,21 +238,15 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.html">Overview of exercises</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Guide to Health Economic Evaluation in R</h1>
+<h1 class="title">Overview of exercises</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Core Clinical Sciences </p>
-          </div>
-  </div>
     
   
     
@@ -241,27 +257,138 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>Welcome to this online guidebook on health economic evaluation in R. This is a living resource, designed to grow and evolve over time as new examples, exercises, and methods are added. Our goal is to support learners, researchers, and practitioners in developing the skills needed to build and analyze health economic models directly in R.</p>
-<p>By working in R rather than in spreadsheets alone, analysts can take advantage of a flexible, script-based environment that enhances the transparency, reproducibility, and robustness of health economic evaluation. The guide introduces key concepts step by step, with practical exercises translated from standard texts and supplemented with modern R workflows.</p>
-<p>Throughout, we draw on widely used packages such as <code>dplyr</code> and <code>tidyr</code> for data manipulation, <code>ggplot2</code> for visualization, and tools such as <code>MASS</code> and <code>MCMCpack</code> for probability distributions and simulation. Together, these exercises and examples aim to build both technical fluency in R and a deeper understanding of best practices in health economic modelling.</p>
-<section id="coding-style-and-good-practices" class="level2">
-<h2 class="anchored" data-anchor-id="coding-style-and-good-practices">Coding style and good practices</h2>
-<p>Good coding style is an important part of reproducible research. While individual preferences may vary, there are core elements of good practice that make code easier to read, share, and maintain. These include:</p>
-<ul>
-<li>Using human-readable names for variables and functions<br>
+<section id="exercise-2.5---a-simple-markov-model-for-two-hiv-treatments" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2.5---a-simple-markov-model-for-two-hiv-treatments">Exercise 2.5 - A Simple Markov Model for Two HIV Treatments</h2>
+<p>This exercise reviews how to run a basic Markov model that compares the cost effectiveness of two HIV treatments. The first treatment involves a monotherapy of Zidovudine (control), against a combination therapy of Zidovudine and Lamivudine (treatment). The combination therapy is only used in the first two years.</p>
+<section id="steps" class="level3">
+<h3 class="anchored" data-anchor-id="steps">Steps</h3>
+<ol type="1">
+<li>Work out the transition probabilities between health states for the monotherapy group (control).<br>
 </li>
-<li>Writing comprehensive annotations and comments<br>
+<li>Use these probabilities to run a Markov trace and follow the cohort through 20 years.<br>
 </li>
-<li>Breaking code into modular, reusable functions<br>
+<li>Calculate the total costs for the control group.<br>
 </li>
-<li>Maintaining consistent formatting and indentation<br>
+<li>Apply discounting to account for time preferences.<br>
 </li>
-<li>Keeping scripts organized and well-structured</li>
-</ul>
-<p>In this guidebook, we use the the <a href="https://biopharmsoftgrp.github.io/BioPharmSoftRStyleGuide/">Biopharmaceutical Software Working Group’s R Style Guide</a>.</p>
-<p>For those just getting started with R, we recommend the <a href="https://style.tidyverse.org/">tidyverse style guide</a> as a helpful reference.</p>
+<li>Adjust the transition probabilities for the treatment group using a relative risk measure.<br>
+</li>
+<li>Calculate the treatment group’s total costs.<br>
+</li>
+<li>Apply discounting again for the treatment results.<br>
+</li>
+<li>Compare treatment vs.&nbsp;control to calculate the Incremental Cost-Effectiveness Ratio (ICER).</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments">Exercise 3.5 - A Time-Dependent Markov Model for two Hip-Replacement Treaments</h2>
+<p>This exercise extends upon exercise 2.5 by building a <strong>time-dependent</strong> markov model for two total hip-replacement treatments over 60 years. Specifically, it includes how to use existing mortality rates and risk derived from a survival function to compare the cost and utility of treatments.</p>
+<section id="steps-1" class="level3">
+<h3 class="anchored" data-anchor-id="steps-1">Steps</h3>
+<ol type="1">
+<li>Populate model parameters using the provided estimates.<br>
+</li>
+<li>Calculate time-dependent transition probabilities using survival analysis results.</li>
+<li>Estimate background mortality rates given the relevant covariates.<br>
+</li>
+<li>Build the Markov model for the standard intervention.<br>
+</li>
+<li>Apply costs and utilities for the standard intervention, including discounting.<br>
+</li>
+<li>Repeat the procedure for the new prosthesis treatment.</li>
+<li>Compare treatment vs.&nbsp;control to calculate the Incremental Cost-Effectiveness Ratio (ICER).</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version">Exercise 4.7 – Adapt the HIV Treatment Model into a Probabilistic Version</h2>
+<p>You will expand the simple model from Exercise 2.5 into a probabilistic Markov model by incorporating uncertainty in parameters by drawing each parameter from a probability distribution.</p>
+<section id="steps-2" class="level3">
+<h3 class="anchored" data-anchor-id="steps-2">Steps</h3>
+<ol type="1">
+<li>Assign a log-normal distribution for relative risks, based on mean and 95% confidence intervals.<br>
+</li>
+<li>Use a gamma distribution for costs, assuming the standard error equals the mean.<br>
+</li>
+<li>Use the Dirichlet distribution to draw values for the transition probability matrix.</li>
+<li>Compare treatment vs.&nbsp;control to calculate the Incremental Cost-Effectiveness Ratio (ICER).<br>
+</li>
+<li>Try running the code again to check that a new ICER is calculated.</li>
+<li>Build a stand-alone analysis function that automatically calculates the ICER for given parameter inputs.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-4.8-adapt-the-model-into-a-probabilistic-version" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4.8-adapt-the-model-into-a-probabilistic-version">Exercise 4.8 – Adapt the Model into a Probabilistic Version</h2>
+<p>In this exercise, you will extend the total hip replacement example from Exercise 3.5 to be probabilistic. This involves assigning probability distributions to uncertain parameters including the uncertainty in the survival model.</p>
+</section>
+<section id="steps-3" class="level2">
+<h2 class="anchored" data-anchor-id="steps-3">Steps</h2>
+<ol type="1">
+<li>Review all parameter inputs and identify which should remain deterministic (e.g., patient characteristics, prosthesis costs, discount rates) and which should be included in the probabilistic sensitivity analysis.<br>
+</li>
+<li>Fit beta distributions for probability parameters, such as post-operative mortality and revision-related mortality, using the provided information.</li>
+<li>Fit gamma distributions for cost parameters. Use the method of moments (with the provided mean and standard error) to estimat the parameters of the gamma distribution.</li>
+<li>Fit beta distributions for utility parameters. Use the method of moments to estimate the beta parameters from the given means and standard errors.</li>
+<li>Use the multivariate normal distribution with the specified covariance matrix to draw values for the survival parameters.</li>
+<li>Build a stand-alone analysis function that automatically calculates the ICER for given parameter inputs.</li>
+</ol>
+<hr>
+</section>
+<section id="exercise-5.7-use-simulations-and-generate-ce-plane-ceac" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5.7-use-simulations-and-generate-ce-plane-ceac">Exercise 5.7 – Use Simulations and Generate CE Plane &amp; CEAC</h2>
+<p>In this exercise, you will build a simulation using the probabilistic model from Exercise 4.8 to estimate the uncertainty in the ICER . The goal is to produce both a <strong>cost effectiveness plane</strong> and a <strong>cost effectiveness acceptability curve (CEAC)</strong> across the parameter space.</p>
+<section id="steps-4" class="level3">
+<h3 class="anchored" data-anchor-id="steps-4">Steps</h3>
+<ol type="1">
+<li>Build a simulation function that automates the simulation process including drawing all parameter values and calculating the cost effectiveness cost effectiveness acceptability.</li>
+<li>Analyze the results and create a cost-effectiveness plane.<br>
+</li>
+<li>Repeat the analysis for different subgroups.<br>
+</li>
+<li>Plot CEACs for each subgroup and compare the results.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example">Exercise 5.8 – Adding a Third Treatment Option to the total hip replacement example</h2>
+<p>In this exercise, you will expand the model by adding a third treatment option. Since all treatment options are mutually exclusive, the analysis requires multiple CEACs and the creation of a <strong>cost effectiveness acceptability frontier</strong>.</p>
+<section id="steps-5" class="level3">
+<h3 class="anchored" data-anchor-id="steps-5">Steps</h3>
+<ol type="1">
+<li>Add a third prosthesis option to the model.<br>
+</li>
+<li>Run the simulation, calculate mean results, and plot all options on the cost-effectiveness plane.<br>
+</li>
+<li>Use the net-benefit framework to generate multiple CEACs for the three options and construct the cost-effectiveness acceptability frontier.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi">Exercise 6.6 – Calculate the Expected Value of Perfect Information (EVPI)</h2>
+<p>This exercise focuses on calculating the non-parametric <strong>expected value of perfect information (EVPI)</strong> for the total hip replacement example, both at the individual and population level. You will also calculate <strong>EVPPI</strong> for group of parameters</p>
+<section id="steps-6" class="level3">
+<h3 class="anchored" data-anchor-id="steps-6">Steps</h3>
+<ol type="1">
+<li>Calculate the per-patient EVPI for a new prosthesis from the simulation output.<br>
+</li>
+<li>Compute the mean across net benefits under perfect information, then calculate the difference between the mean of maximized net benefits and the maximum of the mean values to obtain the EVPI at the individual level.<br>
+</li>
+<li>Estimate the effective population size and multiply by individual EVPI to get population EVPI.<br>
+</li>
+<li>Calculate EVPI as a function of the cost-effectiveness threshold and examine the peak value.<br>
+</li>
+<li>Calculate EVPI for the risk-reduction parameter: take net benefits for each intervention across many draws, average them, and then compute the maximum net benefits across draws to estimate the payoff under under perfect information of risk-reduction.<br>
+</li>
+<li>Compute the <strong>expected value of perfect parameter information (EVPPI)</strong> for all groups of parameters.</li>
+<li>Plot the EVPPI results for all parameters as a bar chart.</li>
+</ol>
 
 
 </section>
@@ -669,10 +796,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="pagination-link" aria-label="Book: Decision Modelling for Health Economic Evaluation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Book: Decision Modelling for Health Economic Evaluation</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Source/General-Guide/Ch0-Preamble-Matrix-Multiplication.html" class="pagination-link" aria-label="Preamble on R and matrix operations">
-        <span class="nav-page-text">Preamble on R and matrix operations</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" class="pagination-link" aria-label="Exercise 2.5">
+        <span class="nav-page-text">Exercise 2.5</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

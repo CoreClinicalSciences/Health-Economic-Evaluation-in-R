@@ -165,6 +165,9 @@ window.Quarto = {
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../../">Guide to Health Economic Evaluation in R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -182,8 +185,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Preamble on R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -191,8 +194,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preamble on matrix operations</span></a>
+  <a href="../../../Source/General-Guide/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble on R and matrix operations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview of exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -240,21 +260,8 @@ window.Quarto = {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Appendix</span></span></a>
-  </div>
-</li>
-      </ul>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Appendices</span></span>
   </li>
     </ul>
     </div>
@@ -272,7 +279,7 @@ window.Quarto = {
   <li><a href="#part-4-re-running-the-markov-model-from-exercise-2.5" id="toc-part-4-re-running-the-markov-model-from-exercise-2.5" class="nav-link" data-scroll-target="#part-4-re-running-the-markov-model-from-exercise-2.5">Part 4: Re-running the Markov model from exercise 2.5</a></li>
   <li><a href="#part-5-calculating-the-icer" id="toc-part-5-calculating-the-icer" class="nav-link" data-scroll-target="#part-5-calculating-the-icer">Part 5: Calculating the ICER</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -308,18 +315,16 @@ window.Quarto = {
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#set a seed for reproducibility</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">##fixed parameters</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>RR <span class="ot">&lt;-</span> <span class="fl">0.509</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#discount rate</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>cDR <span class="ot">&lt;-</span> <span class="fl">0.06</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#the confidence interval</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>CI_RR <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.365</span>, <span class="fl">0.710</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#drug costs, these are known and fixed</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>cAZT <span class="ot">&lt;-</span> <span class="dv">2278</span> <span class="co">#cost of Zidovudine</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>cLam <span class="ot">&lt;-</span> <span class="fl">2086.5</span> <span class="co">#cost of Lamivudine </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">##fixed parameters##</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>RR <span class="ot">&lt;-</span> <span class="fl">0.509</span> <span class="co">#relative risk of new treatment</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>cDR <span class="ot">&lt;-</span> <span class="fl">0.06</span> <span class="co">#discount rate</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#the confidence interval</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>CI_RR <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.365</span>, <span class="fl">0.710</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#drug costs, these are known and fixed</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>cAZT <span class="ot">&lt;-</span> <span class="dv">2278</span> <span class="co">#cost of Zidovudine</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>cLam <span class="ot">&lt;-</span> <span class="fl">2086.5</span> <span class="co">#cost of Lamivudine </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We need to re-arrange the confidence interval formula to calculate the standard error.</p>
 <p>Remember that the normal distribution’s parameters are on the log scale. So, the confidence interval parameters and relative risk must be transformed accordingly.</p>
@@ -416,13 +421,12 @@ window.Quarto = {
 <p>The equivalent alphas are given (note the deterministic value is <code>alpha / (alpha + beta)</code>), which is exactly the transition matrix given above. The betas are excluded here for simplicity</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tAlpha <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1251</span>, <span class="dv">350</span>, <span class="dv">116</span>  , <span class="dv">17</span> ,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>   , <span class="dv">731</span>, <span class="dv">512</span>  , <span class="dv">15</span> ,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>   , <span class="dv">0</span>  , <span class="dv">1312</span> , <span class="dv">437</span>, </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>   , <span class="dv">0</span>  , <span class="dv">0</span>    , <span class="dv">1749</span> <span class="co">#note this alpha is not required as we know all are in the last state</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  ),<span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> T</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">1251</span>, <span class="dv">350</span>, <span class="dv">116</span>  , <span class="dv">17</span> ,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>   , <span class="dv">731</span>, <span class="dv">512</span>  , <span class="dv">15</span> ,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>   , <span class="dv">0</span>  , <span class="dv">1312</span> , <span class="dv">437</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>   , <span class="dv">0</span>  , <span class="dv">0</span>    , <span class="dv">1749</span> <span class="co">#note this alpha is not required as we know all are in the last state</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  ),<span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">byrow =</span> T</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Lets use the <code>apply</code> function to quickly draw random numbers from the dirichlet distribution using the function from <code>MCMCpack</code> and apply it to each row of <code>tAlpha</code>. First, we will need load the MCMCpack library. In order to do this, you will need to have it installed. You can install it using this code: <code>install.packages("MCMCpack")</code></p>
 <div class="cell">
@@ -469,10 +473,11 @@ Note
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>tProbRand <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(tAlpha,<span class="dv">1</span>,<span class="cf">function</span>(x){</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(MCMCpack<span class="sc">::</span><span class="fu">rdirichlet</span>(<span class="dv">1</span>,x))</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#our new transition probability matrix</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>tProbRand </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#our new transition probability matrix</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>tProbRand </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          [,1]      [,2]       [,3]        [,4]
 [1,] 0.7269368 0.2026091 0.05981664 0.010637517
@@ -527,28 +532,24 @@ Tip
 <span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>calculateYearlyProbs <span class="ot">&lt;-</span> <span class="cf">function</span>(tProbs, t, iVec){</span>
 <span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create empty matrix that we will fill in</span></span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>  matReturn <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> t, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">#initialize first vector of proportions</span></span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create column names</span></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(matReturn) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>)</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>  matReturn <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> t, <span class="at">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create column names</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(matReturn) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">#loop through all time-points and multiply the vector by our transition probability matrix</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>t){</span>
 <span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Loop through all time-points and multiply the vector by </span></span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(t)){</span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    matReturn[i,] <span class="ot">&lt;-</span>   iVec <span class="sc">%*%</span> tProbs</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>    matReturn[i,] <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    <span class="co">#update iVec</span></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    iVec <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs</span>
 <span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>    <span class="co">#update ivec</span></span>
-<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>    iVec <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs</span>
-<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(matReturn)</span>
-<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a>  <span class="co">#returns a t (years) x 4 (states) matrix where the rows represent the proportion in a given state at year t</span></span>
-<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">#returns a t (years) x 4 (states) matrix where the rows represent the proportion in a given state at year t</span></span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(matReturn)</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Then we will use these functions to create a single analysis function. We can build in an error check to make sure our rows sum to 1 as before.</p>
 <div class="cell">
@@ -558,71 +559,67 @@ Tip
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#call the function</span></span>
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  yearlyProbs <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbs,t,iVec)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#throw error if row sums are not equal to 1</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#stopifnot(!rowsum(yearlyProbs)==1)</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  lifeYears <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(yearlyProbs[,<span class="sc">-</span><span class="dv">4</span>])</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  costA <span class="ot">&lt;-</span> dmca<span class="sc">+</span>ccca<span class="sc">+</span>cAZT</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  costB <span class="ot">&lt;-</span> dmcb<span class="sc">+</span>cccb<span class="sc">+</span>cAZT</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  costC <span class="ot">&lt;-</span> dmcc<span class="sc">+</span>cccc<span class="sc">+</span>cAZT</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  costVector <span class="ot">&lt;-</span> <span class="fu">c</span>(costA,costB,costC)</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the non-discounted cost</span></span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  nonDiscCost <span class="ot">&lt;-</span> yearlyProbs[,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVector</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  discCost <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(nonDiscCost, <span class="at">discRate =</span> cDR,t)</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total costs and life years over the 20 years</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  totalDiscCostMonoTherapy <span class="ot">&lt;-</span> <span class="fu">sum</span>(discCost)</span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  totalLifeYearsMonoTherapy <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYears)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  lifeYears <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(yearlyProbs[,<span class="sc">-</span><span class="dv">4</span>])</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  costA <span class="ot">&lt;-</span> dmca<span class="sc">+</span>ccca<span class="sc">+</span>cAZT</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  costB <span class="ot">&lt;-</span> dmcb<span class="sc">+</span>cccb<span class="sc">+</span>cAZT</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  costC <span class="ot">&lt;-</span> dmcc<span class="sc">+</span>cccc<span class="sc">+</span>cAZT</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  costVector <span class="ot">&lt;-</span> <span class="fu">c</span>(costA,costB,costC)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the non-discounted cost</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  nonDiscCost <span class="ot">&lt;-</span> yearlyProbs[,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVector</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  discCost <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(nonDiscCost, <span class="at">discRate =</span> cDR,t)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total costs and life years over the 20 years</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  totalDiscCostMonoTherapy <span class="ot">&lt;-</span> <span class="fu">sum</span>(discCost)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>  totalLifeYearsMonoTherapy <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYears)</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the combination therapy</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  tProbsComb <span class="ot">&lt;-</span> <span class="fu">calculatetProbCombination</span>(tProbs,<span class="at">RR =</span> RR)</span>
 <span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the combination therapy</span></span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  tProbsComb <span class="ot">&lt;-</span> <span class="fu">calculatetProbCombination</span>(tProbs,<span class="at">RR =</span> RR)</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>  <span class="co">#check to ensure all rows sum to 1</span></span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowSums</span>(tProbsComb)</span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the yearly proportions (for the first two years)</span></span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>  probsCombYearly1_2 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbsComb,<span class="at">t =</span> <span class="dv">2</span>,<span class="at">iVec =</span> iVec)</span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate rest of years</span></span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>  probsCombYearly3_20 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbs,<span class="at">t =</span> t<span class="dv">-2</span>,<span class="at">iVec =</span>probsCombYearly1_2[<span class="dv">2</span>,])</span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">#combine them</span></span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>  probsCombYearly <span class="ot">&lt;-</span> <span class="fu">rbind</span>(probsCombYearly1_2,probsCombYearly3_20)</span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the life-years</span></span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>  lifeYearsComb <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(probsCombYearly[,<span class="sc">-</span><span class="dv">4</span>])</span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the costs</span></span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>  costAComb <span class="ot">&lt;-</span> costA<span class="sc">+</span>cLam</span>
-<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>  costBComb <span class="ot">&lt;-</span> costB<span class="sc">+</span>cLam</span>
-<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>  costCComb <span class="ot">&lt;-</span> costC<span class="sc">+</span>cLam</span>
-<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>  <span class="co">#combine the costs into a vector</span></span>
-<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>  costVectorComb <span class="ot">&lt;-</span> <span class="fu">c</span>(costAComb,costBComb,costCComb)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#check to ensure all rows sum to 1</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowSums</span>(tProbsComb)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the yearly proportions (for the first two years)</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>  probsCombYearly1_2 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbsComb,<span class="at">t =</span> <span class="dv">2</span>,<span class="at">iVec =</span> iVec)</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate rest of years</span></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>  probsCombYearly3_20 <span class="ot">&lt;-</span> <span class="fu">calculateYearlyProbs</span>(tProbs,<span class="at">t =</span> t<span class="dv">-2</span>,<span class="at">iVec =</span>probsCombYearly1_2[<span class="dv">2</span>,])</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">#combine them</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>  probsCombYearly <span class="ot">&lt;-</span> <span class="fu">rbind</span>(probsCombYearly1_2,probsCombYearly3_20)</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the life-years</span></span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>  lifeYearsComb <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(probsCombYearly[,<span class="sc">-</span><span class="dv">4</span>])</span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the costs</span></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>  costAComb <span class="ot">&lt;-</span> costA<span class="sc">+</span>cLam</span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>  costBComb <span class="ot">&lt;-</span> costB<span class="sc">+</span>cLam</span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>  costCComb <span class="ot">&lt;-</span> costC<span class="sc">+</span>cLam</span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>  <span class="co">#combine the costs into a vector</span></span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a>  costVectorComb <span class="ot">&lt;-</span> <span class="fu">c</span>(costAComb,costBComb,costCComb)</span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>  <span class="co">#use matrix multiplication to calculate yearly costs</span></span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>  costCombNonDisc1_2 <span class="ot">&lt;-</span> probsCombYearly[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVectorComb</span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>  costCombNonDisc3_20 <span class="ot">&lt;-</span> probsCombYearly[<span class="dv">3</span><span class="sc">:</span><span class="dv">20</span>,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVector</span>
 <span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>  <span class="co">#use matrix multiplication to calculate yearly costs</span></span>
-<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>  costCombNonDisc1_2 <span class="ot">&lt;-</span>   probsCombYearly[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVectorComb</span>
-<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>  costCombNonDisc3_20 <span class="ot">&lt;-</span> probsCombYearly[<span class="dv">3</span><span class="sc">:</span><span class="dv">20</span>,<span class="sc">-</span><span class="dv">4</span>] <span class="sc">%*%</span> costVector</span>
-<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>  <span class="co">#use rbind to combine the non-discounted cost</span></span>
-<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>  costCombNonDisc <span class="ot">&lt;-</span> <span class="fu">rbind</span>(costCombNonDisc1_2,costCombNonDisc3_20)</span>
-<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the discounted costs</span></span>
-<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>  costCombDisc <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(costCombNonDisc, <span class="at">discRate =</span> cDR,t)</span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a>  <span class="co">#use rbind to combine the non-discounted cost</span></span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>  costCombNonDisc <span class="ot">&lt;-</span> <span class="fu">rbind</span>(costCombNonDisc1_2,costCombNonDisc3_20)</span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the discounted costs</span></span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>  costCombDisc <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(costCombNonDisc, <span class="at">discRate =</span> cDR,t)</span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total costs and life years for the combination therapy</span></span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a>  totalLifeYearsComb <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsComb)</span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>  totalDiscCostComb <span class="ot">&lt;-</span> <span class="fu">sum</span>(costCombDisc)</span>
 <span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total costs and life years for the combination therapy</span></span>
-<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a>  totalLifeYearsComb <span class="ot">&lt;-</span> <span class="fu">sum</span>(lifeYearsComb)</span>
-<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a>  totalDiscCostComb <span class="ot">&lt;-</span> <span class="fu">sum</span>(costCombDisc)</span>
-<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a>  <span class="co">#return a list of all the relevant values</span></span>
-<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">MonoLYs =</span> totalLifeYearsMonoTherapy,<span class="at">MonoDiscCost =</span> totalDiscCostMonoTherapy,<span class="at">CombLYs =</span> totalLifeYearsComb , <span class="at">CombDiscCost =</span> totalDiscCostComb))</span>
-<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a>  <span class="co">#return a list of all the relevant values</span></span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="at">MonoLYs =</span> totalLifeYearsMonoTherapy,<span class="at">MonoDiscCost =</span> totalDiscCostMonoTherapy,<span class="at">CombLYs =</span> totalLifeYearsComb , <span class="at">CombDiscCost =</span> totalDiscCostComb))</span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="part-5-calculating-the-icer" class="level2">
@@ -1065,4 +1062,4 @@ Tip
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

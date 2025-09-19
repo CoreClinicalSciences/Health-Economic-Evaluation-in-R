@@ -165,6 +165,9 @@ window.Quarto = {
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../../">Guide to Health Economic Evaluation in R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -182,8 +185,8 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Preamble on R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -191,8 +194,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Preamble on matrix operations</span></a>
+  <a href="../../../Source/General-Guide/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble on R and matrix operations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview of exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -240,21 +260,8 @@ window.Quarto = {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Appendix</span></span></a>
-  </div>
-</li>
-      </ul>
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Appendices</span></span>
   </li>
     </ul>
     </div>
@@ -273,7 +280,7 @@ window.Quarto = {
   <li><a href="#part-5-combining-all-our-functions" id="toc-part-5-combining-all-our-functions" class="nav-link" data-scroll-target="#part-5-combining-all-our-functions">Part 5: Combining all our functions</a></li>
   <li><a href="#part-6-calculating-the-icer" id="toc-part-6-calculating-the-icer" class="nav-link" data-scroll-target="#part-6-calculating-the-icer">Part 6: Calculating the ICER</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -318,33 +325,36 @@ window.Quarto = {
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">60</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>cDR <span class="ot">&lt;-</span> <span class="fl">0.06</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>oDR <span class="ot">&lt;-</span> <span class="fl">0.015</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#fixed costs</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>cStandard <span class="ot">&lt;-</span> <span class="dv">394</span> <span class="co">#cost of standard implant</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>cNP1 <span class="ot">&lt;-</span> <span class="dv">579</span> <span class="co">#cost of new implant</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>omrPTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">98</span>)   <span class="co">#operative mortality rate following primary THR</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#use the same distribution for the revision risk as no information is provided</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>omrRTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">98</span>)  <span class="co">#operative mortality rate following revision THR</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>rrr <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">96</span>) <span class="co">#re-revision risk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#discount rates</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>cDR <span class="ot">&lt;-</span> <span class="fl">0.06</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>oDR <span class="ot">&lt;-</span> <span class="fl">0.015</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#fixed costs</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>cStandard <span class="ot">&lt;-</span> <span class="dv">394</span> <span class="co">#cost of standard implant</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>cNP1 <span class="ot">&lt;-</span> <span class="dv">579</span> <span class="co">#cost of new implant</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>omrPTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">98</span>)   <span class="co">#operative mortality rate following primary THR</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#use the same distribution for the revision risk as no information is provided</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>omrRTHR <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">98</span>)  <span class="co">#operative mortality rate following revision THR</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>rrr <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">96</span>) <span class="co">#re-revision risk</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, let us compare the standard errors of each estimate by using the sampling distribution based on the central limit theorem, and the method of moments of the beta distribution.</p>
 <p>We will create a function to calculate the standard errors.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>SE_p <span class="ot">&lt;-</span> <span class="cf">function</span>(p,n){</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">sqrt</span>(p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">/</span>n))</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>SE_beta <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha,beta){</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">sqrt</span>(alpha<span class="sc">*</span>beta<span class="sc">/</span>((alpha<span class="sc">+</span>beta)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span>(alpha<span class="sc">+</span>beta<span class="sc">+</span><span class="dv">1</span>))))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">sqrt</span>(p<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">/</span>n))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>SE_beta <span class="ot">&lt;-</span> <span class="cf">function</span>(alpha,beta){</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">sqrt</span>(alpha<span class="sc">*</span>beta<span class="sc">/</span>((alpha<span class="sc">+</span>beta)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span>(alpha<span class="sc">+</span>beta<span class="sc">+</span><span class="dv">1</span>))))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we will use those functions to calculate the standard errors:</p>
 <div class="cell">
@@ -410,7 +420,8 @@ window.Quarto = {
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  draw <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n,alpha,beta)</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(draw)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we will draw our beta distribution based on the mean and standard errors using our newly created function.</p>
 <div class="cell">
@@ -443,25 +454,24 @@ Note
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#the survival model from exercise 3.5</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>survModelSummary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>),</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">coefficient =</span> <span class="fu">c</span>(<span class="fl">0.3740968</span>,<span class="sc">-</span><span class="fl">5.490935</span>,<span class="sc">-</span><span class="fl">0.0367022</span>,<span class="fl">0.768536</span>,<span class="sc">-</span><span class="fl">1.344474</span>),</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">SE =</span> <span class="fu">c</span>(<span class="fl">0.0474501</span>,<span class="fl">0.207892</span>,<span class="fl">0.0052112</span>,<span class="fl">0.109066</span>,<span class="fl">0.3825815</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>survModelSummary<span class="sc">$</span>hazard_ratio <span class="ot">&lt;-</span> <span class="fu">exp</span>(survModelSummary<span class="sc">$</span>coefficient)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#covariance matrix provided</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>covMat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">0.0022515</span>  , <span class="sc">-</span><span class="fl">0.005691</span> , <span class="fl">0.000000028</span>, <span class="fl">0.0000051</span>, <span class="fl">0.000259</span>,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>   <span class="sc">-</span><span class="fl">0.005691</span>   ,  <span class="fl">0.0432191</span>,<span class="sc">-</span><span class="fl">0.000783</span>   ,<span class="sc">-</span><span class="fl">0.007247</span> ,<span class="sc">-</span><span class="fl">0.000642</span>,</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.000000028</span>, <span class="sc">-</span><span class="fl">0.000783</span> , <span class="fl">2.716e-05</span>  , <span class="fl">0.000033</span> ,<span class="sc">-</span><span class="fl">0.000111</span>,</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0000051</span>  , <span class="sc">-</span><span class="fl">0.007247</span> , <span class="fl">0.000033</span>   , <span class="fl">0.0118954</span>, <span class="fl">0.000184</span>,</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.000259</span>   , <span class="sc">-</span><span class="fl">0.000642</span> ,<span class="sc">-</span><span class="fl">0.000111</span>   , <span class="fl">0.000184</span> , <span class="fl">0.1463686</span>),</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">5</span>, <span class="at">byrow =</span> T</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">#name the matrix columns and rows</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(covMat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(covMat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">coefficient =</span> <span class="fu">c</span>(<span class="fl">0.3740968</span>,<span class="sc">-</span><span class="fl">5.490935</span>,<span class="sc">-</span><span class="fl">0.0367022</span>,<span class="fl">0.768536</span>,<span class="sc">-</span><span class="fl">1.344474</span>),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">SE =</span> <span class="fu">c</span>(<span class="fl">0.0474501</span>,<span class="fl">0.207892</span>,<span class="fl">0.0052112</span>,<span class="fl">0.109066</span>,<span class="fl">0.3825815</span>)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>survModelSummary<span class="sc">$</span>hazard_ratio <span class="ot">&lt;-</span> <span class="fu">exp</span>(survModelSummary<span class="sc">$</span>coefficient)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#covariance matrix provided</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>covMat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">0.0022515</span>  , <span class="sc">-</span><span class="fl">0.005691</span> , <span class="fl">0.000000028</span>, <span class="fl">0.0000051</span>, <span class="fl">0.000259</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>   <span class="sc">-</span><span class="fl">0.005691</span>   ,  <span class="fl">0.0432191</span>,<span class="sc">-</span><span class="fl">0.000783</span>   ,<span class="sc">-</span><span class="fl">0.007247</span> ,<span class="sc">-</span><span class="fl">0.000642</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.000000028</span>, <span class="sc">-</span><span class="fl">0.000783</span> , <span class="fl">2.716e-05</span>  , <span class="fl">0.000033</span> ,<span class="sc">-</span><span class="fl">0.000111</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.0000051</span>  , <span class="sc">-</span><span class="fl">0.007247</span> , <span class="fl">0.000033</span>   , <span class="fl">0.0118954</span>, <span class="fl">0.000184</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="fl">0.000259</span>   , <span class="sc">-</span><span class="fl">0.000642</span> ,<span class="sc">-</span><span class="fl">0.000111</span>   , <span class="fl">0.000184</span> , <span class="fl">0.1463686</span>),</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">ncol =</span> <span class="dv">5</span>, <span class="at">byrow =</span> T</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">#name the matrix columns and rows</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(covMat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(covMat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lngamma"</span>,<span class="st">"cons"</span>,<span class="st">"age"</span>,<span class="st">"male"</span>,<span class="st">"NP1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Although we don’t need to, it’s worth noting that we can easily calculate the cholesky decomposition in R</p>
 <div class="cell">
@@ -504,83 +514,84 @@ Note
 <p>The first step is to load in all of our previous functions</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tProbsHazard <span class="ot">&lt;-</span> <span class="cf">function</span>(t,lambda,gamma){</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(lambda<span class="sc">*</span>(((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">^</span>gamma <span class="sc">-</span> ((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">^</span>gamma))))</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">exp</span>(lambda<span class="sc">*</span>(((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">^</span>gamma <span class="sc">-</span> ((<span class="dv">1</span><span class="sc">:</span>t)<span class="sc">^</span>gamma))))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>tProbs_time <span class="ot">&lt;-</span> <span class="cf">function</span>(omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rr is revision risk, mr is mortality risk</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  tProbs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span><span class="sc">-</span>(omrPTHR),     <span class="dv">0</span>,     <span class="dv">0</span>,                   omrPTHR,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">1</span><span class="sc">-</span>(rr[t]<span class="sc">+</span>mr[t]), rr[t], <span class="dv">0</span>,                   mr[t],</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               <span class="dv">0</span>,     <span class="dv">1</span><span class="sc">-</span>(omrRTHR <span class="sc">+</span> mr[t]), omrRTHR <span class="sc">+</span> mr[t],</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               rrr,   <span class="dv">1</span><span class="sc">-</span>(rrr<span class="sc">+</span>mr[t]),       mr[t],</span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               <span class="dv">0</span>,     <span class="dv">0</span>,                   <span class="dv">1</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  ),<span class="at">ncol =</span> <span class="dv">5</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">byrow =</span> T</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="co">#provided death rates and yearly transition probabilities</span></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>deathRates <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span>),</span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">Males =</span> <span class="fu">c</span>(<span class="fl">1.51</span>,<span class="fl">3.93</span>,<span class="fl">10.9</span>,<span class="fl">31.6</span>,<span class="fl">80.1</span>,<span class="fl">187.9</span>),</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">Females =</span> <span class="fu">c</span>(<span class="fl">0.99</span>,<span class="fl">2.6</span>,<span class="fl">6.7</span>,<span class="fl">19.3</span>,<span class="fl">53.5</span>,<span class="fl">154.8</span>)</span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>yearlyTProbs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">c</span>(<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span>),</span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">Index =</span> <span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">45</span>,<span class="dv">55</span>,<span class="dv">65</span>,<span class="dv">75</span>,<span class="dv">85</span>),</span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">Males =</span> <span class="fu">c</span>(<span class="fl">0.00151</span>,<span class="fl">0.00393</span>,<span class="fl">0.0109</span>,<span class="fl">0.0316</span>,<span class="fl">0.0801</span>,<span class="fl">0.1879</span>),</span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">Females =</span> <span class="fu">c</span>(<span class="fl">0.00099</span>,<span class="fl">0.0026</span>,<span class="fl">0.0067</span>,<span class="fl">0.0193</span>,<span class="fl">0.0535</span>,<span class="fl">0.1548</span>)</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>calculateYearlyProbs <span class="ot">&lt;-</span> <span class="cf">function</span>(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
-<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create empty matrix that we will fill in</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>tProbs_time <span class="ot">&lt;-</span> <span class="cf">function</span>(omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rr is revision risk, mr is mortality risk</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  tProbs <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span><span class="sc">-</span>(omrPTHR),     <span class="dv">0</span>,     <span class="dv">0</span>,                   omrPTHR,</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">1</span><span class="sc">-</span>(rr[t]<span class="sc">+</span>mr[t]), rr[t], <span class="dv">0</span>,                   mr[t],</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               <span class="dv">0</span>,     <span class="dv">1</span><span class="sc">-</span>(omrRTHR <span class="sc">+</span> mr[t]), omrRTHR <span class="sc">+</span> mr[t],</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               rrr,   <span class="dv">1</span><span class="sc">-</span>(rrr<span class="sc">+</span>mr[t]),       mr[t],</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>, <span class="dv">0</span>,               <span class="dv">0</span>,     <span class="dv">0</span>,                   <span class="dv">1</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  ),<span class="at">ncol =</span> <span class="dv">5</span>, <span class="at">nrow =</span> <span class="dv">5</span>, <span class="at">byrow =</span> T</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(tProbs)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co">#provided death rates and yearly transition probabilities</span></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>deathRates <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">c</span>(<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span>),</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">Males =</span> <span class="fu">c</span>(<span class="fl">1.51</span>,<span class="fl">3.93</span>,<span class="fl">10.9</span>,<span class="fl">31.6</span>,<span class="fl">80.1</span>,<span class="fl">187.9</span>),</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">Females =</span> <span class="fu">c</span>(<span class="fl">0.99</span>,<span class="fl">2.6</span>,<span class="fl">6.7</span>,<span class="fl">19.3</span>,<span class="fl">53.5</span>,<span class="fl">154.8</span>)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>yearlyTProbs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> <span class="fu">c</span>(<span class="st">"35-44"</span>,<span class="st">"45-54"</span>,<span class="st">"55-64"</span>,<span class="st">"65-74"</span>,<span class="st">"75-84"</span>,<span class="st">"85 and over"</span>),</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">Index =</span> <span class="fu">c</span>(<span class="dv">35</span>,<span class="dv">45</span>,<span class="dv">55</span>,<span class="dv">65</span>,<span class="dv">75</span>,<span class="dv">85</span>),</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">Males =</span> <span class="fu">c</span>(<span class="fl">0.00151</span>,<span class="fl">0.00393</span>,<span class="fl">0.0109</span>,<span class="fl">0.0316</span>,<span class="fl">0.0801</span>,<span class="fl">0.1879</span>),</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">Females =</span> <span class="fu">c</span>(<span class="fl">0.00099</span>,<span class="fl">0.0026</span>,<span class="fl">0.0067</span>,<span class="fl">0.0193</span>,<span class="fl">0.0535</span>,<span class="fl">0.1548</span>)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>calculateYearlyProbs <span class="ot">&lt;-</span> <span class="cf">function</span>(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){</span>
 <span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>  matReturn <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> t, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create empty matrix that we will fill in</span></span>
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">#initialize first vector of proportions</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>  matReturn <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">nrow =</span> t, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
 <span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create column names</span></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(matReturn) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PrimaryTHR"</span>,<span class="st">"SuccessP"</span>,<span class="st">"RevisionTHR"</span>,<span class="st">"SucessR"</span>,<span class="st">"Death"</span>)</span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>t){</span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    <span class="co">#get the corresponding transition matrix based on the time</span></span>
-<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    tProbs <span class="ot">&lt;-</span> <span class="fu">tProbs_time</span>(omrPTHR,omrRTHR,rr,mr,rrr,i)</span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>    matReturn[i,] <span class="ot">&lt;-</span>   iVec <span class="sc">%*%</span> tProbs </span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>  <span class="co">#initialize first vector of proportions</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create column names</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(matReturn) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PrimaryTHR"</span>,<span class="st">"SuccessP"</span>,<span class="st">"RevisionTHR"</span>,<span class="st">"SucessR"</span>,<span class="st">"Death"</span>)</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>t){</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    <span class="co">#get the corresponding transition matrix based on the time</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>    tProbs <span class="ot">&lt;-</span> <span class="fu">tProbs_time</span>(omrPTHR,omrRTHR,rr,mr,rrr,i)</span>
 <span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>    <span class="co">#update iVec</span></span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>    iVec <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs</span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(matReturn)</span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>    matReturn[i,] <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs </span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>    <span class="co">#update iVec</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>    iVec <span class="ot">&lt;-</span> iVec <span class="sc">%*%</span> tProbs</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">#returns a t (years) x 5 (states) matrix where the rows represent </span></span>
 <span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>  <span class="co">#the proportion in a given state at year t</span></span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(matReturn)</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>discountFormula <span class="ot">&lt;-</span> <span class="cf">function</span>(nonDiscount,discRate,t){</span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(nonDiscount<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>discRate)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>t))</span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>discountFormula <span class="ot">&lt;-</span> <span class="cf">function</span>(nonDiscount,discRate,t){</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(nonDiscount<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>discRate)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>t))</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Then we compile all the functions into a single analysis function:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>analysisNP1 <span class="ot">&lt;-</span> <span class="cf">function</span>(omrPTHR,omrRTHR,mr,rrr,cPrimary,cRevision,cPSuccess,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the revision risk</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    rr <span class="ot">&lt;-</span> <span class="fu">tProbsHazard</span>(<span class="at">t=</span>t,<span class="at">lambda =</span> lambda,<span class="at">gamma =</span> gamma)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    mr <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>t,<span class="cf">function</span>(x){</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>   rr <span class="ot">&lt;-</span> <span class="fu">tProbsHazard</span>(<span class="at">t=</span>t,<span class="at">lambda =</span> lambda,<span class="at">gamma =</span> gamma)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>   mr <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>t,<span class="cf">function</span>(x){</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#calculate which index select based on the age group</span></span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    inds <span class="ot">&lt;-</span> <span class="fu">sum</span>(x<span class="sc">+</span>age <span class="sc">&gt;=</span> yearlyTProbs<span class="sc">$</span>Index)</span>
@@ -616,7 +627,7 @@ Note
 <span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  utility<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,uSuccessP,uRevision,uSuccessR)</span>
 <span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">#multiply by the cohort</span></span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  totalQuality <span class="ot">&lt;-</span>  standPopStates[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> utility</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  totalQuality <span class="ot">&lt;-</span> standPopStates[,<span class="sc">-</span><span class="dv">5</span>] <span class="sc">%*%</span> utility</span>
 <span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  QALYStandard <span class="ot">&lt;-</span> <span class="fu">discountFormula</span>(totalQuality,<span class="at">discRate =</span> oDR,<span class="at">t=</span>t)</span>
 <span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="co">#calculate the total cost for all cycles/person</span></span>
@@ -1103,4 +1114,4 @@ Note
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

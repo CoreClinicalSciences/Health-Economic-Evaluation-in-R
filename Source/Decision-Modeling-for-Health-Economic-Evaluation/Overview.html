@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Preamble on matrix operations – Guide to Health Economic Evaluation in R</title>
+<title>Overview of exercises – Guide to Health Economic Evaluation in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,64 +20,29 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" rel="next">
-<link href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" rel="prev">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-d58359eb3ecc31d3bec1ed479c2cbb3a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" rel="next">
+<link href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d58359eb3ecc31d3bec1ed479c2cbb3a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -118,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html">Preamble on matrix operations</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.html">Overview of exercises</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -132,10 +97,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="../../../index.html" class="sidebar-logo-link">
+      <a href="../../index.html" class="sidebar-logo-link">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../../">Guide to Health Economic Evaluation in R</a> 
+      <a href="../../">Guide to Health Economic Evaluation in R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -147,14 +115,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Preamble on R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -162,58 +130,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Preamble on matrix operations</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 2.5</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 3.5</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-47.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 4.7</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-48.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 4.8</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 5.7</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 5.8</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exercise 6.6A &amp; 6.6B</span></a>
+  <a href="../../Source/General-Guide/Ch0-Preamble-Matrix-Multiplication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble on R and matrix operations</span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+            <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Book: Decision Modelling for Health Economic Evaluation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -221,11 +147,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Appendix</span></span></a>
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Overview of exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 2.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 3.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-47.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 4.7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-48.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 4.8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-57.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 5.7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 5.8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 6.6A &amp; 6.6B</span></a>
   </div>
 </li>
       </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Appendices</span></span>
   </li>
     </ul>
     </div>
@@ -237,16 +209,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#matrix-multiplication-example" id="toc-matrix-multiplication-example" class="nav-link active" data-scroll-target="#matrix-multiplication-example">Matrix multiplication example</a></li>
+  <li><a href="#exercise-2.5---a-simple-markov-model-for-two-hiv-treatments" id="toc-exercise-2.5---a-simple-markov-model-for-two-hiv-treatments" class="nav-link active" data-scroll-target="#exercise-2.5---a-simple-markov-model-for-two-hiv-treatments">Exercise 2.5 - A Simple Markov Model for Two HIV Treatments</a>
+  <ul class="collapse">
+  <li><a href="#steps" id="toc-steps" class="nav-link" data-scroll-target="#steps">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments" id="toc-exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments" class="nav-link" data-scroll-target="#exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments">Exercise 3.5 - A Time-Dependent Markov Model for two Hip-Replacement Treaments</a>
+  <ul class="collapse">
+  <li><a href="#steps-1" id="toc-steps-1" class="nav-link" data-scroll-target="#steps-1">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version" id="toc-exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version" class="nav-link" data-scroll-target="#exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version">Exercise 4.7 – Adapt the HIV Treatment Model into a Probabilistic Version</a>
+  <ul class="collapse">
+  <li><a href="#steps-2" id="toc-steps-2" class="nav-link" data-scroll-target="#steps-2">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-4.8-adapt-the-model-into-a-probabilistic-version" id="toc-exercise-4.8-adapt-the-model-into-a-probabilistic-version" class="nav-link" data-scroll-target="#exercise-4.8-adapt-the-model-into-a-probabilistic-version">Exercise 4.8 – Adapt the Model into a Probabilistic Version</a></li>
+  <li><a href="#steps-3" id="toc-steps-3" class="nav-link" data-scroll-target="#steps-3">Steps</a></li>
+  <li><a href="#exercise-5.7-use-simulations-and-generate-ce-plane-ceac" id="toc-exercise-5.7-use-simulations-and-generate-ce-plane-ceac" class="nav-link" data-scroll-target="#exercise-5.7-use-simulations-and-generate-ce-plane-ceac">Exercise 5.7 – Use Simulations and Generate CE Plane &amp; CEAC</a>
+  <ul class="collapse">
+  <li><a href="#steps-4" id="toc-steps-4" class="nav-link" data-scroll-target="#steps-4">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example" id="toc-exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example" class="nav-link" data-scroll-target="#exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example">Exercise 5.8 – Adding a Third Treatment Option to the total hip replacement example</a>
+  <ul class="collapse">
+  <li><a href="#steps-5" id="toc-steps-5" class="nav-link" data-scroll-target="#steps-5">Steps</a></li>
+  </ul></li>
+  <li><a href="#exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi" id="toc-exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi" class="nav-link" data-scroll-target="#exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi">Exercise 6.6 – Calculate the Expected Value of Perfect Information (EVPI)</a>
+  <ul class="collapse">
+  <li><a href="#steps-6" id="toc-steps-6" class="nav-link" data-scroll-target="#steps-6">Steps</a></li>
+  </ul></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.html">Preamble on matrix operations</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html">Book: Decision Modelling for Health Economic Evaluation</a></li><li class="breadcrumb-item"><a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.html">Overview of exercises</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Preamble on matrix operations</h1>
+<h1 class="title">Overview of exercises</h1>
 </div>
 
 
@@ -263,76 +260,141 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>When building markov molds and building transition matrices, using matrix-vector multiplications simplifies manual computation significantly.</p>
-<p>To multiply a matrix by a vector we must have the same number of columns in the matrix as rows in a vector. Consider below an example of a two-state markov model and the goal is to discern the proportion left in the first state after two time cycles. We also show how to select rows and columns of a matrix.</p>
-<section id="matrix-multiplication-example" class="level2">
-<h2 class="anchored" data-anchor-id="matrix-multiplication-example">Matrix multiplication example</h2>
-<p>First, we will create our vector called <code>iVec_example</code>. The number of entries in this vector should be the same as the number of states. In this example we will assume that everyone starts in the first state.</p>
-<p>Note: the <code>c()</code> operation initializes a vector (it is considered by default a column vector)</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>iVec_example <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><br>
-Below, we consider a two-state markov model. We build a 2 x 2 matrix of the transition probabilities:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tProbs_example <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="fl">0.7</span>,<span class="fl">0.3</span>,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                           <span class="fl">0.1</span>,<span class="fl">0.9</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">ncol =</span> <span class="dv">2</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">byrow =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><br>
-Now, we want to calculate the proportion of individuals in the first time-cycle. The results will be saved in <code>time1Prop</code></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note: the number of columns in the matrix must match the number of rows in the vector.</p>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>time1Prop <span class="ot">&lt;-</span> tProbs_example <span class="sc">%*%</span> iVec_example</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><br>
-To get the proportion after the second-time we can multiply the first-time proportion that we just calculated by the transition probability matrix</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>time2Prop <span class="ot">&lt;-</span> tProbs_example <span class="sc">%*%</span> time1Prop</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><br>
-We can use the <code>[i,j]</code> operator to extract row <em>i</em> and column <em>j</em> of a matrix</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[<span class="dv">1</span>,] <span class="co">#extracts the first row</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7 0.3</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[,<span class="dv">2</span>] <span class="co">#extracts the second column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3 0.9</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[<span class="dv">1</span>,<span class="dv">2</span>] <span class="co">#extracts first row and second column entry</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3</code></pre>
-</div>
-</div>
-<p><br>
-We can also use the <em>-i</em> operator to extract <strong>all except</strong> <em>i</em></p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[<span class="sc">-</span><span class="dv">1</span>,]  <span class="co">#extracts all but the first row</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1 0.9</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>tProbs_example[,<span class="sc">-</span><span class="dv">1</span>]  <span class="co">#extracts all but the column</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3 0.9</code></pre>
-</div>
-</div>
+<section id="exercise-2.5---a-simple-markov-model-for-two-hiv-treatments" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2.5---a-simple-markov-model-for-two-hiv-treatments">Exercise 2.5 - A Simple Markov Model for Two HIV Treatments</h2>
+<p>This exercise reviews how to run a basic Markov model that compares the cost effectiveness of two HIV treatments. The first treatment involves a monotherapy of Zidovudine (control), against a combination therapy of Zidovudine and Lamivudine (treatment). The combination therapy is only used in the first two years.</p>
+<section id="steps" class="level3">
+<h3 class="anchored" data-anchor-id="steps">Steps</h3>
+<ol type="1">
+<li>Work out the transition probabilities between health states for the monotherapy group (control).<br>
+</li>
+<li>Use these probabilities to run a Markov trace and follow the cohort through 20 years.<br>
+</li>
+<li>Calculate the total costs for the control group.<br>
+</li>
+<li>Apply discounting to account for time preferences.<br>
+</li>
+<li>Adjust the transition probabilities for the treatment group using a relative risk measure.<br>
+</li>
+<li>Calculate the treatment group’s total costs.<br>
+</li>
+<li>Apply discounting again for the treatment results.<br>
+</li>
+<li>Compare treatment vs.&nbsp;control to calculate the Incremental Cost-Effectiveness Ratio (ICER).</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-3.5---a-time-dependent-markov-model-for-two-hip-replacement-treaments">Exercise 3.5 - A Time-Dependent Markov Model for two Hip-Replacement Treaments</h2>
+<p>This exercise extends upon exercise 2.5 by building a <strong>time-dependent</strong> markov model for two total hip-replacement treatments over 60 years. Specifically, it includes how to use existing mortality rates and risk derived from a survival function to compare the cost and utility of treatments.</p>
+<section id="steps-1" class="level3">
+<h3 class="anchored" data-anchor-id="steps-1">Steps</h3>
+<ol type="1">
+<li>Populate model parameters using the provided estimates.<br>
+</li>
+<li>Calculate time-dependent transition probabilities using survival analysis results.</li>
+<li>Estimate background mortality rates given the relevant covariates.<br>
+</li>
+<li>Build the Markov model for the standard intervention.<br>
+</li>
+<li>Apply costs and utilities for the standard intervention, including discounting.<br>
+</li>
+<li>Repeat the procedure for the new prosthesis treatment.</li>
+<li>Compare treatment vs.&nbsp;control to calculate the Incremental Cost-Effectiveness Ratio (ICER).</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4.7-adapt-the-hiv-treatment-model-into-a-probabilistic-version">Exercise 4.7 – Adapt the HIV Treatment Model into a Probabilistic Version</h2>
+<p>You will expand the simple model from Exercise 2.5 into a probabilistic Markov model by incorporating uncertainty in parameters by drawing each parameter from a probability distribution.</p>
+<section id="steps-2" class="level3">
+<h3 class="anchored" data-anchor-id="steps-2">Steps</h3>
+<ol type="1">
+<li>Assign a log-normal distribution for relative risks, based on mean and 95% confidence intervals.<br>
+</li>
+<li>Use a gamma distribution for costs, assuming the standard error equals the mean.<br>
+</li>
+<li>Use the Dirichlet distribution to draw values for the transition probability matrix.</li>
+<li>Compare treatment vs.&nbsp;control to calculate the Incremental Cost-Effectiveness Ratio (ICER).<br>
+</li>
+<li>Try running the code again to check that a new ICER is calculated.</li>
+<li>Build a stand-alone analysis function that automatically calculates the ICER for given parameter inputs.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-4.8-adapt-the-model-into-a-probabilistic-version" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-4.8-adapt-the-model-into-a-probabilistic-version">Exercise 4.8 – Adapt the Model into a Probabilistic Version</h2>
+<p>In this exercise, you will extend the total hip replacement example from Exercise 3.5 to be probabilistic. This involves assigning probability distributions to uncertain parameters including the uncertainty in the survival model.</p>
+</section>
+<section id="steps-3" class="level2">
+<h2 class="anchored" data-anchor-id="steps-3">Steps</h2>
+<ol type="1">
+<li>Review all parameter inputs and identify which should remain deterministic (e.g., patient characteristics, prosthesis costs, discount rates) and which should be included in the probabilistic sensitivity analysis.<br>
+</li>
+<li>Fit beta distributions for probability parameters, such as post-operative mortality and revision-related mortality, using the provided information.</li>
+<li>Fit gamma distributions for cost parameters. Use the method of moments (with the provided mean and standard error) to estimat the parameters of the gamma distribution.</li>
+<li>Fit beta distributions for utility parameters. Use the method of moments to estimate the beta parameters from the given means and standard errors.</li>
+<li>Use the multivariate normal distribution with the specified covariance matrix to draw values for the survival parameters.</li>
+<li>Build a stand-alone analysis function that automatically calculates the ICER for given parameter inputs.</li>
+</ol>
+<hr>
+</section>
+<section id="exercise-5.7-use-simulations-and-generate-ce-plane-ceac" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5.7-use-simulations-and-generate-ce-plane-ceac">Exercise 5.7 – Use Simulations and Generate CE Plane &amp; CEAC</h2>
+<p>In this exercise, you will build a simulation using the probabilistic model from Exercise 4.8 to estimate the uncertainty in the ICER . The goal is to produce both a <strong>cost effectiveness plane</strong> and a <strong>cost effectiveness acceptability curve (CEAC)</strong> across the parameter space.</p>
+<section id="steps-4" class="level3">
+<h3 class="anchored" data-anchor-id="steps-4">Steps</h3>
+<ol type="1">
+<li>Build a simulation function that automates the simulation process including drawing all parameter values and calculating the cost effectiveness cost effectiveness acceptability.</li>
+<li>Analyze the results and create a cost-effectiveness plane.<br>
+</li>
+<li>Repeat the analysis for different subgroups.<br>
+</li>
+<li>Plot CEACs for each subgroup and compare the results.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-5.8-adding-a-third-treatment-option-to-the-total-hip-replacement-example">Exercise 5.8 – Adding a Third Treatment Option to the total hip replacement example</h2>
+<p>In this exercise, you will expand the model by adding a third treatment option. Since all treatment options are mutually exclusive, the analysis requires multiple CEACs and the creation of a <strong>cost effectiveness acceptability frontier</strong>.</p>
+<section id="steps-5" class="level3">
+<h3 class="anchored" data-anchor-id="steps-5">Steps</h3>
+<ol type="1">
+<li>Add a third prosthesis option to the model.<br>
+</li>
+<li>Run the simulation, calculate mean results, and plot all options on the cost-effectiveness plane.<br>
+</li>
+<li>Use the net-benefit framework to generate multiple CEACs for the three options and construct the cost-effectiveness acceptability frontier.</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-6.6-calculate-the-expected-value-of-perfect-information-evpi">Exercise 6.6 – Calculate the Expected Value of Perfect Information (EVPI)</h2>
+<p>This exercise focuses on calculating the non-parametric <strong>expected value of perfect information (EVPI)</strong> for the total hip replacement example, both at the individual and population level. You will also calculate <strong>EVPPI</strong> for group of parameters</p>
+<section id="steps-6" class="level3">
+<h3 class="anchored" data-anchor-id="steps-6">Steps</h3>
+<ol type="1">
+<li>Calculate the per-patient EVPI for a new prosthesis from the simulation output.<br>
+</li>
+<li>Compute the mean across net benefits under perfect information, then calculate the difference between the mean of maximized net benefits and the maximum of the mean values to obtain the EVPI at the individual level.<br>
+</li>
+<li>Estimate the effective population size and multiply by individual EVPI to get population EVPI.<br>
+</li>
+<li>Calculate EVPI as a function of the cost-effectiveness threshold and examine the peak value.<br>
+</li>
+<li>Calculate EVPI for the risk-reduction parameter: take net benefits for each intervention across many draws, average them, and then compute the maximum net benefits across draws to estimate the payoff under under perfect information of risk-reduction.<br>
+</li>
+<li>Compute the <strong>expected value of perfect parameter information (EVPPI)</strong> for all groups of parameters.</li>
+<li>Plot the EVPPI results for all parameters as a bar chart.</li>
+</ol>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -738,12 +800,12 @@ We can also use the <em>-i</em> operator to extract <strong>all except</strong> 
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="pagination-link" aria-label="Book: Decision Modelling for Health Economic Evaluation">
+      <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.html" class="pagination-link" aria-label="Book: Decision Modelling for Health Economic Evaluation">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Book: Decision Modelling for Health Economic Evaluation</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" class="pagination-link" aria-label="Exercise 2.5">
+      <a href="../../Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.html" class="pagination-link" aria-label="Exercise 2.5">
         <span class="nav-page-text">Exercise 2.5</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
@@ -753,4 +815,4 @@ We can also use the <em>-i</em> operator to extract <strong>all except</strong> 
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

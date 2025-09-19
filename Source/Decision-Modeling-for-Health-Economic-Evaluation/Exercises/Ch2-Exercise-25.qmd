@@ -91,7 +91,7 @@ We assume all individuals start in State A. We are giving the vector the name `i
 
 ```{r 2.5.2 vector definition}
 
-iVec <-  c(1,0,0,0)
+iVec <- c(1,0,0,0)
 ```
 \
 We are going to create a function called `calculateYearlyProbs` that we can use to calculate the proportion of people in each state at a given time point. 
@@ -109,15 +109,16 @@ calculateYearlyProbs <- function(tProbs, t, iVec){
   #create column names
   colnames(matReturn) <- c("A","B","C","D")
 
-  #Loop through all time-points and multiply the vector by 
+  #loop through all time-points and multiply the vector by our transition probability matrix
   for(i in 1:(t)){
 
-    matReturn[i,] <-   iVec %*% tProbs
+    matReturn[i,] <- iVec %*% tProbs
     
-    #update ivec
+    #update iVec
     iVec <- iVec %*% tProbs
     
   }
+  #returns a t (years) x 4 (states) matrix where the rows represent the proportion in a given state at year t
   return(matReturn)
   
 }
@@ -198,7 +199,6 @@ Having completed the analysis for the monotherapy, we will repeat the same steps
 To begin, lets create a function that converts the original transition matrix to the combination transition matrix by using the risk ratio provided
 
 ```{r 2.5.4 Combination Therapy Proportions Function}
-
 calculateProbCombination <- function(tProbs,RR = 0.506){
   
   newMat <- tProbs
@@ -261,7 +261,7 @@ costCComb <- costC+cLam
 costVectorComb <- c(costAComb,costBComb,costCComb)
 
 #use matrix multiplication
-costCombNonDisc1_2 <-   probsCombYearly[1:2,-4] %*% costVectorComb
+costCombNonDisc1_2 <- probsCombYearly[1:2,-4] %*% costVectorComb
 costCombNonDisc3_20 <- probsCombYearly[3:20,-4] %*% costVector
 ```
 \

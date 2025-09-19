@@ -42,7 +42,6 @@ covMat <- matrix(
 colnames(covMat) <- rownames(covMat) <- c("lngamma","cons","age","male","NP1")
 
 survModelSummary <- data.frame(
-  
   variable = c("lngamma","cons","age","male","NP1"),
   coefficient = c(0.3740968,-5.490935,-0.0367022,0.768536,-1.344474),
   SE = c(0.0474501,0.207892,0.0052112,0.109066,0.3825815)
@@ -62,6 +61,7 @@ drawBetaMethodMoments <- function(n,mu,s){
   draw <- rbeta(n,alpha,beta)
   
   return(draw)
+  
 }
 
 
@@ -86,6 +86,8 @@ tProbs_time <- function(omrPTHR,omrRTHR,rr,mr,rrr,t){
     0, 0,               0,     0,                   1
   ),ncol = 5, nrow = 5, byrow = T
 )
+  
+  return(tProbs)
   
 }
 
@@ -128,15 +130,14 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
     #get the corresponding transition matrix based on the time
     tProbs <- tProbs_time(omrPTHR,omrRTHR,rr,mr,rrr,i)
     
-    matReturn[i,] <-   iVec %*% tProbs 
+    matReturn[i,] <- iVec %*% tProbs 
     
     #update ivec
     iVec <- iVec %*% tProbs
     
   }
-  return(matReturn)
-  
   #returns a t (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t
+  return(matReturn)
   
 }
 
@@ -145,8 +146,8 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
 analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,cPrimary,cRevision,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){
 
   #calculate the revision risk
-    rr <- tProbsHazard(t=t,lambda = lambda,gamma = gamma)
-    mr <- sapply(1:t,function(x){
+  rr <- tProbsHazard(t=t,lambda = lambda,gamma = gamma)
+  mr <- sapply(1:t,function(x){
     
     #calculate which index select based on the age group
     inds <- sum(x+age >= yearlyTProbs$Index)
@@ -178,7 +179,7 @@ analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,cPrimary,cRevision,cStandar
   utility<- c(0,uSuccessP,uRevision,uSuccessR)
   
   #multiply by the cohort
-  totalQuality <-  standPopStates[,-5] %*% utility
+  totalQuality <- standPopStates[,-5] %*% utility
   QALYStandard <- discountFormula(totalQuality,discRate = oDR,t=t)
   
   #calculate the total cost for all cycles/person
@@ -238,8 +239,6 @@ generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
              "uRevision","cRatio","STDCost","STDQALYS","NP1Cost","NP1QALYS",
              "STDNMB","NP1NMB","NP1Inc","CESTD","CENP1","CENP1Inc")
    
-   
-   
    dfReturn <- data.frame(matrix(NA,nrow = nReps,ncol = length(cols)))
   
    #fill out the column names for our dataframe
@@ -273,7 +272,7 @@ generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
    dfReturn$uRevision <- uRevision 
    
    #draw from multivariate normal
-   normDraw <- mvrnorm(nReps, mu = survModelSummary$coefficient,Sigma = covMat)
+   normDraw <- MASS::mvrnorm(nReps, mu = survModelSummary$coefficient,Sigma = covMat)
    
    #using R's vectorization, we can calculate operations on the entire vector, we must use [,"name"]as normDraw is not a matrix rather than a vector
    lambda <- exp(normDraw[,'cons'] + normDraw[,'age']*age + normDraw[,'male']*male)
@@ -312,7 +311,9 @@ generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
     
     #the above formulae come directly from the textbook 5.1.4
   }
+   
   return(dfReturn)
+   
 }
 ```
 
@@ -363,7 +364,7 @@ ggplot(res,
       labs(
         x = "QALYs", 
         y = "Cost", 
-        title = "Increase in Cost Effectiveness Plane")
+        title = "Increase in cost effectiveness plane")
 ```
 
 ## Part 3: Adding a threshold
@@ -404,10 +405,10 @@ cRatioResults <- sapply(cRatios,function(x){
   propNP1CE <- mean(NP1sim$CENP1)
   
   return(propNP1CE)
+  
 })
 
 ncRatios <- length(cRatios)
-
 dfcRatios <- data.frame(cRatio = cRatios,probCENP1 = cRatioResults,probCESTD = 1-cRatioResults)
 ```
 
@@ -423,8 +424,8 @@ ggplot(dfcRatios,
       theme_minimal()+ 
       labs(
         x = "Value of ceiling ratio", 
-        y = "Probability of cost-effective of NP1 treatment", 
-        title = "Probability of cost-effective by value of ceiling ratio",
+        y = "Proportion of cost-effective of NP1 treatment", 
+        title = "Proportion of cost effective by value of ceiling ratio",
         colour = "Treatment") 
 ```
 

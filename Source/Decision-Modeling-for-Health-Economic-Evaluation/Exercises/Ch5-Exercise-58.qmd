@@ -8,7 +8,7 @@ In this exercise we will build upon the pre-existing prosthesis example, and exp
 ```{r 5.8.0 setup and parameters 1}
 library(MASS)
 
-#fixed parameters
+##fixed parameters## 
 
 cStandard <- 394 #cost of standard prosthesis
 cNP1 <- 579 #cost of new prosthesis 1
@@ -55,7 +55,6 @@ colnames(covMat) <- rownames(covMat) <- c("lngamma","cons","age","male","NP1","N
 cholcovMat <- chol(covMat)
 
 survModelSummary <- data.frame(
-  
   variable = c("lngamma","cons","age","male","NP1","NP2"),
   coefficient = c(0.3740968,-5.490935,-0.0367022,0.768536,-1.344474,-1.6687),
   SE = c(0.0474501,0.207892,0.0052112,0.109066,0.3825815,0.517653)
@@ -84,6 +83,7 @@ drawBetaMethodMoments <- function(n,mu,s){
   draw <- rbeta(n,alpha,beta)
   
   return(draw)
+  
 }
 
 
@@ -105,6 +105,8 @@ tProbs_time <- function(omrPTHR,omrRTHR,rr,mr,rrr,t){
     0, 0,               0,     0,                   1
   ),ncol = 5, nrow = 5, byrow = T
 )
+  
+  return(tProbs)
   
 }
 
@@ -132,15 +134,14 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
     #get the corresponding transition matrix based on the time
     tProbs <- tProbs_time(omrPTHR,omrRTHR,rr,mr,rrr,i)
     
-    matReturn[i,] <-   iVec %*% tProbs 
+    matReturn[i,] <- iVec %*% tProbs 
     
-    #update ivec
+    #update iVec
     iVec <- iVec %*% tProbs
     
   }
-  return(matReturn)
-  
   #returns a t (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t
+  return(matReturn)
   
 }
 
@@ -152,8 +153,8 @@ Next we alter the analysis and simulation functions to add the third prosthesis.
 analysisNP2 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,rrNP2,cPrimary,cRevision,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){
 
     #calculate the revision risk
-    rr <- tProbsHazard(t=t,lambda = lambda,gamma = gamma)
-    mr <- sapply(1:t,function(x){
+   rr <- tProbsHazard(t=t,lambda = lambda,gamma = gamma)
+   mr <- sapply(1:t,function(x){
     
     #calculate which index select based on the age group
     inds <- sum(x+age >= yearlyTProbs$Index)
@@ -185,7 +186,7 @@ analysisNP2 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,rrNP2,cPrimary,cRevision,cS
   utility<- c(0,uSuccessP,uRevision,uSuccessR)
   
   #multiply by the cohort
-  totalQuality <-  standPopStates[,-5] %*% utility
+  totalQuality <- standPopStates[,-5] %*% utility
   QALYStandard <- discountFormula(totalQuality,discRate = oDR,t=t)
   
   #calculate the total cost for all cycles/person
@@ -258,8 +259,7 @@ generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
    cols <- c("omrPTHR","omrRTHR","rrNP1","rrNP2","rrr","lambda","gamma","cPrimary","cRevision","cSuccess","uSuccessP","uSuccessR","uRevision",
                           "cRatio","STDCost","STDQALYS","NP1Cost","NP1QALYS","NP2Cost","NP2QALYS","STDNMB","NP1NMB","NP2NMB","CESTD","CENP1","CINP2")
    
-  
-     #we need to know how many columns or variable we have here in ncol
+   #we need to know how many columns or variable we have here in ncol
    dfReturn <- data.frame(matrix(NA,nrow = nReps,ncol = length(cols)))
   
    #fill out the column names for our dataframe
@@ -294,7 +294,7 @@ generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
    dfReturn$uRevision <- uRevision 
    
    #draw from multivariate normal
-   normDraw <- mvrnorm(nReps, mu = survModelSummary$coefficient, Sigma = covMat)
+   normDraw <- MASS::mvrnorm(nReps, mu = survModelSummary$coefficient, Sigma = covMat)
    
    #using R's vectorization, we can calculate operations on the entire vector, we must use [,"name"]as normDraw is not a matrix rather than a vector
    lambda <- exp(normDraw[,'cons'] + normDraw[,'age']*age + normDraw[,'male']*male)
@@ -440,6 +440,7 @@ cRatioResults <- t(sapply(cRatios,function(x){
   propCE <- colMeans(allSimResults[,c("CESTD","CENP1","CENP2")])
   
   return(propCE)
+  
 }))
 ```
 
@@ -456,7 +457,6 @@ CEAcurveLong <- cRatioResults %>% tidyr::pivot_longer(CESTD:CENP2,names_to = "tr
 
 Again, as a final step we will plot these results using `ggplot2`
 ```{r 5.8.3 plot results}
-
 ggplot2::ggplot(CEAcurveLong,
                 aes(
                   x = cRatio, 
@@ -472,7 +472,7 @@ ggplot2::ggplot(CEAcurveLong,
                 labs(
                   x = "Ceiling Ratio", 
                   y = "Proportion of treatment cost effective", 
-                  title = "Cost Effective Analysis Curves for three prosthesis treatments")
+                  title = "Cost effective analysis curves for three prosthesis treatments")
 ```
 
 

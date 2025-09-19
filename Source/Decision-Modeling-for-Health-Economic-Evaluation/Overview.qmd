@@ -1,0 +1,98 @@
+# Overview of exercises {.unnumbered}
+
+
+## Exercise 2.5 - A Simple Markov Model for Two HIV Treatments
+
+This exercise reviews how to run a basic Markov model that compares the cost effectiveness of two HIV treatments. The first treatment involves a monotherapy of Zidovudine (control), against a combination therapy of Zidovudine and Lamivudine (treatment). The combination therapy is only used in the first two years. 
+
+### Steps
+1. Work out the transition probabilities between health states for the monotherapy group (control).  
+2. Use these probabilities to run a Markov trace and follow the cohort through 20 years.  
+3. Calculate the total costs for the control group.  
+4. Apply discounting to account for time preferences.  
+5. Adjust the transition probabilities for the treatment group using a relative risk measure.  
+6. Calculate the treatment group’s total costs.  
+7. Apply discounting again for the treatment results.  
+8. Compare treatment vs. control to calculate the Incremental Cost-Effectiveness Ratio (ICER).  
+
+---
+
+## Exercise 3.5 - A Time-Dependent Markov Model for two Hip-Replacement Treaments
+
+This exercise extends upon exercise 2.5 by building a **time-dependent** markov model for two total hip-replacement treatments over 60 years. Specifically, it includes how to use existing mortality rates and risk derived from a survival function to compare the cost and utility of treatments.
+
+### Steps 
+1. Populate model parameters using the provided estimates.  
+2. Calculate time-dependent transition probabilities using survival analysis results. 
+3. Estimate background mortality rates given the relevant covariates.  
+4. Build the Markov model for the standard intervention.  
+5. Apply costs and utilities for the standard intervention, including discounting.  
+6. Repeat the procedure for the new prosthesis treatment.
+7. Compare treatment vs. control to calculate the Incremental Cost-Effectiveness Ratio (ICER).  
+
+---
+
+## Exercise 4.7 – Adapt the HIV Treatment Model into a Probabilistic Version
+
+You will expand the simple model from Exercise 2.5 into a probabilistic Markov model by incorporating uncertainty in parameters by drawing each parameter from a probability distribution.
+
+
+### Steps
+1. Assign a log-normal distribution for relative risks, based on mean and 95% confidence intervals.  
+2. Use a gamma distribution for costs, assuming the standard error equals the mean.  
+3. Use the Dirichlet distribution to draw values for the transition probability matrix.
+4. Compare treatment vs. control to calculate the Incremental Cost-Effectiveness Ratio (ICER).   
+5. Try running the code again to check that a new ICER is calculated.
+6. Build a stand-alone analysis function that automatically calculates the ICER for given parameter inputs.
+
+---
+
+## Exercise 4.8 – Adapt the Model into a Probabilistic Version
+
+In this exercise, you will extend the total hip replacement example from Exercise 3.5 to be probabilistic. This involves assigning probability distributions to uncertain parameters including the uncertainty in the survival model.
+
+## Steps
+1. Review all parameter inputs and identify which should remain deterministic (e.g., patient characteristics, prosthesis costs, discount rates) and which should be included in the probabilistic sensitivity analysis.  
+2. Fit beta distributions for probability parameters, such as post-operative mortality and revision-related mortality, using the provided information. 
+3. Fit gamma distributions for cost parameters. Use the method of moments (with the provided mean and standard error) to estimat the parameters of the gamma distribution.
+4. Fit beta distributions for utility parameters. Use the method of moments to estimate the beta parameters from the given means and standard errors.
+5. Use the multivariate normal distribution with the specified covariance matrix to draw values for the survival parameters.
+6. Build a stand-alone analysis function that automatically calculates the ICER for given parameter inputs.
+
+---
+
+## Exercise 5.7 – Use Simulations and Generate CE Plane & CEAC
+
+In this exercise, you will build a simulation using the probabilistic model from Exercise 4.8 to estimate the uncertainty in the ICER . The goal is to produce both a **cost effectiveness plane** and a **cost effectiveness acceptability curve (CEAC)** across the parameter space.
+
+### Steps
+1. Build a simulation function that automates the simulation process including drawing all parameter values and calculating the cost effectiveness cost effectiveness acceptability.
+2. Analyze the results and create a cost-effectiveness plane.  
+3. Repeat the analysis for different subgroups.  
+4. Plot CEACs for each subgroup and compare the results.  
+
+---
+
+## Exercise 5.8 – Adding a Third Treatment Option to the total hip replacement example
+
+In this exercise, you will expand the model by adding a third treatment option. Since all treatment options are mutually exclusive, the analysis requires multiple CEACs and the creation of a **cost effectiveness acceptability frontier**.
+
+### Steps
+1. Add a third prosthesis option to the model.  
+2. Run the simulation, calculate mean results, and plot all options on the cost-effectiveness plane.  
+3. Use the net-benefit framework to generate multiple CEACs for the three options and construct the cost-effectiveness acceptability frontier.  
+
+---
+
+## Exercise 6.6 – Calculate the Expected Value of Perfect Information (EVPI)
+
+This exercise focuses on calculating the non-parametric **expected value of perfect information (EVPI)** for the total hip replacement example, both at the individual and population level. You will also calculate **EVPPI** for group of parameters
+
+### Steps
+1. Calculate the per-patient EVPI for a new prosthesis from the simulation output.  
+2. Compute the mean across net benefits under perfect information, then calculate the difference between the mean of maximized net benefits and the maximum of the mean values to obtain the EVPI at the individual level.  
+3. Estimate the effective population size and multiply by individual EVPI to get population EVPI.  
+4. Calculate EVPI as a function of the cost-effectiveness threshold and examine the peak value.  
+5. Calculate EVPI for the risk-reduction parameter: take net benefits for each intervention across many draws, average them, and then compute the maximum net benefits across draws to estimate the payoff under under perfect information of risk-reduction.  
+6. Compute the **expected value of perfect parameter information (EVPPI)** for all groups of parameters.
+7. Plot the EVPPI results for all parameters as a bar chart.  

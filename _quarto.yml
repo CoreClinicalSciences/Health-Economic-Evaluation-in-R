@@ -5,16 +5,19 @@ project:
 book:
   title: "Guide to Health Economic Evaluation in R"
   author: "Core Clinical Sciences"
+  repo-url: "https://github.com/CoreClinicalSciences/Health-Economic-Evaluation-in-R/"
+  repo-actions: [issue]
   # logo: X
-  # repo-url: X
   # repo-branch: main
-  # repo-actions: [issue]
   
   chapters:
       - index.qmd
+      - part: "Preamble on R"
+        chapters:
+          - Source/General-Guide/Ch0-Preamble-Matrix-Multiplication.qmd
       - part: Source/Decision-Modeling-for-Health-Economic-Evaluation/1-Decision-Modelling-For-HE-Evaluation.qmd
         chapters: 
-          - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch0-Preamble-Matrix-Multiplication.qmd
+          - Source/Decision-Modeling-for-Health-Economic-Evaluation/Overview.qmd
           - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch2-Exercise-25.qmd
           - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch3-Exercise-35.qmd
           - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch4-Exercise-47.qmd
@@ -23,8 +26,8 @@ book:
           - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch5-Exercise-58.qmd
           - Source/Decision-Modeling-for-Health-Economic-Evaluation/Exercises/Ch6-Exercise-66.qmd
       - part: Appendices
-        chapters: 
-            - Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.qmd
+        #chapters: 
+            #- Source/Decision-Modeling-for-Health-Economic-Evaluation/Appendix-1-Codes.qmd
 
 # bibliography: references.bib
 

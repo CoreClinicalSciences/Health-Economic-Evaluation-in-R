@@ -12,7 +12,7 @@ In this case, we are only focusing on the standard prosthesis and the "new prost
 ```{r 6.6A.0 Setup parameters}
 library(MASS)
 
-#fixed parameters
+##fixed parameters##
 
 cStandard <- 394 #cost of standard prosthesis
 cNP1 <- 579 #cost of new prosthesis 1
@@ -83,6 +83,7 @@ drawBetaMethodMoments <- function(n,mu,s){
   draw <- rbeta(n,alpha,beta)
   
   return(draw)
+  
 }
 
 
@@ -104,13 +105,14 @@ tProbs_time <- function(omrPTHR,omrRTHR,rr,mr,rrr,t){
   ),ncol = 5, nrow = 5, byrow = T
 )
   
+  return(tProbs)
+  
 }
 
 
 calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
   
   #create empty matrix that we will fill in
-  
   matReturn <- matrix(nrow = t, ncol = 5)
   
   #initialize first vector of proportions
@@ -129,18 +131,17 @@ calculateYearlyProbs <- function(iVec,omrPTHR,omrRTHR,rr,mr,rrr,t){
     iVec <- iVec %*% tProbs
     
   }
-  return(matReturn)
-  
   #returns a t (years) x 5 (states) matrix where the rows represent the proportion in a given state at year t
+  return(matReturn)
   
 }
 
 analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,cPrimary,cRevision,cStandard,uSuccessP,uSuccessR,uRevision,cDR,oDR,cNP1,gamma,lambda,iVec,t){
 
     #calculate the revision risk
-    rr <- tProbsHazard(t=t,lambda = lambda,gamma = gamma)
+   rr <- tProbsHazard(t=t,lambda = lambda,gamma = gamma)
     
-    mr <- sapply(1:t,function(x){
+   mr <- sapply(1:t,function(x){
     
     #calculate which index select based on the age group
     inds <- sum(x+age >= yearlyTProbs$Index)
@@ -172,7 +173,7 @@ analysisNP1 <- function(omrPTHR,omrRTHR,mr,rrr,rrNP1,cPrimary,cRevision,cStandar
   utility<- c(0,uSuccessP,uRevision,uSuccessR)
   
   #multiply by the cohort
-  totalQuality <-  standPopStates[,-5] %*% utility
+  totalQuality <- standPopStates[,-5] %*% utility
   QALYStandard <- discountFormula(totalQuality,discRate = oDR,t=t)
   
   #calculate the total cost for all cycles/person
@@ -288,7 +289,9 @@ generateSimulations <- function(nReps = 1000,age=60,male=0,cRatio = 100000){
     
     #the above formulae come directly from the textbook 5.1.4
   }
+   
   return(dfReturn)
+   
 }
 
 ```
@@ -299,7 +302,6 @@ We will start the simulation the way as in Exercise 5.7 and 5.8. Then we will ca
 
 Net monetary benefit is often referred to as NMB. We use this initialism in the R code below.
 ```{r 6.6A.1 run the simulation}
-
 set.seed(123)
 cRatio <- 100000
 
@@ -315,13 +317,12 @@ meanNMB <- colMeans(simResults[,c("STDNMB","NP1NMB")])
 maxPINMB <- pmax(simResults[,c("STDNMB")],simResults[,c("NP1NMB")])
 ```
 
-Now we can calculate the EVPI which is: 
+Now we can calculate the EVPI which is
 $$
-E_{\theta} [\max_j \text{NMB}(j,\theta)]- \max_j E_{\theta}[\text{NMB}(j,\theta)]
+E_{\theta} [\max_j \text{NMB}(j,\theta)]- \max_j E_{\theta}[\text{NMB}(j,\theta)].
 $$
 For this exercise, we only need the STD and NP1 columns.
 ```{r 6.6A.1 Calculate EVPI}
-
 EVPI <- mean(maxPINMB)-max(meanNMB) 
 
 EVPI 
@@ -344,9 +345,7 @@ Now we calculate the sum of the population years and multiply the result by the 
 ```{r 6.6A.2 EVPI at the population level 2}
 perAnnumEffPop <- sum(c(annualPop,discPop))
 
-
 popEVPI <- EVPI*perAnnumEffPop
-
 
 popEVPI 
 ```
@@ -360,8 +359,6 @@ Here we run the simulation loop by sequencing through cRatio to plot the curve. 
 library(ggplot2)
 #calculate the cRatios to be looped over
 cRatios <- seq(0,50000,by = 500)
-  annualPop <- 40000
-
 
 #using the same sapply function as before
 cRatioResults <- sapply(cRatios,function(x){
@@ -437,8 +434,7 @@ The main alteration is by adding a `keepFixed` argument. Here, `keepFixed` deter
 
 ```{r 6.6b.1}
 generateSimulationsParam <- function(nReps = 1000,age=60,male=0,cRatio = 100000, keepFixed = "rrNP1"){
-  
-  
+   
    #we need to know how many columns or variable we have here in ncol
    cols <- c("omrPTHR","omrRTHR","rrNP1","rrr","lambda","gamma",
              "cPrimary","cRevision","cSuccess","uSuccessP","uSuccessR",
@@ -497,12 +493,14 @@ generateSimulationsParam <- function(nReps = 1000,age=60,male=0,cRatio = 100000,
     if(keepFixed == "rrNP1"){
       
       dfReturn$rrNP1 <- rrNP1[1]
+      
     }else if(keepFixed == "OMRs"){
       
       dfReturn$omrPTHR <- omrPTHR[1]
       dfReturn$omrRTHR <- omrRTHR[1]   
       
     }else if(keepFixed == "cRevision"){
+       
       dfReturn$cRevision <- cRevision[1]
       
     }else if(keepFixed == "rrr"){
@@ -514,12 +512,12 @@ generateSimulationsParam <- function(nReps = 1000,age=60,male=0,cRatio = 100000,
         dfReturn$uSuccessP <- uSuccessP[1]
         dfReturn$uRevision <- uRevision[1]
         dfReturn$uSuccessR <- uSuccessR[1]
+        
     }else if(keepFixed == "survParams"){
       
         dfReturn$lambda <- lambda[1]
         dfReturn$gamma <- gamma[1]
-      
-      
+        
     }
 
   for(i in 1:nReps){
@@ -553,6 +551,7 @@ generateSimulationsParam <- function(nReps = 1000,age=60,male=0,cRatio = 100000,
   }
   
   return(dfReturn)
+   
 }
 
 
@@ -560,10 +559,8 @@ generateSimulationsParam <- function(nReps = 1000,age=60,male=0,cRatio = 100000,
 
 fixrrNP1 <- t(sapply(1:100,function(x){
   
-  
   simResults <- generateSimulationsParam(cRatio = 2200,keepFixed = "rrNP1",nReps = 1000)
   meanBenefit <- colMeans(simResults[,c("STDNMB","NP1NMB")])
-  
   
   return(meanBenefit)
   
@@ -596,15 +593,13 @@ In the loop below, the function `outerSimLoop` uses the vector `paramGroups `to 
 :::
 
 ```{r 6.6b.2 parameter looping}
-
 outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rrNP1","OMRs","cRevision","rrr","utilities","survParams")){
   
   #Run the simulation for each fixed parameter
-
   nParams <- length(paramGroups)  
   
   EVPIs <- data.frame(matrix(NA,nrow =1,ncol = nParams))
-  ##set the column names to match our parameters of interest using paramGroups vector
+  #set the column names to match our parameters of interest using paramGroups vector
   colnames(EVPIs) <- paramGroups
 
   for(p in 1:nParams){
@@ -620,7 +615,6 @@ outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rr
       
       #get the mean benefit across the trials
       meanBenefit <- colMeans(simResults[,c("STDNMB","NP1NMB")])
-      
       
       return(meanBenefit)
       
@@ -640,7 +634,6 @@ outerSimLoop <- function(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rr
     
   }
   
-  #return
   return(EVPIs)
   
 }
@@ -653,7 +646,6 @@ Here we only run the simulations of 100x100 this is already 100,000. Note that:
 
 ```{r 6.6b.2 EVPPI simulation results}
 EVPPI_simResults <- outerSimLoop(trials = 100,nReps=100,cRatio=2200, paramGroups = c("rrNP1","OMRs","cRevision","rrr","utilities","survParams"))
-
 ```
 
 ## Part 3: Ploting the results

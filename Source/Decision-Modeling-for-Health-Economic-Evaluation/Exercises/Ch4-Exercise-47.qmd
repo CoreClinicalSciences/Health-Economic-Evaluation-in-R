@@ -19,11 +19,9 @@ We will start by setting the seed and adding in the provided parameters.
 #set a seed for reproducibility
 set.seed(123)
 
-##fixed parameters
-RR <- 0.509
-
-#discount rate
-cDR <- 0.06
+##fixed parameters##
+RR <- 0.509 #relative risk of new treatment
+cDR <- 0.06 #discount rate
 
 #the confidence interval
 CI_RR <- c(0.365, 0.710)
@@ -74,7 +72,6 @@ In R we can nest the assignment operator  `<-`  to save space
 :::
 
 ```{r 4.7.2 Draws using the gamma distribution}
-
 dmca <- SEdmca <- 1701 #direct medical cost of A
 dmcb <- SEdmcb <- 1774 #direct medical cost of B
 dmcc <- SEdmcc <- 6948 #direct medical cost of C
@@ -132,7 +129,6 @@ The equivalent alphas are given (note the deterministic value is `alpha / (alpha
 
 ```{r 4.7.3 generating transition matrices 2}
 tAlpha <- matrix(
-  
   c(1251, 350, 116  , 17 ,
     0   , 731, 512  , 15 ,
     0   , 0  , 1312 , 437, 
@@ -159,6 +155,7 @@ The rdirichlet function by default returns the vector of draws by columns, but w
 tProbRand <- t(apply(tAlpha,1,function(x){
   
   return(MCMCpack::rdirichlet(1,x))
+   
 }))
 
 #our new transition probability matrix
@@ -174,7 +171,6 @@ Now that we have defined all our parameters in this exercise by drawing from ran
 
 To begin, we will load in all of our previously built functions.
 ```{r 4.7.4 loading in previous functions}
-
 #ensure to list all the previously built functions over here
 calculatetProbCombination <- function(tProbs,RR){
   
@@ -202,26 +198,22 @@ discountFormula <- function(nonDiscount,discRate,t){
 calculateYearlyProbs <- function(tProbs, t, iVec){
   
   #create empty matrix that we will fill in
-  
   matReturn <- matrix(nrow = t, ncol = 4)
-  
-  #initialize first vector of proportions
   
   #create column names
   colnames(matReturn) <- c("A","B","C","D")
 
-  #Loop through all time-points and multiply the vector by 
-  for(i in 1:(t)){
+  #loop through all time-points and multiply the vector by our transition probability matrix
+  for(i in 1:t){
 
-    matReturn[i,] <-   iVec %*% tProbs
+    matReturn[i,] <- iVec %*% tProbs
     
-    #update ivec
+    #update iVec
     iVec <- iVec %*% tProbs
     
   }
-  return(matReturn)
-  
   #returns a t (years) x 4 (states) matrix where the rows represent the proportion in a given state at year t
+  return(matReturn)
   
 }
 ```
@@ -234,10 +226,6 @@ analysisFunc <- function(dmca,dmcb,dmcc,ccca,cccb,cccc,RR,cAZT,cALam,cDR,tProbs,
   
   #call the function
   yearlyProbs <- calculateYearlyProbs(tProbs,t,iVec)
-
-  #throw error if row sums are not equal to 1
-  #stopifnot(!rowsum(yearlyProbs)==1)
-  
   lifeYears <- rowSums(yearlyProbs[,-4])
   
   costA <- dmca+ccca+cAZT
@@ -282,7 +270,7 @@ analysisFunc <- function(dmca,dmcb,dmcc,ccca,cccb,cccc,RR,cAZT,cALam,cDR,tProbs,
   costVectorComb <- c(costAComb,costBComb,costCComb)
   
   #use matrix multiplication to calculate yearly costs
-  costCombNonDisc1_2 <-   probsCombYearly[1:2,-4] %*% costVectorComb
+  costCombNonDisc1_2 <- probsCombYearly[1:2,-4] %*% costVectorComb
   costCombNonDisc3_20 <- probsCombYearly[3:20,-4] %*% costVector
   
   #use rbind to combine the non-discounted cost
